@@ -101,7 +101,7 @@ function Header() {
   return (
     <AppBar position="static" sx={{ background: "#f6f6f6" }} >
       <Grid >
-        <Grid item XS={12} sx={sxStyle}>
+        <Grid item xs={12} sx={sxStyle}>
           <Box  className = {roboto.className}>
             <Box component="span" sx={spanStyle}>
               FREE SHIPPING FOR ALL ORDERS,
@@ -117,7 +117,7 @@ function Header() {
             RETURN
           </Box>
         </Grid>
-        <Grid item XS={12} sx={mainHeader}>
+        <Grid item xs={12} sx={mainHeader}>
           <Box
             sx={{
               display: "flex",
@@ -170,7 +170,7 @@ function Header() {
             </Box>
           </Box>
         </Grid>
-        <Grid item XS={12}>
+        <Grid item xs={12}>
           <Toolbar disableGutters>
             <Box
               sx={{
