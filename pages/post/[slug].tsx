@@ -113,7 +113,7 @@ sx={{
     <Grid>
       {/* <h1>{title}</h1> */}
       {/* <span>By {name}</span> */}
-      <Grid item XS={12}>
+      <Grid item xs={12}>
         <Header />
         <Box>
           {categories && (
