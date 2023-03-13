@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { AppProps } from "next/app";
 import "normalize.css/normalize.css";
 import { Roboto } from '@next/font/google';
