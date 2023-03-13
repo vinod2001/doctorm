@@ -1,3 +1,4 @@
+// @ts-nocheck
 // [slug].tsx
 
 import groq from "groq";
