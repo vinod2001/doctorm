@@ -7,7 +7,16 @@ import { PortableText } from "@portabletext/react";
 import client from "../../client";
 import Header from "../../components/header";
 import ResponsiveAppBar from "../../components/menu";
-import { Box, Grid, Theme, Paper, Card, SubCategory } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Theme,
+  Paper,
+  Card,
+  SubCategory,
+  Button,
+  Link,
+} from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import Divider from "@mui/material/Divider";
 import { Roboto } from "@next/font/google";
@@ -46,9 +55,11 @@ const Post = ({ post }) => {
     categoriesDes,
     authorImage,
     categoriesImg,
+    categoriesButton,
     findFramesTitle,
     findFramesDes,
     findFramesImg,
+    findFramesButton,
     topCategoriesHeading,
     topCategories,
     topCategoriesImg,
@@ -58,6 +69,7 @@ const Post = ({ post }) => {
     biggerBanners,
     biggerBannersImg,
     biggerBannersDes,
+    biggerBannersButton,
     body = [],
   } = post;
 
@@ -158,6 +170,21 @@ sx={{
                       <Box sx={{ border: "0px solid", textAlign: "center" }}>
                         {categoriesDes[index]}
                       </Box>
+                      <Box
+                        sx={{ border: "0px solid", textAlign: "center", mt: 3 }}
+                      >
+                        <Button
+                          variant="contained"
+                          sx={{
+                            backgroundColor: "#ff9905",
+                            "&:hover": {
+                              backgroundColor: "#f59407",
+                            },
+                          }}
+                        >
+                          {categoriesButton[index]}
+                        </Button>
+                      </Box>
                     </Box>
                   </Box>
                 </Box>
@@ -197,10 +224,37 @@ sx={{
                     }}
                   >
                     <Box>
-                      <Box sx={{ fontSize: "24px", fontWeight: "bold" }}>
+                      <Box
+                        sx={{
+                          fontSize: "24px",
+                          fontWeight: "bold",
+                          color: "#343434",
+                        }}
+                      >
                         {frames}
                       </Box>
-                      <Box sx={{ mt: 2 }}>{findFramesDes[index]}</Box>
+                      <Box sx={{ mt: 2, color: "#8d8d8d" }}>
+                        {findFramesDes[index]}
+                      </Box>
+                      <Box sx={{ border: "0px solid", mt: 5 }}>
+                        <Link
+                          href="#"
+                          underline="always"
+                          sx={{
+                            color: "#ff9905",
+                            textDecorationColor: "#ff9905",
+                            fontWeight: "bold",
+                            fontSize: "20px",
+                            "&:hover": {
+                              color: "#f59407",
+                              fontWeight: "bold",
+                              textDecorationColor: "#f59407",
+                            },
+                          }}
+                        >
+                          {findFramesButton[index]}
+                        </Link>
+                      </Box>
                     </Box>
                   </Box>
                   <Box sx={{ width: "56%" }}>
@@ -403,10 +457,38 @@ sx={{
                             components={ptComponents}
                           />
                         </Box>
-                        <Box sx={{ mt: 4, mb: 2, fontSize: "30px" }}>
+                        <Box
+                          sx={{
+                            mt: 4,
+                            mb: 2,
+                            fontSize: "30px",
+                            color: "#343434",
+                          }}
+                        >
                           {item}
                         </Box>
-                        <Box>{biggerBannersDes[index]}</Box>
+                        <Box sx={{ height: "30px", color: "#8d8d8d" }}>
+                          {biggerBannersDes[index]}
+                        </Box>
+                        <Box sx={{ border: "0px solid", mt: 5 }}>
+                          <Link
+                            href="#"
+                            underline="always"
+                            sx={{
+                              color: "#ff9905",
+                              textDecorationColor: "#ff9905",
+                              fontWeight: "bold",
+                              fontSize: "18px",
+                              "&:hover": {
+                                color: "#f59407",
+                                fontWeight: "bold",
+                                textDecorationColor: "#f59407",
+                              },
+                            }}
+                          >
+                            {biggerBannersButton[index]}
+                          </Link>
+                        </Box>
                       </Box>
                     ))}
                 </Box>
@@ -426,10 +508,12 @@ const query = groq`*[_type == "post" && slug.current == $slug][0]{
   "categories": categories[]->title,
   "categoriesDes": categories[]->description,
   "categoriesImg": categories[]->carouselImage,
+  "categoriesButton": categories[]->buttonOrLinkText,
   "authorImage": author->image,
   "findFramesTitle": findFrames[]->title,
   "findFramesDes": findFrames[]->description,
   "findFramesImg": findFrames[]->carouselImage,
+  "findFramesButton": findFrames[]->buttonOrLinkText,
   topCategoriesHeading,
   "topCategories": topCategories[]->title,
   "topCategoriesImg": topCategories[]->carouselImage,
@@ -439,6 +523,7 @@ const query = groq`*[_type == "post" && slug.current == $slug][0]{
   "biggerBanners":biggerBanners[]->title,
   "biggerBannersImg":biggerBanners[]->carouselImage,
   "biggerBannersDes":biggerBanners[]->description,
+  "biggerBannersButton": biggerBanners[]->buttonOrLinkText,
   body
 }`;
 export async function getServerSidePaths() {
