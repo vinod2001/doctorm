@@ -9,13 +9,13 @@ import Header from "../../components/header";
 import ResponsiveAppBar from "../../components/menu";
 import { Box, Grid, Theme, Paper, Card, SubCategory } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
-import Divider from '@mui/material/Divider';
-import { Roboto } from '@next/font/google';
+import Divider from "@mui/material/Divider";
+import { Roboto } from "@next/font/google";
 
 const roboto = Roboto({
-  subsets:['latin'],
-  weight: '400'
-})
+  subsets: ["latin"],
+  weight: "400",
+});
 function urlFor(source) {
   return imageUrlBuilder(client).image(source);
 }
@@ -43,6 +43,7 @@ const Post = ({ post }) => {
     title = "Missing title",
     name = "Missing name",
     categories,
+    categoriesDes,
     authorImage,
     categoriesImg,
     findFramesTitle,
@@ -60,13 +61,13 @@ const Post = ({ post }) => {
     body = [],
   } = post;
 
-
-  console.log("largeBanners:"+JSON.stringify(largeBanners))
+  console.log("largeBanners:" + JSON.stringify(largeBanners));
 
   const sliderItems: number = topBrandsImg.length > 3 ? 3 : topBrandsImg.length;
   const items: Array<any> = [];
 
-{/* <Box
+  {
+    /* <Box
 sx={{
   border: "0px solid",
   display: "flex",
@@ -81,31 +82,30 @@ sx={{
     />
  
 </Box>
-</Box> */}
+</Box> */
+  }
 
   for (let i = 0; i < topBrandsImg.length; i += sliderItems) {
     if (i % sliderItems === 0) {
       items.push(
-        <Box  key={i.toString()}
-sx={{
-  border: "0px solid",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-}}
->
-            {topBrandsImg.slice(i, i + sliderItems).map((da, index) => {
-              // return <SubCategory key={index.toString()} item={da} />;
-              return <Box key={index.toString()} sx={{ border: "0px solid red" }}>
-                <PortableText
-                      value={da}
-                      components={ptComponents}
-                    />
-                
-                </Box>
-            })}
+        <Box
+          key={i.toString()}
+          sx={{
+            border: "0px solid",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {topBrandsImg.slice(i, i + sliderItems).map((da, index) => {
+            // return <SubCategory key={index.toString()} item={da} />;
+            return (
+              <Box key={index.toString()} sx={{ border: "0px solid red" }}>
+                <PortableText value={da} components={ptComponents} />
+              </Box>
+            );
+          })}
         </Box>
-
       );
     }
   }
@@ -131,7 +131,35 @@ sx={{
                     components={ptComponents}
                   />{" "}
                   <br />
-                  {category}
+                  <Box
+                    sx={{
+                      mx: 2,
+                      mt: 3,
+                      pb: 4,
+                      display: "flex",
+                      justifyContent: "center",
+                      border: "0px solid",
+                      alignItems: "center",
+                      color: "#343434",
+                    }}
+                  >
+                    <Box sx={{ border: "0px solid red", width: "400px" }}>
+                      <Box
+                        sx={{
+                          fontWeight: "bold",
+                          fontSize: "30px",
+                          mb: "10px",
+                          border: "0px solid",
+                          textAlign: "center",
+                        }}
+                      >
+                        {category}
+                      </Box>
+                      <Box sx={{ border: "0px solid", textAlign: "center" }}>
+                        {categoriesDes[index]}
+                      </Box>
+                    </Box>
+                  </Box>
                 </Box>
               ))}
             </Carousel>
@@ -188,26 +216,36 @@ sx={{
         </Box>
         <Box>
           {topCategories && (
-            <Box >
+            <Box>
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "center",
                   margin: "auto",
-                  mt:6,
-                  mb:1.5,
-                  fontSize:'35px'
+                  mt: 6,
+                  mb: 1.5,
+                  fontSize: "35px",
                 }}
               >
                 {topCategoriesHeading}
-                
               </Box>
-              <Box sx={{display: "flex",
+              <Box
+                sx={{
+                  display: "flex",
                   justifyContent: "center",
-                  margin: "auto",mb:6}}>
-              <Divider sx={{width:'10%', borderBottomWidth: 4, background:'#343434'}}/>
+                  margin: "auto",
+                  mb: 6,
+                }}
+              >
+                <Divider
+                  sx={{
+                    width: "10%",
+                    borderBottomWidth: 4,
+                    background: "#343434",
+                  }}
+                />
               </Box>
-              
+
               <Box
                 sx={{
                   display: "flex",
@@ -263,26 +301,36 @@ sx={{
 
         <Box>
           {topBrandsImg && (
-            <Box >
+            <Box>
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "center",
                   margin: "auto",
-                  mt:10,
-                  mb:1.5,
-                  fontSize:'35px'
+                  mt: 10,
+                  mb: 1.5,
+                  fontSize: "35px",
                 }}
               >
                 {topBrandsHeading}
-                
               </Box>
-              <Box sx={{display: "flex",
+              <Box
+                sx={{
+                  display: "flex",
                   justifyContent: "center",
-                  margin: "auto",mb:6,}}>
-              <Divider sx={{width:'10%', borderBottomWidth: 4, background:'#343434'}}/>
+                  margin: "auto",
+                  mb: 6,
+                }}
+              >
+                <Divider
+                  sx={{
+                    width: "10%",
+                    borderBottomWidth: 4,
+                    background: "#343434",
+                  }}
+                />
               </Box>
-              
+
               <Box
                 sx={{
                   display: "flex",
@@ -290,37 +338,36 @@ sx={{
                   border: "0px solid",
                 }}
               >
-                <Carousel  sx={{width:'100%'}}>
-                  {items}
-                </Carousel>
+                <Carousel sx={{ width: "100%" }}>{items}</Carousel>
               </Box>
             </Box>
           )}
         </Box>
-        
+
         <Box>
           {topBrandsImg && (
-            <Box >
+            <Box>
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "center",
                   border: "0px solid",
-                  mt:8
+                  mt: 8,
                 }}
               >
-               {largeBanners && (
-                largeBanners.map((item,index)=>(
-                  <Box key={index} sx={{
-                    display: "flex",
-                    justifyContent: "center",width:'95%'}}>
-                   <PortableText
-                      value={item}
-                      components={ptComponents}
-                    />  
-                  </Box>
-                ))
-                )}
+                {largeBanners &&
+                  largeBanners.map((item, index) => (
+                    <Box
+                      key={index}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        width: "95%",
+                      }}
+                    >
+                      <PortableText value={item} components={ptComponents} />
+                    </Box>
+                  ))}
               </Box>
             </Box>
           )}
@@ -328,36 +375,40 @@ sx={{
 
         <Box>
           {biggerBanners && (
-            <Box >
+            <Box>
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "center",
                   border: "0px solid",
-                  mt:8,
+                  mt: 8,
                 }}
               >
-                <Box sx={{width:'95%', display: "flex",
-                    justifyContent: "space-between",}}>
-               {biggerBanners && (
-                biggerBanners.map((item,index)=>(
-                  <Box key={index} sx={{ width:'49%', borderLeft:'0px solid red'}}>
-                    <Box>
-                   <PortableText
-                      value={biggerBannersImg[index]}
-                      components={ptComponents}
-                    />  
-                    </Box>
-                    <Box sx={{mt:4,mb:2,fontSize:'30px'}}>
-                      {item}
-                    </Box>
-                    <Box>
-                      {biggerBannersDes[index]}
-                    </Box>
-                  </Box>
-                ))
-                )}
-                
+                <Box
+                  sx={{
+                    width: "95%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  {biggerBanners &&
+                    biggerBanners.map((item, index) => (
+                      <Box
+                        key={index}
+                        sx={{ width: "49%", borderLeft: "0px solid red" }}
+                      >
+                        <Box>
+                          <PortableText
+                            value={biggerBannersImg[index]}
+                            components={ptComponents}
+                          />
+                        </Box>
+                        <Box sx={{ mt: 4, mb: 2, fontSize: "30px" }}>
+                          {item}
+                        </Box>
+                        <Box>{biggerBannersDes[index]}</Box>
+                      </Box>
+                    ))}
                 </Box>
               </Box>
             </Box>
@@ -373,6 +424,7 @@ const query = groq`*[_type == "post" && slug.current == $slug][0]{
   title,
   "name": author->name,
   "categories": categories[]->title,
+  "categoriesDes": categories[]->description,
   "categoriesImg": categories[]->carouselImage,
   "authorImage": author->image,
   "findFramesTitle": findFrames[]->title,

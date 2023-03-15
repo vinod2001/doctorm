@@ -13,12 +13,12 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
-import { Roboto } from '@next/font/google';
+import { Roboto } from "@next/font/google";
 
 const roboto = Roboto({
-  subsets:['latin'],
-  weight: ['400','700']
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 const sxStyle = {
   backgroundColor: "#3A3A3A",
@@ -62,8 +62,8 @@ const HeaderItemWrapper = {
 };
 
 const HeaderLogo = {
-  width:'30%'
-}
+  width: "30%",
+};
 
 const HeaderItemInnerWrapper = {
   display: "flex",
@@ -100,14 +100,14 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" sx={{ background: "#f6f6f6" }} >
-      <Grid >
+    <AppBar position="static" sx={{ background: "#f6f6f6" }}>
+      <Grid>
         <Grid item xs={12} sx={sxStyle}>
-          <Box  className = {roboto.className}>
+          <Box className={roboto.className}>
             <Box component="span" sx={spanStyle}>
               FREE SHIPPING FOR ALL ORDERS,
             </Box>{" "}
-            <span sx={{mr:2}}>LIMITED TIME ONLY</span> | FAST SHIPPING WITHIN{" "}
+            <span sx={{ mr: 2 }}>LIMITED TIME ONLY</span> | FAST SHIPPING WITHIN{" "}
             <Box component="span" sx={spanStyle}>
               2-4 BUSINESS DAYS*
             </Box>{" "}
@@ -129,7 +129,7 @@ function Header() {
               pl: 6,
               pr: 6,
             }}
-            className = {roboto.className}
+            className={roboto.className}
           >
             <Box sx={HeaderItemWrapper}>
               <Box>
@@ -147,14 +147,17 @@ function Header() {
             </Box>
 
             <Box sx={HeaderItemWrapper}>
-              <img style={{width:'100%'}} src="https://img-cdn.magrabi.com/medias/sys_master/root/hb0/h3f/9069140738078/logo/logo.png" />
+              <img
+                style={{ width: "100%" }}
+                src="https://img-cdn.magrabi.com/medias/sys_master/root/hb0/h3f/9069140738078/logo/logo.png"
+              />
             </Box>
             <Box sx={[HeaderItemWrapper, HeaderitemWrapperWidth]}>
               <Box sx={HeaderItemInnerWrapper}>
                 <Box>
                   <AccountCircleRoundedIcon sx={iconSize} />
                 </Box>
-                <Box sx={{fontWeight:'bold'}}>drm</Box>
+                <Box sx={{ fontWeight: "bold" }}>drm</Box>
               </Box>
               <Box>
                 <Box sx={HeaderItemInnerWrapper}>
@@ -183,7 +186,6 @@ function Header() {
                   alignItems: "center",
                 },
               }}
-              
             >
               {pages.map((page) => (
                 <Button
@@ -195,9 +197,9 @@ function Header() {
                     fontWeight: "bold",
                     display: "block",
                     ml: 8,
-                    fontSize:'14px'
+                    fontSize: "14px",
                   }}
-                  className = {roboto.className}
+                  className={roboto.className}
                 >
                   {page}
                 </Button>
