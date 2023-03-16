@@ -16,12 +16,37 @@ import Button from "@mui/material/Button";
 import { Roboto } from "@next/font/google";
 import groq from "groq";
 import client from "../client";
-import useScrollDirection  from '../utils/useScrollDirection'
+import useScrollDirection from "../utils/useScrollDirection";
+import Carousel from "react-material-ui-carousel";
+import { PortableText } from "@portabletext/react";
+import imageUrlBuilder from "@sanity/image-url";
 
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["400", "700"],
 });
+
+function urlFor(source) {
+  return imageUrlBuilder(client).image(source);
+}
+
+const ptComponents = {
+  types: {
+    image: ({ value, index }) => {
+      if (!value?.asset?._ref) {
+        return null;
+      }
+      return (
+        <img
+          alt={value.alt || " "}
+          loading="lazy"
+          src={urlFor(value).fit("max").auto("format")}
+          width="100%"
+        />
+      );
+    },
+  },
+};
 
 const sxStyle = {
   backgroundColor: "#3A3A3A",
@@ -40,9 +65,9 @@ const spanStyle = {
 };
 
 const deviderSpace = {
-  mr:2,
-  ml:2,
-}
+  mr: 2,
+  ml: 2,
+};
 const mainHeader = {
   backgroundColor: "#F7961C",
   width: "100%",
@@ -84,17 +109,17 @@ const HeaderitemWrapperWidth = {
 };
 
 const clsHeader = {
-  position: 'sticky',
-  top: '0px',
-  transitionProperty: 'all',
-  transitionTimingGunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
-  transitionFuration: '500ms'
-}
+  position: "sticky",
+  top: "0px",
+  transitionProperty: "all",
+  transitionTimingGunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionFuration: "500ms",
+};
 
 function Header() {
   const scrollDirection = useScrollDirection();
-  const [scrollContent,setScrollContent] = React.useState([]);
-  
+  const [scrollContent, setScrollContent] = React.useState([]);
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -118,20 +143,25 @@ function Header() {
     setAnchorElUser(null);
   };
 
-  React.useEffect(()=>{
-    client.fetch(`*[_type == "header"]{
+  React.useEffect(() => {
+    client
+      .fetch(
+        `*[_type == "header"]{
       content,
-    }`).then(data=>setScrollContent(...data))
-   },[])
+      logo,
+    }`
+      )
+      .then((data) => setScrollContent(...data));
+  }, []);
 
-   React.useEffect(()=>{
-    console.log(JSON.stringify(scrollContent))
-   console.log(scrollContent.content)
-   },[scrollContent])
+  React.useEffect(() => {
+    console.log(JSON.stringify(scrollContent));
+    console.log(scrollContent.content);
+  }, [scrollContent]);
 
   return (
     //sx={{clsHeader:`${ scrollDirection === "down" ? "hide" : "show"}`}}
-    <AppBar position="static" sx={{background: "#f6f6f6"}}>
+    <AppBar position="static" sx={{ background: "#f6f6f6" }}>
       <Grid>
         <Grid item xs={12} sx={sxStyle}>
           <Box className={roboto.className}>
@@ -147,14 +177,29 @@ function Header() {
               IN-STORE
             </Box>{" "}
             RETURN */}
-            {scrollContent.content &&  scrollContent.content.map((item,index)=>(
-              item.children[0].marks.length>0 && item.children[0].marks[0]!== 'strong' ?
-              <Box component="span" key={index}>{item.children[0].text}{" "}</Box>
-              :(item.children[0].marks[0]=== 'strong'?
-              <Box component="span" key={index} sx={[spanStyle,deviderSpace]}>{"  "}{item.children[0].text}{"  "}</Box>
-              :
-              <Box component="span" key={index} sx={spanStyle}>{item.children[0].text}{" "}</Box>)
-            ))}
+            {scrollContent.content &&
+              scrollContent.content.map((item, index) =>
+                item.children[0].marks.length > 0 &&
+                item.children[0].marks[0] !== "strong" ? (
+                  <Box component="span" key={index}>
+                    {item.children[0].text}{" "}
+                  </Box>
+                ) : item.children[0].marks[0] === "strong" ? (
+                  <Box
+                    component="span"
+                    key={index}
+                    sx={[spanStyle, deviderSpace]}
+                  >
+                    {"  "}
+                    {item.children[0].text}
+                    {"  "}
+                  </Box>
+                ) : (
+                  <Box component="span" key={index} sx={spanStyle}>
+                    {item.children[0].text}{" "}
+                  </Box>
+                )
+              )}
           </Box>
         </Grid>
         <Grid item xs={12} sx={mainHeader}>
@@ -186,9 +231,9 @@ function Header() {
             </Box>
 
             <Box sx={HeaderItemWrapper}>
-              <img
-                style={{ width: "100%" }}
-                src="https://img-cdn.magrabi.com/medias/sys_master/root/hb0/h3f/9069140738078/logo/logo.png"
+              <PortableText
+                value={scrollContent.logo}
+                components={ptComponents}
               />
             </Box>
             <Box sx={[HeaderItemWrapper, HeaderitemWrapperWidth]}>
