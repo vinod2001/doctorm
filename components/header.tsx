@@ -14,6 +14,9 @@ import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { Roboto } from "@next/font/google";
+import groq from "groq";
+import client from "../client";
+import useScrollDirection  from '../utils/useScrollDirection'
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -75,7 +78,16 @@ const HeaderitemWrapperWidth = {
   width: "20%",
 };
 
+const clsHeader = {
+  position: 'sticky',
+  top: '0px',
+  transitionProperty: 'all',
+  transitionTimingGunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+  transitionFuration: '500ms'
+}
+
 function Header() {
+  const scrollDirection = useScrollDirection();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -99,8 +111,15 @@ function Header() {
     setAnchorElUser(null);
   };
 
+  React.useEffect(()=>{
+    client.fetch(`*[_type == "header"]{
+      title,
+    }`).then(data=>{console.log(data)})
+   })
+
   return (
-    <AppBar position="static" sx={{ background: "#f6f6f6" }}>
+    //sx={{clsHeader:`${ scrollDirection === "down" ? "hide" : "show"}`}}
+    <AppBar position="static" sx={{background: "#f6f6f6"}}>
       <Grid>
         <Grid item xs={12} sx={sxStyle}>
           <Box className={roboto.className}>
