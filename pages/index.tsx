@@ -3,7 +3,7 @@ import Link from "next/link";
 import groq from "groq";
 import client from "../client";
 
-const Index = ({ posts }) => {
+const Index = () => {
   return (
     <div>
       {/* {posts.length > 0 &&
@@ -32,5 +32,19 @@ const Index = ({ posts }) => {
 //     },
 //   };
 // }
+
+export async function getServerSideProps() {
+  
+    return {
+      redirect: {
+        destination: "/post/home",
+        permanent: false, // make this true if you want the redirect to be cached by the search engines and clients forever
+      }, 
+    }
+  
+  return {
+    props: {}
+  }
+}
 
 export default Index;
