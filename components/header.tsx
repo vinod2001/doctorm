@@ -38,6 +38,11 @@ const sxStyle = {
 const spanStyle = {
   color: "#FFFFFF",
 };
+
+const deviderSpace = {
+  mr:2,
+  ml:2,
+}
 const mainHeader = {
   backgroundColor: "#F7961C",
   width: "100%",
@@ -88,6 +93,8 @@ const clsHeader = {
 
 function Header() {
   const scrollDirection = useScrollDirection();
+  const [scrollContent,setScrollContent] = React.useState([]);
+  
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -113,9 +120,14 @@ function Header() {
 
   React.useEffect(()=>{
     client.fetch(`*[_type == "header"]{
-      title,
-    }`).then(data=>{console.log(data)})
-   })
+      content,
+    }`).then(data=>setScrollContent(...data))
+   },[])
+
+   React.useEffect(()=>{
+    console.log(JSON.stringify(scrollContent))
+   console.log(scrollContent.content)
+   },[scrollContent])
 
   return (
     //sx={{clsHeader:`${ scrollDirection === "down" ? "hide" : "show"}`}}
@@ -123,7 +135,7 @@ function Header() {
       <Grid>
         <Grid item xs={12} sx={sxStyle}>
           <Box className={roboto.className}>
-            <Box component="span" sx={spanStyle}>
+            {/* <Box component="span" sx={spanStyle}>
               FREE SHIPPING FOR ALL ORDERS,
             </Box>{" "}
             <span sx={{ mr: 2 }}>LIMITED TIME ONLY</span> | FAST SHIPPING WITHIN{" "}
@@ -134,7 +146,15 @@ function Header() {
             <Box component="span" sx={spanStyle}>
               IN-STORE
             </Box>{" "}
-            RETURN
+            RETURN */}
+            {scrollContent.content &&  scrollContent.content.map((item,index)=>(
+              item.children[0].marks.length>0 && item.children[0].marks[0]!== 'strong' ?
+              <Box component="span" key={index}>{item.children[0].text}{" "}</Box>
+              :(item.children[0].marks[0]=== 'strong'?
+              <Box component="span" key={index} sx={[spanStyle,deviderSpace]}>{"  "}{item.children[0].text}{"  "}</Box>
+              :
+              <Box component="span" key={index} sx={spanStyle}>{item.children[0].text}{" "}</Box>)
+            ))}
           </Box>
         </Grid>
         <Grid item xs={12} sx={mainHeader}>
