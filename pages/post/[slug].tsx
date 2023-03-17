@@ -6,7 +6,6 @@ import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import client from "../../client";
 import Header from "../../components/header";
-import ResponsiveAppBar from "../../components/menu";
 import {
   Box,
   Grid,
@@ -78,25 +77,6 @@ const Post = ({ post }) => {
   const sliderItems: number = topBrandsImg.length > 3 ? 3 : topBrandsImg.length;
   const items: Array<any> = [];
 
-  {
-    /* <Box
-sx={{
-  border: "0px solid",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-}}
->
-<Box sx={{ border: "0px solid red" }}>
-<PortableText
-      value={topBrandsImg[index]}
-      components={ptComponents}
-    />
- 
-</Box>
-</Box> */
-  }
-
   for (let i = 0; i < topBrandsImg.length; i += sliderItems) {
     if (i % sliderItems === 0) {
       items.push(
@@ -124,8 +104,6 @@ sx={{
 
   return (
     <Grid>
-      {/* <h1>{title}</h1> */}
-      {/* <span>By {name}</span> */}
       <Grid item xs={12}>
         <Header />
         <Box>

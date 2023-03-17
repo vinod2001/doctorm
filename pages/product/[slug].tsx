@@ -7,18 +7,7 @@ import { PortableText } from "@portabletext/react";
 import client from "../../client";
 import Header from "../../components/header";
 import BreadcrumbsDetails from "../../components/breadcrumbs";
-import PdpSection from "../../components/pdpSection";
-import ResponsiveAppBar from "../../components/menu";
-import {
-  Box,
-  Grid,
-  Theme,
-  Paper,
-  Card,
-  SubCategory,
-  Button,
-  Link,
-} from "@mui/material";
+import { Box, Grid, Button } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import Divider from "@mui/material/Divider";
 import { Roboto } from "@next/font/google";
