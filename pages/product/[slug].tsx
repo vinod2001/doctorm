@@ -22,6 +22,8 @@ import {
 import Carousel from "react-material-ui-carousel";
 import Divider from "@mui/material/Divider";
 import { Roboto } from "@next/font/google";
+import DoneIcon from "@mui/icons-material/Done";
+import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -31,6 +33,39 @@ function urlFor(source) {
   return imageUrlBuilder(client).image(source);
 }
 
+const space = {
+  mr: 2,
+  ml: 2,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  fontWeight: "bold",
+};
+const tickColor = {
+  color: "#F7961C",
+};
+const title = {
+  fontSize: "28px",
+};
+const dis = {
+  fontSize: "20px",
+  mt: 2,
+  mb: 4,
+};
+const productDis = {
+  width: "80%",
+};
+const types = {
+  p: 2,
+  borderRadius: "50px",
+  background: "#F1ECE1",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "65%",
+  pr: 6,
+  pl: 6,
+};
 const ptComponents = {
   types: {
     image: ({ value, index }) => {
@@ -42,7 +77,24 @@ const ptComponents = {
           alt={value.alt || " "}
           loading="lazy"
           src={urlFor(value).fit("max").auto("format")}
-          width="100%"
+        />
+      );
+    },
+  },
+};
+
+const thumpComponents = {
+  types: {
+    image: ({ value, index }) => {
+      if (!value?.asset?._ref) {
+        return null;
+      }
+      return (
+        <img
+          alt={value.alt || " "}
+          loading="lazy"
+          src={urlFor(value).fit("max").auto("format")}
+          width="80%"
         />
       );
     },
@@ -55,34 +107,124 @@ const Pdp = ({ pdp }) => {
     productThumpnail,
     measurements,
     measurementImages,
+    frameImage,
   } = pdp;
 
   React.useEffect(() => {
-    console.log("pdp:" + JSON.stringify(pdp));
+    console.log(productThumpnail);
+    console.log(productCarouselImg);
   }, [pdp]);
   return (
     <Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} className={roboto.className}>
         <Header />
         <BreadcrumbsDetails />
-        <Grid container xs={12}>
-          <Grid xs={6} sx={{ border: "0px solid" }}>
+        <Grid container xs={12} sx={{ mt: 10 }}>
+          <Grid xs={7} sx={{ border: "0px solid" }}>
             <Box>
-              <Carousel
-                width="100%"
-                swipe="true"
-                duration="100"
-              >
+              <Carousel width="100%" swipe="true" duration="100">
                 {productCarouselImg.map((images, index) => (
-                  <Box key={index}>
+                  <Box key={index} sx={{ textAlign: "center" }}>
                     <PortableText value={images} components={ptComponents} />
                   </Box>
                 ))}
               </Carousel>
             </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                border: "0px solid",
+                ml: 2,
+                mr: 2,
+                mt: 5,
+              }}
+            >
+              {productThumpnail.map((images, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    border: "0px solid",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "25%",
+                  }}
+                >
+                  <PortableText value={images} components={thumpComponents} />
+                </Box>
+              ))}
+            </Box>
           </Grid>
-          <Grid xs={6} sx={{ border: "0px solid" }}>
-            <Box>hello</Box>
+          <Grid xs={5} sx={{ border: "0px solid" }}>
+            <Box sx={productDis}>
+              <Box sx={title}>
+                <b>Ray-Ban</b> Square Sunglasses
+              </Box>
+              <Box sx={dis}>
+                Men’s sunglasses from RayBan in a classy square silhouette
+              </Box>
+              <Box sx={types}>
+                <Box component="span" sx={space}>
+                  <DoneIcon sx={tickColor} />
+                  <Box component="span">Aviator</Box>
+                </Box>
+                <Box component="span">|</Box>
+                <Box component="span" sx={space}>
+                  <DoneIcon sx={tickColor} />
+                  <Box component="span">Standard</Box>
+                </Box>
+                <Box component="span">|</Box>
+                <Box component="span" sx={space}>
+                  <DoneIcon sx={tickColor} />
+                  <Box component="span">Metal</Box>
+                </Box>
+              </Box>
+              <Box>
+                <Box sx={{ fontSize: "20px", mt: 3 }}>
+                  <b>Frame Color</b> : Gunmetal
+                </Box>
+                <Box sx={{ mt: 2 }}>
+                  <PortableText value={frameImage} components={ptComponents} />
+                </Box>
+                <Box sx={{ fontSize: "20px", mt: 3 }}>
+                  <b>Lence Color</b> : Green
+                </Box>
+                <Box sx={{ mt: 2 }}>
+                  <RadioButtonCheckedIcon
+                    sx={{ color: "#b2be9a", fontSize: "50px" }}
+                  />
+                </Box>
+              </Box>
+            </Box>
+          </Grid>
+          <Grid xs={12}>
+            <Box
+              sx={{ background: "#F5F5F5", p: 4, mt: 5 }}
+              display="flex"
+              justifyContent="flex-end"
+              alignItems="flex-end"
+            >
+              <Box sx={{ fontSize: "30px" }}>SAR 550.00</Box>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "#ff9905",
+                  "&:hover": {
+                    backgroundColor: "#f59407",
+                  },
+                  ml: 3,
+                  color: "#343434",
+                  textTransform: "capitalize",
+                  fontWeight: "bold",
+                  pl: 10,
+                  pr: 10,
+                }}
+              >
+                Add to cart
+              </Button>
+            </Box>
           </Grid>
         </Grid>
       </Grid>
@@ -95,6 +237,7 @@ const query = groq`*[_type == "productDetail" && slug.current == $slug][0]{
   "productThumpnail":thumpnails[]->carouselImage,
   measurements,
   "measurementImages":measurementImages[]->carouselImage,
+  frameImage
   }`;
 export async function getServerSidePaths() {
   const paths = await client.fetch(
