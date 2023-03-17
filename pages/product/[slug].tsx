@@ -1,11 +1,13 @@
 // @ts-nocheck
 // [slug].tsx
-
+import React from "react";
 import groq from "groq";
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import client from "../../client";
 import Header from "../../components/header";
+import BreadcrumbsDetails from "../../components/breadcrumbs";
+import PdpSection from "../../components/pdpSection";
 import ResponsiveAppBar from "../../components/menu";
 import {
   Box,
@@ -48,20 +50,51 @@ const ptComponents = {
 };
 
 const Pdp = ({ pdp }) => {
-  const { title } = pdp;
+  const {
+    productCarouselImg,
+    productThumpnail,
+    measurements,
+    measurementImages,
+  } = pdp;
+
+  React.useEffect(() => {
+    console.log("pdp:" + JSON.stringify(pdp));
+  }, [pdp]);
   return (
     <Grid>
       <Grid item xs={12}>
         <Header />
-        {title}
+        <BreadcrumbsDetails />
+        <Grid container xs={12}>
+          <Grid xs={6} sx={{ border: "0px solid" }}>
+            <Box>
+              <Carousel
+                width="100%"
+                swipe="true"
+                duration="100"
+              >
+                {productCarouselImg.map((images, index) => (
+                  <Box key={index}>
+                    <PortableText value={images} components={ptComponents} />
+                  </Box>
+                ))}
+              </Carousel>
+            </Box>
+          </Grid>
+          <Grid xs={6} sx={{ border: "0px solid" }}>
+            <Box>hello</Box>
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   );
 };
 
-const query = groq`*[_type == "pdp" && slug.current == 'pdp']{
-    title,
-    body
+const query = groq`*[_type == "productDetail" && slug.current == $slug][0]{
+  "productCarouselImg":productCarousel[]->carouselImage,
+  "productThumpnail":thumpnails[]->carouselImage,
+  measurements,
+  "measurementImages":measurementImages[]->carouselImage,
   }`;
 export async function getServerSidePaths() {
   const paths = await client.fetch(

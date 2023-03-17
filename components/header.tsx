@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React from "react";
-import { Box, Grid, Theme } from "@mui/material";
+import { Box, Grid, Theme, Link } from "@mui/material";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
@@ -165,18 +165,6 @@ function Header() {
       <Grid>
         <Grid item xs={12} sx={sxStyle}>
           <Box className={roboto.className}>
-            {/* <Box component="span" sx={spanStyle}>
-              FREE SHIPPING FOR ALL ORDERS,
-            </Box>{" "}
-            <span sx={{ mr: 2 }}>LIMITED TIME ONLY</span> | FAST SHIPPING WITHIN{" "}
-            <Box component="span" sx={spanStyle}>
-              2-4 BUSINESS DAYS*
-            </Box>{" "}
-            | FREE{" "}
-            <Box component="span" sx={spanStyle}>
-              IN-STORE
-            </Box>{" "}
-            RETURN */}
             {scrollContent.content &&
               scrollContent.content.map((item, index) =>
                 item.children[0].marks.length > 0 &&
@@ -231,10 +219,12 @@ function Header() {
             </Box>
 
             <Box sx={HeaderItemWrapper}>
-              <PortableText
-                value={scrollContent.logo}
-                components={ptComponents}
-              />
+              <Link href="/">
+                <PortableText
+                  value={scrollContent.logo}
+                  components={ptComponents}
+                />
+              </Link>
             </Box>
             <Box sx={[HeaderItemWrapper, HeaderitemWrapperWidth]}>
               <Box sx={HeaderItemInnerWrapper}>
@@ -285,7 +275,12 @@ function Header() {
                   }}
                   className={roboto.className}
                 >
-                  {page}
+                  <Link
+                    href="/product/pdp"
+                    sx={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    {page}
+                  </Link>
                 </Button>
               ))}
             </Box>

@@ -34,17 +34,16 @@ const Index = () => {
 // }
 
 export async function getServerSideProps() {
-  
-    return {
-      redirect: {
-        destination: "/post/home",
-        permanent: false, // make this true if you want the redirect to be cached by the search engines and clients forever
-      }, 
-    }
-  
   return {
-    props: {}
-  }
+    redirect: {
+      destination: "/post/home",
+      permanent: true, // make this true if you want the redirect to be cached by the search engines and clients forever
+    },
+  };
+
+  return {
+    props: {},
+  };
 }
 
 export default Index;
