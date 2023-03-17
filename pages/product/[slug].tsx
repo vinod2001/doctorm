@@ -107,6 +107,8 @@ const Pdp = ({ pdp }) => {
     productThumpnail,
     measurements,
     measurementImages,
+    measurementsTitle,
+    measurementsDes,
     frameImage,
   } = pdp;
 
@@ -218,12 +220,85 @@ const Pdp = ({ pdp }) => {
                   color: "#343434",
                   textTransform: "capitalize",
                   fontWeight: "bold",
+                  fontSize: "16px",
                   pl: 10,
                   pr: 10,
+                  pt: 1,
+                  pb: 1,
                 }}
               >
                 Add to cart
               </Button>
+            </Box>
+          </Grid>
+          <Grid xs={12}>
+            <Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  margin: "auto",
+                  mt: 6,
+                  mb: 1.5,
+                  fontSize: "35px",
+                }}
+              >
+                {measurements}
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  margin: "auto",
+                  mb: 6,
+                }}
+              >
+                <Divider
+                  sx={{
+                    width: "10%",
+                    borderBottomWidth: 4,
+                    background: "#343434",
+                  }}
+                />
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              {measurementImages.map((val, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    border: "0px solid",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                >
+                  <Box sx={{ border: "0px solid", textAlign: "center" }}>
+                    <PortableText value={val} components={thumpComponents} />
+                    <Box sx={{ textAlign: "center", mt: 2 }}>
+                      <Box sx={{ textAlign: "center", fontSize: "22px" }}>
+                        {measurementsTitle[index]}
+                      </Box>
+                      <Box
+                        sx={{
+                          textAlign: "center",
+                          fontSize: "20px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {measurementsDes[index]}
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+              ))}
             </Box>
           </Grid>
         </Grid>
@@ -237,6 +312,8 @@ const query = groq`*[_type == "productDetail" && slug.current == $slug][0]{
   "productThumpnail":thumpnails[]->carouselImage,
   measurements,
   "measurementImages":measurementImages[]->carouselImage,
+  "measurementsTitle":measurementImages[]->title,
+  "measurementsDes":measurementImages[]->description,
   frameImage
   }`;
 export async function getServerSidePaths() {
