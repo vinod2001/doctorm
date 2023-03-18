@@ -6,6 +6,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import client from "../../client";
 import Header from "../../components/header";
+import PdpDetail from "../../components/pdpDetail";
 import BreadcrumbsDetails from "../../components/breadcrumbs";
 import { Box, Grid, Button } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
@@ -290,6 +291,7 @@ const Pdp = ({ pdp }) => {
               ))}
             </Box>
           </Grid>
+          <PdpDetail/>
         </Grid>
       </Grid>
     </Grid>
