@@ -14,6 +14,8 @@ import Divider from "@mui/material/Divider";
 import { Roboto } from "@next/font/google";
 import DoneIcon from "@mui/icons-material/Done";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -189,6 +191,24 @@ const Pdp = ({ pdp }) => {
                   />
                 </Box>
               </Box>
+              {/*clear lence*/}
+              <Box>
+                <Box sx={{ fontSize: "20px", mt: 3 }}>
+                  Enter your prescription
+                </Box>
+                <Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Box>Sphere (Power) :</Box>
+                    <Box></Box>
+                  </Box>
+                </Box>
+              </Box>
             </Box>
           </Grid>
           <Grid xs={12}>
@@ -291,7 +311,7 @@ const Pdp = ({ pdp }) => {
               ))}
             </Box>
           </Grid>
-          <PdpDetail/>
+          <PdpDetail />
         </Grid>
       </Grid>
     </Grid>
