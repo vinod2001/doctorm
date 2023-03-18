@@ -54,8 +54,8 @@ const pdpDetailsContent = {
 };
 
 function PdpDetail() {
-  const [isPdetail, setIsPdetail] = React.useState(false);
-  const [isFeature, setIsFeature] = React.useState(true);
+  const [isPdetail, setIsPdetail] = React.useState(true);
+  const [isFeature, setIsFeature] = React.useState(false);
   const handleClick = (val) => {
     if (val === "showPdetails") {
       setIsPdetail(true);
