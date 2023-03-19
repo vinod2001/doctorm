@@ -7,6 +7,7 @@ import { PortableText } from "@portabletext/react";
 import client from "../../client";
 import Header from "../../components/header";
 import PdpDetail from "../../components/pdpDetail";
+import ZoomModal from "../../components/zoomModal";
 import BreadcrumbsDetails from "../../components/breadcrumbs";
 import { Box, Grid, Button } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
@@ -18,8 +19,8 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -97,7 +98,19 @@ const thumpComponents = {
   },
 };
 
-const powerLists = ["select","-1.25","-1.50","-2.00","-2.75","-3.25","-3.50","-3.75","-4.00","-4.50","-4.75"]
+const powerLists = [
+  "select",
+  "-1.25",
+  "-1.50",
+  "-2.00",
+  "-2.75",
+  "-3.25",
+  "-3.50",
+  "-3.75",
+  "-4.00",
+  "-4.50",
+  "-4.75",
+];
 
 const Pdp = ({ pdp }) => {
   const {
@@ -111,10 +124,22 @@ const Pdp = ({ pdp }) => {
   } = pdp;
 
   const [power, setPower] = React.useState();
- 
+  const [zoomModalDetails, setZoomModalDetails] = React.useState({
+    display: false,
+    selectedImage: null,
+    allImages: productCarouselImg,
+  });
 
   const handleChange = (event: SelectChangeEvent) => {
     setPower(event.target.value);
+  };
+
+  const zoom = (images) => {
+    setZoomModalDetails((oldData) => ({
+      ...oldData,
+      display: true,
+      selectedImage: images,
+    }));
   };
 
   React.useEffect(() => {
@@ -131,7 +156,11 @@ const Pdp = ({ pdp }) => {
             <Box>
               <Carousel width="100%" swipe="true" duration="100">
                 {productCarouselImg.map((images, index) => (
-                  <Box key={index} sx={{ textAlign: "center" }}>
+                  <Box
+                    key={index}
+                    sx={{ textAlign: "center", cursor: "zoom-in" }}
+                    onClick={() => zoom(images)}
+                  >
                     <PortableText value={images} components={ptComponents} />
                   </Box>
                 ))}
@@ -192,15 +221,13 @@ const Pdp = ({ pdp }) => {
                 <Box sx={{ fontSize: "20px", mt: 3 }}>
                   <b>Frame Color</b> : Gunmetal
                 </Box>
-                <Box sx={{ mt: 2, display:'flex' }}>
+                <Box sx={{ mt: 2, display: "flex" }}>
                   {/* <PortableText value={frameImage} components={ptComponents} /> */}
-                  {frameImage.map((images,index)=>(
-                    <Box key={index} sx={{ mr:2}}>
+                  {frameImage.map((images, index) => (
+                    <Box key={index} sx={{ mr: 2 }}>
                       <PortableText value={images} components={ptComponents} />
                     </Box>
-                  ))
-                  
-                  }
+                  ))}
                 </Box>
                 <Box sx={{ fontSize: "20px", mt: 3 }}>
                   <b>Lence Color</b> : Green
@@ -213,7 +240,7 @@ const Pdp = ({ pdp }) => {
               </Box>
               {/*clear lence*/}
               <Box>
-                <Box sx={{ fontSize: "20px", mt: 3, fontWeight:'bold' }}>
+                <Box sx={{ fontSize: "20px", mt: 3, fontWeight: "bold" }}>
                   Enter your prescription
                 </Box>
                 <Box>
@@ -222,12 +249,12 @@ const Pdp = ({ pdp }) => {
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      border:'0px solid',
-                      mt: 3 
+                      border: "0px solid",
+                      mt: 3,
                     }}
                   >
                     <Box sx={{ border: "0px solid" }}>Sphere (Power) :</Box>
-                    <Box sx={{ border: "0px solid", width: "60%",}}>
+                    <Box sx={{ border: "0px solid", width: "60%" }}>
                       <FormControl style={{ minWidth: 220 }}>
                         <InputLabel id="demo-simple-select-autowidth-label">
                           Select
@@ -240,20 +267,30 @@ const Pdp = ({ pdp }) => {
                           label="Power"
                           sx={{ width: "100%" }}
                         >
-                          {powerLists.map((item,index)=>(
-                            <MenuItem key={index} value={item}>{item}</MenuItem>
+                          {powerLists.map((item, index) => (
+                            <MenuItem key={index} value={item}>
+                              {item}
+                            </MenuItem>
                           ))}
-                          
                         </Select>
                       </FormControl>
                     </Box>
-                   
                   </Box>
-                  <Box sx={{mt:2}}>
-                  <FormControlLabel control={<Checkbox  sx={{color:'#F7961C','&.Mui-checked': {
-            color:'#F7961C',
-          },}} />} label="I need 2 different powers" />
-                    </Box>
+                  <Box sx={{ mt: 2 }}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          sx={{
+                            color: "#F7961C",
+                            "&.Mui-checked": {
+                              color: "#F7961C",
+                            },
+                          }}
+                        />
+                      }
+                      label="I need 2 different powers"
+                    />
+                  </Box>
                 </Box>
               </Box>
             </Box>
@@ -361,6 +398,12 @@ const Pdp = ({ pdp }) => {
           <PdpDetail />
         </Grid>
       </Grid>
+      {zoomModalDetails.display && (
+        <ZoomModal
+          zoomModalDetails={zoomModalDetails}
+          setZoomModalDetails={setZoomModalDetails}
+        />
+      )}
     </Grid>
   );
 };

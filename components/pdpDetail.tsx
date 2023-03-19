@@ -55,7 +55,7 @@ const pdpDetailsContent = {
 
 const pdpDetailsFeatureContent = {
   fontSize: "20px",
-}
+};
 
 function PdpDetail() {
   const [isPdetail, setIsPdetail] = React.useState(true);
@@ -134,7 +134,7 @@ function PdpDetail() {
           {isFeature && (
             <Box sx={{ ml: 20, border: "0px solid", width: "100%" }}>
               <Box sx={sectionTitle}>Features</Box>
-              <Box sx={[pdpDetailsContent,pdpDetailsFeatureContent]}>
+              <Box sx={[pdpDetailsContent, pdpDetailsFeatureContent]}>
                 <ul>
                   <li>
                     Full rim in narrow width, crafted from lightweight acetate
