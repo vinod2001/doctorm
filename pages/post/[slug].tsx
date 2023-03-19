@@ -19,6 +19,8 @@ import {
 import Carousel from "react-material-ui-carousel";
 import Divider from "@mui/material/Divider";
 import { Roboto } from "@next/font/google";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -382,15 +384,51 @@ const Post = ({ post }) => {
                   }}
                 />
               </Box>
-
               <Box
                 sx={{
+                  textAlign: "center",
+                  border: "0px solid",
                   display: "flex",
                   justifyContent: "center",
-                  border: "0px solid",
                 }}
               >
-                <Carousel sx={{ width: "100%" }}>{items}</Carousel>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    border: "0px solid",
+                    width: "80%",
+                  }}
+                >
+                  <Carousel
+                    sx={{ width: "100%" }}
+                    PrevIcon={<ArrowBackIosNewIcon />}
+                    NextIcon={<ArrowForwardIosIcon />}
+                    navButtonsProps={{
+                      // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
+                      style: {
+                        background: "transparent",
+                        color: "#F7961C",
+                      },
+                    }}
+                    navButtonsAlwaysVisible={true}
+                    activeIndicatorIconButtonProps={{
+                      style: {
+                        backgroundColor: "#F7961C",
+                        color: "#F7961C",
+                      },
+                    }}
+                    indicatorIconButtonProps={{
+                      style: {
+                        color: "#b2be9a",
+                        marginRight: "10px",
+                      },
+                    }}
+                  >
+                    {items}
+                  </Carousel>
+                </Box>
               </Box>
             </Box>
           )}

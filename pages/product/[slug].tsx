@@ -21,6 +21,8 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -158,6 +160,8 @@ const Pdp = ({ pdp }) => {
                 width="100%"
                 swipe="true"
                 duration="100"
+                PrevIcon={<ArrowBackIosNewIcon />}
+                NextIcon={<ArrowForwardIosIcon />}
                 navButtonsProps={{
                   // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
                   style: {
