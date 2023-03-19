@@ -154,7 +154,31 @@ const Pdp = ({ pdp }) => {
         <Grid container xs={12} sx={{ mt: 10 }}>
           <Grid xs={7} sx={{ border: "0px solid" }}>
             <Box>
-              <Carousel width="100%" swipe="true" duration="100">
+              <Carousel
+                width="100%"
+                swipe="true"
+                duration="100"
+                navButtonsProps={{
+                  // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
+                  style: {
+                    background: "none",
+                    color: "#F7961C",
+                  },
+                }}
+                navButtonsAlwaysVisible={true}
+                activeIndicatorIconButtonProps={{
+                  style: {
+                    backgroundColor: "#F7961C",
+                    color: "#F7961C",
+                  },
+                }}
+                indicatorIconButtonProps={{
+                  style: {
+                    color: "#b2be9a",
+                    marginRight: "10px",
+                  },
+                }}
+              >
                 {productCarouselImg.map((images, index) => (
                   <Box
                     key={index}

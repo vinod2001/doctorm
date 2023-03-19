@@ -113,6 +113,26 @@ const Post = ({ post }) => {
               animation="slide"
               swipe="true"
               duration="100"
+              navButtonsProps={{
+                // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
+                style: {
+                  background: "#fff",
+                  color: "#F7961C",
+                },
+              }}
+              navButtonsAlwaysVisible={true}
+              activeIndicatorIconButtonProps={{
+                style: {
+                  backgroundColor: "#F7961C",
+                  color: "#F7961C",
+                },
+              }}
+              indicatorIconButtonProps={{
+                style: {
+                  color: "#b2be9a",
+                  marginRight: "10px",
+                },
+              }}
             >
               {categories.map((category, index) => (
                 <Box key={category}>
