@@ -6,7 +6,6 @@ import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import client from "../../client";
 import Header from "../../components/header";
-import ResponsiveAppBar from "../../components/menu";
 import {
   Box,
   Grid,
@@ -20,6 +19,8 @@ import {
 import Carousel from "react-material-ui-carousel";
 import Divider from "@mui/material/Divider";
 import { Roboto } from "@next/font/google";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -78,25 +79,6 @@ const Post = ({ post }) => {
   const sliderItems: number = topBrandsImg.length > 3 ? 3 : topBrandsImg.length;
   const items: Array<any> = [];
 
-  {
-    /* <Box
-sx={{
-  border: "0px solid",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-}}
->
-<Box sx={{ border: "0px solid red" }}>
-<PortableText
-      value={topBrandsImg[index]}
-      components={ptComponents}
-    />
- 
-</Box>
-</Box> */
-  }
-
   for (let i = 0; i < topBrandsImg.length; i += sliderItems) {
     if (i % sliderItems === 0) {
       items.push(
@@ -124,8 +106,6 @@ sx={{
 
   return (
     <Grid>
-      {/* <h1>{title}</h1> */}
-      {/* <span>By {name}</span> */}
       <Grid item xs={12}>
         <Header />
         <Box>
@@ -135,6 +115,26 @@ sx={{
               animation="slide"
               swipe="true"
               duration="100"
+              navButtonsProps={{
+                // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
+                style: {
+                  background: "#fff",
+                  color: "#F7961C",
+                },
+              }}
+              navButtonsAlwaysVisible={true}
+              activeIndicatorIconButtonProps={{
+                style: {
+                  backgroundColor: "#F7961C",
+                  color: "#F7961C",
+                },
+              }}
+              indicatorIconButtonProps={{
+                style: {
+                  color: "#b2be9a",
+                  marginRight: "10px",
+                },
+              }}
             >
               {categories.map((category, index) => (
                 <Box key={category}>
@@ -384,15 +384,51 @@ sx={{
                   }}
                 />
               </Box>
-
               <Box
                 sx={{
+                  textAlign: "center",
+                  border: "0px solid",
                   display: "flex",
                   justifyContent: "center",
-                  border: "0px solid",
                 }}
               >
-                <Carousel sx={{ width: "100%" }}>{items}</Carousel>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    border: "0px solid",
+                    width: "80%",
+                  }}
+                >
+                  <Carousel
+                    sx={{ width: "100%" }}
+                    PrevIcon={<ArrowBackIosNewIcon />}
+                    NextIcon={<ArrowForwardIosIcon />}
+                    navButtonsProps={{
+                      // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
+                      style: {
+                        background: "transparent",
+                        color: "#F7961C",
+                      },
+                    }}
+                    navButtonsAlwaysVisible={true}
+                    activeIndicatorIconButtonProps={{
+                      style: {
+                        backgroundColor: "#F7961C",
+                        color: "#F7961C",
+                      },
+                    }}
+                    indicatorIconButtonProps={{
+                      style: {
+                        color: "#b2be9a",
+                        marginRight: "10px",
+                      },
+                    }}
+                  >
+                    {items}
+                  </Carousel>
+                </Box>
               </Box>
             </Box>
           )}

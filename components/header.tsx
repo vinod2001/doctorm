@@ -16,12 +16,38 @@ import Button from "@mui/material/Button";
 import { Roboto } from "@next/font/google";
 import groq from "groq";
 import client from "../client";
-import useScrollDirection from "../lib/useScrollDirection";
+import useScrollDirection from "@/lib/useScrollDirection";
+import Carousel from "react-material-ui-carousel";
+import { PortableText } from "@portabletext/react";
+import imageUrlBuilder from "@sanity/image-url";
+import Link from "next/link";
 
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["400", "700"],
 });
+
+function urlFor(source) {
+  return imageUrlBuilder(client).image(source);
+}
+
+const ptComponents = {
+  types: {
+    image: ({ value, index }) => {
+      if (!value?.asset?._ref) {
+        return null;
+      }
+      return (
+        <img
+          alt={value.alt || " "}
+          loading="lazy"
+          src={urlFor(value).fit("max").auto("format")}
+          width="100%"
+        />
+      );
+    },
+  },
+};
 
 const sxStyle = {
   backgroundColor: "#3A3A3A",
@@ -37,6 +63,11 @@ const sxStyle = {
 };
 const spanStyle = {
   color: "#FFFFFF",
+};
+
+const deviderSpace = {
+  mr: 2,
+  ml: 2,
 };
 const mainHeader = {
   backgroundColor: "#F7961C",
@@ -88,6 +119,8 @@ const clsHeader = {
 
 function Header() {
   const scrollDirection = useScrollDirection();
+  const [scrollContent, setScrollContent] = React.useState([]);
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -115,13 +148,17 @@ function Header() {
     client
       .fetch(
         `*[_type == "header"]{
-      title,
+      content,
+      logo,
     }`
       )
-      .then((data) => {
-        console.log(data);
-      });
-  });
+      .then((data) => setScrollContent(...data));
+  }, []);
+
+  React.useEffect(() => {
+    console.log(JSON.stringify(scrollContent));
+    console.log(scrollContent.content);
+  }, [scrollContent]);
 
   return (
     //sx={{clsHeader:`${ scrollDirection === "down" ? "hide" : "show"}`}}
@@ -129,18 +166,29 @@ function Header() {
       <Grid>
         <Grid item xs={12} sx={sxStyle}>
           <Box className={roboto.className}>
-            <Box component="span" sx={spanStyle}>
-              FREE SHIPPING FOR ALL ORDERS,
-            </Box>{" "}
-            <span sx={{ mr: 2 }}>LIMITED TIME ONLY</span> | FAST SHIPPING WITHIN{" "}
-            <Box component="span" sx={spanStyle}>
-              2-4 BUSINESS DAYS*
-            </Box>{" "}
-            | FREE{" "}
-            <Box component="span" sx={spanStyle}>
-              IN-STORE
-            </Box>{" "}
-            RETURN
+            {scrollContent.content &&
+              scrollContent.content.map((item, index) =>
+                item.children[0].marks.length > 0 &&
+                item.children[0].marks[0] !== "strong" ? (
+                  <Box component="span" key={index}>
+                    {item.children[0].text}{" "}
+                  </Box>
+                ) : item.children[0].marks[0] === "strong" ? (
+                  <Box
+                    component="span"
+                    key={index}
+                    sx={[spanStyle, deviderSpace]}
+                  >
+                    {"  "}
+                    {item.children[0].text}
+                    {"  "}
+                  </Box>
+                ) : (
+                  <Box component="span" key={index} sx={spanStyle}>
+                    {item.children[0].text}{" "}
+                  </Box>
+                )
+              )}
           </Box>
         </Grid>
         <Grid item xs={12} sx={mainHeader}>
@@ -172,10 +220,12 @@ function Header() {
             </Box>
 
             <Box sx={HeaderItemWrapper}>
-              <img
-                style={{ width: "100%" }}
-                src="https://img-cdn.magrabi.com/medias/sys_master/root/hb0/h3f/9069140738078/logo/logo.png"
-              />
+              <Link href="/">
+                <PortableText
+                  value={scrollContent.logo}
+                  components={ptComponents}
+                />
+              </Link>
             </Box>
             <Box sx={[HeaderItemWrapper, HeaderitemWrapperWidth]}>
               <Box sx={HeaderItemInnerWrapper}>
@@ -226,7 +276,12 @@ function Header() {
                   }}
                   className={roboto.className}
                 >
-                  {page}
+                  <Link
+                    href="/product/pdp"
+                    sx={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    {page}
+                  </Link>
                 </Button>
               ))}
             </Box>
