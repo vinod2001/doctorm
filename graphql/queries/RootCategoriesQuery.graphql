@@ -1,0 +1,11 @@
+query RootCategoriesQuery($locale: LanguageCodeEnum!) {
+  categories {
+    edges {
+      node {
+        id
+        name
+        slug
+      }
+    }
+  }
+}

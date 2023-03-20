@@ -1,22 +1,11 @@
-// @ts-nocheck
-// [slug].tsx
-
 import groq from "groq";
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import client from "../../client";
 import Header from "../../components/header";
-import ResponsiveAppBar from "../../components/menu";
-import {
-  Box,
-  Grid,
-  Theme,
-  Paper,
-  Card,
-  SubCategory,
-  Button,
-  Link,
-} from "@mui/material";
+import { GetServerSideProps } from "next";
+import { InferGetServerSidePropsType } from "next";
+import { Box, Grid, Theme, Paper, Card, Button, Link } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
 import Divider from "@mui/material/Divider";
 import { Roboto } from "@next/font/google";
@@ -25,7 +14,7 @@ const roboto = Roboto({
   subsets: ["latin"],
   weight: "400",
 });
-function urlFor(source) {
+function urlFor(source: string) {
   return imageUrlBuilder(client).image(source);
 }
 
@@ -47,7 +36,7 @@ const ptComponents = {
   },
 };
 
-const Post = ({ post }) => {
+export function HomepageBlock({ homePageContent }) {
   const {
     title = "Missing title",
     name = "Missing name",
@@ -71,31 +60,12 @@ const Post = ({ post }) => {
     biggerBannersDes,
     biggerBannersButton,
     body = [],
-  } = post;
+  } = homePageContent;
 
   console.log("largeBanners:" + JSON.stringify(largeBanners));
 
   const sliderItems: number = topBrandsImg.length > 3 ? 3 : topBrandsImg.length;
   const items: Array<any> = [];
-
-  {
-    /* <Box
-sx={{
-  border: "0px solid",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-}}
->
-<Box sx={{ border: "0px solid red" }}>
-<PortableText
-      value={topBrandsImg[index]}
-      components={ptComponents}
-    />
- 
-</Box>
-</Box> */
-  }
 
   for (let i = 0; i < topBrandsImg.length; i += sliderItems) {
     if (i % sliderItems === 0) {
@@ -127,7 +97,6 @@ sx={{
       {/* <h1>{title}</h1> */}
       {/* <span>By {name}</span> */}
       <Grid item xs={12}>
-        <Header />
         <Box>
           {categories && (
             <Carousel
@@ -500,55 +469,31 @@ sx={{
       </Grid>
     </Grid>
   );
-};
+}
 
 const query = groq`*[_type == "post" && slug.current == $slug][0]{
-  title,
-  "name": author->name,
-  "categories": categories[]->title,
-  "categoriesDes": categories[]->description,
-  "categoriesImg": categories[]->carouselImage,
-  "categoriesButton": categories[]->buttonOrLinkText,
-  "authorImage": author->image,
-  "findFramesTitle": findFrames[]->title,
-  "findFramesDes": findFrames[]->description,
-  "findFramesImg": findFrames[]->carouselImage,
-  "findFramesButton": findFrames[]->buttonOrLinkText,
-  topCategoriesHeading,
-  "topCategories": topCategories[]->title,
-  "topCategoriesImg": topCategories[]->carouselImage,
-  topBrandsHeading,
-  "topBrandsImg": topBrands[]->carouselImage,
-  "largeBanners":largeBanners[]->carouselImage,
-  "biggerBanners":biggerBanners[]->title,
-  "biggerBannersImg":biggerBanners[]->carouselImage,
-  "biggerBannersDes":biggerBanners[]->description,
-  "biggerBannersButton": biggerBanners[]->buttonOrLinkText,
-  body
-}`;
-export async function getServerSidePaths() {
-  console.log("******1********getServerSidePaths");
-  const paths = await client.fetch(
-    groq`*[_type == "post" && defined(slug.current)][].slug.current`
-  );
+    title,
+    "name": author->name,
+    "categories": categories[]->title,
+    "categoriesDes": categories[]->description,
+    "categoriesImg": categories[]->carouselImage,
+    "categoriesButton": categories[]->buttonOrLinkText,
+    "authorImage": author->image,
+    "findFramesTitle": findFrames[]->title,
+    "findFramesDes": findFrames[]->description,
+    "findFramesImg": findFrames[]->carouselImage,
+    "findFramesButton": findFrames[]->buttonOrLinkText,
+    topCategoriesHeading,
+    "topCategories": topCategories[]->title,
+    "topCategoriesImg": topCategories[]->carouselImage,
+    topBrandsHeading,
+    "topBrandsImg": topBrands[]->carouselImage,
+    "largeBanners":largeBanners[]->carouselImage,
+    "biggerBanners":biggerBanners[]->title,
+    "biggerBannersImg":biggerBanners[]->carouselImage,
+    "biggerBannersDes":biggerBanners[]->description,
+    "biggerBannersButton": biggerBanners[]->buttonOrLinkText,
+    body
+  }`;
 
-  return {
-    paths: paths.map((slug) => ({ params: { slug } })),
-    fallback: true,
-  };
-}
-
-export async function getServerSideProps(context) {
-  console.log("*******1*******getServerSideProps");
-  // It's important to default the slug so that it doesn't return "undefined"
-  const { slug = "" } = context.params;
-  console.log("---1----slug-----", slug);
-  const post = await client.fetch(query, { slug });
-  console.log(JSON.stringify(post));
-  return {
-    props: {
-      post,
-    },
-  };
-}
-export default Post;
+export default HomepageBlock;

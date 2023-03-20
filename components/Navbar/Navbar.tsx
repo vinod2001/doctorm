@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from "react";
 import { Box, Grid, Theme } from "@mui/material";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
@@ -6,17 +5,13 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+
 import AppBar from "@mui/material/AppBar";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { Roboto } from "@next/font/google";
-import groq from "groq";
-import client from "../client";
-import useScrollDirection from "../lib/useScrollDirection";
+import client from "../../client";
+import useScrollDirection from "../../lib/useScrollDirection";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -86,7 +81,8 @@ const clsHeader = {
   transitionFuration: "500ms",
 };
 
-function Header() {
+export function Navbar(props) {
+  const rootCategories = props.rootCategories;
   const scrollDirection = useScrollDirection();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -94,7 +90,12 @@ function Header() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
-  const pages = ["Eyeglasses", "Sunglasses", "Contact Lenses", "Accessories"];
+
+  const categories = rootCategories.map((category) => {
+    return category.name;
+  });
+
+  const pages = categories;
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -237,4 +238,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default Navbar;
