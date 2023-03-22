@@ -75,7 +75,7 @@ const ptComponents = {
         <img
           alt={value.alt || " "}
           loading="lazy"
-          src={urlFor(value).fit("max").auto("format")}
+          src={urlFor(value).fit("max").auto("format").url()}
         />
       );
     },
@@ -92,7 +92,7 @@ const thumpComponents = {
         <img
           alt={value.alt || " "}
           loading="lazy"
-          src={urlFor(value).fit("max").auto("format")}
+          src={urlFor(value).fit("max").auto("format").url()}
           width="80%"
         />
       );
