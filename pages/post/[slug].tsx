@@ -27,7 +27,7 @@ const roboto = Roboto({
   weight: "400",
 });
 function urlFor(source) {
-  return imageUrlBuilder(client).image(source);
+  return imageUrlBuilder(client).image(source).url();
 }
 
 const ptComponents = {
@@ -111,10 +111,9 @@ const Post = ({ post }) => {
         <Box>
           {categories && (
             <Carousel
-              width="100%"
               animation="slide"
-              swipe="true"
-              duration="100"
+              swipe={true}
+              duration={100}
               navButtonsProps={{
                 // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
                 style: {
