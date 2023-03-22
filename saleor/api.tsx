@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { gql } from "@apollo/client";
 import "graphql/language/ast";
 export type Exact<T extends { [key: string]: unknown }> = {
