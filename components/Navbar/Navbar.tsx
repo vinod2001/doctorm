@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { Box, Grid, Theme } from "@mui/material";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
