@@ -100,10 +100,9 @@ export function HomepageBlock({ homePageContent }) {
         <Box>
           {categories && (
             <Carousel
-              width="100%"
               animation="slide"
-              swipe="true"
-              duration="100"
+              swipe={true}
+              duration={100}
             >
               {categories.map((category, index) => (
                 <Box key={category}>
