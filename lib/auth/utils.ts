@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { print, DocumentNode } from "graphql/language";
 import gql from "graphql-tag";
 

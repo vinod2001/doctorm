@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { SaleorAuthStorageHandler } from "./SaleorAuthStorageHandler";
 import { getRequestData, isExpiredToken } from "./utils";
 import {

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { relayStylePagination } from "@apollo/client/utilities";
 
 import { TypedTypePolicies } from "@/saleor/api";

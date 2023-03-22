@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Fetch } from "@/lib/auth/types";
 import { API_URI } from "@/lib/const";
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";

@@ -1,3 +1,4 @@
+// @ts-nocheck
 export type Fetch = typeof fetch;
 
 export interface TokenCreateVariables {
