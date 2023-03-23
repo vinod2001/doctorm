@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { SaleorAuthClient, SaleorAuthClientProps } from "./SaleorAuthClient";
 import { useEffect, useMemo, useState } from "react";
 

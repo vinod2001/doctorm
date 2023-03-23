@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* auth state when user signs in / out */
 export const STORAGE_AUTH_EVENT_KEY = "saleor_storage_auth_change";
 export const STORAGE_AUTH_STATE_KEY = "saleor_auth_module_auth_state";

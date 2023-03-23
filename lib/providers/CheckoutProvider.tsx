@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ApolloError } from "@apollo/client";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";

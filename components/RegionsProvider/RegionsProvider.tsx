@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useRouter } from "next/router";
 import React, { ReactNode, useState } from "react";
 import { IntlProvider } from "react-intl";

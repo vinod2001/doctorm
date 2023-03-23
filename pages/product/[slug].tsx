@@ -29,7 +29,7 @@ const roboto = Roboto({
   weight: "400",
 });
 function urlFor(source) {
-  return imageUrlBuilder(client).image(source);
+  return imageUrlBuilder(client).image(source).url();
 }
 
 const space = {
@@ -75,7 +75,7 @@ const ptComponents = {
         <img
           alt={value.alt || " "}
           loading="lazy"
-          src={urlFor(value).fit("max").auto("format")}
+          src={urlFor(value).fit("max").auto("format").url()}
         />
       );
     },
@@ -92,7 +92,7 @@ const thumpComponents = {
         <img
           alt={value.alt || " "}
           loading="lazy"
-          src={urlFor(value).fit("max").auto("format")}
+          src={urlFor(value).fit("max").auto("format").url()}
           width="80%"
         />
       );
@@ -157,9 +157,8 @@ const Pdp = ({ pdp }) => {
           <Grid xs={7} sx={{ border: "0px solid" }}>
             <Box>
               <Carousel
-                width="100%"
-                swipe="true"
-                duration="100"
+                swipe={true}
+                duration={100}
                 PrevIcon={<ArrowBackIosNewIcon />}
                 NextIcon={<ArrowForwardIosIcon />}
                 navButtonsProps={{

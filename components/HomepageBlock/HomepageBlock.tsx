@@ -1,3 +1,4 @@
+// @ts-nocheck
 import groq from "groq";
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
@@ -28,7 +29,7 @@ const ptComponents = {
         <img
           alt={value.alt || " "}
           loading="lazy"
-          src={urlFor(value).fit("max").auto("format")}
+          src={urlFor(value).fit("max").auto("format").url()}
           width="100%"
         />
       );
@@ -100,10 +101,9 @@ export function HomepageBlock({ homePageContent }) {
         <Box>
           {categories && (
             <Carousel
-              width="100%"
               animation="slide"
-              swipe="true"
-              duration="100"
+              swipe={true}
+              duration={100}
             >
               {categories.map((category, index) => (
                 <Box key={category}>

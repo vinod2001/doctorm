@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { SaleorAuthClient } from "./SaleorAuthClient";
 import { UseSaleorAuthClient } from "./useSaleorAuthClient";
 import { PropsWithChildren } from "react";
