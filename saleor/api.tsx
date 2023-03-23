@@ -77,6 +77,326 @@ export type PriceFragment = {
   amount: number;
 };
 
+export type ProductBySlugQueryVariables = Exact<{
+  slug: Scalars["String"];
+  channel: Scalars["String"];
+  locale: LanguageCodeEnum;
+}>;
+
+export type AttributeTypeEnum = "PAGE_TYPE" | "PRODUCT_TYPE";
+
+export type ProductBySlugQuery = {
+  __typename?: "Query";
+  product?: {
+    __typename?: "Product";
+    id: string;
+    name: string;
+    slug: string;
+    description?: string | null;
+    seoDescription?: string | null;
+    seoTitle?: string | null;
+    isAvailableForPurchase?: boolean | null;
+    translation?: {
+      __typename?: "ProductTranslation";
+      id: string;
+      description?: string | null;
+      name?: string | null;
+    } | null;
+    attributes: Array<{
+      __typename?: "SelectedAttribute";
+      attribute: {
+        __typename?: "Attribute";
+        id: string;
+        name?: string | null;
+        type?: AttributeTypeEnum | null;
+        unit?: MeasurementUnitsEnum | null;
+        translation?: {
+          __typename?: "AttributeTranslation";
+          id: string;
+          name: string;
+        } | null;
+      };
+      values: Array<{
+        __typename?: "AttributeValue";
+        id: string;
+        name?: string | null;
+        value?: string | null;
+        translation?: {
+          __typename?: "AttributeValueTranslation";
+          id: string;
+          name: string;
+          richText?: string | null;
+        } | null;
+      }>;
+    }>;
+    category?: {
+      __typename?: "Category";
+      name: string;
+      id: string;
+      slug: string;
+      translation?: {
+        __typename?: "CategoryTranslation";
+        id: string;
+        name?: string | null;
+      } | null;
+    } | null;
+    variants?: Array<{
+      __typename?: "ProductVariant";
+      id: string;
+      name: string;
+      quantityAvailable?: number | null;
+      translation?: {
+        __typename?: "ProductVariantTranslation";
+        id: string;
+        name: string;
+      } | null;
+      attributes: Array<{
+        __typename?: "SelectedAttribute";
+        attribute: {
+          __typename?: "Attribute";
+          id: string;
+          name?: string | null;
+          type?: AttributeTypeEnum | null;
+          unit?: MeasurementUnitsEnum | null;
+          translation?: {
+            __typename?: "AttributeTranslation";
+            id: string;
+            name: string;
+          } | null;
+        };
+        values: Array<{
+          __typename?: "AttributeValue";
+          id: string;
+          name?: string | null;
+          value?: string | null;
+          translation?: {
+            __typename?: "AttributeValueTranslation";
+            id: string;
+            name: string;
+            richText?: string | null;
+          } | null;
+        }>;
+      }>;
+      media?: Array<{
+        __typename?: "ProductMedia";
+        url: string;
+        alt: string;
+        type: ProductMediaType;
+      }> | null;
+      pricing?: {
+        __typename?: "VariantPricingInfo";
+        price?: {
+          __typename?: "TaxedMoney";
+          gross: { __typename?: "Money"; currency: string; amount: number };
+        } | null;
+      } | null;
+    }> | null;
+    pricing?: {
+      __typename?: "ProductPricingInfo";
+      priceRange?: {
+        __typename?: "TaxedMoneyRange";
+        start?: {
+          __typename?: "TaxedMoney";
+          gross: { __typename?: "Money"; currency: string; amount: number };
+        } | null;
+      } | null;
+    } | null;
+    media?: Array<{
+      __typename?: "ProductMedia";
+      url: string;
+      alt: string;
+      type: ProductMediaType;
+    }> | null;
+    thumbnail?: {
+      __typename?: "Image";
+      url: string;
+      alt?: string | null;
+    } | null;
+  } | null;
+};
+
+export const PriceFragmentDoc = gql`
+  fragment PriceFragment on Money {
+    currency
+    amount
+  }
+`;
+export const ImageFragmentDoc = gql`
+  fragment ImageFragment on Image {
+    url
+    alt
+  }
+`;
+export const ProductMediaFragmentDoc = gql`
+  fragment ProductMediaFragment on ProductMedia {
+    url
+    alt
+    type
+  }
+`;
+
+export const SelectedAttributeDetailsFragmentDoc = gql`
+  fragment SelectedAttributeDetailsFragment on SelectedAttribute {
+    attribute {
+      id
+      name
+      translation(languageCode: $locale) {
+        id
+        name
+      }
+      type
+      unit
+    }
+    values {
+      id
+      name
+      translation(languageCode: $locale) {
+        id
+        name
+        richText
+      }
+      value
+    }
+  }
+`;
+
+export const ProductVariantDetailsFragmentDoc = gql`
+  fragment ProductVariantDetailsFragment on ProductVariant {
+    id
+    name
+    translation(languageCode: $locale) {
+      id
+      name
+    }
+    quantityAvailable
+    attributes {
+      ...SelectedAttributeDetailsFragment
+    }
+    media {
+      ...ProductMediaFragment
+    }
+    pricing {
+      price {
+        gross {
+          ...PriceFragment
+        }
+      }
+    }
+  }
+  ${SelectedAttributeDetailsFragmentDoc}
+  ${ProductMediaFragmentDoc}
+  ${PriceFragmentDoc}
+`;
+
+export const CategoryBasicFragmentDoc = gql`
+  fragment CategoryBasicFragment on Category {
+    id
+    name
+    slug
+    translation(languageCode: $locale) {
+      id
+      name
+    }
+  }
+`;
+
+export const ProductDetailsFragmentDoc = gql`
+  fragment ProductDetailsFragment on Product {
+    id
+    name
+    slug
+    description
+    seoDescription
+    seoTitle
+    isAvailableForPurchase
+    translation(languageCode: $locale) {
+      id
+      description
+      name
+    }
+    attributes {
+      ...SelectedAttributeDetailsFragment
+    }
+    category {
+      ...CategoryBasicFragment
+    }
+    variants {
+      ...ProductVariantDetailsFragment
+    }
+    pricing {
+      priceRange {
+        start {
+          gross {
+            ...PriceFragment
+          }
+        }
+      }
+    }
+    media {
+      ...ProductMediaFragment
+    }
+    thumbnail {
+      ...ImageFragment
+    }
+    category {
+      name
+    }
+  }
+  ${SelectedAttributeDetailsFragmentDoc}
+  ${CategoryBasicFragmentDoc}
+  ${ProductVariantDetailsFragmentDoc}
+  ${PriceFragmentDoc}
+  ${ProductMediaFragmentDoc}
+  ${ImageFragmentDoc}
+`;
+export const ProductBySlugDocument = gql`
+  query ProductBySlug(
+    $slug: String!
+    $channel: String!
+    $locale: LanguageCodeEnum!
+  ) {
+    product(slug: $slug, channel: $channel) {
+      ...ProductDetailsFragment
+    }
+  }
+  ${ProductDetailsFragmentDoc}
+`;
+
+/** An enumeration. */
+export type ProductMediaType = "IMAGE" | "VIDEO";
+
+/** An enumeration. */
+export type MeasurementUnitsEnum =
+  | "ACRE_FT"
+  | "ACRE_IN"
+  | "CM"
+  | "CUBIC_CENTIMETER"
+  | "CUBIC_DECIMETER"
+  | "CUBIC_FOOT"
+  | "CUBIC_INCH"
+  | "CUBIC_METER"
+  | "CUBIC_MILLIMETER"
+  | "CUBIC_YARD"
+  | "FL_OZ"
+  | "FT"
+  | "G"
+  | "INCH"
+  | "KG"
+  | "KM"
+  | "LB"
+  | "LITER"
+  | "M"
+  | "OZ"
+  | "PINT"
+  | "QT"
+  | "SQ_CM"
+  | "SQ_FT"
+  | "SQ_INCH"
+  | "SQ_KM"
+  | "SQ_M"
+  | "SQ_YD"
+  | "TONNE"
+  | "YD";
 /** An enumeration. */
 export type LanguageCodeEnum =
   | "AF"
