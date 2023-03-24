@@ -1,6 +1,6 @@
 import { HomepageBlock, Layout } from "@/components";
 import React, { ReactElement } from "react";
-import groq from "groq";
+
 import client from "../../../client";
 import { ApolloQueryResult } from "@apollo/client";
 import { serverApolloClient } from "@/lib/auth/useAuthenticatedApolloClient";
@@ -17,6 +17,7 @@ import {
   RootCategoriesQueryVariables,
   RootCategoriesDocument,
 } from "@/saleor/api";
+import { HOME_PAGE_SANITY_QUERY } from "@/lib/const";
 
 function HomeRedirection({
   homePageContent,
@@ -49,7 +50,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }));
 
   const slug = "home";
-  const homePageContent = await client.fetch(query, { slug });
+  const homePageContent = await client.fetch(HOME_PAGE_SANITY_QUERY, { slug });
 
   return {
     props: {
@@ -58,31 +59,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   };
 };
-
-const query = groq`*[_type == "post" && slug.current == $slug][0]{
-  title,
-  "name": author->name,
-  "categories": categories[]->title,
-  "categoriesDes": categories[]->description,
-  "categoriesImg": categories[]->carouselImage,
-  "categoriesButton": categories[]->buttonOrLinkText,
-  "authorImage": author->image,
-  "findFramesTitle": findFrames[]->title,
-  "findFramesDes": findFrames[]->description,
-  "findFramesImg": findFrames[]->carouselImage,
-  "findFramesButton": findFrames[]->buttonOrLinkText,
-  topCategoriesHeading,
-  "topCategories": topCategories[]->title,
-  "topCategoriesImg": topCategories[]->carouselImage,
-  topBrandsHeading,
-  "topBrandsImg": topBrands[]->carouselImage,
-  "largeBanners":largeBanners[]->carouselImage,
-  "biggerBanners":biggerBanners[]->title,
-  "biggerBannersImg":biggerBanners[]->carouselImage,
-  "biggerBannersDes":biggerBanners[]->description,
-  "biggerBannersButton": biggerBanners[]->buttonOrLinkText,
-  body
-}`;
 
 HomeRedirection.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
