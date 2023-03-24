@@ -278,7 +278,7 @@ function Header() {
                 >
                   <Link
                     href="/product/pdp"
-                    sx={{ textDecoration: "none", color: "inherit" }}
+                    style={{ textDecoration: "none", color: "inherit" }}
                   >
                     {page}
                   </Link>
