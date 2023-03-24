@@ -9,7 +9,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Draggable from "react-draggable";
 import Paper, { PaperProps } from "@mui/material/Paper";
-import client from "../client";
+import client from "@/lib/sanity/client";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";

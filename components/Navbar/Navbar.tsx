@@ -11,7 +11,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { Roboto } from "@next/font/google";
-import client from "../../client";
+import client from "@/lib/sanity/client";
 import useScrollDirection from "../../lib/useScrollDirection";
 
 const roboto = Roboto({
@@ -120,9 +120,7 @@ export function Navbar(props) {
       title,
     }`
       )
-      .then((data) => {
-        console.log(data);
-      });
+      .then((data) => {});
   });
 
   return (

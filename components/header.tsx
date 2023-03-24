@@ -15,7 +15,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { Roboto } from "@next/font/google";
 import groq from "groq";
-import client from "../client";
+import client from "@/lib/sanity/client";
 import useScrollDirection from "@/lib/useScrollDirection";
 import Carousel from "react-material-ui-carousel";
 import { PortableText } from "@portabletext/react";

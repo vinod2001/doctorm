@@ -22,7 +22,7 @@ export function LocaleRedirectionMiddleware({
     // redirection middleware can be turned on by setting the NEXT_PUBLIC_GEOLOCATION
     // env variable. If it's turned off we redirect to the default region
     const url = nextUrl.clone();
-    url.pathname = `/${DEFAULT_CHANNEL.slug}/${DEFAULT_LOCALE}`;
+    url.pathname = `/${DEFAULT_LOCALE}`;
     return NextResponse.redirect(url);
   }
   const requestLocale =

@@ -1,7 +1,7 @@
 import { HomepageBlock, Layout } from "@/components";
 import React, { ReactElement } from "react";
 
-import client from "../../../client";
+import client from "@/lib/sanity/client";
 import { ApolloQueryResult } from "@apollo/client";
 import { serverApolloClient } from "@/lib/auth/useAuthenticatedApolloClient";
 import { contextToRegionQuery } from "@/lib/regions";

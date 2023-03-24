@@ -8,10 +8,7 @@ import { useLocalStorage } from "@/lib/hooks/useLocalStorage";
 import { DEFAULT_LOCALE, localeToEnum } from "@/lib/regions";
 import createSafeContext from "@/lib/useSafeContext";
 
-export type CheckoutDetailsFragment = {};
-function useCheckoutByTokenQuery(testarg) {
-  return { data: {}, loading: false, error: {} };
-}
+import { CheckoutDetailsFragment, useCheckoutByTokenQuery } from "@/saleor/api";
 
 export interface CheckoutConsumerProps {
   checkoutToken: string;

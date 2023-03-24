@@ -20,6 +20,7 @@
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.12",
     "@next/font": "^13.1.6",
+    "@next/bundle-analyzer": "13.0.0",
     "@portabletext/react": "^2.0.1",
     "@sanity/client": "^4.0.1",
     "@sanity/image-url": "^1.0.2",
@@ -38,7 +39,8 @@
     "typescript": "4.9.5",
     "yarn": "^1.22.19",
     "graphql": "16.6.0",
-    "graphql-tag": "2.12.6"
+    "graphql-tag": "2.12.6",
+    "@headlessui/react": "1.7.3"
   },
   "devDependencies": {
     "prettier": "2.8.4"

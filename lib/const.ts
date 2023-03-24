@@ -39,4 +39,5 @@ export const PDP_PAGE_SANITY_QUERY = groq`*[_type == "productDetail" && slug.cur
     "measurementsTitle":measurementImages[]->title,
     "measurementsDes":measurementImages[]->description,
     "frameImage":frameImage[]->carouselImage,
+    "frameCode":frameImage[]->title,
     }`;

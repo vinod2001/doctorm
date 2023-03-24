@@ -2,6 +2,9 @@
 import { Layout } from "@/components";
 import React from "react";
 import { ReactElement } from "react";
+import { useRouter } from "next/router";
+import { useIntl } from "react-intl";
+import { useState } from "react";
 import { InferGetServerSidePropsType } from "next";
 import { GetServerSideProps } from "next";
 import { ApolloQueryResult } from "@apollo/client";
@@ -13,15 +16,17 @@ import {
   ProductBySlugQuery,
   ProductBySlugQueryVariables,
   ProductBySlugDocument,
+  useCheckoutAddProductLineMutation,
+  useCreateCheckoutMutation,
 } from "@/saleor/api";
 import { contextToRegionQuery } from "@/lib/regions";
 import { Roboto } from "@next/font/google";
 import imageUrlBuilder from "@sanity/image-url";
-import client from "../../../../client";
+import client from "@/lib/sanity/client";
 import { PDP_PAGE_SANITY_QUERY } from "@/lib/const";
 import { Box, Grid, Button } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import BreadcrumbsDetails from "../../../../components/breadcrumbs";
+import BreadcrumbsDetails from "../../../components/breadcrumbs";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { PortableText } from "@portabletext/react";
@@ -34,9 +39,19 @@ import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Divider from "@mui/material/Divider";
 import Checkbox from "@mui/material/Checkbox";
-import PdpDetail from "../../../../components/pdpDetail";
-import ZoomModal from "../../../../components/zoomModal";
+import PdpDetail from "@/components/pdpDetail";
+import ZoomModal from "@/components/zoomModal";
 import Image from "next/image";
+import { usePaths } from "@/lib/paths";
+import { useRegions } from "@/components/RegionsProvider";
+import { useCheckout } from "@/lib/providers/CheckoutProvider";
+import { useUser } from "@/lib/useUser";
+import { getSelectedVariantID } from "@/lib/product";
+import { VariantSelector } from "@/components/product/VariantSelector";
+
+export type OptionalQuery = {
+  variant?: string;
+};
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -136,21 +151,29 @@ const powerLists = [
   "-4.75",
 ];
 
-function ProductDetails({ pdpLayout, productDetails }) {
+function ProductDetails({ pdpLayout, product }) {
+  const router = useRouter();
+  const paths = usePaths();
+  const t = useIntl();
+  const { currentChannel, formatPrice, query } = useRegions();
+
+  const { checkoutToken, setCheckoutToken, checkout } = useCheckout();
+
+  const [createCheckout] = useCreateCheckoutMutation();
+  const { user } = useUser();
+
+  const [addProductToCheckout] = useCheckoutAddProductLineMutation();
+  const [loadingAddToCheckout, setLoadingAddToCheckout] = useState(false);
+  const [addToCartError, setAddToCartError] = useState("");
+
   const productCarouselImg = [];
-  const { media, name, description, attributes, category } = productDetails;
+  const { media, name, description, attributes, category } = product;
   let productDescription = JSON.parse(description);
   const productAttributesMap = new Map();
-  attributes.forEach((attribute) => {
-    productAttributesMap.set(
-      attribute.attribute.name,
-      attribute.values[0].name
-    );
-  });
 
-  console.log(productAttributesMap.keys());
-  console.log(productAttributesMap.values());
-  console.log(category);
+  attributes.forEach((attribute) => {
+    productAttributesMap.set(attribute.attribute.name, "dddd");
+  });
 
   productDescription = productDescription.blocks[0].data.text;
   const {
@@ -160,6 +183,7 @@ function ProductDetails({ pdpLayout, productDetails }) {
     measurementsTitle,
     measurementsDes,
     frameImage,
+    frameCode,
   } = pdpLayout;
 
   const [power, setPower] = React.useState();
@@ -182,9 +206,91 @@ function ProductDetails({ pdpLayout, productDetails }) {
   };
 
   React.useEffect(() => {
-    console.log(productThumpnail);
-    console.log(productCarouselImg);
-  }, [pdpLayout]);
+    //UHJvZHVjdFZhcmlhbnQ6NDM1
+    console.log("***********frameCode**************");
+    let index = frameCode.findIndex((day) => day === "silver");
+    console.log(index);
+    console.log("**********frameCode***************");
+    router.push(
+      "/en-US/products/hh/?variant=UHJvZHVjdFZhcmlhbnQ6NDM1",
+      undefined,
+      {
+        shallow: true,
+      }
+    );
+  }, [product]);
+  const selectedVariantID = getSelectedVariantID(product, router);
+
+  const selectedVariant =
+    product?.variants?.find((v) => v?.id === selectedVariantID) || undefined;
+
+  const onAddToCart = async () => {
+    // Clear previous error messages
+    setAddToCartError("");
+
+    // Block add to checkout button
+    setLoadingAddToCheckout(true);
+    const errors: CheckoutError[] = [];
+
+    if (!selectedVariantID) {
+      return;
+    }
+
+    if (checkout) {
+      // If checkout is already existing, add products
+      const { data: addToCartData } = await addProductToCheckout({
+        variables: {
+          checkoutToken,
+          variantId: selectedVariantID,
+          locale: query.locale,
+        },
+      });
+      addToCartData?.checkoutLinesAdd?.errors.forEach((e) => {
+        if (e) {
+          errors.push(e);
+        }
+      });
+    } else {
+      // Theres no checkout, we have to create one
+      const { data: createCheckoutData } = await createCheckout({
+        variables: {
+          email: user?.email,
+          channel: currentChannel.slug,
+          lines: [
+            {
+              quantity: 1,
+              variantId: selectedVariantID,
+            },
+          ],
+        },
+      });
+      createCheckoutData?.checkoutCreate?.errors.forEach((e) => {
+        if (e) {
+          errors.push(e);
+        }
+      });
+      if (createCheckoutData?.checkoutCreate?.checkout?.token) {
+        setCheckoutToken(createCheckoutData?.checkoutCreate?.checkout?.token);
+      }
+    }
+    // Enable button
+    setLoadingAddToCheckout(false);
+
+    if (errors.length === 0) {
+      // Product successfully added
+      return;
+    }
+
+    // Display error message
+    const errorMessages = errors.map((e) => e.message || "") || [];
+    setAddToCartError(errorMessages.join("\n"));
+  };
+
+  const isAddToCartButtonDisabled =
+    !selectedVariant ||
+    selectedVariant?.quantityAvailable === 0 ||
+    loadingAddToCheckout;
+
   return (
     <Grid>
       <Grid item xs={12} className={roboto.className}>
@@ -304,6 +410,11 @@ function ProductDetails({ pdpLayout, productDetails }) {
                       <PortableText value={images} components={ptComponents} />
                     </Box>
                   ))}
+                  <VariantSelector
+                    pdpLayout={pdpLayout}
+                    product={product}
+                    selectedVariantID={selectedVariantID}
+                  />
                 </Box>
                 <Box sx={{ fontSize: "20px", mt: 3 }}>
                   <b>Lence Color</b> : Green
@@ -371,6 +482,7 @@ function ProductDetails({ pdpLayout, productDetails }) {
               </Box>
             </Box>
           </Grid>
+
           <Grid xs={12}>
             <Box
               sx={{ background: "#F5F5F5", p: 4, mt: 5 }}
@@ -380,6 +492,8 @@ function ProductDetails({ pdpLayout, productDetails }) {
             >
               <Box sx={{ fontSize: "30px" }}>SAR 550.00</Box>
               <Button
+                onClick={onAddToCart}
+                type="submit"
                 variant="contained"
                 sx={{
                   backgroundColor: "#ff9905",
@@ -521,25 +635,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         ...contextToRegionQuery(context),
       },
     });
-
-  console.log("*******************");
-  console.log(JSON.stringify(productDetails));
-
-  console.log("*******************");
-
   const slug = "pdp";
   const pdpLayout = await client.fetch(PDP_PAGE_SANITY_QUERY, { slug });
-
-  console.log("******pdpLayout*************");
+  console.log("**********pdpLayout******************");
   console.log(JSON.stringify(pdpLayout));
-
-  console.log("******pdpLayout*************");
-
+  console.log("**********products******************");
+  console.log(JSON.stringify(productDetails));
+  console.log("**********products******************");
   return {
     props: {
       rootCategories: rootCategories,
       pdpLayout: pdpLayout,
-      productDetails: productDetails.data.product,
+      product: productDetails.data.product,
     },
   };
 };

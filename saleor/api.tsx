@@ -1,6 +1,14 @@
 // @ts-nocheck
 import { gql } from "@apollo/client";
 import "graphql/language/ast";
+import * as Apollo from "@apollo/client";
+import {
+  FieldPolicy,
+  FieldReadFunction,
+  TypePolicies,
+  TypePolicy,
+} from "@apollo/client/cache";
+const defaultOptions = {} as const;
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K];
 };
@@ -51,6 +59,13 @@ export type RootCategoriesQuery = {
   } | null;
 };
 
+export const ImageFragmentDoc = gql`
+  fragment ImageFragment on Image {
+    url
+    alt
+  }
+`;
+
 export const RootCategoriesDocument = gql`
   query RootCategoriesQuery {
     categories(first: 10, level: 0) {
@@ -63,6 +78,169 @@ export const RootCategoriesDocument = gql`
       }
     }
   }
+`;
+
+export const AddressDetailsFragmentDoc = gql`
+  fragment AddressDetailsFragment on Address {
+    id
+    phone
+    firstName
+    lastName
+    streetAddress1
+    city
+    postalCode
+    isDefaultBillingAddress
+    isDefaultShippingAddress
+    country {
+      code
+      country
+    }
+  }
+`;
+
+export const PriceFragmentDoc = gql`
+  fragment PriceFragment on Money {
+    currency
+    amount
+  }
+`;
+
+export const DeliveryMethodFragmentDoc = gql`
+  fragment DeliveryMethodFragment on ShippingMethod {
+    id
+    name
+    translation(languageCode: $locale) {
+      id
+      name
+    }
+    price {
+      ...PriceFragment
+    }
+    minimumDeliveryDays
+    maximumDeliveryDays
+  }
+  ${PriceFragmentDoc}
+`;
+
+export const CheckoutLineDetailsFragmentDoc = gql`
+  fragment CheckoutLineDetailsFragment on CheckoutLine {
+    id
+    totalPrice {
+      gross {
+        ...PriceFragment
+      }
+    }
+    variant {
+      id
+      product {
+        id
+        name
+        translation(languageCode: $locale) {
+          id
+          name
+        }
+        slug
+        thumbnail {
+          ...ImageFragment
+        }
+      }
+      pricing {
+        price {
+          gross {
+            ...PriceFragment
+          }
+        }
+      }
+      name
+      translation(languageCode: $locale) {
+        id
+        name
+      }
+    }
+    quantity
+  }
+  ${PriceFragmentDoc}
+  ${ImageFragmentDoc}
+`;
+
+export const CheckoutDetailsFragmentDoc = gql`
+  fragment CheckoutDetailsFragment on Checkout {
+    id
+    token
+    email
+    billingAddress {
+      ...AddressDetailsFragment
+    }
+    shippingAddress {
+      ...AddressDetailsFragment
+    }
+    shippingMethod {
+      ...DeliveryMethodFragment
+    }
+    isShippingRequired
+    availableShippingMethods {
+      ...DeliveryMethodFragment
+    }
+    availablePaymentGateways {
+      id
+      name
+      config {
+        field
+        value
+      }
+    }
+    lines {
+      ...CheckoutLineDetailsFragment
+    }
+    discount {
+      ...PriceFragment
+    }
+    discountName
+    subtotalPrice {
+      net {
+        ...PriceFragment
+      }
+      tax {
+        ...PriceFragment
+      }
+    }
+    shippingPrice {
+      gross {
+        ...PriceFragment
+      }
+    }
+    totalPrice {
+      gross {
+        ...PriceFragment
+      }
+    }
+  }
+  ${AddressDetailsFragmentDoc}
+  ${DeliveryMethodFragmentDoc}
+  ${CheckoutLineDetailsFragmentDoc}
+  ${PriceFragmentDoc}
+`;
+
+export const CheckoutAddProductLineDocument = gql`
+  mutation CheckoutAddProductLine(
+    $checkoutToken: UUID!
+    $variantId: ID!
+    $locale: LanguageCodeEnum!
+  ) {
+    checkoutLinesAdd(
+      token: $checkoutToken
+      lines: [{ quantity: 1, variantId: $variantId }]
+    ) {
+      checkout {
+        ...CheckoutDetailsFragment
+      }
+      errors {
+        message
+        code
+      }
+    }
+  }
+  ${CheckoutDetailsFragmentDoc}
 `;
 
 import {
@@ -216,18 +394,324 @@ export type ProductBySlugQuery = {
   } | null;
 };
 
-export const PriceFragmentDoc = gql`
-  fragment PriceFragment on Money {
-    currency
-    amount
+export type CheckoutDetailsFragment = {
+  __typename?: "Checkout";
+  id: string;
+  token: string;
+  email?: string | null;
+  isShippingRequired: boolean;
+  discountName?: string | null;
+  billingAddress?: {
+    __typename?: "Address";
+    id: string;
+    phone?: string | null;
+    firstName: string;
+    lastName: string;
+    streetAddress1: string;
+    city: string;
+    postalCode: string;
+    isDefaultBillingAddress?: boolean | null;
+    isDefaultShippingAddress?: boolean | null;
+    country: { __typename?: "CountryDisplay"; code: string; country: string };
+  } | null;
+  shippingAddress?: {
+    __typename?: "Address";
+    id: string;
+    phone?: string | null;
+    firstName: string;
+    lastName: string;
+    streetAddress1: string;
+    city: string;
+    postalCode: string;
+    isDefaultBillingAddress?: boolean | null;
+    isDefaultShippingAddress?: boolean | null;
+    country: { __typename?: "CountryDisplay"; code: string; country: string };
+  } | null;
+  shippingMethod?: {
+    __typename?: "ShippingMethod";
+    id: string;
+    name: string;
+    minimumDeliveryDays?: number | null;
+    maximumDeliveryDays?: number | null;
+    translation?: {
+      __typename?: "ShippingMethodTranslation";
+      id: string;
+      name?: string | null;
+    } | null;
+    price: { __typename?: "Money"; currency: string; amount: number };
+  } | null;
+  availableShippingMethods: Array<{
+    __typename?: "ShippingMethod";
+    id: string;
+    name: string;
+    minimumDeliveryDays?: number | null;
+    maximumDeliveryDays?: number | null;
+    translation?: {
+      __typename?: "ShippingMethodTranslation";
+      id: string;
+      name?: string | null;
+    } | null;
+    price: { __typename?: "Money"; currency: string; amount: number };
+  }>;
+  availablePaymentGateways: Array<{
+    __typename?: "PaymentGateway";
+    id: string;
+    name: string;
+    config: Array<{
+      __typename?: "GatewayConfigLine";
+      field: string;
+      value?: string | null;
+    }>;
+  }>;
+  lines: Array<{
+    __typename?: "CheckoutLine";
+    id: string;
+    quantity: number;
+    totalPrice: {
+      __typename?: "TaxedMoney";
+      gross: { __typename?: "Money"; currency: string; amount: number };
+    };
+    variant: {
+      __typename?: "ProductVariant";
+      id: string;
+      name: string;
+      product: {
+        __typename?: "Product";
+        id: string;
+        name: string;
+        slug: string;
+        translation?: {
+          __typename?: "ProductTranslation";
+          id: string;
+          name?: string | null;
+        } | null;
+        thumbnail?: {
+          __typename?: "Image";
+          url: string;
+          alt?: string | null;
+        } | null;
+      };
+      pricing?: {
+        __typename?: "VariantPricingInfo";
+        price?: {
+          __typename?: "TaxedMoney";
+          gross: { __typename?: "Money"; currency: string; amount: number };
+        } | null;
+      } | null;
+      translation?: {
+        __typename?: "ProductVariantTranslation";
+        id: string;
+        name: string;
+      } | null;
+    };
+  }>;
+  discount?: { __typename?: "Money"; currency: string; amount: number } | null;
+  subtotalPrice: {
+    __typename?: "TaxedMoney";
+    net: { __typename?: "Money"; currency: string; amount: number };
+    tax: { __typename?: "Money"; currency: string; amount: number };
+  };
+  shippingPrice: {
+    __typename?: "TaxedMoney";
+    gross: { __typename?: "Money"; currency: string; amount: number };
+  };
+  totalPrice: {
+    __typename?: "TaxedMoney";
+    gross: { __typename?: "Money"; currency: string; amount: number };
+  };
+};
+
+export type CheckoutByTokenQueryVariables = Exact<{
+  checkoutToken: Scalars["UUID"];
+  locale: LanguageCodeEnum;
+}>;
+
+export type CheckoutByTokenQuery = {
+  __typename?: "Query";
+  checkout?: {
+    __typename?: "Checkout";
+    id: string;
+    token: string;
+    email?: string | null;
+    isShippingRequired: boolean;
+    discountName?: string | null;
+    billingAddress?: {
+      __typename?: "Address";
+      id: string;
+      phone?: string | null;
+      firstName: string;
+      lastName: string;
+      streetAddress1: string;
+      city: string;
+      postalCode: string;
+      isDefaultBillingAddress?: boolean | null;
+      isDefaultShippingAddress?: boolean | null;
+      country: { __typename?: "CountryDisplay"; code: string; country: string };
+    } | null;
+    shippingAddress?: {
+      __typename?: "Address";
+      id: string;
+      phone?: string | null;
+      firstName: string;
+      lastName: string;
+      streetAddress1: string;
+      city: string;
+      postalCode: string;
+      isDefaultBillingAddress?: boolean | null;
+      isDefaultShippingAddress?: boolean | null;
+      country: { __typename?: "CountryDisplay"; code: string; country: string };
+    } | null;
+    shippingMethod?: {
+      __typename?: "ShippingMethod";
+      id: string;
+      name: string;
+      minimumDeliveryDays?: number | null;
+      maximumDeliveryDays?: number | null;
+      translation?: {
+        __typename?: "ShippingMethodTranslation";
+        id: string;
+        name?: string | null;
+      } | null;
+      price: { __typename?: "Money"; currency: string; amount: number };
+    } | null;
+    availableShippingMethods: Array<{
+      __typename?: "ShippingMethod";
+      id: string;
+      name: string;
+      minimumDeliveryDays?: number | null;
+      maximumDeliveryDays?: number | null;
+      translation?: {
+        __typename?: "ShippingMethodTranslation";
+        id: string;
+        name?: string | null;
+      } | null;
+      price: { __typename?: "Money"; currency: string; amount: number };
+    }>;
+    availablePaymentGateways: Array<{
+      __typename?: "PaymentGateway";
+      id: string;
+      name: string;
+      config: Array<{
+        __typename?: "GatewayConfigLine";
+        field: string;
+        value?: string | null;
+      }>;
+    }>;
+    lines: Array<{
+      __typename?: "CheckoutLine";
+      id: string;
+      quantity: number;
+      totalPrice: {
+        __typename?: "TaxedMoney";
+        gross: { __typename?: "Money"; currency: string; amount: number };
+      };
+      variant: {
+        __typename?: "ProductVariant";
+        id: string;
+        name: string;
+        product: {
+          __typename?: "Product";
+          id: string;
+          name: string;
+          slug: string;
+          translation?: {
+            __typename?: "ProductTranslation";
+            id: string;
+            name?: string | null;
+          } | null;
+          thumbnail?: {
+            __typename?: "Image";
+            url: string;
+            alt?: string | null;
+          } | null;
+        };
+        pricing?: {
+          __typename?: "VariantPricingInfo";
+          price?: {
+            __typename?: "TaxedMoney";
+            gross: { __typename?: "Money"; currency: string; amount: number };
+          } | null;
+        } | null;
+        translation?: {
+          __typename?: "ProductVariantTranslation";
+          id: string;
+          name: string;
+        } | null;
+      };
+    }>;
+    discount?: {
+      __typename?: "Money";
+      currency: string;
+      amount: number;
+    } | null;
+    subtotalPrice: {
+      __typename?: "TaxedMoney";
+      net: { __typename?: "Money"; currency: string; amount: number };
+      tax: { __typename?: "Money"; currency: string; amount: number };
+    };
+    shippingPrice: {
+      __typename?: "TaxedMoney";
+      gross: { __typename?: "Money"; currency: string; amount: number };
+    };
+    totalPrice: {
+      __typename?: "TaxedMoney";
+      gross: { __typename?: "Money"; currency: string; amount: number };
+    };
+  } | null;
+};
+
+/**
+ * __useCollectionBySlugQuery__
+ *
+ * To run a query within a React component, call `useCollectionBySlugQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCollectionBySlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCollectionBySlugQuery({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *      channel: // value for 'channel'
+ *      locale: // value for 'locale'
+ *   },
+ * });
+ */
+export function useCheckoutByTokenQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    CheckoutByTokenQuery,
+    CheckoutByTokenQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<CheckoutByTokenQuery, CheckoutByTokenQueryVariables>(
+    CheckoutByTokenDocument,
+    options
+  );
+}
+export function useCheckoutByTokenLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    CheckoutByTokenQuery,
+    CheckoutByTokenQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    CheckoutByTokenQuery,
+    CheckoutByTokenQueryVariables
+  >(CheckoutByTokenDocument, options);
+}
+
+export const CheckoutByTokenDocument = gql`
+  query CheckoutByToken($checkoutToken: UUID!, $locale: LanguageCodeEnum!) {
+    checkout(token: $checkoutToken) {
+      ...CheckoutDetailsFragment
+    }
   }
+  ${CheckoutDetailsFragmentDoc}
 `;
-export const ImageFragmentDoc = gql`
-  fragment ImageFragment on Image {
-    url
-    alt
-  }
-`;
+
 export const ProductMediaFragmentDoc = gql`
   fragment ProductMediaFragment on ProductMedia {
     url
@@ -265,6 +749,10 @@ export const ProductVariantDetailsFragmentDoc = gql`
   fragment ProductVariantDetailsFragment on ProductVariant {
     id
     name
+    metadata {
+      key
+      value
+    }
     translation(languageCode: $locale) {
       id
       name
@@ -362,6 +850,516 @@ export const ProductBySlugDocument = gql`
   }
   ${ProductDetailsFragmentDoc}
 `;
+
+export interface MutationHookOptions<
+  TData = any,
+  TVariables = OperationVariables,
+  TContext = DefaultContext,
+  TCache extends ApolloCache<any> = ApolloCache<any>
+> extends BaseMutationOptions<TData, TVariables, TContext, TCache> {
+  mutation?: DocumentNode | TypedDocumentNode<TData, TVariables>;
+}
+
+export type CreateCheckoutMutation = {
+  __typename?: "Mutation";
+  checkoutCreate?: {
+    __typename?: "CheckoutCreate";
+    checkout?: { __typename?: "Checkout"; id: string; token: string } | null;
+    errors: Array<{
+      __typename?: "CheckoutError";
+      field?: string | null;
+      message?: string | null;
+      code: CheckoutErrorCode;
+    }>;
+  } | null;
+};
+
+export type CreateCheckoutMutationVariables = Exact<{
+  email?: InputMaybe<Scalars["String"]>;
+  lines: Array<CheckoutLineInput> | CheckoutLineInput;
+  channel: Scalars["String"];
+}>;
+
+export type CheckoutAddProductLineMutationVariables = Exact<{
+  checkoutToken: Scalars["UUID"];
+  variantId: Scalars["ID"];
+  locale: LanguageCodeEnum;
+}>;
+
+export type CheckoutAddProductLineMutation = {
+  __typename?: "Mutation";
+  checkoutLinesAdd?: {
+    __typename?: "CheckoutLinesAdd";
+    checkout?: {
+      __typename?: "Checkout";
+      id: string;
+      token: string;
+      email?: string | null;
+      isShippingRequired: boolean;
+      discountName?: string | null;
+      billingAddress?: {
+        __typename?: "Address";
+        id: string;
+        phone?: string | null;
+        firstName: string;
+        lastName: string;
+        streetAddress1: string;
+        city: string;
+        postalCode: string;
+        isDefaultBillingAddress?: boolean | null;
+        isDefaultShippingAddress?: boolean | null;
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
+      } | null;
+      shippingAddress?: {
+        __typename?: "Address";
+        id: string;
+        phone?: string | null;
+        firstName: string;
+        lastName: string;
+        streetAddress1: string;
+        city: string;
+        postalCode: string;
+        isDefaultBillingAddress?: boolean | null;
+        isDefaultShippingAddress?: boolean | null;
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
+      } | null;
+      shippingMethod?: {
+        __typename?: "ShippingMethod";
+        id: string;
+        name: string;
+        minimumDeliveryDays?: number | null;
+        maximumDeliveryDays?: number | null;
+        translation?: {
+          __typename?: "ShippingMethodTranslation";
+          id: string;
+          name?: string | null;
+        } | null;
+        price: { __typename?: "Money"; currency: string; amount: number };
+      } | null;
+      availableShippingMethods: Array<{
+        __typename?: "ShippingMethod";
+        id: string;
+        name: string;
+        minimumDeliveryDays?: number | null;
+        maximumDeliveryDays?: number | null;
+        translation?: {
+          __typename?: "ShippingMethodTranslation";
+          id: string;
+          name?: string | null;
+        } | null;
+        price: { __typename?: "Money"; currency: string; amount: number };
+      }>;
+      availablePaymentGateways: Array<{
+        __typename?: "PaymentGateway";
+        id: string;
+        name: string;
+        config: Array<{
+          __typename?: "GatewayConfigLine";
+          field: string;
+          value?: string | null;
+        }>;
+      }>;
+      lines: Array<{
+        __typename?: "CheckoutLine";
+        id: string;
+        quantity: number;
+        totalPrice: {
+          __typename?: "TaxedMoney";
+          gross: { __typename?: "Money"; currency: string; amount: number };
+        };
+        variant: {
+          __typename?: "ProductVariant";
+          id: string;
+          name: string;
+          product: {
+            __typename?: "Product";
+            id: string;
+            name: string;
+            slug: string;
+            translation?: {
+              __typename?: "ProductTranslation";
+              id: string;
+              name?: string | null;
+            } | null;
+            thumbnail?: {
+              __typename?: "Image";
+              url: string;
+              alt?: string | null;
+            } | null;
+          };
+          pricing?: {
+            __typename?: "VariantPricingInfo";
+            price?: {
+              __typename?: "TaxedMoney";
+              gross: { __typename?: "Money"; currency: string; amount: number };
+            } | null;
+          } | null;
+          translation?: {
+            __typename?: "ProductVariantTranslation";
+            id: string;
+            name: string;
+          } | null;
+        };
+      }>;
+      discount?: {
+        __typename?: "Money";
+        currency: string;
+        amount: number;
+      } | null;
+      subtotalPrice: {
+        __typename?: "TaxedMoney";
+        net: { __typename?: "Money"; currency: string; amount: number };
+        tax: { __typename?: "Money"; currency: string; amount: number };
+      };
+      shippingPrice: {
+        __typename?: "TaxedMoney";
+        gross: { __typename?: "Money"; currency: string; amount: number };
+      };
+      totalPrice: {
+        __typename?: "TaxedMoney";
+        gross: { __typename?: "Money"; currency: string; amount: number };
+      };
+    } | null;
+    errors: Array<{
+      __typename?: "CheckoutError";
+      message?: string | null;
+      code: CheckoutErrorCode;
+    }>;
+  } | null;
+};
+
+export function useCreateCheckoutMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateCheckoutMutation,
+    CreateCheckoutMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateCheckoutMutation,
+    CreateCheckoutMutationVariables
+  >(CreateCheckoutDocument, options);
+}
+
+export function useCheckoutAddProductLineMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CheckoutAddProductLineMutation,
+    CheckoutAddProductLineMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CheckoutAddProductLineMutation,
+    CheckoutAddProductLineMutationVariables
+  >(CheckoutAddProductLineDocument, options);
+}
+
+export type UserQueryVariables = Exact<{ [key: string]: never }>;
+
+export type UserQuery = {
+  __typename?: "Query";
+  user?: {
+    __typename?: "User";
+    id: string;
+    email: string;
+    addresses: Array<{
+      __typename?: "Address";
+      id: string;
+      phone?: string | null;
+      firstName: string;
+      lastName: string;
+      streetAddress1: string;
+      city: string;
+      postalCode: string;
+      isDefaultBillingAddress?: boolean | null;
+      isDefaultShippingAddress?: boolean | null;
+      country: { __typename?: "CountryDisplay"; code: string; country: string };
+    }>;
+    defaultBillingAddress?: {
+      __typename?: "Address";
+      id: string;
+      phone?: string | null;
+      firstName: string;
+      lastName: string;
+      streetAddress1: string;
+      city: string;
+      postalCode: string;
+      isDefaultBillingAddress?: boolean | null;
+      isDefaultShippingAddress?: boolean | null;
+      country: { __typename?: "CountryDisplay"; code: string; country: string };
+    } | null;
+    defaultShippingAddress?: {
+      __typename?: "Address";
+      id: string;
+      phone?: string | null;
+      firstName: string;
+      lastName: string;
+      streetAddress1: string;
+      city: string;
+      postalCode: string;
+      isDefaultBillingAddress?: boolean | null;
+      isDefaultShippingAddress?: boolean | null;
+      country: { __typename?: "CountryDisplay"; code: string; country: string };
+    } | null;
+  } | null;
+};
+
+export function useUserQuery(
+  baseOptions?: Apollo.QueryHookOptions<UserQuery, UserQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<UserQuery, UserQueryVariables>(UserDocument, options);
+}
+
+export const UserDocument = gql`
+  query User {
+    user: me {
+      id
+      email
+      addresses {
+        ...AddressDetailsFragment
+      }
+      defaultBillingAddress {
+        ...AddressDetailsFragment
+      }
+      defaultShippingAddress {
+        ...AddressDetailsFragment
+      }
+    }
+  }
+  ${AddressDetailsFragmentDoc}
+`;
+
+export const CreateCheckoutDocument = gql`
+  mutation CreateCheckout(
+    $email: String
+    $lines: [CheckoutLineInput!]!
+    $channel: String!
+  ) {
+    checkoutCreate(input: { channel: $channel, email: $email, lines: $lines }) {
+      checkout {
+        id
+        token
+      }
+      errors {
+        field
+        message
+        code
+      }
+    }
+  }
+`;
+
+export type ProductDetailsFragment = {
+  __typename?: "Product";
+  id: string;
+  name: string;
+  slug: string;
+  description?: string | null;
+  seoDescription?: string | null;
+  seoTitle?: string | null;
+  isAvailableForPurchase?: boolean | null;
+  translation?: {
+    __typename?: "ProductTranslation";
+    id: string;
+    description?: string | null;
+    name?: string | null;
+  } | null;
+  attributes: Array<{
+    __typename?: "SelectedAttribute";
+    attribute: {
+      __typename?: "Attribute";
+      id: string;
+      name?: string | null;
+      type?: AttributeTypeEnum | null;
+      unit?: MeasurementUnitsEnum | null;
+      translation?: {
+        __typename?: "AttributeTranslation";
+        id: string;
+        name: string;
+      } | null;
+    };
+    values: Array<{
+      __typename?: "AttributeValue";
+      id: string;
+      name?: string | null;
+      value?: string | null;
+      translation?: {
+        __typename?: "AttributeValueTranslation";
+        id: string;
+        name: string;
+        richText?: string | null;
+      } | null;
+    }>;
+  }>;
+  category?: {
+    __typename?: "Category";
+    name: string;
+    id: string;
+    slug: string;
+    translation?: {
+      __typename?: "CategoryTranslation";
+      id: string;
+      name?: string | null;
+    } | null;
+  } | null;
+  variants?: Array<{
+    __typename?: "ProductVariant";
+    id: string;
+    name: string;
+    quantityAvailable?: number | null;
+    translation?: {
+      __typename?: "ProductVariantTranslation";
+      id: string;
+      name: string;
+    } | null;
+    attributes: Array<{
+      __typename?: "SelectedAttribute";
+      attribute: {
+        __typename?: "Attribute";
+        id: string;
+        name?: string | null;
+        type?: AttributeTypeEnum | null;
+        unit?: MeasurementUnitsEnum | null;
+        translation?: {
+          __typename?: "AttributeTranslation";
+          id: string;
+          name: string;
+        } | null;
+      };
+      values: Array<{
+        __typename?: "AttributeValue";
+        id: string;
+        name?: string | null;
+        value?: string | null;
+        translation?: {
+          __typename?: "AttributeValueTranslation";
+          id: string;
+          name: string;
+          richText?: string | null;
+        } | null;
+      }>;
+    }>;
+    media?: Array<{
+      __typename?: "ProductMedia";
+      url: string;
+      alt: string;
+      type: ProductMediaType;
+    }> | null;
+    pricing?: {
+      __typename?: "VariantPricingInfo";
+      price?: {
+        __typename?: "TaxedMoney";
+        gross: { __typename?: "Money"; currency: string; amount: number };
+      } | null;
+    } | null;
+  }> | null;
+  pricing?: {
+    __typename?: "ProductPricingInfo";
+    priceRange?: {
+      __typename?: "TaxedMoneyRange";
+      start?: {
+        __typename?: "TaxedMoney";
+        gross: { __typename?: "Money"; currency: string; amount: number };
+      } | null;
+    } | null;
+  } | null;
+  media?: Array<{
+    __typename?: "ProductMedia";
+    url: string;
+    alt: string;
+    type: ProductMediaType;
+  }> | null;
+  thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+};
+
+export type ProductVariantDetailsFragment = {
+  __typename?: "ProductVariant";
+  id: string;
+  name: string;
+  quantityAvailable?: number | null;
+  translation?: {
+    __typename?: "ProductVariantTranslation";
+    id: string;
+    name: string;
+  } | null;
+  attributes: Array<{
+    __typename?: "SelectedAttribute";
+    attribute: {
+      __typename?: "Attribute";
+      id: string;
+      name?: string | null;
+      type?: AttributeTypeEnum | null;
+      unit?: MeasurementUnitsEnum | null;
+      translation?: {
+        __typename?: "AttributeTranslation";
+        id: string;
+        name: string;
+      } | null;
+    };
+    values: Array<{
+      __typename?: "AttributeValue";
+      id: string;
+      name?: string | null;
+      value?: string | null;
+      translation?: {
+        __typename?: "AttributeValueTranslation";
+        id: string;
+        name: string;
+        richText?: string | null;
+      } | null;
+    }>;
+  }>;
+  media?: Array<{
+    __typename?: "ProductMedia";
+    url: string;
+    alt: string;
+    type: ProductMediaType;
+  }> | null;
+  pricing?: {
+    __typename?: "VariantPricingInfo";
+    price?: {
+      __typename?: "TaxedMoney";
+      gross: { __typename?: "Money"; currency: string; amount: number };
+    } | null;
+  } | null;
+};
+
+export type SelectedAttributeDetailsFragment = {
+  __typename?: "SelectedAttribute";
+  attribute: {
+    __typename?: "Attribute";
+    id: string;
+    name?: string | null;
+    type?: AttributeTypeEnum | null;
+    unit?: MeasurementUnitsEnum | null;
+    translation?: {
+      __typename?: "AttributeTranslation";
+      id: string;
+      name: string;
+    } | null;
+  };
+  values: Array<{
+    __typename?: "AttributeValue";
+    id: string;
+    name?: string | null;
+    value?: string | null;
+    translation?: {
+      __typename?: "AttributeValueTranslation";
+      id: string;
+      name: string;
+      richText?: string | null;
+    } | null;
+  }>;
+};
 
 /** An enumeration. */
 export type ProductMediaType = "IMAGE" | "VIDEO";

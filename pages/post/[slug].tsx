@@ -4,7 +4,7 @@
 import groq from "groq";
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
-import client from "../../client";
+import client from "@/lib/sanity/client";
 import Header from "../../components/header";
 import {
   Box,
@@ -27,7 +27,7 @@ const roboto = Roboto({
   weight: "400",
 });
 function urlFor(source) {
-  return imageUrlBuilder(client).image(source).url();
+  return imageUrlBuilder(client).image(source);
 }
 
 const ptComponents = {
@@ -40,7 +40,7 @@ const ptComponents = {
         <img
           alt={value.alt || " "}
           loading="lazy"
-          src={urlFor(value).fit("max").auto("format").url()}
+          src={urlFor(value).fit("max").auto("format")}
           width="100%"
         />
       );
@@ -73,8 +73,6 @@ const Post = ({ post }) => {
     biggerBannersButton,
     body = [],
   } = post;
-
-  console.log("largeBanners:" + JSON.stringify(largeBanners));
 
   const sliderItems: number = topBrandsImg.length > 3 ? 3 : topBrandsImg.length;
   const items: Array<any> = [];
@@ -562,7 +560,6 @@ const query = groq`*[_type == "post" && slug.current == $slug][0]{
   body
 }`;
 export async function getServerSidePaths() {
-  console.log("******1********getServerSidePaths");
   const paths = await client.fetch(
     groq`*[_type == "post" && defined(slug.current)][].slug.current`
   );
@@ -574,12 +571,9 @@ export async function getServerSidePaths() {
 }
 
 export async function getServerSideProps(context) {
-  console.log("*******1*******getServerSideProps");
   // It's important to default the slug so that it doesn't return "undefined"
   const { slug = "" } = context.params;
-  console.log("---1----slug-----", slug);
   const post = await client.fetch(query, { slug });
-  console.log(JSON.stringify(post));
   return {
     props: {
       post,

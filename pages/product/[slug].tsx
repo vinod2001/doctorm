@@ -4,7 +4,7 @@ import React from "react";
 import groq from "groq";
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
-import client from "../../client";
+import client from "@/lib/sanity/client";
 import Header from "../../components/header";
 import PdpDetail from "../../components/pdpDetail";
 import ZoomModal from "../../components/zoomModal";
@@ -29,7 +29,7 @@ const roboto = Roboto({
   weight: "400",
 });
 function urlFor(source) {
-  return imageUrlBuilder(client).image(source).url();
+  return imageUrlBuilder(client).image(source);
 }
 
 const space = {
@@ -182,15 +182,16 @@ const Pdp = ({ pdp }) => {
                   },
                 }}
               >
-                {productCarouselImg.map((images, index) => (
-                  <Box
-                    key={index}
-                    sx={{ textAlign: "center", cursor: "zoom-in" }}
-                    onClick={() => zoom(images)}
-                  >
-                    <PortableText value={images} components={ptComponents} />
-                  </Box>
-                ))}
+                {productCarouselImg &&
+                  productCarouselImg.map((images, index) => (
+                    <Box
+                      key={index}
+                      sx={{ textAlign: "center", cursor: "zoom-in" }}
+                      onClick={() => zoom(images)}
+                    >
+                      <PortableText value={images} components={ptComponents} />
+                    </Box>
+                  ))}
               </Carousel>
             </Box>
             <Box
@@ -204,20 +205,21 @@ const Pdp = ({ pdp }) => {
                 mt: 5,
               }}
             >
-              {productThumpnail.map((images, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    border: "0px solid",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "25%",
-                  }}
-                >
-                  <PortableText value={images} components={thumpComponents} />
-                </Box>
-              ))}
+              {productThumpnail &&
+                productThumpnail.map((images, index) => (
+                  <Box
+                    key={index}
+                    sx={{
+                      border: "0px solid",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "25%",
+                    }}
+                  >
+                    <PortableText value={images} components={thumpComponents} />
+                  </Box>
+                ))}
             </Box>
           </Grid>
           <Grid xs={5} sx={{ border: "0px solid" }}>
@@ -250,11 +252,15 @@ const Pdp = ({ pdp }) => {
                 </Box>
                 <Box sx={{ mt: 2, display: "flex" }}>
                   {/* <PortableText value={frameImage} components={ptComponents} /> */}
-                  {frameImage.map((images, index) => (
-                    <Box key={index} sx={{ mr: 2 }}>
-                      <PortableText value={images} components={ptComponents} />
-                    </Box>
-                  ))}
+                  {frameImage &&
+                    frameImage.map((images, index) => (
+                      <Box key={index} sx={{ mr: 2 }}>
+                        <PortableText
+                          value={images}
+                          components={ptComponents}
+                        />
+                      </Box>
+                    ))}
                 </Box>
                 <Box sx={{ fontSize: "20px", mt: 3 }}>
                   <b>Lence Color</b> : Green
@@ -390,36 +396,37 @@ const Pdp = ({ pdp }) => {
                 alignItems: "center",
               }}
             >
-              {measurementImages.map((val, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    border: "0px solid",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <Box sx={{ border: "0px solid", textAlign: "center" }}>
-                    <PortableText value={val} components={thumpComponents} />
-                    <Box sx={{ textAlign: "center", mt: 2 }}>
-                      <Box sx={{ textAlign: "center", fontSize: "22px" }}>
-                        {measurementsTitle[index]}
-                      </Box>
-                      <Box
-                        sx={{
-                          textAlign: "center",
-                          fontSize: "20px",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        {measurementsDes[index]}
+              {measurementImages &&
+                measurementImages.map((val, index) => (
+                  <Box
+                    key={index}
+                    sx={{
+                      border: "0px solid",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "100%",
+                    }}
+                  >
+                    <Box sx={{ border: "0px solid", textAlign: "center" }}>
+                      <PortableText value={val} components={thumpComponents} />
+                      <Box sx={{ textAlign: "center", mt: 2 }}>
+                        <Box sx={{ textAlign: "center", fontSize: "22px" }}>
+                          {measurementsTitle[index]}
+                        </Box>
+                        <Box
+                          sx={{
+                            textAlign: "center",
+                            fontSize: "20px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {measurementsDes[index]}
+                        </Box>
                       </Box>
                     </Box>
                   </Box>
-                </Box>
-              ))}
+                ))}
             </Box>
           </Grid>
           <PdpDetail />
@@ -457,8 +464,10 @@ export async function getServerSidePaths() {
 
 export async function getServerSideProps(context) {
   // It's important to default the slug so that it doesn't return "undefined"
-  const { slug = "" } = context.params;
+  //const { slug = "" } = context.params;
+  const slug = "pdp";
   const pdp = await client.fetch(query, { slug });
+  console.log(JSON.stringify(pdp));
   return {
     props: {
       pdp,
