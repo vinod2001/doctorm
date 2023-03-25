@@ -53,9 +53,12 @@ function ZoomModal({ setZoomModalDetails, zoomModalDetails }) {
   const fullScreen = useMediaQuery(theme.breakpoints.down("lg"));
   const [open, setOpen] = React.useState(true);
   const [displayImage, setDisplayImage] = React.useState(
-    zoomModalDetails.selectedImage
+    zoomModalDetails.selectedImage.url
   );
 
+  React.useEffect(()=>{
+    console.log(displayImage)
+  },[displayImage])
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -71,11 +74,11 @@ function ZoomModal({ setZoomModalDetails, zoomModalDetails }) {
   const nextItem = () => {
     const fullLength = zoomModalDetails.allImages.length - 1;
     zoomModalDetails.allImages.forEach((item, index) => {
-      if (item.asset._ref === displayImage.asset._ref && fullLength !== index) {
-        setDisplayImage(zoomModalDetails.allImages[index + 1]);
+      if (item.url === displayImage && fullLength !== index) {
+        setDisplayImage(zoomModalDetails.allImages[index + 1].url);
       }
-      if (item.asset._ref === displayImage.asset._ref && fullLength === index) {
-        setDisplayImage(zoomModalDetails.allImages[0]);
+      if (item.url === displayImage && fullLength === index) {
+        setDisplayImage(zoomModalDetails.allImages[0].url);
       }
     });
   };
@@ -83,11 +86,11 @@ function ZoomModal({ setZoomModalDetails, zoomModalDetails }) {
   const prevItem = () => {
     const fullLength = zoomModalDetails.allImages.length - 1;
     zoomModalDetails.allImages.forEach((item, index) => {
-      if (item.asset._ref === displayImage.asset._ref && fullLength >= index) {
-        setDisplayImage(zoomModalDetails.allImages[index - 1]);
+      if (item.url === displayImage && fullLength >= index) {
+        setDisplayImage(zoomModalDetails.allImages[index - 1].url);
       }
-      if (item.asset._ref === displayImage.asset._ref && index <= 0) {
-        setDisplayImage(zoomModalDetails.allImages[fullLength]);
+      if (item.url === displayImage && index <= 0) {
+        setDisplayImage(zoomModalDetails.allImages[fullLength].url);
       }
     });
   };
@@ -132,7 +135,8 @@ function ZoomModal({ setZoomModalDetails, zoomModalDetails }) {
               />
             </Box>
             <Box>
-              <PortableText value={displayImage} components={ptComponents} />
+              {/* <PortableText value={displayImage} components={ptComponents} /> */}
+              <img src={displayImage}/>
             </Box>
             <Box>
               <KeyboardArrowRightIcon

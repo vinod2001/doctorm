@@ -208,7 +208,7 @@ function ProductDetails({ pdpLayout, product }) {
   const [zoomModalDetails, setZoomModalDetails] = React.useState({
     display: false,
     selectedImage: null,
-    allImages: productCarouselImg,
+    allImages: [],
   });
 
   let productVariant = variants.map((variant) => Object.assign({}, variant));
@@ -228,7 +228,7 @@ function ProductDetails({ pdpLayout, product }) {
     setZoomModalDetails((oldData) => ({
       ...oldData,
       display: true,
-      selectedImage: images.url,
+      selectedImage: images,
     }));
   };
 
@@ -246,9 +246,18 @@ function ProductDetails({ pdpLayout, product }) {
     );
   }, []);
 
+ 
+
   const selectedVariantID = getSelectedVariantID(product, router);
   const selectedVariant =
     product?.variants?.find((v) => v?.id === selectedVariantID) || undefined;
+
+  React.useEffect(()=>{
+      setZoomModalDetails((oldData) => ({
+        ...oldData,
+        allImages: selectedVariant.media,
+      }));
+    },[selectedVariant]);
 
   const onAddToCart = async () => {
     // Clear previous error messages
