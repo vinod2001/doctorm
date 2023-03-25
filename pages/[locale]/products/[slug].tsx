@@ -392,8 +392,8 @@ function ProductDetails({ pdpLayout, product }) {
                   <Image
                     src={image.url}
                     alt="fff"
-                    width={250}
-                    height={200}
+                    width={120}
+                    height={70}
                   ></Image>
                 </Box>
               ))}

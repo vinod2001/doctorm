@@ -79,12 +79,12 @@ export function VariantSelector({
   return (
     <div className="w-full">
       <RadioGroup value={selectedVariant} onChange={onChange}>
-        <div className="space-y-4">
+        <div className="space-y-4" style={{display:'flex', }}>
           {variants.map((variant, index) => (
             <RadioGroup.Option key={variant.id} value={variant.id}>
-              <div>
+              <div style={{display:'flex',}}>
                 <RadioGroup.Label>
-                  <Box key={index} sx={{ mr: 2 }}>
+                  <Box key={index} sx={{ mr: 2, cursor:'pointer' }}>
                     <PortableText
                       value={variant.frameImage}
                       components={ptComponents}
