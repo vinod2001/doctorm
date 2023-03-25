@@ -24,13 +24,13 @@ export const pagesPath = {
             hash: url?.hash,
           }),
         },
-        login: {
-          $url: (url?: { query?: OptionalQuery0; hash?: string }) => ({
-            pathname: "/[locale]/account/login" as const,
-            query: { channel, locale, ...url?.query },
-            hash: url?.hash,
-          }),
-        },
+        // login: {
+        //   $url: (url?: { query?: OptionalQuery0; hash?: string }) => ({
+        //     pathname: "/[locale]/account/login" as const,
+        //     query: { channel, locale, ...url?.query },
+        //     hash: url?.hash,
+        //   }),
+        // },
         orders: {
           $url: (url?: { hash?: string }) => ({
             pathname: "/[locale]/account/orders" as const,
