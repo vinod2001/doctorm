@@ -147,7 +147,7 @@ export function Navbar(props) {
     }`
       )
       .then((data) => {});
-  });
+  },[]);
 
   const counter =
     checkout?.lines?.reduce(
@@ -223,16 +223,23 @@ export function Navbar(props) {
                 </Box>
                 <Box>Favorites</Box>
               </Box>
-              <Link href={`/en-US/cart`}>
+              
                 <Box>
                   <Box sx={HeaderItemInnerWrapper}>
-                    <ShoppingBagOutlinedIcon sx={iconColor} />
+                  
+                    <Badge badgeContent={counter} sx={{color:'#343434'}} color="secondary" >
+                    <Link href={`/en-US/cart`} style={{textDecoration:'none',textDecorationColor:'#343434', color:'#343434'}}>
+                      <ShoppingBagOutlinedIcon sx={iconColor} />
+                      </Link>
+                    </Badge>
+                  
                   </Box>
                   <Box>
-                    <Badge badgeContent={counter}>Basket</Badge>
+                  <Link href={`/en-US/cart`} style={{textDecoration:'none',textDecorationColor:'#343434', color:'#343434'}}>
+                    Basket
+                    </Link>
                   </Box>
                 </Box>
-              </Link>
             </Box>
           </Box>
         </Grid>

@@ -110,8 +110,8 @@ function CartDetails(props) {
     },
   ];
   return (
-    <Grid sx={{ backgroundColor: "#F7F7F7" }}>
-      <Grid item xs={12} className={roboto.className}>
+    <Grid sx={{ backgroundColor: "#f6f6f6", border:'0px solid #f6f6f6', mt:1 }}>
+      <Grid item xs={12} className={roboto.className} sx={{border:'1px solid #f6f6f6'}}>
         <Grid container xs={12} sx={{ mt: 5, color: "#343434" }}>
           <Grid xs={7} sx={{ border: "0px solid", ml: 5, mr: 5 }}>
             <Box>
