@@ -467,7 +467,6 @@ export async function getServerSideProps(context) {
   //const { slug = "" } = context.params;
   const slug = "pdp";
   const pdp = await client.fetch(query, { slug });
-  console.log(JSON.stringify(pdp));
   return {
     props: {
       pdp,

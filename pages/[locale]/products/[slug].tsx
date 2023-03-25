@@ -48,6 +48,7 @@ import { useCheckout } from "@/lib/providers/CheckoutProvider";
 import { useUser } from "@/lib/useUser";
 import { getSelectedVariantID } from "@/lib/product";
 import { VariantSelector } from "@/components/product/VariantSelector";
+import { useParams } from "react-router-dom";
 
 export type OptionalQuery = {
   variant?: string;
@@ -152,6 +153,9 @@ const powerLists = [
 ];
 
 function ProductDetails({ pdpLayout, product }) {
+  console.log("************product*************");
+  console.log(JSON.stringify(product));
+  console.log("************product*************");
   const router = useRouter();
   const paths = usePaths();
   const t = useIntl();
@@ -166,16 +170,30 @@ function ProductDetails({ pdpLayout, product }) {
   const [loadingAddToCheckout, setLoadingAddToCheckout] = useState(false);
   const [addToCartError, setAddToCartError] = useState("");
 
+  //const [selectedVariant, setSelectedVariant] = useState("");
+
   const productCarouselImg = [];
-  const { media, name, description, attributes, category } = product;
+  const { name, description, attributes, category, variants } = product;
   let productDescription = JSON.parse(description);
   const productAttributesMap = new Map();
 
-  attributes.forEach((attribute) => {
-    productAttributesMap.set(attribute.attribute.name, "dddd");
+  const [productRequiredDetails, setProductRequiredDetails] = useState({
+    variant: {},
   });
 
-  productDescription = productDescription.blocks[0].data.text;
+  attributes.forEach((attribute) => {
+    if (attribute.values[0]) {
+      productAttributesMap.set(
+        attribute.attribute.name,
+        attribute.values[0].name
+      );
+    }
+  });
+
+  if (productDescription.blocks[0]) {
+    productDescription = productDescription.blocks[0].data.text;
+  }
+
   const {
     productThumpnail,
     measurements,
@@ -193,6 +211,15 @@ function ProductDetails({ pdpLayout, product }) {
     allImages: productCarouselImg,
   });
 
+  let productVariant = variants.map((variant) => Object.assign({}, variant));
+
+  productVariant.forEach((variant) => {
+    let index = frameCode.findIndex(
+      (code) => code === variant.name.toLowerCase()
+    );
+    variant.frameImage = frameImage[index];
+  });
+
   const handleChange = (event: SelectChangeEvent) => {
     setPower(event.target.value);
   };
@@ -206,21 +233,20 @@ function ProductDetails({ pdpLayout, product }) {
   };
 
   React.useEffect(() => {
-    //UHJvZHVjdFZhcmlhbnQ6NDM1
-    console.log("***********frameCode**************");
-    let index = frameCode.findIndex((day) => day === "silver");
-    console.log(index);
-    console.log("**********frameCode***************");
-    router.push(
-      "/en-US/products/hh/?variant=UHJvZHVjdFZhcmlhbnQ6NDM1",
+    const defaultVariant = productVariant[0].id;
+    void router.replace(
+      paths.products._slug(product.slug).$url({
+        ...(defaultVariant && { query: { variant: defaultVariant } }),
+      }),
       undefined,
       {
         shallow: true,
+        scroll: false,
       }
     );
-  }, [product]);
-  const selectedVariantID = getSelectedVariantID(product, router);
+  }, []);
 
+  const selectedVariantID = getSelectedVariantID(product, router);
   const selectedVariant =
     product?.variants?.find((v) => v?.id === selectedVariantID) || undefined;
 
@@ -325,7 +351,7 @@ function ProductDetails({ pdpLayout, product }) {
                   },
                 }}
               >
-                {media.map((image, index) => (
+                {selectedVariant?.media.map((image, index) => (
                   <Box
                     key={index}
                     sx={{ textAlign: "center", cursor: "zoom-in" }}
@@ -352,7 +378,7 @@ function ProductDetails({ pdpLayout, product }) {
                 mt: 5,
               }}
             >
-              {media.map((image, index) => (
+              {selectedVariant?.media.map((image, index) => (
                 <Box
                   key={index}
                   sx={{
@@ -399,87 +425,81 @@ function ProductDetails({ pdpLayout, product }) {
                   </Box>
                 </Box>
               </Box>
-              <Box>
-                <Box sx={{ fontSize: "20px", mt: 3 }}>
-                  <b>Frame Color</b> : Gunmetal <span>ffff</span>
-                </Box>
-                <Box sx={{ mt: 2, display: "flex" }}>
-                  {/* <PortableText value={frameImage} components={ptComponents} /> */}
-                  {frameImage.map((images, index) => (
-                    <Box key={index} sx={{ mr: 2 }}>
-                      <PortableText value={images} components={ptComponents} />
-                    </Box>
-                  ))}
-                  <VariantSelector
-                    pdpLayout={pdpLayout}
-                    product={product}
-                    selectedVariantID={selectedVariantID}
-                  />
-                </Box>
-                <Box sx={{ fontSize: "20px", mt: 3 }}>
-                  <b>Lence Color</b> : Green
-                </Box>
-                <Box sx={{ mt: 2 }}>
-                  <RadioButtonCheckedIcon
-                    sx={{ color: "#b2be9a", fontSize: "50px" }}
-                  />
-                </Box>
-              </Box>
-              {/*clear lence*/}
-              <Box>
-                <Box sx={{ fontSize: "20px", mt: 3, fontWeight: "bold" }}>
-                  Enter your prescription
-                </Box>
+              {category.name === "Sunglasses" && (
                 <Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      border: "0px solid",
-                      mt: 3,
-                    }}
-                  >
-                    <Box sx={{ border: "0px solid" }}>Sphere (Power) :</Box>
-                    <Box sx={{ border: "0px solid", width: "60%" }}>
-                      <FormControl style={{ minWidth: 220 }}>
-                        <InputLabel id="demo-simple-select-autowidth-label">
-                          Select
-                        </InputLabel>
-                        <Select
-                          labelId="demo-simple-select-autowidth-label"
-                          id="demo-simple-select-autowidth"
-                          value={power}
-                          onChange={handleChange}
-                          label="Power"
-                          sx={{ width: "100%" }}
-                        >
-                          {powerLists.map((item, index) => (
-                            <MenuItem key={index} value={item}>
-                              {item}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </Box>
+                  <Box sx={{ fontSize: "20px", mt: 3 }}>
+                    <b>Frame Color</b> :{" "}
+                    {selectedVariant?.attributes[0]?.values[0]?.name}
                   </Box>
-                  <Box sx={{ mt: 2 }}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          sx={{
-                            color: "#F7961C",
-                            "&.Mui-checked": {
-                              color: "#F7961C",
-                            },
-                          }}
-                        />
-                      }
-                      label="I need 2 different powers"
+                  <Box sx={{ mt: 2, display: "flex" }}>
+                    {/* <PortableText value={frameImage} components={ptComponents} /> */}
+
+                    <VariantSelector
+                      variants={productVariant}
+                      selectedVariantID={selectedVariantID}
+                      product={product}
+                      setProductRequiredDetails={setProductRequiredDetails}
                     />
                   </Box>
                 </Box>
-              </Box>
+              )}
+
+              {category.name !== "Sunglasses" && (
+                <Box>
+                  <Box sx={{ fontSize: "20px", mt: 3, fontWeight: "bold" }}>
+                    Enter your prescription
+                  </Box>
+                  <Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        border: "0px solid",
+                        mt: 3,
+                      }}
+                    >
+                      <Box sx={{ border: "0px solid" }}>Sphere (Power) :</Box>
+                      <Box sx={{ border: "0px solid", width: "60%" }}>
+                        <FormControl style={{ minWidth: 220 }}>
+                          <InputLabel id="demo-simple-select-autowidth-label">
+                            Select
+                          </InputLabel>
+                          <Select
+                            labelId="demo-simple-select-autowidth-label"
+                            id="demo-simple-select-autowidth"
+                            value={power}
+                            onChange={handleChange}
+                            label="Power"
+                            sx={{ width: "100%" }}
+                          >
+                            {powerLists.map((item, index) => (
+                              <MenuItem key={index} value={item}>
+                                {item}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </Box>
+                    </Box>
+                    <Box sx={{ mt: 2 }}>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            sx={{
+                              color: "#F7961C",
+                              "&.Mui-checked": {
+                                color: "#F7961C",
+                              },
+                            }}
+                          />
+                        }
+                        label="I need 2 different powers"
+                      />
+                    </Box>
+                  </Box>
+                </Box>
+              )}
             </Box>
           </Grid>
 
@@ -490,7 +510,9 @@ function ProductDetails({ pdpLayout, product }) {
               justifyContent="flex-end"
               alignItems="flex-end"
             >
-              <Box sx={{ fontSize: "30px" }}>SAR 550.00</Box>
+              <Box sx={{ fontSize: "30px" }}>
+                {formatPrice(selectedVariant?.pricing?.price?.gross)}
+              </Box>
               <Button
                 onClick={onAddToCart}
                 type="submit"
@@ -622,8 +644,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     ...edge.node,
   }));
 
-  //const productSlug = context.params.slug.toString();
-  const productSlug = "aviator-sunglasses";
+  const productSlug = context.params.slug.toString();
+  //const productSlug = "aviator-sunglasses-2";
   const productDetails: ApolloQueryResult<ProductBySlugQuery> =
     await serverApolloClient.query<
       ProductBySlugQuery,
@@ -637,11 +659,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     });
   const slug = "pdp";
   const pdpLayout = await client.fetch(PDP_PAGE_SANITY_QUERY, { slug });
-  console.log("**********pdpLayout******************");
-  console.log(JSON.stringify(pdpLayout));
-  console.log("**********products******************");
-  console.log(JSON.stringify(productDetails));
-  console.log("**********products******************");
   return {
     props: {
       rootCategories: rootCategories,

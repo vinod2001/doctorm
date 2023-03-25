@@ -1,9 +1,10 @@
 // @ts-nocheck
 import { RadioGroup } from "@headlessui/react";
-import { Box, Grid, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import clsx from "clsx";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { PortableText } from "@portabletext/react";
 
 import { usePaths } from "@/lib/paths";
 import { translate } from "@/lib/translations";
@@ -11,16 +12,40 @@ import { ProductDetailsFragment } from "@/saleor/api";
 
 import { useRegions } from "../RegionsProvider";
 import { Sonsie_One } from "@next/font/google";
+import imageUrlBuilder from "@sanity/image-url";
+import client from "@/lib/sanity/client";
 
 export interface VariantSelectorProps {
   product: ProductDetailsFragment;
   selectedVariantID?: string;
 }
 
+function urlFor(source) {
+  return imageUrlBuilder(client).image(source);
+}
+
+const ptComponents = {
+  types: {
+    image: ({ value, index }) => {
+      if (!value?.asset?._ref) {
+        return null;
+      }
+      return (
+        <img
+          alt={value.alt || " "}
+          loading="lazy"
+          src={urlFor(value).fit("max").auto("format").url()}
+        />
+      );
+    },
+  },
+};
+
 export function VariantSelector({
-  product,
+  variants,
   selectedVariantID,
-  pdpLayout,
+  product,
+  setProductRequiredDetails,
 }: VariantSelectorProps) {
   const paths = usePaths();
   const router = useRouter();
@@ -28,15 +53,9 @@ export function VariantSelector({
 
   const [selectedVariant, setSelectedVariant] = useState(selectedVariantID);
 
-  const { variants } = product;
-
-  const { frameCode, frameImage } = pdpLayout;
-
-  const cars = ["Saab", "Volvo", "BMW"];
-
-  function getCity(city) {
-    return city === "BMW";
-  }
+  useEffect(() => {
+    setProductRequiredDetails({ variant: variants[0] });
+  }, [selectedVariant]);
 
   // Skip displaying selector when theres less than 2 variants
   if (!variants || variants.length === 1) {
@@ -61,11 +80,16 @@ export function VariantSelector({
     <div className="w-full">
       <RadioGroup value={selectedVariant} onChange={onChange}>
         <div className="space-y-4">
-          {variants.map((variant) => (
+          {variants.map((variant, index) => (
             <RadioGroup.Option key={variant.id} value={variant.id}>
               <div>
                 <RadioGroup.Label>
-                  {translate(variant, "name")}
+                  <Box key={index} sx={{ mr: 2 }}>
+                    <PortableText
+                      value={variant.frameImage}
+                      components={ptComponents}
+                    />
+                  </Box>
                 </RadioGroup.Label>
               </div>
             </RadioGroup.Option>

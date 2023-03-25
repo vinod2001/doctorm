@@ -678,6 +678,49 @@ export type CheckoutByTokenQuery = {
  *   },
  * });
  */
+
+export type CheckoutLineDetailsFragment = {
+  __typename?: "CheckoutLine";
+  id: string;
+  quantity: number;
+  totalPrice: {
+    __typename?: "TaxedMoney";
+    gross: { __typename?: "Money"; currency: string; amount: number };
+  };
+  variant: {
+    __typename?: "ProductVariant";
+    id: string;
+    name: string;
+    product: {
+      __typename?: "Product";
+      id: string;
+      name: string;
+      slug: string;
+      translation?: {
+        __typename?: "ProductTranslation";
+        id: string;
+        name?: string | null;
+      } | null;
+      thumbnail?: {
+        __typename?: "Image";
+        url: string;
+        alt?: string | null;
+      } | null;
+    };
+    pricing?: {
+      __typename?: "VariantPricingInfo";
+      price?: {
+        __typename?: "TaxedMoney";
+        gross: { __typename?: "Money"; currency: string; amount: number };
+      } | null;
+    } | null;
+    translation?: {
+      __typename?: "ProductVariantTranslation";
+      id: string;
+      name: string;
+    } | null;
+  };
+};
 export function useCheckoutByTokenQuery(
   baseOptions: Apollo.QueryHookOptions<
     CheckoutByTokenQuery,

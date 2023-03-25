@@ -1,18 +1,24 @@
 // @ts-nocheck
 import React from "react";
-import { Box, Grid, Theme } from "@mui/material";
+import { Badge, Box, Grid, Theme } from "@mui/material";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 
+import { useRegions } from "@/components/RegionsProvider";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { Roboto } from "@next/font/google";
 import client from "@/lib/sanity/client";
 import useScrollDirection from "../../lib/useScrollDirection";
+import { CheckoutLineDetailsFragment } from "@/saleor/api";
+import { useCheckout } from "@/lib/providers/CheckoutProvider";
+import { API_URI } from "@/lib/const";
+import { invariant } from "@apollo/client/utilities/globals";
+import Link from "next/link";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -83,6 +89,7 @@ const clsHeader = {
 };
 
 export function Navbar(props) {
+  const { currentLocale, currentChannel } = useRegions();
   const rootCategories = props.rootCategories;
   const scrollDirection = useScrollDirection();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -92,9 +99,28 @@ export function Navbar(props) {
     null
   );
 
+  const saleorApiUrl = API_URI;
+  invariant(saleorApiUrl, "Missing NEXT_PUBLIC_API_URI");
+  const domain = new URL(saleorApiUrl).hostname;
+
   const categories = rootCategories.map((category) => {
     return category.name;
   });
+
+  const { checkout } = useCheckout();
+
+  const checkoutParams = checkout
+    ? new URLSearchParams({
+        checkout: checkout.id,
+        locale: currentLocale,
+        channel: currentChannel.slug,
+        saleorApiUrl,
+        // @todo remove `domain`
+        // https://github.com/saleor/saleor-dashboard/issues/2387
+        // https://github.com/saleor/saleor-app-sdk/issues/87
+        domain,
+      })
+    : new URLSearchParams();
 
   const pages = categories;
 
@@ -122,6 +148,13 @@ export function Navbar(props) {
       )
       .then((data) => {});
   });
+
+  const counter =
+    checkout?.lines?.reduce(
+      (amount: number, line?: CheckoutLineDetailsFragment | null) =>
+        line ? amount + line.quantity : amount,
+      0
+    ) || 0;
 
   return (
     //sx={{clsHeader:`${ scrollDirection === "down" ? "hide" : "show"}`}}
@@ -190,12 +223,16 @@ export function Navbar(props) {
                 </Box>
                 <Box>Favorites</Box>
               </Box>
-              <Box>
-                <Box sx={HeaderItemInnerWrapper}>
-                  <ShoppingBagOutlinedIcon sx={iconColor} />
+              <Link href={`/en-US/cart`}>
+                <Box>
+                  <Box sx={HeaderItemInnerWrapper}>
+                    <ShoppingBagOutlinedIcon sx={iconColor} />
+                  </Box>
+                  <Box>
+                    <Badge badgeContent={counter}>Basket</Badge>
+                  </Box>
                 </Box>
-                <Box>Basket</Box>
-              </Box>
+              </Link>
             </Box>
           </Box>
         </Grid>
