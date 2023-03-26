@@ -58,6 +58,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Checkbox from '@mui/material/Checkbox';
+import LockIcon from '@mui/icons-material/Lock';
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -99,11 +100,11 @@ function Address(props) {
     };
     return (
         <Box sx={{ flexGrow: 1 }}>
-        <Grid container sx={{  border:'0px solid #f6f6f6'}}>
+        <Grid container sx={{  border:'0px solid #f6f6f6', color:'#343434'}}>
             <Grid item xs={12} >
                 <Box  sx={{m:5, backgroundColor: "#f6f6f6", p:3, }}>
-                    <Box sx={{textAlign:'center', mb:4}}>
-                        Our secure checkout is 100% encrypted and your personal details are safe.
+                    <Box sx={{textAlign:'center', mb:4, display:'flex', justifyContent:'center',}}>
+                        <LockIcon/> <Typography sx={{fontSize:'18px', fontWeight:'bold', ml:2}}>Our secure checkout is 100% encrypted and your personal details are safe.</Typography>
                         </Box>
                     <Box>
                         <span style={{fontSize:'25px', fontWeight:'bold'}}>Shipping</span>
