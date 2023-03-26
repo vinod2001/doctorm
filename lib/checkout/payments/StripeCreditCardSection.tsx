@@ -112,14 +112,12 @@ function StripeCardForm({ checkout, locale }: StripeCardFormInterface) {
     }
 
     let order = completeData?.checkoutComplete?.order;
-console.log("1111111111111111111", completeData?.checkoutComplete)
     // Additional payment action is needed (ex. 3D Secure)
     if (completeData?.checkoutComplete?.confirmationNeeded) {
       // Parse data for the Stripe
       const confirmationData = JSON.parse(
         completeData?.checkoutComplete?.confirmationData || ""
       ) as { client_secret: string };
-      console.log("1111111111111111111", "caaaaa")
 
       // Execute additional action at Stripe
       const stripeConfirmationResponse = await stripe.confirmCardPayment(
@@ -128,7 +126,6 @@ console.log("1111111111111111111", completeData?.checkoutComplete)
           payment_method: paymentMethodResult.paymentMethod.id,
         }
       );
-      console.log("1111111111111111111", "stripeConfirmationResponse",stripeConfirmationResponse)
 
       if (stripeConfirmationResponse.error) {
         console.error("Stripe payment confirmation error: ", stripeConfirmationResponse.error);
@@ -136,17 +133,14 @@ console.log("1111111111111111111", completeData?.checkoutComplete)
         return;
       }
 
-      console.log("1111111111111111111", "ssssss")
       // Try to complete checkout
       const { data: confirmedCompleteData, errors: confirmedCompleteErrors } =
         await checkoutCompleteMutation({
           variables: {
-            checkoutToken: checkout.token,
-            description: "description"
+            checkoutToken: checkout.token
           },
         });
 
-        console.log("1111111111111111111", "confirmedCompleteData")
       if (confirmedCompleteErrors) {
         console.error(
           "Errors during checkout completion after the confirmation: ",
