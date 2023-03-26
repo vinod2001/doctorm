@@ -255,7 +255,7 @@ function ProductDetails({ pdpLayout, product }) {
   React.useEffect(()=>{
       setZoomModalDetails((oldData) => ({
         ...oldData,
-        allImages: selectedVariant.media,
+        allImages: selectedVariant?.media,
       }));
     },[selectedVariant]);
 
