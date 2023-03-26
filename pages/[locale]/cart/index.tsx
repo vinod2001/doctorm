@@ -46,6 +46,7 @@ import TableRow from "@mui/material/TableRow";
 import CircleIcon from "@mui/icons-material/Circle";
 import { useCheckout } from "@/lib/providers/CheckoutProvider";
 import { useRegions } from "@/components/RegionsProvider";
+
 const roboto = Roboto({
   subsets: ["latin"],
   weight: "400",
@@ -346,7 +347,8 @@ function CartDetails(props) {
                 </TableContainer>
               </Box>
               <Box sx={{ border: "0px solid", mt: 3 }}>
-                <Button
+                <Link
+                  href="/en-US/checkout"
                   sx={{
                     backgroundColor: "#ff9905",
                     color: "#fff",
@@ -359,7 +361,7 @@ function CartDetails(props) {
                   }}
                 >
                   Proceed to Checkout
-                </Button>
+                </Link>
               </Box>
             </Box>
           </Grid>

@@ -290,7 +290,7 @@ function ProductDetails({ pdpLayout, product }) {
       const { data: createCheckoutData } = await createCheckout({
         variables: {
           email: user?.email,
-          channel: currentChannel.slug,
+          channel: currentChannel.slug || "default-channel",
           lines: [
             {
               quantity: 1,
