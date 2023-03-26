@@ -1,7 +1,6 @@
 // @ts-nocheck
 import React from "react";
 import algoliasearch from 'algoliasearch/lite';
-import { Hit as AlgoliaHit } from 'instantsearch.js';
 import {
   InstantSearch,
   Hits,
@@ -21,17 +20,10 @@ const searchClient = {
   },
 };
 
-type HitProps = {
-  hit: AlgoliaHit<{
-    name: string;
-    price: number;
-  }>;
-};
-
 function Hit({ hit }: HitProps) {
   return (
     <>
-      <Link href={"/product/" + hit.slug} passHref className="Hit-label">
+      <Link target="_blank" href={"/en-US//products/" + hit.slug} passHref className="Hit-label">
         <img src={hit.thumbnail} width="100" height="50"></img>
         <Highlight hit={hit} attribute="name" />
       </Link>
@@ -41,6 +33,7 @@ function Hit({ hit }: HitProps) {
 }
 
 export default function Search() {
+
   return (
     <div className="ais-InstantSearch">
       <InstantSearch indexName="saleor_test.default-channel.USD.products" searchClient={searchClient}>
