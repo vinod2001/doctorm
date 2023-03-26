@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React from "react";
 import { Badge, Box, Grid, Theme } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
@@ -19,6 +20,7 @@ import { useCheckout } from "@/lib/providers/CheckoutProvider";
 import { API_URI } from "@/lib/const";
 import { invariant } from "@apollo/client/utilities/globals";
 import Link from "next/link";
+import Search from "../Search/Search";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -98,6 +100,9 @@ export function Navbar(props) {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+  const [searchActive, setSearchActive] = React.useState<null | HTMLElement>(
+    false
+  );
 
   const saleorApiUrl = API_URI;
   invariant(saleorApiUrl, "Missing NEXT_PUBLIC_API_URI");
@@ -138,6 +143,15 @@ export function Navbar(props) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleSearchClick = () => {
+    setSearchActive(true);
+  };
+
+  const handleSearchClose = () => {
+    setSearchActive(false);
+  };
+
 
   React.useEffect(() => {
     client
@@ -197,10 +211,8 @@ export function Navbar(props) {
                 <Box>Find a Store</Box>
               </Box>
               <Box>
-                <Box sx={HeaderItemInnerWrapper}>
-                  <SearchOutlinedIcon sx={iconColor} />
-                </Box>
-                <Box>Search</Box>
+                {!searchActive && <Box sx={HeaderItemInnerWrapper}><SearchOutlinedIcon sx={iconColor} onClick={handleSearchClick} /> Search</Box>}
+                {searchActive && <Box sx={HeaderItemInnerWrapper}> <CloseIcon sx={iconColor} onClick={handleSearchClose}> Close</CloseIcon> </Box>}
               </Box>
             </Box>
 
@@ -256,6 +268,7 @@ export function Navbar(props) {
                 },
               }}
             >
+              {searchActive && <Search></Search>}
               {pages.map((page) => (
                 <Button
                   key={page}
