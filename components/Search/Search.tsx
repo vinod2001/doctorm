@@ -23,7 +23,7 @@ const searchClient = {
 function Hit({ hit }: HitProps) {
   return (
     <>
-      <Link target="_blank" href={"/en-US//products/" + hit.slug} passHref className="Hit-label">
+      <Link target="_blank" href={"/en-US/products/" + hit.slug} passHref className="Hit-label">
         <img src={hit.thumbnail} width="100" height="50"></img>
         <Highlight hit={hit} attribute="name" />
       </Link>

@@ -2,6 +2,11 @@ import { DataProp } from "editorjs-blocks-react-renderer";
 
 import { DEFAULT_LOCALE } from "@/lib/regions";
 
+export const formatPrice = (
+  price, locale
+) =>
+  formatAsMoney(price?.amount || 0, price?.currency || "USD", locale || DEFAULT_LOCALE);
+
 export const formatAsMoney = (
   amount = 0,
   currency = "USD",
