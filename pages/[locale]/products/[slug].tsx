@@ -153,9 +153,6 @@ const powerLists = [
 ];
 
 function ProductDetails({ pdpLayout, product }) {
-  console.log("************product*************");
-  console.log(JSON.stringify(product));
-  console.log("************product*************");
   const router = useRouter();
   const paths = usePaths();
   const t = useIntl();
@@ -214,10 +211,15 @@ function ProductDetails({ pdpLayout, product }) {
   let productVariant = variants.map((variant) => Object.assign({}, variant));
 
   productVariant.forEach((variant) => {
-    let index = frameCode.findIndex(
-      (code) => code === variant.name.toLowerCase()
+    const frameColorAttribute = variant?.attributes.filter(
+      (attribute) => attribute.attribute.name === "Frame Color"
     );
-    variant.frameImage = frameImage[index];
+    if (frameColorAttribute) {
+      let index = frameCode.findIndex(
+        (code) => code === frameColorAttribute[0]?.values[0]?.name.toLowerCase()
+      );
+      variant.frameImage = frameImage[index];
+    }
   });
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -246,18 +248,16 @@ function ProductDetails({ pdpLayout, product }) {
     );
   }, []);
 
- 
-
   const selectedVariantID = getSelectedVariantID(product, router);
   const selectedVariant =
     product?.variants?.find((v) => v?.id === selectedVariantID) || undefined;
 
-  React.useEffect(()=>{
-      setZoomModalDetails((oldData) => ({
-        ...oldData,
-        allImages: selectedVariant?.media,
-      }));
-    },[selectedVariant]);
+  React.useEffect(() => {
+    setZoomModalDetails((oldData) => ({
+      ...oldData,
+      allImages: selectedVariant?.media,
+    }));
+  }, [selectedVariant]);
 
   const onAddToCart = async () => {
     // Clear previous error messages
@@ -668,6 +668,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     });
   const slug = "pdp";
   const pdpLayout = await client.fetch(PDP_PAGE_SANITY_QUERY, { slug });
+
   return {
     props: {
       rootCategories: rootCategories,
