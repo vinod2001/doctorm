@@ -2,10 +2,12 @@ import { RadioGroup } from "@headlessui/react";
 import clsx from "clsx";
 
 import { translate } from "@/lib/translations";
-import { DeliveryMethodFragment } from "@/saleor/api";
+import { DeliveryMethodFragment, LanguageCodeEnum } from "@/saleor/api";
+import { formatPrice } from "@/lib/util";
 
 export interface ShippingMethodOptionProps {
   method: DeliveryMethodFragment;
+  locale: LanguageCodeEnum;
 }
 
 export function ShippingMethodOption({ method }: ShippingMethodOptionProps) {
@@ -36,7 +38,7 @@ export function ShippingMethodOption({ method }: ShippingMethodOptionProps) {
                 {method.minimumDeliveryDays || 2}-{method.maximumDeliveryDays || 14} business days
               </RadioGroup.Description>
               <RadioGroup.Description as="span" className="mt-6 text-sm font-medium text-gray-900">
-                {method.price}
+                {formatPrice(method.price, null)}
               </RadioGroup.Description>
             </div>
           </div>

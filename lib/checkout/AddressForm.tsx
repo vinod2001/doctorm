@@ -12,6 +12,7 @@ export interface AddressFormData {
   phone: string;
   country: CountryCode;
   streetAddress1: string;
+  city: string;
   countryArea: string;
   postalCode: string;
 }
@@ -41,7 +42,7 @@ export function AddressForm({
       country: "US",
       streetAddress1: existingAddressData?.streetAddress1 || "",
       city: existingAddressData?.city || "",
-      countryArea: "IN" || existingAddressData?.countryArea || "",
+      countryArea: existingAddressData?.countryArea || "",
       postalCode: existingAddressData?.postalCode || "",
     },
   });

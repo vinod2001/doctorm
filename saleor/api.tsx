@@ -1,6 +1,5 @@
 // THIS FILE IS GENERATED WITH `pnpm generate`
 import "graphql/language/ast";
-import * as Scalar from "../scalars";
 import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
 import { FieldPolicy, FieldReadFunction, TypePolicies, TypePolicy } from "@apollo/client/cache";
@@ -24791,6 +24790,7 @@ export type AddressDetailsFragment = {
   lastName: string;
   streetAddress1: string;
   city: string;
+  countryArea?: string;
   postalCode: string;
   isDefaultBillingAddress?: boolean | null;
   isDefaultShippingAddress?: boolean | null;

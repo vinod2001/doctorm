@@ -2,19 +2,15 @@
 import React, { useState } from "react";
 import { useIntl } from "react-intl";
 
-import { SavedAddressSelectionList } from "@/components";
 import { notNullable } from "@/lib/util";
 import {
   CheckoutDetailsFragment,
   CountryCode,
   useCheckoutShippingAddressUpdateMutation,
+  LanguageCodeEnum,
 } from "@/saleor/api";
 
-import {
-  Box, Button,
-  Grid, styled, FormControl, FormControlLabel, RadioGroup, Radio,
-  Typography
-} from "@mui/material";
+import { Button } from "@mui/material";
 import { messages } from "../i18n";
 import { AddressDisplay } from "./AddressDisplay";
 import { AddressForm, AddressFormData } from "./AddressForm";
@@ -23,7 +19,7 @@ import { useUser } from "@/lib/useUser";
 export interface ShippingAddressSectionProps {
   active: boolean;
   checkout: CheckoutDetailsFragment;
-  locale: String;
+  locale: LanguageCodeEnum;
 }
 
 export function ShippingAddressSection({ active, checkout,locale }: ShippingAddressSectionProps) {
@@ -87,11 +83,6 @@ export function ShippingAddressSection({ active, checkout,locale }: ShippingAddr
       {active &&
         (editing ? (
           <>
-            {authenticated && (
-              <SavedAddressSelectionList
-                updateAddressMutation={(address: AddressFormData) => updateMutation(address)}
-              />
-            )}
             <div className="col-span-full pb-4">
               <button type="button" className="btn-checkout-section" onClick={onSameAsBilling}>
                 {t.formatMessage(messages.sameAsBillingButton)}

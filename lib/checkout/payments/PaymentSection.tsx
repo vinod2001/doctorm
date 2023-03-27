@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useIntl } from "react-intl";
 
 import { messages } from "@/lib/i18n";
-import { CheckoutDetailsFragment } from "@/saleor/api";
+import { CheckoutDetailsFragment,LanguageCodeEnum } from "@/saleor/api";
 
 import { DUMMY_CREDIT_CARD_GATEWAY, DummyCreditCardSection } from "./DummyCreditCardSection";
 import { STRIPE_GATEWAY, StripeCreditCardSection } from "./StripeCreditCardSection";
@@ -11,9 +11,10 @@ import { STRIPE_GATEWAY, StripeCreditCardSection } from "./StripeCreditCardSecti
 export interface PaymentSectionProps {
   checkout: CheckoutDetailsFragment;
   active: boolean;
+  locale: LanguageCodeEnum;
 }
 
-export function PaymentSection({ checkout, active }: PaymentSectionProps) {
+export function PaymentSection({ checkout, active, locale }: PaymentSectionProps) {
   const t = useIntl();
   const existingGateways = [STRIPE_GATEWAY, DUMMY_CREDIT_CARD_GATEWAY];
   const availableGateways = checkout.availablePaymentGateways.filter((g) =>
@@ -55,9 +56,9 @@ export function PaymentSection({ checkout, active }: PaymentSectionProps) {
             </RadioGroup>
           </div>
           {chosenGateway === DUMMY_CREDIT_CARD_GATEWAY && (
-            <DummyCreditCardSection checkout={checkout} />
+            <DummyCreditCardSection checkout={checkout}/>
           )}
-          {chosenGateway === STRIPE_GATEWAY && <StripeCreditCardSection checkout={checkout} />}
+          {chosenGateway === STRIPE_GATEWAY && <StripeCreditCardSection checkout={checkout} locale={locale}/>}
         </>
       )}
     </>

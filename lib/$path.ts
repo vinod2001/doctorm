@@ -86,10 +86,17 @@ export const pagesPath = {
         }),
       },
       order: {
-        $url: (url?: { hash?: string }) => ({
+        $url: (url?: { query?: OptionalQuery1; hash?: string }) => ({
           pathname: "/[locale]/order" as const,
-          query: { channel, locale },
+          query: { channel, locale, ...url?.query },
           hash: url?.hash,
+        }),
+        _orderId: (orderId: string) => ({
+          $url: (url?: { hash?: string }) => ({
+            pathname: "/[locale]/order" as const,
+            query: { channel, locale, orderId },
+            hash: url?.hash,
+          }),
         }),
       },
       page: {

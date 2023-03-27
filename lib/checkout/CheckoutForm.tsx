@@ -45,12 +45,8 @@ const sectionsManager = (checkout?: CheckoutDetailsFragment): CollapsedSections 
   return state;
 };
 
-export function CheckoutForm() {
+export function CheckoutForm({ locale }) {
   const { checkout } = useCheckout();
-  const { currentChannel, query } = useRegions();
-
-  const { locale } = query;
-
   if (!checkout) {
     return null;
   }

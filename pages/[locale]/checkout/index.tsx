@@ -13,15 +13,19 @@ import CheckoutForm from "@/lib/checkout/CheckoutForm";
 import { usePaths } from "@/lib/paths";
 import { useCheckout } from "@/lib/providers/CheckoutProvider";
 import CheckoutSidebar from "@/lib/checkout/sidebar/CheckoutSidebar";
+import { useRegions } from "@/components/RegionsProvider";
 import {
   Box,
   Grid
 } from "@mui/material";
 
-function CheckoutPage({ locale }) {
+function CheckoutPage() {
   const router = useRouter();
   const paths = usePaths();
   const { checkout, loading } = useCheckout();
+
+  const { query, currentLocale: localeString } = useRegions();
+  const { locale } = query;
 
   useEffect(() => {
     // Redirect to cart if theres no checkout data
@@ -45,15 +49,15 @@ function CheckoutPage({ locale }) {
 
   return (
     <Grid item sx={{ border: '0px solid #f6f6f6', color: '#343434' }}>
-      <Grid container xs={12} >
-        <Grid xs={8} sx={{ border: "0px solid" }}>
+      <Grid item xs={12} >
+        <Grid item xs={8} sx={{ border: "0px solid" }}>
           <Box sx={{ m: 5, backgroundColor: "#f6f6f6", p: 3, }}>
             <CheckoutForm locale={locale} />
           </Box>
         </Grid>
-        <Grid xs={4} sx={{ border: "0px solid" }}>
+        <Grid item xs={4} sx={{ border: "0px solid" }}>
           <Box sx={{ m: 5, backgroundColor: "#f6f6f6", p: 3, }}>
-            <CheckoutSidebar checkout={checkout} locale={locale} />
+            <CheckoutSidebar checkout={checkout} locale={locale}/>
           </Box>
         </Grid>
       </Grid>

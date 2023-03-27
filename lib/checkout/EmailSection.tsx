@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
 
-import { CheckoutDetailsFragment, useCheckoutEmailUpdateMutation } from "@/saleor/api";
+import { CheckoutDetailsFragment, useCheckoutEmailUpdateMutation, LanguageCodeEnum } from "@/saleor/api";
 
 import {
   Box, Button,
@@ -14,7 +14,7 @@ import { messages } from "../i18n";
 
 export interface EmailSectionProps {
   checkout: CheckoutDetailsFragment;
-  locale: String
+  locale: LanguageCodeEnum
 }
 
 export function EmailSection({ checkout, locale }: EmailSectionProps) {
