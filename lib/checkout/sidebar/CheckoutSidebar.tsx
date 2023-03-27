@@ -1,17 +1,17 @@
 import React from "react";
-import { useIntl } from "react-intl";
 
 import { CartSummary } from "./CartSummary";
-import { CheckoutDetailsFragment } from "@/saleor/api";
+import { CheckoutDetailsFragment, LanguageCodeEnum } from "@/saleor/api";
 
 interface CheckoutSidebarProps {
   checkout: CheckoutDetailsFragment;
+  locale: LanguageCodeEnum;
 }
 
-export function CheckoutSidebar({ checkout }: CheckoutSidebarProps) {
+export function CheckoutSidebar({ checkout, locale }: CheckoutSidebarProps) {
   return (
     <div>
-      <CartSummary checkout={checkout} />
+      <CartSummary checkout={checkout} locale={locale} />
     </div>
   );
 }

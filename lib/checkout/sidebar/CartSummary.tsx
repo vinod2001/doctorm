@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useIntl } from "react-intl";
 
-import { CheckoutDetailsFragment, useCheckoutAddPromoCodeMutation } from "@/saleor/api";
+import { CheckoutDetailsFragment, useCheckoutAddPromoCodeMutation, LanguageCodeEnum } from "@/saleor/api";
 
 import { messages } from "@/lib/i18n";
 import { formatPrice } from "@/lib/util";
@@ -13,10 +13,10 @@ export interface PromoCodeFormData {
 
 export interface CartSummaryProps {
   checkout: CheckoutDetailsFragment;
-  locale: string;
+  locale: LanguageCodeEnum;
 }
 
-export function CartSummary({ checkout, locale}: CartSummaryProps) {
+export function CartSummary({ checkout, locale }: CartSummaryProps) {
   const t = useIntl();
   const [editPromoCode] = useState(false);
   const [checkoutAddPromoCodeMutation] = useCheckoutAddPromoCodeMutation();
@@ -76,24 +76,24 @@ export function CartSummary({ checkout, locale}: CartSummaryProps) {
             {!!discount?.amount && (
               <div className="py-2 flex items-center justify-between">
                 <dt className="text-gray-600">{t.formatMessage(messages.discount)}</dt>
-                <dd className="font-medium text-gray-900">{formatPrice(discount, locale)}</dd>
+                <dd className="font-medium text-gray-900">{formatPrice(discount, null)}</dd>
               </div>
             )}
             <div className="py-2 flex items-center justify-between">
               <dt className="text-gray-600">{t.formatMessage(messages.subtotal)}</dt>
-              <dd className="font-medium text-gray-900">{formatPrice(subtotalPrice?.net, locale)}</dd>
+              <dd className="font-medium text-gray-900">{formatPrice(subtotalPrice?.net, null)}</dd>
             </div>
             <div className="py-2 flex items-center justify-between">
               <dt className="text-gray-600">{t.formatMessage(messages.shipping)}</dt>
-              <dd className="font-medium text-gray-900">{formatPrice(shippingPrice?.gross, locale)}</dd>
+              <dd className="font-medium text-gray-900">{formatPrice(shippingPrice?.gross, null)}</dd>
             </div>
             <div className="py-2 flex items-center justify-between">
               <dt className="text-gray-600">{t.formatMessage(messages.tax)}</dt>
-              <dd className="font-medium text-gray-900">{formatPrice(subtotalPrice?.tax, locale)}</dd>
+              <dd className="font-medium text-gray-900">{formatPrice(subtotalPrice?.tax, null)}</dd>
             </div>
             <div className="pt-4 flex items-center justify-between border-t border-gray-300">
               <dt className="text-lg font-bold text-gray-900">{t.formatMessage(messages.total)}</dt>
-              <dd className="text-lg font-bold text-gray-900">{formatPrice(totalPrice?.gross, locale)}</dd>
+              <dd className="text-lg font-bold text-gray-900">{formatPrice(totalPrice?.gross, null)}</dd>
             </div>
           </dl>
         </div>

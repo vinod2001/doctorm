@@ -9,6 +9,7 @@ import {
   CheckoutDetailsFragment,
   useCheckoutCompleteMutation,
   useCheckoutPaymentCreateMutation,
+  LanguageCodeEnum,
 } from "@/saleor/api";
 
 import { formatPrice } from "@/lib/util";
@@ -19,24 +20,24 @@ export const STRIPE_GATEWAY = "saleor.payments.stripe";
 
 interface StripeCardFormInterface {
   checkout: CheckoutDetailsFragment;
-  locale: string;
 }
 
-function StripeCardForm({ checkout, locale }: StripeCardFormInterface) {
+function StripeCardForm({ checkout }: StripeCardFormInterface) {
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
-  const paths = usePaths();
   const { resetCheckoutToken } = useCheckout();
   const [checkoutPaymentCreateMutation] = useCheckoutPaymentCreateMutation();
   const [checkoutCompleteMutation] = useCheckoutCompleteMutation();
   const [isPaymentProcessing, setIsPaymentProcessing] = useState(false);
+  const paths = usePaths();
+  const locale = router.query.locale?.toString();
   const totalPrice = formatPrice(checkout.totalPrice?.gross, locale);
   const payLabel = `Pay ${totalPrice}`;
 
-  const redirectToOrderDetailsPage = () => {
+  const redirectToOrderDetailsPage = (orderId: string) => {
     resetCheckoutToken();
-    void router.push(paths.order.$url());
+    void router.push(paths.order._orderId(orderId).$url());
   };
 
   const handleSubmit = async (event: FormEvent) => {
@@ -154,7 +155,7 @@ function StripeCardForm({ checkout, locale }: StripeCardFormInterface) {
 
     // If there are no errors during payment and confirmation, order should be created
     if (order) {
-      redirectToOrderDetailsPage();
+      redirectToOrderDetailsPage(order.id);
     } else {
       console.error("Order was not created");
     }
@@ -175,7 +176,7 @@ function StripeCardForm({ checkout, locale }: StripeCardFormInterface) {
 
 interface StripeCreditCardSectionInterface {
   checkout: CheckoutDetailsFragment;
-  locale: string;
+  locale: LanguageCodeEnum;
 }
 
 export function StripeCreditCardSection({ checkout, locale }: StripeCreditCardSectionInterface) {
@@ -197,7 +198,7 @@ export function StripeCreditCardSection({ checkout, locale }: StripeCreditCardSe
   return (
     <div className="py-8">
       <Elements stripe={stripePromise}>
-        <StripeCardForm checkout={checkout} locale={locale} />
+        <StripeCardForm checkout={checkout} />
       </Elements>
     </div>
   );

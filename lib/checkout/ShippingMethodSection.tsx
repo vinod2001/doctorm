@@ -7,6 +7,7 @@ import {
   CheckoutDetailsFragment,
   ShippingMethod,
   useCheckoutShippingMethodUpdateMutation,
+  LanguageCodeEnum,
 } from "@/saleor/api";
 
 import { Button } from "@mui/material";
@@ -17,7 +18,7 @@ import { ShippingMethodOption } from "./ShippingMethodOption";
 export interface ShippingMethodSectionProps {
   checkout: CheckoutDetailsFragment;
   active: boolean;
-  locale: String;
+  locale: LanguageCodeEnum;
 }
 
 export function ShippingMethodSection({ checkout, active, locale }: ShippingMethodSectionProps) {
@@ -65,7 +66,7 @@ export function ShippingMethodSection({ checkout, active, locale }: ShippingMeth
                 if (!method) {
                   return null;
                 }
-                return <ShippingMethodOption method={method} key={method.id} />;
+                return <ShippingMethodOption method={method} key={method.id} locale={locale} />;
               })}
             </div>
           </RadioGroup>

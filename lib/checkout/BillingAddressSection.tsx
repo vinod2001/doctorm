@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useIntl } from "react-intl";
 
-import { SavedAddressSelectionList } from "@/components";
 import { notNullable } from "@/lib/util";
-import { CheckoutDetailsFragment, useCheckoutBillingAddressUpdateMutation } from "@/saleor/api";
+import { CheckoutDetailsFragment, useCheckoutBillingAddressUpdateMutation, LanguageCodeEnum } from "@/saleor/api";
 import { Button } from "@mui/material";
 import { messages } from "@/lib/i18n";
 import { AddressDisplay } from "./AddressDisplay";
@@ -13,7 +12,7 @@ import { useUser } from "@/lib/useUser";
 export interface BillingAddressSection {
   active: boolean;
   checkout: CheckoutDetailsFragment;
-  locale: string
+  locale: LanguageCodeEnum
 }
 
 export function BillingAddressSection({ active, checkout, locale }: BillingAddressSection) {
@@ -49,11 +48,6 @@ export function BillingAddressSection({ active, checkout, locale }: BillingAddre
       {active &&
         (editing ? (
           <>
-            {authenticated && (
-              <SavedAddressSelectionList
-                updateAddressMutation={(address: AddressFormData) => updateMutation(address)}
-              />
-            )}
             <AddressForm
               existingAddressData={checkout.billingAddress || undefined}
               toggleEdit={() => setEditing(false)}
