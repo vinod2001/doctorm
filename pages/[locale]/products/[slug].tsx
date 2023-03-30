@@ -661,6 +661,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       ProductBySlugQueryVariables
     >({
       query: ProductBySlugDocument,
+      fetchPolicy: "no-cache",
       variables: {
         slug: productSlug,
         ...contextToRegionQuery(context),
