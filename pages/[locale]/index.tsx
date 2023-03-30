@@ -41,6 +41,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       RootCategoriesQueryVariables
     >({
       query: RootCategoriesDocument,
+      fetchPolicy: "no-cache",
       variables: {
         locale: contextToRegionQuery(context).locale,
       },
