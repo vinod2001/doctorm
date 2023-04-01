@@ -84,6 +84,9 @@ const HeaderItemInnerWrapper = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  '& .MuiBadge-badge':{
+    background:'#343434'
+  }
 };
 
 const HeaderitemWrapperWidth = {
@@ -256,7 +259,7 @@ export function Navbar(props) {
                 <Box>
                   <Box sx={HeaderItemInnerWrapper}>
                   
-                    <Badge badgeContent={counter} sx={{color:'#343434'}} color="secondary" >
+                    <Badge badgeContent={counter} sx={{color:'#343434',}} color="secondary" >
                     <Link href={`/en-US/cart`} style={{textDecoration:'none',textDecorationColor:'#343434', color:'#343434'}}>
                       <ShoppingBagOutlinedIcon sx={iconColor} />
                       </Link>
