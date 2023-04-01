@@ -5,7 +5,6 @@ import {
 } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import Looks5Icon from '@mui/icons-material/Looks5';
-import {checkoutSectionHeaderActive} from '../EmailSection';
 
 interface CompleteCheckoutButtonProps {
   isDisabled: boolean;
