@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { RadioGroup } from "@headlessui/react";
 import React, { useState } from "react";
 import { useIntl } from "react-intl";
@@ -9,11 +10,17 @@ import {
   useCheckoutShippingMethodUpdateMutation,
   LanguageCodeEnum,
 } from "@/saleor/api";
-
-import { Button } from "@mui/material";
 import { messages } from "../i18n";
 import { ShippingMethodDisplay } from "./ShippingMethodDisplay";
 import { ShippingMethodOption } from "./ShippingMethodOption";
+import Looks4Icon from '@mui/icons-material/Looks4';
+import {
+  Box, Button,
+  Grid, styled,Card
+} from "@mui/material";
+import TextField from '@mui/material/TextField';
+import {checkoutSectionHeaderActive} from './EmailSection';
+import Typography from "@mui/material/Typography";
 
 export interface ShippingMethodSectionProps {
   checkout: CheckoutDetailsFragment;
@@ -50,17 +57,21 @@ export function ShippingMethodSection({ checkout, active, locale }: ShippingMeth
 
   return (
     <>
-      <div className="mt-4 mb-4">
-        <h2
+      <Box sx={{display:'flex',alignItems:'center', mt:2}}>
+      <Box><Looks4Icon/></Box><Typography sx={checkoutSectionHeaderActive}
           className={active ? "checkout-section-header-active" : "checkout-section-header-disabled"}
         >
           {t.formatMessage(messages.shippingMethodCardHeader)}
-        </h2>
-      </div>
+        </Typography>
+      </Box>
+      
       {active &&
-        (editing ? (
+        (
+          <Box>
+        <Card sx={{p:2}}>
+          {editing ? (
           <RadioGroup value={selectedDeliveryMethod} onChange={handleChange} className="py-8">
-            <div className="mt-4 grid grid-cols-2 gap-2">
+            <Box sx={{cursor:'pointer'}}>
               {availableShippingMethods.map((method) => {
                 // todo: Investigate why filter did not excluded non existing methods
                 if (!method) {
@@ -68,7 +79,7 @@ export function ShippingMethodSection({ checkout, active, locale }: ShippingMeth
                 }
                 return <ShippingMethodOption method={method} key={method.id} locale={locale} />;
               })}
-            </div>
+            </Box>
           </RadioGroup>
         ) : (
           <section className="flex justify-between items-center mb-4">
@@ -76,12 +87,16 @@ export function ShippingMethodSection({ checkout, active, locale }: ShippingMeth
               <ShippingMethodDisplay method={checkout.shippingMethod} />
             )}
             <div className="flex justify-between items-center">
-              <Button onClick={() => setEditing(true)}>
+              <Button variant="contained" sx={{mt:1}} onClick={() => setEditing(true)}>
                 {t.formatMessage(messages.changeButton)}
               </Button>
             </div>
           </section>
-        ))}
+        )}
+        </Card>
+        </Box>
+        )}
+        
     </>
   );
 }

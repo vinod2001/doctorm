@@ -42,7 +42,8 @@ export function CartSummary({ checkout, locale }: CartSummaryProps) {
     }
   });
   return (
-    <section>
+    <>
+    {/* <section>
       <div className="bg-gray-50 rounded p-8 border">
         {(editPromoCode || !discount?.amount) && (
           <form method="post" className="pb-4" onSubmit={onAddPromoCode}>
@@ -98,6 +99,7 @@ export function CartSummary({ checkout, locale }: CartSummaryProps) {
           </dl>
         </div>
       </div>
-    </section>
+    </section> */}
+    </>
   );
 }

@@ -4,7 +4,7 @@ import { useIntl } from "react-intl";
 import { CheckoutDetailsFragment, useCheckoutEmailUpdateMutation, LanguageCodeEnum } from "@/saleor/api";
 import {
   Box, Button,
-  Grid, styled,
+  Grid, styled,Card
 } from "@mui/material";
 import { messages } from "../i18n";
 import Divider from "@mui/material/Divider";
@@ -98,6 +98,8 @@ export function EmailSection({ checkout, locale }: EmailSectionProps) {
           {t.formatMessage(messages.emailAddressCardHeader)}
         </Typography>
       </Box>
+      <Box>
+        <Card sx={{p:2}}>
       {!modifyEmail ? (
         <Box className="flex justify-between items-center">
           <p className="text-base">{checkout?.email}</p>
@@ -133,6 +135,8 @@ export function EmailSection({ checkout, locale }: EmailSectionProps) {
           </Box>
         </form>
       )}
+      </Card>
+      </Box>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { CardElement, Elements, useElements, useStripe } from "@stripe/react-stripe-js";
+import { CardElement, CardNumberElement, CardExpiryElement, CardCvcElement, Elements, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js/pure";
 import { useRouter } from "next/router";
 import React, { FormEvent, useState } from "react";
@@ -17,6 +17,13 @@ import { formatPrice } from "@/lib/util";
 import { CompleteCheckoutButton } from "../CompleteCheckoutButton";
 
 export const STRIPE_GATEWAY = "saleor.payments.stripe";
+import {
+  Box, Button,
+  Grid, styled,Card, Typography
+} from "@mui/material";
+import TextField from '@mui/material/TextField';
+import Looks5Icon from '@mui/icons-material/Looks5';
+import {checkoutSectionHeaderActive} from '../EmailSection';
 
 interface StripeCardFormInterface {
   checkout: CheckoutDetailsFragment;
@@ -163,7 +170,35 @@ function StripeCardForm({ checkout }: StripeCardFormInterface) {
 
   return (
     <form method="post" onSubmit={handleSubmit}>
-      <CardElement />
+      {/* <CardElement /> */}
+      <Box sx={{width:'300px'}}>
+        <Box>
+          <Typography>
+          Card Number*
+          </Typography>
+          <Box sx={{border:'0px solid #000', borderRadius:'5px',p:1, background:'#d4d4d4'}}>
+          <CardNumberElement />
+          </Box>
+        </Box>
+        <Box>
+          <Typography>
+          Expiry Date*
+          </Typography>
+          <Box sx={{border:'0px solid #000', borderRadius:'5px',p:1, background:'#d4d4d4'}}>
+          <CardExpiryElement/>
+          </Box>
+        </Box>
+        <Box>
+          <Typography>
+          CVC*
+          </Typography>
+          <Box sx={{border:'0px solid #000', borderRadius:'5px',p:1, background:'#d4d4d4'}}>
+          <CardCvcElement/>
+          </Box>
+        </Box>
+        
+        
+      </Box>
       <CompleteCheckoutButton
         isProcessing={isPaymentProcessing}
         isDisabled={!stripe || !elements || isPaymentProcessing}

@@ -16,7 +16,7 @@ import { useUser } from "@/lib/useUser";
 import Looks3Icon from '@mui/icons-material/Looks3';
 import {
   Box, Button,
-  Grid, styled,
+  Grid, styled,Card
 } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import {checkoutSectionHeaderActive} from './EmailSection';
@@ -80,15 +80,20 @@ export function ShippingAddressSection({ active, checkout,locale }: ShippingAddr
 
   return (
     <>
+    
       <Box sx={{display:'flex',alignItems:'center', mt:2}}>
-      <Box><Looks3Icon/></Box><Typography sx={checkoutSectionHeaderActive}
-          className={active ? "checkout-section-header-active" : "checkout-section-header-disabled"}
-        >
-          {t.formatMessage(messages.shippingAddressCardHeader)}
-        </Typography>
+        <Box><Looks3Icon/></Box><Typography sx={checkoutSectionHeaderActive}
+            className={active ? "checkout-section-header-active" : "checkout-section-header-disabled"}
+          >
+            {t.formatMessage(messages.shippingAddressCardHeader)}
+          </Typography>
       </Box>
+      
       {active &&
-        (editing ? (
+        (
+          <Box>
+        <Card sx={{pl:2,pr:2,pb:2}}>
+          {editing ? (
           <>
             <Box sx={{mt:1}}>
               <Button variant="contained" onClick={onSameAsBilling}>
@@ -104,11 +109,15 @@ export function ShippingAddressSection({ active, checkout,locale }: ShippingAddr
         ) : (
           <Box sx={{mt:2}}>
             {!!checkout.shippingAddress && <AddressDisplay address={checkout.shippingAddress} />}
-            <Button variant="contained" onClick={() => setEditing(true)}>
+            <Button sx={{mt:2}} variant="contained" onClick={() => setEditing(true)}>
               {t.formatMessage(messages.changeButton)}
             </Button>
           </Box>
-        ))}
+        )}
+        </Card>
+      </Box>
+        )}
+        
     </>
   );
 }

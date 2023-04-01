@@ -10,7 +10,7 @@ import { useUser } from "@/lib/useUser";
 import Typography from "@mui/material/Typography";
 import {
   Box, Button,
-  Grid, styled,
+  Grid, styled,Card
 } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import LooksTwoIcon from '@mui/icons-material/LooksTwo';
@@ -45,14 +45,18 @@ export function BillingAddressSection({ active, checkout, locale }: BillingAddre
   return (
     <>
       <Box sx={{display:'flex',alignItems:'center', mt:2}}>
-      <Box><LooksTwoIcon/></Box><Typography
-          sx={checkoutSectionHeaderActive}
-        >
-          {t.formatMessage(messages.billingAddressCardHeader)}
-        </Typography>
+        <Box><LooksTwoIcon/></Box><Typography
+            sx={checkoutSectionHeaderActive}
+          >
+            {t.formatMessage(messages.billingAddressCardHeader)}
+          </Typography>
       </Box>
+      
       {active &&
-        (editing ? (
+        (
+          <Box>
+        <Card sx={{p:2}}>
+          {editing ? (
           <>
             <AddressForm
               existingAddressData={checkout.billingAddress || undefined}
@@ -67,7 +71,11 @@ export function BillingAddressSection({ active, checkout, locale }: BillingAddre
               {t.formatMessage(messages.changeButton)}
             </Button>
           </Box>
-        ))}
+        )}
+        </Card>
+        </Box>
+        )}
+        
     </>
   );
 }

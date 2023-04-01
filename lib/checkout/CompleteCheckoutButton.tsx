@@ -1,4 +1,12 @@
 /* eslint-disable */ // component will be fulle redesigned
+import {
+  Box, Button,
+  Grid, styled,Card, Typography
+} from "@mui/material";
+import TextField from '@mui/material/TextField';
+import Looks5Icon from '@mui/icons-material/Looks5';
+import {checkoutSectionHeaderActive} from '../EmailSection';
+
 interface CompleteCheckoutButtonProps {
   isDisabled: boolean;
   isProcessing: boolean;
@@ -43,14 +51,14 @@ export function CompleteCheckoutButton({
           Processing
         </button>
       ) : (
-        <button
+        <Button
           onClick={onClick}
           disabled={isDisabled}
           type="submit"
           className="w-full mt-6 bg-blue-600 border border-transparent rounded-md shadow-sm py-2 px-4 text-base font-medium text-white hover:bg-blue-700 flex items-center justify-center"
         >
           {children}
-        </button>
+        </Button>
       )}
     </>
   );
