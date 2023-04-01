@@ -70,17 +70,17 @@ export function CheckoutForm({ locale }) {
         <EmailSection checkout={checkout} locale={locale} />
       </Box>
       <Divider/>
-      
+      <Box sx={{mb:2}}>
+        <BillingAddressSection active={!collapsedSections.billingAddress} checkout={checkout} locale={locale} />
+      </Box>
+      <Divider/>
       {checkout.isShippingRequired && (
         <Box sx={{mb:2}}>
           <ShippingAddressSection active={!collapsedSections.shippingAddress} checkout={checkout} locale={locale} />
         </Box>
       )}
       <Divider/>
-      <Box sx={{mb:2}}>
-        <BillingAddressSection active={!collapsedSections.billingAddress} checkout={checkout} locale={locale} />
-      </Box>
-      <Divider/>
+      
       {/* {checkout.isShippingRequired && (
         <Box sx={{mb:2}}>
           <ShippingMethodSection active={!collapsedSections.shippingMethod} checkout={checkout} locale={locale} />
