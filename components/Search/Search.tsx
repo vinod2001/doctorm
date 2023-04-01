@@ -27,9 +27,8 @@ const searchList={
     outline: 'none',
     fontFamily: 'sans-serif',
     fontSize: '14px',
-    '&:focus':{
-      border:'1px solid #777',
-    }
+    border:'none',
+    background:'none',
   },
   '& button': {
     width: '32px',
@@ -37,6 +36,7 @@ const searchList={
     marginLeft: '10px',
     border: '1px solid #ddd',
     borderRadius: '5px',
+    display:'none'
   },
   '& ul':{
     padding:0,
@@ -100,7 +100,7 @@ function Hit({ hit }: HitProps) {
   return (
     <>
     <Box sx={{background: '#fff'}}>
-      <Link target="_blank" href={"/en-US/products/" + hit.slug} passHref  className={roboto.className}>
+      <Link  href={"/en-US/products/" + hit.slug} passHref  className={roboto.className}>
         <span>
         <img src={hit.thumbnail} width="100" height="50"></img>
         </span>
@@ -119,7 +119,7 @@ export default function Search() {
       <InstantSearch indexName="saleor_test.default-channel.USD.products" searchClient={searchClient}>
         <Box className="right-panel" sx={searchList}>
           <Box sx={{background:'#F7961C',p:5}}>
-          <SearchBox showLoadingIndicator={false} defaultRefinement="" />
+          <SearchBox showLoadingIndicator={false} placeholder="text" defaultRefinement="" />
           </Box>
             <Hits hitComponent={Hit}/>
         </Box>
