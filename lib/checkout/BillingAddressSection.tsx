@@ -3,12 +3,18 @@ import { useIntl } from "react-intl";
 
 import { notNullable } from "@/lib/util";
 import { CheckoutDetailsFragment, useCheckoutBillingAddressUpdateMutation, LanguageCodeEnum } from "@/saleor/api";
-import { Button } from "@mui/material";
 import { messages } from "@/lib/i18n";
 import { AddressDisplay } from "./AddressDisplay";
 import { AddressForm, AddressFormData } from "./AddressForm";
 import { useUser } from "@/lib/useUser";
-
+import Typography from "@mui/material/Typography";
+import {
+  Box, Button,
+  Grid, styled,
+} from "@mui/material";
+import TextField from '@mui/material/TextField';
+import LooksTwoIcon from '@mui/icons-material/LooksTwo';
+import {checkoutSectionHeaderActive} from './EmailSection'
 export interface BillingAddressSection {
   active: boolean;
   checkout: CheckoutDetailsFragment;
@@ -38,13 +44,13 @@ export function BillingAddressSection({ active, checkout, locale }: BillingAddre
 
   return (
     <>
-      <div className="mt-4 mb-4">
-        <h2
-          className={active ? "checkout-section-header-active" : "checkout-section-header-disabled"}
+      <Box sx={{display:'flex',alignItems:'center', mt:2}}>
+      <Box><LooksTwoIcon/></Box><Typography
+          sx={checkoutSectionHeaderActive}
         >
           {t.formatMessage(messages.billingAddressCardHeader)}
-        </h2>
-      </div>
+        </Typography>
+      </Box>
       {active &&
         (editing ? (
           <>
@@ -55,12 +61,12 @@ export function BillingAddressSection({ active, checkout, locale }: BillingAddre
             />
           </>
         ) : (
-          <section className="flex justify-between items-center mb-4">
+          <Box sx={{mt:2}}>
             {!!checkout.billingAddress && <AddressDisplay address={checkout.billingAddress} />}
-            <Button onClick={() => setEditing(true)}>
+            <Button variant="contained" sx={{mt:2}} onClick={() => setEditing(true)}>
               {t.formatMessage(messages.changeButton)}
             </Button>
-          </section>
+          </Box>
         ))}
     </>
   );

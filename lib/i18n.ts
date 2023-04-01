@@ -173,6 +173,11 @@ export const messages = defineMessages({
     description: "Header of the email section.",
     defaultMessage: "Email Address",
   },
+  email: {
+    id: "app.checkout.email",
+    description: "Email field header",
+    defaultMessage: "Email",
+  },
   billingMethodCardHeader: {
     id: "app.checkout.billingMethodCardHeader",
     description: "Header of the billing method section.",

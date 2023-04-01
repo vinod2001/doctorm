@@ -9,12 +9,19 @@ import {
   useCheckoutShippingAddressUpdateMutation,
   LanguageCodeEnum,
 } from "@/saleor/api";
-
-import { Button } from "@mui/material";
 import { messages } from "../i18n";
 import { AddressDisplay } from "./AddressDisplay";
 import { AddressForm, AddressFormData } from "./AddressForm";
 import { useUser } from "@/lib/useUser";
+import Looks3Icon from '@mui/icons-material/Looks3';
+import {
+  Box, Button,
+  Grid, styled,
+} from "@mui/material";
+import TextField from '@mui/material/TextField';
+import {checkoutSectionHeaderActive} from './EmailSection';
+import Typography from "@mui/material/Typography";
+
 
 export interface ShippingAddressSectionProps {
   active: boolean;
@@ -73,21 +80,21 @@ export function ShippingAddressSection({ active, checkout,locale }: ShippingAddr
 
   return (
     <>
-      <div className="mt-4 mb-4">
-        <h2
+      <Box sx={{display:'flex',alignItems:'center', mt:2}}>
+      <Box><Looks3Icon/></Box><Typography sx={checkoutSectionHeaderActive}
           className={active ? "checkout-section-header-active" : "checkout-section-header-disabled"}
         >
           {t.formatMessage(messages.shippingAddressCardHeader)}
-        </h2>
-      </div>
+        </Typography>
+      </Box>
       {active &&
         (editing ? (
           <>
-            <div className="col-span-full pb-4">
-              <button type="button" className="btn-checkout-section" onClick={onSameAsBilling}>
+            <Box sx={{mt:1}}>
+              <Button variant="contained" onClick={onSameAsBilling}>
                 {t.formatMessage(messages.sameAsBillingButton)}
-              </button>
-            </div>
+              </Button>
+            </Box>
             <AddressForm
               existingAddressData={checkout.shippingAddress || undefined}
               toggleEdit={() => setEditing(false)}
@@ -95,12 +102,12 @@ export function ShippingAddressSection({ active, checkout,locale }: ShippingAddr
             />
           </>
         ) : (
-          <section className="flex justify-between items-center mb-4">
+          <Box sx={{mt:2}}>
             {!!checkout.shippingAddress && <AddressDisplay address={checkout.shippingAddress} />}
-            <Button onClick={() => setEditing(true)}>
+            <Button variant="contained" onClick={() => setEditing(true)}>
               {t.formatMessage(messages.changeButton)}
             </Button>
-          </section>
+          </Box>
         ))}
     </>
   );

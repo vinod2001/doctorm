@@ -347,21 +347,26 @@ function CartDetails(props) {
                 </TableContainer>
               </Box>
               <Box sx={{ border: "0px solid", mt: 3 }}>
+                
                 <Link
                   href="/en-US/checkout"
-                  sx={{
+                  style={{
                     backgroundColor: "#ff9905",
                     color: "#fff",
                     textTransform: "capitalize",
-                    pl: 2,
-                    pr: 2,
+                    padding: '8px',
+                    borderRadius: '5px',
+                    textDecoration: 'none',
                     "&:hover": { backgroundColor: "#f59407" },
                     width: "100%",
                     fontWeight: "bold",
+                    display:'block',
+                    textAlign:'center'
                   }}
                 >
                   Proceed to Checkout
                 </Link>
+                
               </Box>
             </Box>
           </Grid>

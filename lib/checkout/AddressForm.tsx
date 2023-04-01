@@ -5,6 +5,13 @@ import { useIntl } from "react-intl";
 import { AddressDetailsFragment, CheckoutError, CountryCode } from "@/saleor/api";
 
 import { messages } from "../i18n";
+import Typography from "@mui/material/Typography";
+import {
+  Box, Button,
+  Grid, styled,
+} from "@mui/material";
+import TextField from '@mui/material/TextField';
+import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 
 export interface AddressFormData {
   firstName: string;
@@ -65,13 +72,13 @@ export function AddressForm({
   });
   return (
     <form method="post" onSubmit={onAddressFormSubmit}>
-      <div className="grid grid-cols-12 gap-4 w-full">
-        <div className="col-span-full">
-          <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+      <Box sx={{mt:2}}>
+        <Box className="col-span-full">
+          {/* <label htmlFor="address" className="block text-sm font-medium text-gray-700">
             {t.formatMessage(messages.phoneField)}
-          </label>
-          <div className="mt-1">
-            <input
+          </label> */}
+          <Box className="mt-1">
+            {/* <input
               type="text"
               id="phone"
               className="w-full border-gray-300 rounded-md shadow-sm text-base"
@@ -80,17 +87,29 @@ export function AddressForm({
                 required: true,
                 pattern: /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i,
               })}
+            /> */}
+            <TextField
+              type="text"
+              id="phone"
+              required
+              label={t.formatMessage(messages.phoneField)}
+              className="w-full border-gray-300 rounded-md shadow-sm text-base"
+              spellCheck={false}
+              {...registerAddress("phone", {
+                required: true,
+                pattern: /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i,
+              })}
             />
             {!!errorsAddress.phone && <p>{errorsAddress.phone.message}</p>}
-          </div>
-        </div>
+          </Box>
+        </Box>
 
-        <div className="col-span-full sm:col-span-6">
-          <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+        <Box sx={{mt:1}}>
+          {/* <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
             {t.formatMessage(messages.firstNameField)}
-          </label>
-          <div className="mt-1">
-            <input
+          </label> */}
+          <Box >
+            {/* <input
               type="text"
               id="province"
               className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-base"
@@ -98,19 +117,32 @@ export function AddressForm({
               {...registerAddress("firstName", {
                 required: true,
               })}
+            /> */}
+             <TextField
+              type="text"
+              id="province"
+              required
+              label={t.formatMessage(messages.firstNameField)}
+              className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-base"
+              spellCheck={false}
+              {...registerAddress("firstName", {
+                required: true,
+              })}
             />
             {!!errorsAddress.firstName && <p>{errorsAddress.firstName.message}</p>}
-          </div>
-        </div>
+          </Box>
+        </Box>
 
-        <div className="col-span-full sm:col-span-6">
-          <label htmlFor="province" className="block text-sm font-medium text-gray-700">
+        <Box sx={{mt:1}}>
+          {/* <label htmlFor="province" className="block text-sm font-medium text-gray-700">
             {t.formatMessage(messages.lastNameField)}
-          </label>
-          <div className="mt-1">
-            <input
+          </label> */}
+          <Box className="mt-1">
+            <TextField
               type="text"
               id="lastName"
+              required
+              label={t.formatMessage(messages.lastNameField)}
               className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-base"
               spellCheck={false}
               {...registerAddress("lastName", {
@@ -118,17 +150,19 @@ export function AddressForm({
               })}
             />
             {!!errorsAddress.lastName && <p>{errorsAddress.lastName.message}</p>}
-          </div>
-        </div>
+          </Box>
+        </Box>
 
-        <div className="col-span-full">
-          <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+        <Box sx={{mt:1}}>
+          {/* <label htmlFor="address" className="block text-sm font-medium text-gray-700">
             {t.formatMessage(messages.addressField)}
-          </label>
-          <div className="mt-1">
-            <input
+          </label> */}
+          <Box className="mt-1">
+            <TextField
               type="text"
               id="streetAddress1"
+              required
+              label={t.formatMessage(messages.addressField)}
               className="w-full border-gray-300 rounded-md shadow-sm text-base"
               spellCheck={false}
               {...registerAddress("streetAddress1", {
@@ -136,40 +170,44 @@ export function AddressForm({
               })}
             />
             {!!errorsAddress.streetAddress1 && <p>{errorsAddress.streetAddress1.message}</p>}
-          </div>
-        </div>
+          </Box>
+        </Box>
 
-        <div className="col-span-full sm:col-span-6">
-          <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+        <Box sx={{mt:1}}>
+          {/* <label htmlFor="city" className="block text-sm font-medium text-gray-700">
             {t.formatMessage(messages.cityField)}
-          </label>
-          <div className="mt-1">
-            <input
+          </label> */}
+          <Box className="mt-1">
+            <TextField
               type="text"
               id="city"
+              required
+              label={t.formatMessage(messages.cityField)}
               className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-base"
               spellCheck={false}
               {...registerAddress("city", { required: true })}
             />
             {!!errorsAddress.city && <p>{errorsAddress.city.message}</p>}
-          </div>
-        </div>
+          </Box>
+        </Box>
 
-        <div className="col-span-full sm:col-span-6">
-          <label htmlFor="countryArea" className="block text-sm font-medium text-gray-700">
+        <Box sx={{mt:1}}>
+          {/* <label htmlFor="countryArea" className="block text-sm font-medium text-gray-700">
             {t.formatMessage(messages.countryAreaField)}
-          </label>
-          <div className="mt-1">
-            <input
+          </label> */}
+          <Box>
+            <TextField
               type="text"
               id="countryArea"
+              required
+              label={t.formatMessage(messages.countryAreaField)}
               className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-base"
               spellCheck={false}
               {...registerAddress("countryArea", { required: true })}
             />
             {!!errorsAddress.countryArea && <p>{errorsAddress.countryArea.message}</p>}
-          </div>
-        </div>
+          </Box>
+        </Box>
 
         {/* <div className="col-span-full sm:col-span-4">
         <label
@@ -188,14 +226,16 @@ export function AddressForm({
         </div>
       </div> */}
 
-        <div className="col-span-full sm:col-span-6">
-          <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
+        <Box sx={{mt:1}}>
+          {/* <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
             {t.formatMessage(messages.postalCodeField)}
-          </label>
-          <div className="mt-1">
-            <input
+          </label> */}
+          <Box className="mt-1">
+            <TextField
               type="text"
               id="postal-code"
+              required
+              label={t.formatMessage(messages.postalCodeField)}
               autoComplete="postal-code"
               className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-base"
               spellCheck={false}
@@ -204,15 +244,15 @@ export function AddressForm({
               })}
             />
             {!!errorsAddress.postalCode && <p>{errorsAddress.postalCode.message}</p>}
-          </div>
-        </div>
+          </Box>
+        </Box>
 
-        <div className="col-span-full">
-          <button type="button" className="btn-checkout-section" onClick={onAddressFormSubmit}>
+        <Box sx={{mt:2}}>
+          <Button variant="contained" onClick={onAddressFormSubmit}>
             {t.formatMessage(messages.saveButton)}
-          </button>
-        </div>
-      </div>
+          </Button>
+        </Box>
+      </Box>
     </form>
   );
 }

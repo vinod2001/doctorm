@@ -9,6 +9,12 @@ import { EmailSection } from "./EmailSection";
 import { PaymentSection } from "./payments/PaymentSection";
 import { ShippingAddressSection } from "./ShippingAddressSection";
 import { ShippingMethodSection } from "./ShippingMethodSection";
+import {
+  Box, Button,
+  Grid, styled,
+} from "@mui/material";
+import Divider from "@mui/material/Divider";
+import { Roboto } from "@next/font/google";
 
 interface CollapsedSections {
   billingAddress: boolean;
@@ -16,6 +22,11 @@ interface CollapsedSections {
   shippingMethod: boolean;
   payment: boolean;
 }
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 const sectionsManager = (checkout?: CheckoutDetailsFragment): CollapsedSections => {
   // Will hide sections which cannot be set yet during the checkout
@@ -54,26 +65,33 @@ export function CheckoutForm({ locale }) {
   const collapsedSections = sectionsManager(checkout);
 
   return (
-    <section className="flex flex-auto flex-col overflow-y-auto px-4 pt-4 space-y-4 pb-4">
-      <div className="checkout-section-container">
+    <section className={roboto.className}>
+      <Box sx={{mb:2}}>
         <EmailSection checkout={checkout} locale={locale} />
-      </div>
-      <div className="checkout-section-container">
+      </Box>
+      <Divider/>
+      <Box sx={{mb:2}}>
         <BillingAddressSection active={!collapsedSections.billingAddress} checkout={checkout} locale={locale} />
-      </div>
+      </Box>
+      <Divider/>
       {checkout.isShippingRequired && (
-        <div className="checkout-section-container">
+        <Box sx={{mb:2}}>
           <ShippingAddressSection active={!collapsedSections.shippingAddress} checkout={checkout} locale={locale} />
-        </div>
+        </Box>
       )}
-      {checkout.isShippingRequired && (
-        <div className="checkout-section-container">
+      <Divider/>
+      {/* {checkout.isShippingRequired && (
+        <Box sx={{mb:2}}>
           <ShippingMethodSection active={!collapsedSections.shippingMethod} checkout={checkout} locale={locale} />
-        </div>
-      )}
-      <div className="checkout-section-container">
+        </Box>
+      )} */}
+      <Box sx={{mb:2}}>
+          <ShippingMethodSection active={!collapsedSections.shippingMethod} checkout={checkout} locale={locale} />
+        </Box>
+      <Divider/>
+      <Box className="checkout-section-container">
         <PaymentSection active={!collapsedSections.payment} checkout={checkout} locale={locale} />
-      </div>
+      </Box>
     </section>
   );
 }

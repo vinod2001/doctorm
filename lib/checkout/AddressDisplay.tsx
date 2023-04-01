@@ -1,23 +1,26 @@
 import { AddressDetailsFragment } from "@/saleor/api";
-
+import {
+  Box, Button,
+  Grid, styled,
+} from "@mui/material";
 export interface AddressDisplayProps {
   address: AddressDetailsFragment;
 }
 
 export function AddressDisplay({ address }: AddressDisplayProps) {
   return (
-    <div className="text-base">
-      <address className="not-italic mb-2">
-        <p>
+    <Box className="text-base">
+      <address  style={{fontSize:'16px',fontStyle:'normal'}}>
+        <Box sx={{mb:1, }}>
           {address?.firstName} {address?.lastName}
-        </p>
-        <p>{address?.streetAddress1}</p>
-        <p>
-          {address?.postalCode} {address?.city}, {address?.country.country}
-        </p>
+        </Box>
+        <Box sx={{mb:1}}>{address?.streetAddress1}</Box>
+        <Box sx={{mb:1}}>
+          {address?.postalCode} {address?.city}, <br/>{address?.country.country}
+        </Box>
       </address>
-      <div>{address?.phone}</div>
-    </div>
+      <Box>{address?.phone}</Box>
+    </Box>
   );
 }
 
