@@ -51,6 +51,14 @@ const mainHeader = {
   fontFamily: "Acumin Pro",
 };
 
+const searchWrapper = {
+  backgroundColor: "#F7961C",
+  width: "100%",
+  direction: "column",
+  color: "#F7961C",
+  fontFamily: "Acumin Pro",
+};
+
 const iconColor = {
   color: "#3A3A3A",
   fontSize: "26px",
@@ -211,8 +219,17 @@ export function Navbar(props) {
                 <Box>Find a Store</Box>
               </Box>
               <Box>
-                {!searchActive && <Box sx={HeaderItemInnerWrapper}><SearchOutlinedIcon sx={iconColor} onClick={handleSearchClick} /> Search</Box>}
-                {searchActive && <Box sx={HeaderItemInnerWrapper}> <CloseIcon sx={iconColor} onClick={handleSearchClose}> Close</CloseIcon> </Box>}
+                {!searchActive && (
+                  <>
+                  <Box sx={HeaderItemInnerWrapper}>
+                    <SearchOutlinedIcon sx={iconColor} onClick={handleSearchClick} /> 
+                  </Box><Box>Search</Box>
+                  </>)}
+                  
+                {searchActive && (
+                  <Box sx={HeaderItemInnerWrapper}> 
+                    <CloseIcon sx={iconColor} onClick={handleSearchClose}/> 
+                  </Box>)}
               </Box>
             </Box>
 
@@ -268,7 +285,7 @@ export function Navbar(props) {
                 },
               }}
             >
-              {searchActive && <Search></Search>}
+             
               {pages.map((page) => (
                 <Button
                   key={page}
@@ -289,6 +306,13 @@ export function Navbar(props) {
             </Box>
           </Toolbar>
         </Grid>
+
+        {searchActive && (
+        <Grid item xs={12} sx={searchWrapper}>
+          <Box>
+            <Search/>
+          </Box>
+        </Grid>)}
       </Grid>
     </AppBar>
   );
