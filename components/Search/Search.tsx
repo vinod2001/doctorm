@@ -9,6 +9,7 @@ import {
 import Link from 'next/link';
 import HitDetails from './HitDetails';
 import { Badge, Box, Grid, Theme } from "@mui/material";
+import SearchIcon from '@mui/icons-material/Search';
 import { Roboto } from "@next/font/google";
 
 const roboto = Roboto({
@@ -27,8 +28,9 @@ const searchList={
     outline: 'none',
     fontFamily: 'sans-serif',
     fontSize: '14px',
-    border:'none',
     background:'none',
+    width:'100%',
+    border:'none',
   },
   '& button': {
     width: '32px',
@@ -117,13 +119,17 @@ export default function Search() {
   return (
     <Box className="ais-InstantSearch">
       <InstantSearch indexName="saleor_test.default-channel.USD.products" searchClient={searchClient}>
-        <Box className="right-panel" sx={searchList}>
-          <Box sx={{background:'#F7961C',p:5}}>
-          <SearchBox showLoadingIndicator={false} placeholder="text" defaultRefinement="" />
+
+          <Box className="right-panel" sx={searchList}>
+            <Box sx={{background:'#F7961C',pl:6,pr:5,pt:5,pb:5, display:'flex'}}>
+              <Box><SearchIcon sx={{color:'#343434'}}/></Box>
+              <Box sx={{ml:3,width:'100%'}}>
+              <SearchBox showLoadingIndicator={false} placeholder="text" defaultRefinement="" />
+              </Box>
+            </Box>
+            <Box>
+              <Hits hitComponent={Hit}/></Box>
           </Box>
-            <Hits hitComponent={Hit}/>
-        </Box>
-        
       </InstantSearch>
     </Box>
   );
