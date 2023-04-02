@@ -64,6 +64,8 @@ const searchList={
       background:'#fff',
       textAlign:'center',
       cursor:'pointer',
+      fontSize:'20px',
+      fontFamily: 'sans-serif',
       '&:hover':{
         border:'1px solid #F7961C'
       },
@@ -86,7 +88,7 @@ const searchList={
           overflow: 'hidden',
           padding: '5px',
           color: '#343434',
-          fontSize:'16px',
+          fontSize:'20px',
         }
       },
       
@@ -113,9 +115,15 @@ function HitComponent({ Hit, handleSearchClose }: HitProps) {
         <span>
         <img src={hit.thumbnail} width="100" height="50"></img>
         </span>
-        <Highlight hit={hit} attribute="name" />
+        <span>
+          {hit.productName}
+        </span>
+        {/* <span>
+          {hit.grossPrice}
+        </span> */}
+        {/* <Highlight hit={hit} attribute="name" /> */}
       </Link>
-      <span className="Hit-price">${hit.price}</span>
+      <span className="Hit-price">${hit.grossPrice}</span>
     </Box>
     </>
   );
