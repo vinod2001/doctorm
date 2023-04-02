@@ -27126,6 +27126,10 @@ export type OrderDetailsQueryVariables = Exact<{
   token: Scalars["UUID"];
 }>;
 
+export type OrderDetailsQueryByIdVariables = Exact<{
+  id: Scalars["ID"];
+}>;
+
 export type OrderDetailsQuery = {
   __typename?: "Query";
   orderByToken?: {
@@ -27151,6 +27155,68 @@ export type OrderDetailsQuery = {
       };
     }>;
     total: {
+      __typename?: "TaxedMoney";
+      gross: { __typename?: "Money"; currency: string; amount: number };
+    };
+  } | null;
+  order?: {
+    __typename?: "Order";
+    id: string;
+    number: string;
+    created: string;
+    statusDisplay: string;
+    shippingAddress?: {
+      __typename?: "Address";
+      id: string;
+      phone?: string | null;
+      firstName: string;
+      lastName: string;
+      streetAddress1: string;
+      city: string;
+      postalCode: string;
+      isDefaultBillingAddress?: boolean | null;
+      isDefaultShippingAddress?: boolean | null;
+      country: { __typename?: "CountryDisplay"; code: string; country: string };
+    } | null;
+    billingAddress?: {
+      __typename?: "Address";
+      id: string;
+      phone?: string | null;
+      firstName: string;
+      lastName: string;
+      streetAddress1: string;
+      city: string;
+      postalCode: string;
+      isDefaultBillingAddress?: boolean | null;
+      isDefaultShippingAddress?: boolean | null;
+      country: { __typename?: "CountryDisplay"; code: string; country: string };
+    } | null;
+    subtotal: {
+      __typename?: "TaxedMoney";
+      net: { __typename?: "Money"; currency: string; amount: number };
+      tax: { __typename?: "Money"; currency: string; amount: number };
+    };
+    total: {
+      __typename?: "TaxedMoney";
+      gross: { __typename?: "Money"; currency: string; amount: number };
+    };
+    lines: Array<{
+      __typename?: "OrderLine";
+      id: string;
+      productName: string;
+      variantName: string;
+      quantity: number;
+      thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+      unitPrice: {
+        __typename?: "TaxedMoney";
+        gross: { __typename?: "Money"; currency: string; amount: number };
+      };
+      totalPrice: {
+        __typename?: "TaxedMoney";
+        gross: { __typename?: "Money"; currency: string; amount: number };
+      };
+    }>;
+    shippingPrice: {
       __typename?: "TaxedMoney";
       gross: { __typename?: "Money"; currency: string; amount: number };
     };
@@ -29739,6 +29805,62 @@ export const OrderDetailsQueryDocument = gql`
   }
   ${PriceFragmentDoc}
   ${ImageFragmentDoc}
+`;
+
+export const OrderDetailsQueryByIdDocument = gql`
+  query OrderDetailsQuery($id: ID!) {
+    order(id: $id) {
+      id
+      status
+      number
+      shippingAddress {
+        ...AddressDetailsFragment
+      }
+      billingAddress {
+        ...AddressDetailsFragment
+      }
+      subtotal {
+        net {
+          ...PriceFragment
+        }
+        tax {
+          ...PriceFragment
+        }
+      }
+      total {
+        gross {
+          ...PriceFragment
+        }
+      }
+      lines {
+        id
+        productName
+        variantName
+        quantity
+        thumbnail {
+          url
+          alt
+        }
+        unitPrice {
+          gross {
+            ...PriceFragment
+          }
+        }
+        totalPrice {
+          gross {
+            ...PriceFragment
+          }
+        }
+      }
+      shippingPrice {
+        gross {
+          ...PriceFragment
+        }
+      }
+    }
+  }
+  ${AddressDetailsFragmentDoc}
+  ${PriceFragmentDoc}
 `;
 
 /**
