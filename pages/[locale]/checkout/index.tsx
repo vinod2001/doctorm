@@ -32,7 +32,7 @@ function CheckoutPage() {
     if (!loading && (!checkout || !checkout.lines?.length)) {
       void router.push(paths.$url());
     }
-  });
+  }, []);
 
   const isCheckoutLoading = loading || typeof window === "undefined";
   if (isCheckoutLoading) {
