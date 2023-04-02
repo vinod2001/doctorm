@@ -232,7 +232,8 @@ export function Navbar(props) {
                   
                 {searchActive && (
                   <Box sx={HeaderItemInnerWrapper}> 
-                    <CloseIcon sx={iconColor} onClick={handleSearchClose}/> 
+                    <CloseIcon sx={{color: "#3A3A3A",
+  fontSize: "26px",width:'53px'}} onClick={handleSearchClose}/> 
                   </Box>)}
               </Box>
             </Box>
