@@ -246,7 +246,7 @@ function ProductDetails({ pdpLayout, product }) {
         scroll: false,
       }
     );
-  }, []);
+  }, [product, productVariant]);
 
   const selectedVariantID = getSelectedVariantID(product, router);
   const selectedVariant =

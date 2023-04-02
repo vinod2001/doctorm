@@ -1,15 +1,10 @@
 import { HomepageBlock, Layout } from "@/components";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import client from "@/lib/sanity/client";
 import { ApolloQueryResult } from "@apollo/client";
 import { serverApolloClient } from "@/lib/auth/useAuthenticatedApolloClient";
 import { contextToRegionQuery } from "@/lib/regions";
-import {
-  GetStaticPaths,
-  GetStaticPropsContext,
-  InferGetStaticPropsType,
-} from "next";
 import { InferGetServerSidePropsType } from "next";
 import { GetServerSideProps } from "next";
 import {

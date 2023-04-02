@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React from "react";
-import { Badge, Box, Grid, Theme } from "@mui/material";
+import { Badge, Box, Grid } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -13,7 +13,6 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { Roboto } from "@next/font/google";
-import client from "@/lib/sanity/client";
 import useScrollDirection from "../../lib/useScrollDirection";
 import { CheckoutLineDetailsFragment } from "@/saleor/api";
 import { useCheckout } from "@/lib/providers/CheckoutProvider";
