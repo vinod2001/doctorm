@@ -19,6 +19,11 @@ const roboto = Roboto({
 
 const client = algoliasearch('YXKWT0FKQM', '11d7ffaf5f69d91c4b7945038aeaef79');
 
+const searchListWrapper = {
+  position:'absolute',
+  zIndex:'999',
+  width:'100%'
+}
 const searchList={
   background:'#f3f3f3',
   '& input': {
@@ -58,6 +63,7 @@ const searchList={
       borderRadius:'5px',
       background:'#fff',
       textAlign:'center',
+      cursor:'pointer',
       '&:hover':{
         border:'1px solid #F7961C'
       },
@@ -98,11 +104,12 @@ const searchClient = {
   },
 };
 
-function Hit({ hit }: HitProps) {
+function HitComponent({ Hit, handleSearchClose }: HitProps) {
+  const {hit} = Hit
   return (
     <>
     <Box sx={{background: '#fff'}}>
-      <Link  href={"/en-US/products/" + hit.slug} passHref  className={roboto.className}>
+      <Link  href={"/en-US/products/" + hit.slug} passHref  className={roboto.className} onClick={handleSearchClose}>
         <span>
         <img src={hit.thumbnail} width="100" height="50"></img>
         </span>
@@ -114,21 +121,21 @@ function Hit({ hit }: HitProps) {
   );
 }
 
-export default function Search() {
+export default function Search({handleSearchClose}) {
 
   return (
-    <Box className="ais-InstantSearch">
+    <Box sx={searchListWrapper} className="google">
       <InstantSearch indexName="saleor_test.default-channel.USD.products" searchClient={searchClient}>
 
           <Box className="right-panel" sx={searchList}>
             <Box sx={{background:'#F7961C',pl:6,pr:5,pt:5,pb:5, display:'flex'}}>
               <Box><SearchIcon sx={{color:'#343434'}}/></Box>
               <Box sx={{ml:3,width:'100%'}}>
-              <SearchBox showLoadingIndicator={false} placeholder="text" defaultRefinement="" />
+              <SearchBox showLoadingIndicator={false} placeholder="text" defaultRefinement=""  autoFocus={true}/>
               </Box>
             </Box>
-            <Box>
-              <Hits hitComponent={Hit}/></Box>
+            <Box >
+              <Hits hitComponent={Hit => <HitComponent Hit={Hit} handleSearchClose={handleSearchClose}/>}/></Box>
           </Box>
       </InstantSearch>
     </Box>

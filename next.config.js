@@ -8,6 +8,7 @@ const apiURL = new URL("https://doctorm-poc-store.eu.saleor.cloud/graphql/");
 
 module.exports = withBundleAnalyzer({
   reactStrictMode: true,
+  concurrentFeatures: true,
   swcMinify: true,
   images: {
     domains: [apiURL.hostname],

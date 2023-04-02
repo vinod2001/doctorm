@@ -1,4 +1,5 @@
 // @ts-nocheck
+import React, { Suspense } from "react";
 import { Footer } from "../Footer";
 import { Navbar } from "../Navbar";
 
@@ -11,7 +12,9 @@ export function Layout({ children }: LayoutProps) {
   return (
     <>
       <Navbar rootCategories={rootCategories} />
-      <div>{children}</div>
+      <Suspense fallback={<h1>Loading profile...</h1>}>
+        <div>{children}</div>
+      </Suspense>
       <Footer />
     </>
   );

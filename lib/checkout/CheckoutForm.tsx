@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import { Roboto } from "@next/font/google";
+import OrderSummary from "./OrderSummary";
 
 interface CollapsedSections {
   billingAddress: boolean;
@@ -90,8 +91,12 @@ export function CheckoutForm({ locale }) {
           <ShippingMethodSection active={!collapsedSections.shippingMethod} checkout={checkout} locale={locale} />
         </Box>
       <Divider/>
-      <Box className="checkout-section-container">
+      <Box sx={{mb:2}}>
         <PaymentSection active={!collapsedSections.payment} checkout={checkout} locale={locale} />
+      </Box>
+      <Divider/>
+      <Box sx={{mt:2}}>
+        <OrderSummary/>
       </Box>
     </section>
   );

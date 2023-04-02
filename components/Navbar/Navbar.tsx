@@ -115,6 +115,7 @@ export function Navbar(props) {
     false
   );
 
+
   const saleorApiUrl = API_URI;
   invariant(saleorApiUrl, "Missing NEXT_PUBLIC_API_URI");
   const domain = new URL(saleorApiUrl).hostname;
@@ -221,12 +222,12 @@ export function Navbar(props) {
                 </Box>
                 <Box>Find a Store</Box>
               </Box>
-              <Box>
+              <Box sx={{cursor:'pointer'}}>
                 {!searchActive && (
                   <>
                   <Box sx={HeaderItemInnerWrapper}>
                     <SearchOutlinedIcon sx={iconColor} onClick={handleSearchClick} /> 
-                  </Box><Box>Search</Box>
+                  </Box><Box onClick={handleSearchClick}>Search</Box>
                   </>)}
                   
                 {searchActive && (
@@ -313,7 +314,7 @@ export function Navbar(props) {
         {searchActive && (
         <Grid item xs={12} sx={searchWrapper}>
           <Box>
-            <Search/>
+            <Search handleSearchClose={handleSearchClose}/>
           </Box>
         </Grid>)}
       </Grid>
