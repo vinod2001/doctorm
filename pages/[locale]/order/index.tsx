@@ -1,5 +1,5 @@
 import { Layout } from "@/components";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import Link from "next/link";
 import { usePaths } from "@/lib/paths";
@@ -11,16 +11,11 @@ import {
   RootCategoriesQuery,
   RootCategoriesQueryVariables,
   RootCategoriesDocument,
+  OrderDetailsQuery, OrderDetailsQueryByIdDocument, OrderDetailsQueryByIdVariables
 } from "@/saleor/api";
-import { useRouter } from "next/router";
 
-function OrderConfirmation() {
-
-  const router = useRouter();
-  const { query } = router;
-
-  const { orderId } = query || {};
-
+function OrderConfirmation({orderDetails}) {
+  console.log(orderDetails, "orderDetails")
   const paths = usePaths();
   return <div>
     <div className="font-semibold text-3xl">Your order is completed!</div>
@@ -54,10 +49,22 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const rootCategories = response.data.categories.edges.map((edge) => ({
     ...edge.node,
   }));
-
+  const { orderId } = context.query || {};
+  const orderDetailsResponse: ApolloQueryResult<OrderDetailsQuery> =
+    await serverApolloClient.query<
+      OrderDetailsQuery,
+      OrderDetailsQueryByIdVariables
+    >({
+      query: OrderDetailsQueryByIdDocument,
+      fetchPolicy: "no-cache",
+      variables: {
+        id: orderId.toString()
+      },
+    });
   return {
     props: {
       rootCategories: rootCategories,
+      orderDetails: orderDetailsResponse.data.order,
     },
   };
 };
