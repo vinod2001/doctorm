@@ -164,17 +164,6 @@ export function Navbar(props) {
     setSearchActive(false);
   };
 
-
-  React.useEffect(() => {
-    client
-      .fetch(
-        `*[_type == "header"]{
-      title,
-    }`
-      )
-      .then((data) => {});
-  },[]);
-
   const counter =
     checkout?.lines?.reduce(
       (amount: number, line?: CheckoutLineDetailsFragment | null) =>
