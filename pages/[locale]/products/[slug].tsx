@@ -638,15 +638,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       notFound: true,
     };
   }
-
+  const { locale, channel } = contextToRegionQuery(context);
   const response: ApolloQueryResult<RootCategoriesQuery> =
     await serverApolloClient.query<
       RootCategoriesQuery,
       RootCategoriesQueryVariables
     >({
       query: RootCategoriesDocument,
+      fetchPolicy: "no-cache",
       variables: {
-        locale: contextToRegionQuery(context).locale,
+        locale,
       },
     });
   const rootCategories = response.data.categories.edges.map((edge) => ({
@@ -664,12 +665,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       fetchPolicy: "no-cache",
       variables: {
         slug: productSlug,
-        ...contextToRegionQuery(context),
+        locale,
+        channel
       },
     });
   const slug = "pdp";
   const pdpLayout = await client.fetch(PDP_PAGE_SANITY_QUERY, { slug });
   const product = productDetails.data.product;
+  if (!product) {
+    return {
+      props: {},
+      notFound: true,
+    };
+  }
   return {
     props: {
       rootCategories: rootCategories,
