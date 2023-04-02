@@ -669,12 +669,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     });
   const slug = "pdp";
   const pdpLayout = await client.fetch(PDP_PAGE_SANITY_QUERY, { slug });
-
+  const product = productDetails.data.product;
   return {
     props: {
       rootCategories: rootCategories,
       pdpLayout: pdpLayout,
-      product: productDetails.data.product,
+      product: product,
     },
   };
 };
