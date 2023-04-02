@@ -57,7 +57,9 @@ function StripeCardForm({ checkout }: StripeCardFormInterface) {
       return;
     }
 
-    const cardElement = elements.getElement(CardElement);
+    const cardElement = elements.getElement(CardNumberElement);
+    // TODO if using CardElement uncomment following
+    // const cardElement =elements.getElement(CardElement);
     if (!cardElement) {
       console.error("Card element not initialized");
       setIsPaymentProcessing(false);
@@ -196,8 +198,6 @@ function StripeCardForm({ checkout }: StripeCardFormInterface) {
           <CardCvcElement/>
           </Box>
         </Box>
-        
-        
       </Box>
       <CompleteCheckoutButton
         isProcessing={isPaymentProcessing}
