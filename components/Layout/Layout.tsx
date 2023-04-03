@@ -12,7 +12,7 @@ export function Layout({ children }: LayoutProps) {
   return (
     <>
       <Navbar rootCategories={rootCategories} />
-      <Suspense fallback={<h1>Loading profile...</h1>}>
+      <Suspense fallback={<h1>Loading...</h1>}>
         <div>{children}</div>
       </Suspense>
       <Footer />
