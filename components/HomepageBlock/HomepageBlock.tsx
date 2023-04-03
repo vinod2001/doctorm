@@ -22,7 +22,7 @@ export function HomepageBlock({ homePageContent }) {
     translations: {
       contents
     }
-  } = homePageContent;
+  } = homePageContent || { seoDetails: {}, translations: {} };
 
   return (
     <Grid>
