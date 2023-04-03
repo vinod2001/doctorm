@@ -15,7 +15,7 @@ import createSafeContext from "@/lib/useSafeContext";
 import { formatAsMoney } from "@/lib/util";
 import { LanguageCodeEnum, PriceFragment } from "@/saleor/api";
 
-import * as sourceOfTruth from "../../locale/en-US.json";
+import * as sourceOfTruth from "../../locale/en-AE.json";
 import * as ae from "../../locale/ar-AE.json";
 import { useApolloClient } from "@apollo/client";
 
@@ -38,7 +38,7 @@ export type LocaleMessages = typeof sourceOfTruth;
 export type LocaleKey = keyof LocaleMessages;
 export function importMessages(locale: string): LocaleMessages {
   switch (locale) {
-    case "en-US":
+    case "en-AE":
       return sourceOfTruth;
     case "pl-PL":
       return pl;

@@ -1,4 +1,12 @@
-import { CardElement, CardNumberElement, CardExpiryElement, CardCvcElement, Elements, useElements, useStripe } from "@stripe/react-stripe-js";
+import {
+  CardElement,
+  CardNumberElement,
+  CardExpiryElement,
+  CardCvcElement,
+  Elements,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js/pure";
 import { useRouter } from "next/router";
 import React, { FormEvent, useState } from "react";
@@ -17,13 +25,10 @@ import { formatPrice } from "@/lib/util";
 import { CompleteCheckoutButton } from "../CompleteCheckoutButton";
 
 export const STRIPE_GATEWAY = "saleor.payments.stripe";
-import {
-  Box, Button,
-  Grid, styled,Card, Typography
-} from "@mui/material";
-import TextField from '@mui/material/TextField';
-import Looks5Icon from '@mui/icons-material/Looks5';
-import {checkoutSectionHeaderActive} from '../EmailSection';
+import { Box, Button, Grid, styled, Card, Typography } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import Looks5Icon from "@mui/icons-material/Looks5";
+import { checkoutSectionHeaderActive } from "../EmailSection";
 
 interface StripeCardFormInterface {
   checkout: CheckoutDetailsFragment;
@@ -40,7 +45,7 @@ function StripeCardForm({ checkout }: StripeCardFormInterface) {
   const paths = usePaths();
   const locale = router.query.locale?.toString();
   const totalPrice = formatPrice(checkout.totalPrice?.gross, locale);
-  const payLabel = `Pay ${totalPrice}`;
+  const payLabel = `${totalPrice}`;
 
   const redirectToOrderDetailsPage = (orderId: string) => {
     resetCheckoutToken();
@@ -72,16 +77,16 @@ function StripeCardForm({ checkout }: StripeCardFormInterface) {
       card: cardElement,
       billing_details: checkout.billingAddress
         ? {
-          email: checkout.email || "",
-          phone: checkout.billingAddress.phone || "",
-          name: `${checkout.billingAddress.firstName} ${checkout.billingAddress.lastName}`,
-          address: {
-            line1: checkout.billingAddress.streetAddress1,
-            city: checkout.billingAddress.city,
-            country: checkout.billingAddress.country.code,
-            postal_code: checkout.billingAddress.postalCode,
-          },
-        }
+            email: checkout.email || "",
+            phone: checkout.billingAddress.phone || "",
+            name: `${checkout.billingAddress.firstName} ${checkout.billingAddress.lastName}`,
+            address: {
+              line1: checkout.billingAddress.streetAddress1,
+              city: checkout.billingAddress.city,
+              country: checkout.billingAddress.country.code,
+              postal_code: checkout.billingAddress.postalCode,
+            },
+          }
         : undefined,
     });
 
@@ -92,16 +97,18 @@ function StripeCardForm({ checkout }: StripeCardFormInterface) {
     }
 
     // Send Stripe payment data to the Saleor
-    const { errors: paymentCreateErrors } = await checkoutPaymentCreateMutation({
-      variables: {
-        checkoutToken: checkout.token,
-        paymentInput: {
-          gateway: "saleor.payments.stripe",
-          amount: checkout.totalPrice?.gross.amount,
-          token: paymentMethodResult.paymentMethod.id
+    const { errors: paymentCreateErrors } = await checkoutPaymentCreateMutation(
+      {
+        variables: {
+          checkoutToken: checkout.token,
+          paymentInput: {
+            gateway: "saleor.payments.stripe",
+            amount: checkout.totalPrice?.gross.amount,
+            token: paymentMethodResult.paymentMethod.id,
+          },
         },
-      },
-    });
+      }
+    );
 
     if (paymentCreateErrors) {
       console.error(paymentCreateErrors);
@@ -110,11 +117,12 @@ function StripeCardForm({ checkout }: StripeCardFormInterface) {
     }
 
     // Try to complete the checkout
-    const { data: completeData, errors: completeErrors } = await checkoutCompleteMutation({
-      variables: {
-        checkoutToken: checkout.token,
-      },
-    });
+    const { data: completeData, errors: completeErrors } =
+      await checkoutCompleteMutation({
+        variables: {
+          checkoutToken: checkout.token,
+        },
+      });
     if (completeErrors) {
       console.error("complete errors:", completeErrors);
       setIsPaymentProcessing(false);
@@ -138,7 +146,10 @@ function StripeCardForm({ checkout }: StripeCardFormInterface) {
       );
 
       if (stripeConfirmationResponse.error) {
-        console.error("Stripe payment confirmation error: ", stripeConfirmationResponse.error);
+        console.error(
+          "Stripe payment confirmation error: ",
+          stripeConfirmationResponse.error
+        );
         setIsPaymentProcessing(false);
         return;
       }
@@ -147,7 +158,7 @@ function StripeCardForm({ checkout }: StripeCardFormInterface) {
       const { data: confirmedCompleteData, errors: confirmedCompleteErrors } =
         await checkoutCompleteMutation({
           variables: {
-            checkoutToken: checkout.token
+            checkoutToken: checkout.token,
           },
         });
 
@@ -173,29 +184,44 @@ function StripeCardForm({ checkout }: StripeCardFormInterface) {
   return (
     <form method="post" onSubmit={handleSubmit}>
       {/* <CardElement /> */}
-      <Box sx={{width:'300px'}}>
+      <Box sx={{ width: "300px" }}>
         <Box>
-          <Typography>
-          Card Number*
-          </Typography>
-          <Box sx={{border:'0px solid #000', borderRadius:'5px',p:1, background:'#d4d4d4'}}>
-          <CardNumberElement />
+          <Typography>Card Number*</Typography>
+          <Box
+            sx={{
+              border: "0px solid #000",
+              borderRadius: "5px",
+              p: 1,
+              background: "#d4d4d4",
+            }}
+          >
+            <CardNumberElement />
           </Box>
         </Box>
         <Box>
-          <Typography>
-          Expiry Date*
-          </Typography>
-          <Box sx={{border:'0px solid #000', borderRadius:'5px',p:1, background:'#d4d4d4'}}>
-          <CardExpiryElement/>
+          <Typography>Expiry Date*</Typography>
+          <Box
+            sx={{
+              border: "0px solid #000",
+              borderRadius: "5px",
+              p: 1,
+              background: "#d4d4d4",
+            }}
+          >
+            <CardExpiryElement />
           </Box>
         </Box>
         <Box>
-          <Typography>
-          CVC*
-          </Typography>
-          <Box sx={{border:'0px solid #000', borderRadius:'5px',p:1, background:'#d4d4d4'}}>
-          <CardCvcElement/>
+          <Typography>CVC*</Typography>
+          <Box
+            sx={{
+              border: "0px solid #000",
+              borderRadius: "5px",
+              p: 1,
+              background: "#d4d4d4",
+            }}
+          >
+            <CardCvcElement />
           </Box>
         </Box>
       </Box>
@@ -214,11 +240,16 @@ interface StripeCreditCardSectionInterface {
   locale: LanguageCodeEnum;
 }
 
-export function StripeCreditCardSection({ checkout, locale }: StripeCreditCardSectionInterface) {
+export function StripeCreditCardSection({
+  checkout,
+  locale,
+}: StripeCreditCardSectionInterface) {
   const stripeGateway = checkout.availablePaymentGateways.find(
     (gateway) => gateway.id === STRIPE_GATEWAY
   );
-  const stripeApiKey = stripeGateway?.config.find((conf) => conf.field === "api_key")?.value;
+  const stripeApiKey = stripeGateway?.config.find(
+    (conf) => conf.field === "api_key"
+  )?.value;
 
   if (!stripeApiKey) {
     return (

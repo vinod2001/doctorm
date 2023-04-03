@@ -49,6 +49,11 @@ import { useUser } from "@/lib/useUser";
 import { getSelectedVariantID } from "@/lib/product";
 import { VariantSelector } from "@/components/product/VariantSelector";
 import { useParams } from "react-router-dom";
+import {
+  getSunglassCategoryMesurementDetails,
+  getProductDetails,
+  getProductFeatures,
+} from "@/lib/transformer/productDetailPage";
 
 export type OptionalQuery = {
   variant?: string;
@@ -173,6 +178,16 @@ function ProductDetails({ pdpLayout, product }) {
   const { name, description, attributes, category, variants } = product;
   let productDescription = JSON.parse(description);
   const productAttributesMap = new Map();
+
+  const [sunglassMeasurementDetails, setSunglassMeasurementDetails] = useState(
+    getSunglassCategoryMesurementDetails(attributes)
+  );
+
+  const [pdpDetails, setPdpDetails] = useState(getProductDetails(attributes));
+
+  const [productFeature, setProductFeature] = useState(
+    getProductFeatures(attributes)
+  );
 
   const [productRequiredDetails, setProductRequiredDetails] = useState({
     variant: {},
@@ -608,7 +623,8 @@ function ProductDetails({ pdpLayout, product }) {
                           fontWeight: "bold",
                         }}
                       >
-                        {measurementsDes[index]}
+                        {sunglassMeasurementDetails &&
+                          sunglassMeasurementDetails[index] + " mm"}
                       </Box>
                     </Box>
                   </Box>
@@ -616,7 +632,7 @@ function ProductDetails({ pdpLayout, product }) {
               ))}
             </Box>
           </Grid>
-          <PdpDetail />
+          <PdpDetail pdpDetails={pdpDetails} productFeature={productFeature} />
         </Grid>
       </Grid>
       {zoomModalDetails.display && (
@@ -666,7 +682,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       variables: {
         slug: productSlug,
         locale,
-        channel
+        channel,
       },
     });
   const slug = "pdp";

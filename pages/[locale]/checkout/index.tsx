@@ -14,10 +14,8 @@ import { usePaths } from "@/lib/paths";
 import { useCheckout } from "@/lib/providers/CheckoutProvider";
 import CheckoutSidebar from "@/lib/checkout/sidebar/CheckoutSidebar";
 import { useRegions } from "@/components/RegionsProvider";
-import {
-  Box,
-  Grid
-} from "@mui/material";
+import { Box, Grid } from "@mui/material";
+import CheckoutLayout from "@/components/CheckoutLayout/Layout";
 
 function CheckoutPage() {
   const router = useRouter();
@@ -48,16 +46,16 @@ function CheckoutPage() {
   }
 
   return (
-    <Grid item sx={{ border: '0px solid #f6f6f6', color: '#343434' }}>
-      <Grid item xs={12} >
+    <Grid item sx={{ border: "0px solid #f6f6f6", color: "#343434" }}>
+      <Grid item xs={12}>
         <Grid item xs={8} sx={{ border: "0px solid" }}>
-          <Box sx={{ m: 5, backgroundColor: "#f6f6f6", p: 3, }}>
+          <Box sx={{ m: 5, backgroundColor: "#f6f6f6", p: 3 }}>
             <CheckoutForm locale={locale} />
           </Box>
         </Grid>
         <Grid item xs={4} sx={{ border: "0px solid" }}>
-          <Box sx={{ m: 5, backgroundColor: "#f6f6f6", p: 3, }}>
-            <CheckoutSidebar checkout={checkout} locale={locale}/>
+          <Box sx={{ m: 5, backgroundColor: "#f6f6f6", p: 3 }}>
+            <CheckoutSidebar checkout={checkout} locale={locale} />
           </Box>
         </Grid>
       </Grid>
@@ -93,11 +91,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     props: {
       rootCategories: rootCategories,
-      locale
+      locale,
     },
   };
 };
 
 CheckoutPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
+  return <CheckoutLayout>{page}</CheckoutLayout>;
 };

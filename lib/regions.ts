@@ -4,16 +4,16 @@ import { LanguageCodeEnum } from "../saleor/api";
 
 export const LOCALES = [
   {
-    slug: "en-US",
-    code: "EN_US" as LanguageCodeEnum,
-    name: "American English",
+    slug: "en-AE",
+    code: "EN_AE" as LanguageCodeEnum,
+    name: "UAE English",
   },
   { slug: "pl-PL", code: "PL_PL" as LanguageCodeEnum, name: "Polski" },
   { slug: "fr-FR", code: "FR_FR" as LanguageCodeEnum, name: "Français" },
   { slug: "vi-VN", code: "VI_VN" as LanguageCodeEnum, name: "Việt Nam" },
   { slug: "ar-AE", code: "AR_AE" as LanguageCodeEnum, name: "العربية" },
 ];
-export const DEFAULT_LOCALE = "en-US";
+export const DEFAULT_LOCALE = "en-AE";
 
 export const CHANNEL_SLUG_KEY = "channelSlug";
 
@@ -24,9 +24,9 @@ export interface Channel {
 }
 
 export const DEFAULT_CHANNEL: Channel = {
-  slug: "default-channel",
-  name: "United States Dollar",
-  currencyCode: "USD",
+  slug: "web-uae",
+  name: "الريال السعودي",
+  currencyCode: "AED",
 };
 
 export const CHANNELS: Channel[] = [
@@ -77,7 +77,7 @@ export const localeToEnum = (localeSlug: string): LanguageCodeEnum => {
   if (chosenLocale) {
     return chosenLocale;
   }
-  return LOCALES.find(({ slug }) => slug === DEFAULT_LOCALE)?.code || "EN_US";
+  return LOCALES.find(({ slug }) => slug === DEFAULT_LOCALE)?.code || "EN_AE";
 };
 
 export const contextToRegionQuery = (context: GetStaticPropsContext) => ({

@@ -57,7 +57,7 @@ const pdpDetailsFeatureContent = {
   fontSize: "20px",
 };
 
-function PdpDetail() {
+function PdpDetail({ pdpDetails, productFeature }) {
   const [isPdetail, setIsPdetail] = React.useState(true);
   const [isFeature, setIsFeature] = React.useState(false);
   const handleClick = (val) => {
@@ -95,11 +95,11 @@ function PdpDetail() {
                   <tbody>
                     <tr>
                       <td>Material</td>
-                      <td>Metal</td>
+                      <td>{pdpDetails.Material}</td>
                     </tr>
                     <tr>
                       <td>Shape</td>
-                      <td>Aviator</td>
+                      <td>{pdpDetails.Shape}</td>
                     </tr>
                     <tr>
                       <td>Size</td>
@@ -111,19 +111,19 @@ function PdpDetail() {
                     </tr>
                     <tr>
                       <td>Model</td>
-                      <td>3025</td>
+                      <td>{pdpDetails.Model}</td>
                     </tr>
                     <tr>
                       <td>Color Code</td>
-                      <td>2140</td>
+                      <td>{pdpDetails["Color Code"]}</td>
                     </tr>
                     <tr>
                       <td>Product</td>
-                      <td>21005002</td>
+                      <td>{pdpDetails.Product}</td>
                     </tr>
                     <tr>
                       <td>Brand</td>
-                      <td>Ray-Ban</td>
+                      <td>{pdpDetails.Brand}</td>
                     </tr>
                   </tbody>
                 </table>

@@ -13,13 +13,10 @@ import {
 import { messages } from "../i18n";
 import { ShippingMethodDisplay } from "./ShippingMethodDisplay";
 import { ShippingMethodOption } from "./ShippingMethodOption";
-import Looks4Icon from '@mui/icons-material/Looks4';
-import {
-  Box, Button,
-  Grid, styled,Card
-} from "@mui/material";
-import TextField from '@mui/material/TextField';
-import {checkoutSectionHeaderActive} from './EmailSection';
+import LooksTwoIcon from "@mui/icons-material/LooksTwo";
+import { Box, Button, Grid, styled, Card } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import { checkoutSectionHeaderActive } from "./EmailSection";
 import Typography from "@mui/material/Typography";
 
 export interface ShippingMethodSectionProps {
@@ -28,13 +25,20 @@ export interface ShippingMethodSectionProps {
   locale: LanguageCodeEnum;
 }
 
-export function ShippingMethodSection({ checkout, active, locale }: ShippingMethodSectionProps) {
+export function ShippingMethodSection({
+  checkout,
+  active,
+  locale,
+}: ShippingMethodSectionProps) {
   const t = useIntl();
 
-  const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(checkout.shippingMethod);
+  const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(
+    checkout.shippingMethod
+  );
   const [editing, setEditing] = useState(!checkout.shippingMethod);
 
-  const [checkoutShippingMethodUpdate] = useCheckoutShippingMethodUpdateMutation({});
+  const [checkoutShippingMethodUpdate] =
+    useCheckoutShippingMethodUpdateMutation({});
 
   const handleChange = async (method: ShippingMethod) => {
     const { data } = await checkoutShippingMethodUpdate({
@@ -53,50 +57,71 @@ export function ShippingMethodSection({ checkout, active, locale }: ShippingMeth
     setEditing(false);
   };
 
-  const availableShippingMethods = checkout.availableShippingMethods.filter(notNullable) || [];
+  const availableShippingMethods =
+    checkout.availableShippingMethods.filter(notNullable) || [];
 
   return (
     <>
-      <Box sx={{display:'flex',alignItems:'center', mt:2}}>
-      <Box><Looks4Icon/></Box><Typography sx={checkoutSectionHeaderActive}
-          className={active ? "checkout-section-header-active" : "checkout-section-header-disabled"}
+      <Box sx={{ display: "flex", alignItems: "center", mt: 2 }}>
+        <Box>
+          <LooksTwoIcon />
+        </Box>
+        <Typography
+          sx={checkoutSectionHeaderActive}
+          className={
+            active
+              ? "checkout-section-header-active"
+              : "checkout-section-header-disabled"
+          }
         >
           {t.formatMessage(messages.shippingMethodCardHeader)}
         </Typography>
       </Box>
-      
-      {active &&
-        (
-          <Box>
-        <Card sx={{p:2}}>
-          {editing ? (
-          <RadioGroup value={selectedDeliveryMethod} onChange={handleChange} className="py-8">
-            <Box sx={{cursor:'pointer'}}>
-              {availableShippingMethods.map((method) => {
-                // todo: Investigate why filter did not excluded non existing methods
-                if (!method) {
-                  return null;
-                }
-                return <ShippingMethodOption method={method} key={method.id} locale={locale} />;
-              })}
-            </Box>
-          </RadioGroup>
-        ) : (
-          <section className="flex justify-between items-center mb-4">
-            {!!checkout.shippingMethod && (
-              <ShippingMethodDisplay method={checkout.shippingMethod} />
+
+      {active && (
+        <Box>
+          <Card sx={{ p: 2 }}>
+            {editing ? (
+              <RadioGroup
+                value={selectedDeliveryMethod}
+                onChange={handleChange}
+                className="py-8"
+              >
+                <Box sx={{ cursor: "pointer" }}>
+                  {availableShippingMethods.map((method) => {
+                    // todo: Investigate why filter did not excluded non existing methods
+                    if (!method) {
+                      return null;
+                    }
+                    return (
+                      <ShippingMethodOption
+                        method={method}
+                        key={method.id}
+                        locale={locale}
+                      />
+                    );
+                  })}
+                </Box>
+              </RadioGroup>
+            ) : (
+              <section className="flex justify-between items-center mb-4">
+                {!!checkout.shippingMethod && (
+                  <ShippingMethodDisplay method={checkout.shippingMethod} />
+                )}
+                <div className="flex justify-between items-center">
+                  <Button
+                    variant="contained"
+                    sx={{ mt: 1 }}
+                    onClick={() => setEditing(true)}
+                  >
+                    {t.formatMessage(messages.changeButton)}
+                  </Button>
+                </div>
+              </section>
             )}
-            <div className="flex justify-between items-center">
-              <Button variant="contained" sx={{mt:1}} onClick={() => setEditing(true)}>
-                {t.formatMessage(messages.changeButton)}
-              </Button>
-            </div>
-          </section>
-        )}
-        </Card>
+          </Card>
         </Box>
-        )}
-        
+      )}
     </>
   );
 }

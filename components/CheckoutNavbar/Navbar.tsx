@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React from "react";
-import { Badge, Box, Grid } from "@mui/material";
+import { Badge, Box, Grid, Theme } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -13,6 +13,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { Roboto } from "@next/font/google";
+import client from "@/lib/sanity/client";
 import useScrollDirection from "../../lib/useScrollDirection";
 import { CheckoutLineDetailsFragment } from "@/saleor/api";
 import { useCheckout } from "@/lib/providers/CheckoutProvider";
@@ -50,14 +51,6 @@ const mainHeader = {
   fontFamily: "Acumin Pro",
 };
 
-const searchWrapper = {
-  backgroundColor: "#F7961C",
-  width: "100%",
-  direction: "column",
-  color: "#F7961C",
-  fontFamily: "Acumin Pro",
-};
-
 const iconColor = {
   color: "#3A3A3A",
   fontSize: "26px",
@@ -83,9 +76,6 @@ const HeaderItemInnerWrapper = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  "& .MuiBadge-badge": {
-    background: "#343434",
-  },
 };
 
 const HeaderitemWrapperWidth = {
@@ -102,7 +92,6 @@ const clsHeader = {
 
 export function Navbar(props) {
   const { currentLocale, currentChannel } = useRegions();
-  const rootCategories = props.rootCategories;
   const scrollDirection = useScrollDirection();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -118,10 +107,6 @@ export function Navbar(props) {
   invariant(saleorApiUrl, "Missing NEXT_PUBLIC_API_URI");
   const domain = new URL(saleorApiUrl).hostname;
 
-  const categories = rootCategories.map((category) => {
-    return category.name;
-  });
-
   const { checkout } = useCheckout();
 
   const checkoutParams = checkout
@@ -136,8 +121,6 @@ export function Navbar(props) {
         domain,
       })
     : new URLSearchParams();
-
-  const pages = categories;
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -161,6 +144,16 @@ export function Navbar(props) {
   const handleSearchClose = () => {
     setSearchActive(false);
   };
+
+  React.useEffect(() => {
+    client
+      .fetch(
+        `*[_type == "header"]{
+      title,
+    }`
+      )
+      .then((data) => {});
+  }, []);
 
   const counter =
     checkout?.lines?.reduce(
@@ -204,32 +197,7 @@ export function Navbar(props) {
           >
             <Box sx={HeaderItemWrapper}>
               <Box>
-                <Box sx={HeaderItemInnerWrapper}>
-                  <LocationOnOutlinedIcon sx={iconColor} />
-                </Box>
-                <Box>Find a Store</Box>
-              </Box>
-              <Box sx={{ cursor: "pointer" }}>
-                {!searchActive && (
-                  <>
-                    <Box sx={HeaderItemInnerWrapper}>
-                      <SearchOutlinedIcon
-                        sx={iconColor}
-                        onClick={handleSearchClick}
-                      />
-                    </Box>
-                    <Box onClick={handleSearchClick}>Search</Box>
-                  </>
-                )}
-
-                {searchActive && (
-                  <Box sx={HeaderItemInnerWrapper}>
-                    <CloseIcon
-                      sx={{ color: "#3A3A3A", fontSize: "26px", width: "53px" }}
-                      onClick={handleSearchClose}
-                    />
-                  </Box>
-                )}
+                <Box sx={HeaderItemInnerWrapper}></Box>
               </Box>
             </Box>
 
@@ -241,96 +209,12 @@ export function Navbar(props) {
                 />
               </Link>
             </Box>
-            <Box sx={[HeaderItemWrapper, HeaderitemWrapperWidth]}>
-              <Box sx={HeaderItemInnerWrapper}>
-                <Box>
-                  <AccountCircleRoundedIcon sx={iconSize} />
-                </Box>
-                <Box sx={{ fontWeight: "bold" }}>drm</Box>
-              </Box>
-              <Box>
-                <Box sx={HeaderItemInnerWrapper}>
-                  <FavoriteBorderOutlinedIcon sx={iconColor} />
-                </Box>
-                <Box>Favorites</Box>
-              </Box>
-
-              <Box>
-                <Box sx={HeaderItemInnerWrapper}>
-                  <Badge
-                    badgeContent={counter}
-                    sx={{ color: "#343434" }}
-                    color="secondary"
-                  >
-                    <Link
-                      href={`/en-AE/cart`}
-                      style={{
-                        textDecoration: "none",
-                        textDecorationColor: "#343434",
-                        color: "#343434",
-                      }}
-                    >
-                      <ShoppingBagOutlinedIcon sx={iconColor} />
-                    </Link>
-                  </Badge>
-                </Box>
-                <Box>
-                  <Link
-                    href={`/en-AE/cart`}
-                    style={{
-                      textDecoration: "none",
-                      textDecorationColor: "#343434",
-                      color: "#343434",
-                    }}
-                  >
-                    Basket
-                  </Link>
-                </Box>
-              </Box>
-            </Box>
+            <Box sx={[HeaderItemWrapper, HeaderitemWrapperWidth]}></Box>
           </Box>
         </Grid>
         <Grid item xs={12}>
-          <Toolbar disableGutters>
-            <Box
-              sx={{
-                flexGrow: 1,
-                display: {
-                  xs: "none",
-                  md: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                },
-              }}
-            >
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 1.5,
-                    color: "black",
-                    fontWeight: "bold",
-                    display: "block",
-                    ml: 8,
-                    fontSize: "14px",
-                  }}
-                  className={roboto.className}
-                >
-                  {page}
-                </Button>
-              ))}
-            </Box>
-          </Toolbar>
+          <Toolbar disableGutters></Toolbar>
         </Grid>
-
-        {searchActive && (
-          <Grid item xs={12} sx={searchWrapper}>
-            <Box>
-              <Search handleSearchClose={handleSearchClose} />
-            </Box>
-          </Grid>
-        )}
       </Grid>
     </AppBar>
   );

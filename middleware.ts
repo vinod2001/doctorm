@@ -33,7 +33,7 @@ export function LocaleRedirectionMiddleware({
     locale = requestLocale;
   }
 
-  const requestCountry = geo?.country?.toLowerCase() || "us";
+  const requestCountry = geo?.country?.toLowerCase() || "ae";
   let channel = DEFAULT_CHANNEL.slug;
 
   // For the demo purposes channel redirection only recognizes PLN channel by country

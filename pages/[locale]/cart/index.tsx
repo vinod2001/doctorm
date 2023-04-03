@@ -111,8 +111,15 @@ function CartDetails(props) {
     },
   ];
   return (
-    <Grid sx={{ backgroundColor: "#f6f6f6", border:'0px solid #f6f6f6', mt:1 }}>
-      <Grid item xs={12} className={roboto.className} sx={{border:'1px solid #f6f6f6'}}>
+    <Grid
+      sx={{ backgroundColor: "#f6f6f6", border: "0px solid #f6f6f6", mt: 1 }}
+    >
+      <Grid
+        item
+        xs={12}
+        className={roboto.className}
+        sx={{ border: "1px solid #f6f6f6" }}
+      >
         <Grid container xs={12} sx={{ mt: 5, color: "#343434" }}>
           <Grid xs={7} sx={{ border: "0px solid", ml: 5, mr: 5 }}>
             <Box>
@@ -134,9 +141,7 @@ function CartDetails(props) {
                       textDecorationColor: "#F7961C",
                       fontSize: "20px",
                     }}
-                  >
-                    Save Cart
-                  </Link>
+                  ></Link>
                 </Box>
               </Box>
 
@@ -150,7 +155,7 @@ function CartDetails(props) {
                   </Box>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <Link
-                      href={`/en-US/products/${lineItem.variant?.product?.slug}?channel=default-channel&variant=${lineItem.variant.id}`}
+                      href={`/en-AE/products/${lineItem.variant?.product?.slug}?channel=web-ksa&variant=${lineItem.variant.id}`}
                     >
                       <Box>
                         <img src={lineItem.variant?.product?.thumbnail?.url} />
@@ -347,26 +352,24 @@ function CartDetails(props) {
                 </TableContainer>
               </Box>
               <Box sx={{ border: "0px solid", mt: 3 }}>
-                
                 <Link
-                  href="/en-US/checkout"
+                  href="/en-AE/checkout"
                   style={{
                     backgroundColor: "#ff9905",
                     color: "#fff",
                     textTransform: "capitalize",
-                    padding: '8px',
-                    borderRadius: '5px',
-                    textDecoration: 'none',
+                    padding: "8px",
+                    borderRadius: "5px",
+                    textDecoration: "none",
                     "&:hover": { backgroundColor: "#f59407" },
                     width: "100%",
                     fontWeight: "bold",
-                    display:'block',
-                    textAlign:'center'
+                    display: "block",
+                    textAlign: "center",
                   }}
                 >
                   Proceed to Checkout
                 </Link>
-                
               </Box>
             </Box>
           </Grid>
