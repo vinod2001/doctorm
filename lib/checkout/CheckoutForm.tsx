@@ -41,10 +41,7 @@ const sectionsManager = (
   if (!checkout || !checkout.email) {
     return state;
   }
-  state.billingAddress = false;
-  if (!checkout.billingAddress) {
-    return state;
-  }
+
   state.shippingAddress = false;
   if (checkout.isShippingRequired && !checkout.shippingAddress) {
     return state;
@@ -68,8 +65,12 @@ export function CheckoutForm({ locale }) {
   return (
     <section className={roboto.className}>
       <Box sx={{ mb: 2 }}>
+        <EmailSection checkout={checkout} locale={locale} />
+      </Box>
+      <Divider />
+      <Box sx={{ mb: 2 }}>
         <CommonAddressSection
-          active={true}
+          active={!collapsedSections.shippingAddress}
           checkout={checkout}
           locale={locale}
         />

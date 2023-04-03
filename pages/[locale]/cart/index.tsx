@@ -73,6 +73,11 @@ function CartDetails(props) {
   const { checkout } = useCheckout();
   const { currentChannel, formatPrice, query } = useRegions();
 
+  function incrementItemQuantity(event) {
+    event.preventDefault();
+    console.log(event);
+  }
+
   const selectionRowContent = [
     {
       name: "Model",
@@ -188,7 +193,7 @@ function CartDetails(props) {
                         {lineItem.quantity}
                       </Box>
                       <Box sx={{ cursor: "pointer" }}>
-                        <AddIcon />
+                        <AddIcon onClick={incrementItemQuantity} />
                       </Box>
                     </Box>
                     <Box>

@@ -49,7 +49,6 @@ const emirates = [
 export interface AddressFormData {
   firstName: string;
   lastName: string;
-  email: string;
   phone: string;
   country: CountryCode;
   streetAddress1: string;
@@ -109,48 +108,6 @@ export function AddressForm({
   return (
     <form method="post" onSubmit={onAddressFormSubmit}>
       <Box sx={{ mt: 2 }}>
-        <Box className="col-span-full">
-          {/* <label htmlFor="address" className="block text-sm font-medium text-gray-700">
-            {t.formatMessage(messages.phoneField)}
-          </label> */}
-          <Box className="mt-1">
-            <TextField
-              type="text"
-              id="phone"
-              required
-              label={t.formatMessage(messages.phoneField)}
-              className="w-full border-gray-300 rounded-md shadow-sm text-base"
-              spellCheck={false}
-              {...registerAddress("phone", {
-                required: true,
-                pattern:
-                  /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i,
-              })}
-            />
-            {errorsAddress.phone && <p>{errorsAddress.phone.message}</p>}
-          </Box>
-        </Box>
-
-        <Box sx={{ mt: 1 }}>
-          {/* <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-            {t.formatMessage(messages.firstNameField)}
-          </label> */}
-          <Box>
-            <TextField
-              type="email"
-              id="email"
-              required
-              label={t.formatMessage(messages.email)}
-              className="w-full border-gray-300 rounded-md shadow-sm text-base"
-              spellCheck={false}
-              {...registerAddress("email", {
-                required: true,
-                pattern: /^[^@\s]+@[^@\s]+\.[^@\s]+$/,
-              })}
-            />
-          </Box>
-        </Box>
-
         <Box sx={{ mt: 1 }}>
           {/* <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
             {t.formatMessage(messages.firstNameField)}
@@ -243,6 +200,28 @@ export function AddressForm({
             {!!errorsAddress.streetAddress1 && (
               <p>{errorsAddress.streetAddress1.message}</p>
             )}
+          </Box>
+        </Box>
+
+        <Box className="col-span-full">
+          {/* <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+            {t.formatMessage(messages.phoneField)}
+          </label> */}
+          <Box className="mt-1">
+            <TextField
+              type="text"
+              id="phone"
+              required
+              label={t.formatMessage(messages.phoneField)}
+              className="w-full border-gray-300 rounded-md shadow-sm text-base"
+              spellCheck={false}
+              {...registerAddress("phone", {
+                required: true,
+                pattern:
+                  /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/i,
+              })}
+            />
+            {errorsAddress.phone && <p>{errorsAddress.phone.message}</p>}
           </Box>
         </Box>
 
