@@ -214,7 +214,7 @@ function ProductDetails({ pdpLayout, product }) {
     measurementsDes,
     frameImage,
     frameCode,
-  } = pdpLayout;
+  } = pdpLayout || {};
 
   const [power, setPower] = React.useState();
   const [zoomModalDetails, setZoomModalDetails] = React.useState({
@@ -230,10 +230,10 @@ function ProductDetails({ pdpLayout, product }) {
       (attribute) => attribute.attribute.name === "Frame Color"
     );
     if (frameColorAttribute) {
-      let index = frameCode.findIndex(
+      let index = frameCode?.findIndex(
         (code) => code === frameColorAttribute[0]?.values[0]?.name.toLowerCase()
       );
-      variant.frameImage = frameImage[index];
+      variant.frameImage = frameImage ? frameImage[index] : null;
     }
   });
 
@@ -599,7 +599,7 @@ function ProductDetails({ pdpLayout, product }) {
                 alignItems: "center",
               }}
             >
-              {measurementImages.map((val, index) => (
+              {measurementImages && measurementImages.map((val, index) => (
                 <Box
                   key={index}
                   sx={{
