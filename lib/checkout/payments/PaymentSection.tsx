@@ -17,7 +17,7 @@ import {
 import Typography from "@mui/material/Typography";
 import { Box, Button, Grid, styled, Card } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import Looks3Icon from "@mui/icons-material/Looks3";
+import Looks4Icon from "@mui/icons-material/Looks4";
 import { checkoutSectionHeaderActive } from "../EmailSection";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -55,7 +55,7 @@ export function PaymentSection({
     <>
       <Box sx={{ display: "flex", alignItems: "center", mt: 2 }}>
         <Box>
-          <Looks3Icon />
+          <Looks4Icon />
         </Box>
         <Box
           sx={checkoutSectionHeaderActive}

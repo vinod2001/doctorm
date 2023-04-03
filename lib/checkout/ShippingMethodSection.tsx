@@ -13,7 +13,7 @@ import {
 import { messages } from "../i18n";
 import { ShippingMethodDisplay } from "./ShippingMethodDisplay";
 import { ShippingMethodOption } from "./ShippingMethodOption";
-import LooksTwoIcon from "@mui/icons-material/LooksTwo";
+import Looks3Icon from "@mui/icons-material/Looks3";
 import { Box, Button, Grid, styled, Card } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { checkoutSectionHeaderActive } from "./EmailSection";
@@ -64,7 +64,7 @@ export function ShippingMethodSection({
     <>
       <Box sx={{ display: "flex", alignItems: "center", mt: 2 }}>
         <Box>
-          <LooksTwoIcon />
+          <Looks3Icon />
         </Box>
         <Typography
           sx={checkoutSectionHeaderActive}

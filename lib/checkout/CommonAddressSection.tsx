@@ -21,7 +21,7 @@ import { Box, Button, Grid, styled, Card } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { checkoutSectionHeaderActive } from "./EmailSection";
 import Typography from "@mui/material/Typography";
-import LooksOneIcon from "@mui/icons-material/LooksOne";
+import LooksTwoIcon from "@mui/icons-material/LooksTwo";
 
 export interface CommonAddressSectionProps {
   active: boolean;
@@ -40,7 +40,6 @@ export function CommonAddressSection({
   const [editing, setEditing] = useState(!checkout.shippingAddress);
   const [shippingAddressUpdateMutation] =
     useCheckoutShippingAddressUpdateMutation({});
-  const [checkoutEmailUpdate] = useCheckoutEmailUpdateMutation({});
   const [checkoutBillingAddressUpdate] =
     useCheckoutBillingAddressUpdateMutation({});
 
@@ -73,18 +72,6 @@ export function CommonAddressSection({
     setEditing(false);
   };
   const updateMutation = async (formData: AddressFormData) => {
-    console.log(formData);
-    const checkoutEmailUpdateResult = await checkoutEmailUpdate({
-      variables: {
-        email: formData.email,
-        token: checkout?.token,
-        locale: locale,
-      },
-    });
-    const mutationEmailErrors =
-      checkoutEmailUpdateResult.data?.checkoutEmailUpdate?.errors || [];
-    delete formData.email;
-
     const shippingAddressUpdateMutationResult =
       await shippingAddressUpdateMutation({
         variables: {
@@ -114,7 +101,7 @@ export function CommonAddressSection({
     <>
       <Box sx={{ display: "flex", alignItems: "center", mt: 2 }}>
         <Box>
-          <LooksOneIcon />
+          <LooksTwoIcon />
         </Box>
         <Typography
           sx={checkoutSectionHeaderActive}
