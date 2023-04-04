@@ -9,9 +9,10 @@ export interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   const rootCategories = children.props.rootCategories;
+  const uspContent = children.props.uspContent;
   return (
     <>
-      <Navbar rootCategories={rootCategories} />
+      <Navbar rootCategories={rootCategories} uspContent={uspContent} />
       <Suspense fallback={<h1>Loading...</h1>}>
         <div>{children}</div>
       </Suspense>
