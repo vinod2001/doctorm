@@ -4,14 +4,12 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
-const apiURL = new URL("https://doctorm-poc-store.eu.saleor.cloud/graphql/");
-
 module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   concurrentFeatures: true,
   swcMinify: true,
   images: {
-    domains: [apiURL.hostname],
+    domains: ["https://doctorm-poc-store.eu.saleor.cloud", "https://cdn.sanity.io"],
     formats: ["image/avif", "image/webp"],
   },
 });
