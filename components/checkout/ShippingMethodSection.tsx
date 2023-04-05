@@ -10,7 +10,7 @@ import {
   useCheckoutShippingMethodUpdateMutation,
   LanguageCodeEnum,
 } from "@/saleor/api";
-import { messages } from "../i18n";
+import { messages } from "@/lib/i18n";
 import { ShippingMethodDisplay } from "./ShippingMethodDisplay";
 import { ShippingMethodOption } from "./ShippingMethodOption";
 import Looks3Icon from "@mui/icons-material/Looks3";

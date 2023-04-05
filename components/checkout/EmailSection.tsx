@@ -7,7 +7,7 @@ import {
   LanguageCodeEnum,
 } from "@/saleor/api";
 import { Box, Button, Grid, styled, Card } from "@mui/material";
-import { messages } from "../i18n";
+import { messages } from "@/lib/i18n";
 import Divider from "@mui/material/Divider";
 import { Roboto } from "@next/font/google";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
