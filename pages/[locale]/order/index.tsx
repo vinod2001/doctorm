@@ -58,7 +58,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       query: OrderDetailsQueryByIdDocument,
       fetchPolicy: "no-cache",
       variables: {
-        id: orderId.toString()
+        id: orderId?.toString()
       },
     });
   return {

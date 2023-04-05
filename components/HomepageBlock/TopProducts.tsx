@@ -1,5 +1,6 @@
 // @ts-nocheck
-import { Box, Divider } from "@mui/material";
+import { Box, Divider, Link } from "@mui/material";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
 export function TopProducts({ data }) {
   
@@ -51,56 +52,72 @@ export function TopProducts({ data }) {
               }}
             />
           </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              border: "0px solid",
-            }}
-          >
-            {contents.map((item, index) => (
-              <Box
-                key={item._key}
-                sx={{
-                  border: "0px solid",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Box sx={{ border: "0px solid red" }}>
-                  <Box
-                    sx={{
-                      borderRadius: "100%",
-                      border: "0px solid #999",
-                      overflow: "hidden",
-                      width: "60%",
-                      margin: "auto",
-                    }}
-                  >
-                    <img
-                      alt={item.productImage}
-                      loading="lazy"
-                      src={item.productImage}
-                      width="100%"
-                    />
+          <Box sx={{display:'flex',alignItems:'center', justifyContent:'center'}}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                border: "0px solid",
+                alignItems:'center',
+                width:'auto',
+              }}
+            >
+              {contents.map((item, index) => {
+                {console.log('item'+JSON.stringify(item))}
+                return (<Box
+                  key={item._key}
+                  sx={{
+                    border: "1px solid #d3d3d3",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    ml:index>0?2:0,
+                    borderRadius:'5px',
+                    p:2
+                  }}
+                >
+                  
+                  <Box sx={{ border: "0px solid red" }}>
+                  <Box sx={{display:'flex',justifyContent: "right",alignItems:'right'}}>
+                      <FavoriteBorderOutlinedIcon/>
+                    </Box>
+                    <Link href='#' sx={{textDecoration:'none'}}>
+                      <Box
+                        sx={{
+                          borderRadius: "100%",
+                          border: "0px solid #999",
+                          overflow: "hidden",
+                          width: "100%",
+                          margin: "auto",
+                          pb:2
+                        }}
+                      >
+                        <img
+                          alt={item.productImage}
+                          loading="lazy"
+                          src={item.productImage}
+                          width="100%"
+                        />
+                      </Box>
+                      <Box
+                        sx={{
+                          border: "0px solid",
+                          width: "80%",
+                          display: "flex",
+                          justifyContent: "center",
+                          margin: "auto",
+                          fontWeight: "bold",
+                          color: "#343434",
+                          fontSize:'22px'
+                        }}
+                      >
+                        {item.productName}
+                      </Box>
+                    </Link>
                   </Box>
-                  <Box
-                    sx={{
-                      border: "0px solid",
-                      width: "80%",
-                      display: "flex",
-                      justifyContent: "center",
-                      margin: "auto",
-                      fontWeight: "bold",
-                      color: "#343434",
-                    }}
-                  >
-                    {item.productName}
-                  </Box>
-                </Box>
-              </Box>
-            ))}
+                </Box>)
+              })}
+            </Box>
           </Box>
         </Box>
       )}

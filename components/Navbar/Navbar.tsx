@@ -268,7 +268,7 @@ export function Navbar(props) {
                 <Box>
                   <AccountCircleRoundedIcon sx={iconSize} />
                 </Box>
-                <Box sx={{ fontWeight: "bold" }}>drm</Box>
+                <Box sx={{ fontWeight: "bold",pl:1 }}>drm</Box>
               </Box>
               <Box>
                 <Box sx={HeaderItemInnerWrapper}>
