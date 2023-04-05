@@ -23,7 +23,7 @@ import { contextToRegionQuery } from "@/lib/regions";
 import { Roboto } from "@next/font/google";
 import imageUrlBuilder from "@sanity/image-url";
 import client from "@/lib/sanity/client";
-import { PDP_PAGE_SANITY_QUERY } from "@/lib/const";
+import { PDP_PAGE_SANITY_QUERY, HEADER_PAGE_SANITY_QUERY } from "@/lib/const";
 import { Box, Grid, Button } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import BreadcrumbsDetails from "../../../components/breadcrumbs";
@@ -599,37 +599,38 @@ function ProductDetails({ pdpLayout, product }) {
                 alignItems: "center",
               }}
             >
-              {measurementImages && measurementImages.map((val, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    border: "0px solid",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <Box sx={{ border: "0px solid", textAlign: "center" }}>
-                    <PortableText value={val} components={thumpComponents} />
-                    <Box sx={{ textAlign: "center", mt: 2 }}>
-                      <Box sx={{ textAlign: "center", fontSize: "22px" }}>
-                        {measurementsTitle[index]}
-                      </Box>
-                      <Box
-                        sx={{
-                          textAlign: "center",
-                          fontSize: "20px",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        {sunglassMeasurementDetails &&
-                          sunglassMeasurementDetails[index] + " mm"}
+              {measurementImages &&
+                measurementImages.map((val, index) => (
+                  <Box
+                    key={index}
+                    sx={{
+                      border: "0px solid",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "100%",
+                    }}
+                  >
+                    <Box sx={{ border: "0px solid", textAlign: "center" }}>
+                      <PortableText value={val} components={thumpComponents} />
+                      <Box sx={{ textAlign: "center", mt: 2 }}>
+                        <Box sx={{ textAlign: "center", fontSize: "22px" }}>
+                          {measurementsTitle[index]}
+                        </Box>
+                        <Box
+                          sx={{
+                            textAlign: "center",
+                            fontSize: "20px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {sunglassMeasurementDetails &&
+                            sunglassMeasurementDetails[index] + " mm"}
+                        </Box>
                       </Box>
                     </Box>
                   </Box>
-                </Box>
-              ))}
+                ))}
             </Box>
           </Grid>
           <PdpDetail pdpDetails={pdpDetails} productFeature={productFeature} />
@@ -694,11 +695,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       notFound: true,
     };
   }
+  const marketingContent = await client.fetch(HEADER_PAGE_SANITY_QUERY);
   return {
     props: {
       rootCategories: rootCategories,
       pdpLayout: pdpLayout,
       product: product,
+      uspContent: marketingContent,
     },
   };
 };

@@ -48,12 +48,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const slug = "home";
   const homePageContent = await client.fetch(HOME_PAGE_SANITY_QUERY, { slug });
   const marketingContent = await client.fetch(HEADER_PAGE_SANITY_QUERY);
-  const uspContent = marketingContent.content[0]?.children[0]?.text;
+
   return {
     props: {
       rootCategories: rootCategories,
       homePageContent: homePageContent,
-      uspContent: uspContent,
+      uspContent: marketingContent,
     },
   };
 };

@@ -3,7 +3,6 @@ import React from "react";
 import groq from "groq";
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
-import client from "../../client";
 import { Layout } from "@/components";
 import Header from "../../components/header";
 import {
@@ -46,6 +45,8 @@ import TableRow from "@mui/material/TableRow";
 import CircleIcon from "@mui/icons-material/Circle";
 import { useCheckout } from "@/lib/providers/CheckoutProvider";
 import { useRegions } from "@/components/RegionsProvider";
+import client from "@/lib/sanity/client";
+import { HEADER_PAGE_SANITY_QUERY } from "@/lib/const";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -408,10 +409,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const rootCategories = response.data.categories.edges.map((edge) => ({
     ...edge.node,
   }));
+  const marketingContent = await client.fetch(HEADER_PAGE_SANITY_QUERY);
 
   return {
     props: {
       rootCategories: rootCategories,
+      uspContent: marketingContent,
     },
   };
 };

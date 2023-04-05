@@ -17,7 +17,9 @@ export const HOME_PAGE_SANITY_QUERY = groq`*[_type == "definedPage" && pageType 
   translations
 }`;
 
-export const HEADER_PAGE_SANITY_QUERY = groq`*[_type == "header"][0]`;
+export const HEADER_PAGE_SANITY_QUERY = groq`*[_type == "header"]{
+  content,
+}`;
 
 export const PDP_PAGE_SANITY_QUERY = groq`*[_type == "productDetail" && slug.current == $slug][0]{
     "productCarouselImg":productCarousel[]->carouselImage,
