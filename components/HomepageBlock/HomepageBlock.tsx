@@ -8,6 +8,7 @@ import BannerCarousal from "./BannerCarousal";
 import ImageWithText from "./ImageWithText";
 import BannerImage from "./BannerImage";
 import ImageWithTextGrid from "./ImageWithTextGrid";
+import { useRegions } from "@/components/RegionsProvider";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -15,6 +16,7 @@ const roboto = Roboto({
 });
 
 export function HomepageBlock({ homePageContent }) {
+  const { currentLocale: locale } = useRegions();
   const {
     seoDetails: {
       title
@@ -43,7 +45,7 @@ export function HomepageBlock({ homePageContent }) {
                 return <BannerImage key={content._key} data={content}></BannerImage>
               }
               if (content._type == "topProducts") {
-                return <TopProducts key={content._key} data={content}></TopProducts>
+                return <TopProducts key={content._key} data={content} locale={locale}></TopProducts>
               }
               if (content._type == "topBrands") {
                 return <TopBrands key={content._key} data={content}></TopBrands>
