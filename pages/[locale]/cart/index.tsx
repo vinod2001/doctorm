@@ -20,6 +20,8 @@ import {
   RootCategoriesQuery,
   RootCategoriesQueryVariables,
   RootCategoriesDocument,
+  useCheckoutLineUpdateMutation,
+  useRemoveProductFromCheckoutMutation,
 } from "@/saleor/api";
 import { serverApolloClient } from "@/lib/auth/useAuthenticatedApolloClient";
 import { contextToRegionQuery } from "@/lib/regions";
@@ -70,13 +72,20 @@ const tableStyle = {
 };
 
 function CartDetails(props) {
-  const { checkout } = useCheckout();
+  const { checkoutToken, setCheckoutToken, checkout } = useCheckout();
   const { currentChannel, formatPrice, query } = useRegions();
+  const [updateProductToCheckout] = useCheckoutLineUpdateMutation();
+  const [removeProductFromCheckout] = useRemoveProductFromCheckoutMutation();
 
-  function incrementItemQuantity(event) {
-    event.preventDefault();
-    console.log(event);
-  }
+  const updateItemQuantity = (id, quantity) => async (e) => {
+    const result = await updateProductToCheckout({
+      variables: {
+        token: checkoutToken,
+        lines: [{ lineId: id, quantity: quantity }],
+        locale: query.locale,
+      },
+    });
+  };
 
   const selectionRowContent = [
     {
@@ -187,13 +196,23 @@ function CartDetails(props) {
                   >
                     <Box sx={types}>
                       <Box sx={{ cursor: "pointer" }}>
-                        <RemoveIcon />
+                        <RemoveIcon
+                          onClick={updateItemQuantity(
+                            lineItem.id,
+                            lineItem.quantity - 1
+                          )}
+                        />
                       </Box>
                       <Box sx={{ fontSize: "20px", ml: 2, mr: 2 }}>
                         {lineItem.quantity}
                       </Box>
                       <Box sx={{ cursor: "pointer" }}>
-                        <AddIcon onClick={incrementItemQuantity} />
+                        <AddIcon
+                          onClick={updateItemQuantity(
+                            lineItem.id,
+                            lineItem.quantity + 1
+                          )}
+                        />
                       </Box>
                     </Box>
                     <Box>
@@ -207,6 +226,15 @@ function CartDetails(props) {
                           pr: 2,
                           "&:hover": { backgroundColor: "#d3cec4" },
                         }}
+                        onClick={() =>
+                          removeProductFromCheckout({
+                            variables: {
+                              checkoutToken: checkoutToken,
+                              lineId: lineItem.id,
+                              locale: query.locale,
+                            },
+                          })
+                        }
                       >
                         Delete
                       </Button>
