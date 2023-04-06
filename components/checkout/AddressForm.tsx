@@ -226,7 +226,17 @@ export function AddressForm({
         </Box>
 
         <Box sx={{ mt: 2 }}>
-          <Button variant="contained" onClick={onAddressFormSubmit}>
+          <Button
+            variant="contained"
+            onClick={onAddressFormSubmit}
+            style={{
+              backgroundColor: "#ff9905",
+              color: "#3A3A3A",
+              textTransform: "capitalize",
+              borderRadius: "5px",
+              textDecoration: "none",
+            }}
+          >
             {t.formatMessage(messages.saveButton)}
           </Button>
         </Box>
