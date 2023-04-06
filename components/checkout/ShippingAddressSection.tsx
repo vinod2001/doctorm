@@ -9,7 +9,7 @@ import {
   useCheckoutShippingAddressUpdateMutation,
   LanguageCodeEnum,
 } from "@/saleor/api";
-import { messages } from "../i18n";
+import { messages } from "@/lib/i18n";
 import { AddressDisplay } from "./AddressDisplay";
 import { AddressForm, AddressFormData } from "./AddressForm";
 import { useUser } from "@/lib/useUser";
