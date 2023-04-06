@@ -63,6 +63,7 @@ export function TopProducts({ data, locale }) {
               }}
             >
               {contents.map((item, index) => {
+                console.log('item'+JSON.stringify(item));
                 return (<Box
                   key={item._key}
                   sx={{
@@ -79,7 +80,7 @@ export function TopProducts({ data, locale }) {
                   <Box sx={{display:'flex',justifyContent: "right",alignItems:'right'}}>
                       <FavoriteBorderOutlinedIcon/>
                     </Box>
-                    <Link href={"/" + locale + "/products/" + item.slug} passHref sx={{textDecoration:'none'}}>
+                    <Link href={"/" + locale + "/products/" + item.productId} passHref sx={{textDecoration:'none'}}>
                       <Box
                         sx={{
                           borderRadius: "100%",
@@ -101,17 +102,16 @@ export function TopProducts({ data, locale }) {
                         sx={{
                           border: "0px solid",
                           width: "80%",
-                          display: "flex",
-                          justifyContent: "center",
                           margin: "auto",
                           fontWeight: "bold",
                           color: "#343434",
-                          fontSize:'22px'
+                          fontSize:'24px'
                         }}
                       >
                         {item.productName}
-                        <br/>
-                        AED {item.price}
+                        <Box sx={{mt:3}}>
+                          AED <Box component="span" sx={{ml:1}}>{item.price}</Box>
+                        </Box>
                       </Box>
                     </Link>
                   </Box>
