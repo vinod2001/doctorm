@@ -77,6 +77,7 @@ function CartDetails(props) {
   const { currentChannel, formatPrice, query } = useRegions();
   const [updateProductToCheckout] = useCheckoutLineUpdateMutation();
   const [removeProductFromCheckout] = useRemoveProductFromCheckoutMutation();
+  console.log(checkout);
 
   const updateItemQuantity = (id, quantity) => async (e) => {
     const result = await updateProductToCheckout({
@@ -332,6 +333,12 @@ function CartDetails(props) {
                       >
                         <TableCell sx={{ pl: 0, fontSize: "18px" }}>
                           Subtotal
+                          <Typography
+                            sx={{ pl: 0, fontSize: "13px", color: "grey" }}
+                            gutterBottom
+                          >
+                            Delivery cost may apply
+                          </Typography>
                         </TableCell>
                         <TableCell
                           sx={{
@@ -340,28 +347,30 @@ function CartDetails(props) {
                             textAlign: "right",
                           }}
                         >
-                          <b>{formatPrice(checkout?.totalPrice?.gross)}</b>
+                          <b>{formatPrice(checkout?.subtotalPrice?.net)}</b>
                         </TableCell>
                       </TableRow>
 
-                      <TableRow
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
-                        <TableCell sx={{ pl: 0, fontSize: "18px" }}>
-                          Delivery Cost
-                        </TableCell>
-                        <TableCell
+                      {checkout?.shippingPrice?.gross?.amount > 0 && (
+                        <TableRow
                           sx={{
-                            fontSize: "18px",
-                            color: "#0B8600",
-                            textAlign: "right",
+                            "&:last-child td, &:last-child th": { border: 0 },
                           }}
                         >
-                          <b>FREE</b>
-                        </TableCell>
-                      </TableRow>
+                          <TableCell sx={{ pl: 0, fontSize: "18px" }}>
+                            Delivery Cost
+                          </TableCell>
+                          <TableCell
+                            sx={{
+                              fontSize: "18px",
+                              color: "inherit",
+                              textAlign: "right",
+                            }}
+                          >
+                            <b>{formatPrice(checkout?.shippingPrice?.gross)}</b>
+                          </TableCell>
+                        </TableRow>
+                      )}
 
                       <TableRow
                         sx={{

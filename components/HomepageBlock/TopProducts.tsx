@@ -2,7 +2,7 @@
 import { Box, Divider, Link } from "@mui/material";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
-export function TopProducts({ data }) {
+export function TopProducts({ data, locale }) {
   
   const ptComponents = {
     types: {
@@ -63,7 +63,6 @@ export function TopProducts({ data }) {
               }}
             >
               {contents.map((item, index) => {
-                {console.log('item'+JSON.stringify(item))}
                 return (<Box
                   key={item._key}
                   sx={{
@@ -76,12 +75,11 @@ export function TopProducts({ data }) {
                     p:2
                   }}
                 >
-                  
                   <Box sx={{ border: "0px solid red" }}>
                   <Box sx={{display:'flex',justifyContent: "right",alignItems:'right'}}>
                       <FavoriteBorderOutlinedIcon/>
                     </Box>
-                    <Link href='#' sx={{textDecoration:'none'}}>
+                    <Link href={"/" + locale + "/products/" + item.slug} passHref sx={{textDecoration:'none'}}>
                       <Box
                         sx={{
                           borderRadius: "100%",
@@ -112,6 +110,8 @@ export function TopProducts({ data }) {
                         }}
                       >
                         {item.productName}
+                        <br/>
+                        AED {item.price}
                       </Box>
                     </Link>
                   </Box>
