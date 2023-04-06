@@ -8,7 +8,7 @@ import {
   CountryCode,
 } from "@/saleor/api";
 
-import { messages } from "../i18n";
+import { messages } from "@/lib/i18n";
 import Typography from "@mui/material/Typography";
 import { Box, Button, Grid, styled } from "@mui/material";
 import TextField from "@mui/material/TextField";

@@ -1,7 +1,9 @@
 import sanityClient from "@sanity/client";
+import config from "../../config";
+
+const { sanity } = config;
 
 export default sanityClient({
-  projectId: "zzu1mfit", // you can find this in sanity.json
-  dataset: "production", // or the name you chose in step 1
-  useCdn: true, // `false` if you want to ensure fresh data
+  ...sanity,
+  useCdn: false, // `false` if you want to ensure fresh data
 });

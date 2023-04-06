@@ -100,9 +100,15 @@ const clsHeader = {
   transitionFuration: "500ms",
 };
 
+const deviderSpace = {
+  mr: 2,
+  ml: 2,
+};
+
 export function Navbar(props) {
   const { currentLocale, currentChannel } = useRegions();
   const rootCategories = props.rootCategories;
+  const uspContent = props.uspContent;
   const scrollDirection = useScrollDirection();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -173,20 +179,36 @@ export function Navbar(props) {
     //sx={{clsHeader:`${ scrollDirection === "down" ? "hide" : "show"}`}}
     <AppBar position="static" sx={{ background: "#f6f6f6" }}>
       <Grid>
+        {/*
+          <div dangerouslySetInnerHTML={{ __html: props.uspContent }}></div>
+           */}
+
         <Grid item xs={12} sx={sxStyle}>
           <Box className={roboto.className}>
-            <Box component="span" sx={spanStyle}>
-              FREE SHIPPING FOR ALL ORDERS,
-            </Box>{" "}
-            <span sx={{ mr: 2 }}>LIMITED TIME ONLY</span> | FAST SHIPPING WITHIN{" "}
-            <Box component="span" sx={spanStyle}>
-              2-4 BUSINESS DAYS*
-            </Box>{" "}
-            | FREE{" "}
-            <Box component="span" sx={spanStyle}>
-              IN-STORE
-            </Box>{" "}
-            RETURN
+            {uspContent &&
+              uspContent[0].content &&
+              uspContent[0].content.map((item, index) =>
+                item.children[0].marks.length > 0 &&
+                item.children[0].marks[0] !== "strong" ? (
+                  <Box component="span" key={index}>
+                    {item.children[0].text}{" "}
+                  </Box>
+                ) : item.children[0].marks[0] === "strong" ? (
+                  <Box
+                    component="span"
+                    key={index}
+                    sx={[spanStyle, deviderSpace]}
+                  >
+                    {"  "}
+                    {item.children[0].text}
+                    {"  "}
+                  </Box>
+                ) : (
+                  <Box component="span" key={index} sx={spanStyle}>
+                    {item.children[0].text}{" "}
+                  </Box>
+                )
+              )}
           </Box>
         </Grid>
         <Grid item xs={12} sx={mainHeader}>
@@ -246,7 +268,7 @@ export function Navbar(props) {
                 <Box>
                   <AccountCircleRoundedIcon sx={iconSize} />
                 </Box>
-                <Box sx={{ fontWeight: "bold" }}>drm</Box>
+                <Box sx={{ fontWeight: "bold",pl:1 }}>drm</Box>
               </Box>
               <Box>
                 <Box sx={HeaderItemInnerWrapper}>
@@ -327,7 +349,10 @@ export function Navbar(props) {
         {searchActive && (
           <Grid item xs={12} sx={searchWrapper}>
             <Box>
-              <Search handleSearchClose={handleSearchClose} />
+              <Search
+                handleSearchClose={handleSearchClose}
+                locale={currentLocale}
+              />
             </Box>
           </Grid>
         )}

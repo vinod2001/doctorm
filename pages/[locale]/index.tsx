@@ -12,7 +12,7 @@ import {
   RootCategoriesQueryVariables,
   RootCategoriesDocument,
 } from "@/saleor/api";
-import { HOME_PAGE_SANITY_QUERY } from "@/lib/const";
+import { HOME_PAGE_SANITY_QUERY, HEADER_PAGE_SANITY_QUERY } from "@/lib/const";
 
 function HomeRedirection({
   homePageContent,
@@ -47,11 +47,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const slug = "home";
   const homePageContent = await client.fetch(HOME_PAGE_SANITY_QUERY, { slug });
+  const marketingContent = await client.fetch(HEADER_PAGE_SANITY_QUERY);
 
   return {
     props: {
       rootCategories: rootCategories,
       homePageContent: homePageContent,
+      uspContent: marketingContent,
     },
   };
 };

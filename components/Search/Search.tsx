@@ -1,24 +1,23 @@
 // @ts-nocheck
-import React from "react";
 import algoliasearch from "algoliasearch/lite";
 import {
   InstantSearch,
-  Hits,
-  Highlight,
-  SearchBox,
+  Hits, SearchBox
 } from "react-instantsearch-dom";
 import Link from "next/link";
-import HitDetails from "./HitDetails";
-import { Badge, Box, Grid, Theme } from "@mui/material";
+import { Box } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { Roboto } from "@next/font/google";
+import config from "../../config";
+
+const { algoliaIndexName, algoliaProjectId, algoliaReadKey } = config;
 
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["400", "700"],
 });
 
-const client = algoliasearch("YXKWT0FKQM", "11d7ffaf5f69d91c4b7945038aeaef79");
+const client = algoliasearch(algoliaProjectId, algoliaReadKey);
 
 const searchListWrapper = {
   position: "absolute",
@@ -106,13 +105,13 @@ const searchClient = {
   },
 };
 
-function HitComponent({ Hit, handleSearchClose }: HitProps) {
+function HitComponent({ Hit, handleSearchClose, locale }: HitProps) {
   const { hit } = Hit;
   return (
     <>
       <Box sx={{ background: "#fff" }}>
         <Link
-          href={"/en-AE/products/" + hit.slug}
+          href={"/" + locale + "/products/" + hit.slug}
           passHref
           className={roboto.className}
           onClick={handleSearchClose}
@@ -132,11 +131,11 @@ function HitComponent({ Hit, handleSearchClose }: HitProps) {
   );
 }
 
-export default function Search({ handleSearchClose }) {
+export default function Search({ handleSearchClose, locale }) {
   return (
     <Box sx={searchListWrapper} className="google">
       <InstantSearch
-        indexName="saleor_test.web-uae.AED.products"
+        indexName={algoliaIndexName}
         searchClient={searchClient}
       >
         <Box className="right-panel" sx={searchList}>
@@ -165,7 +164,7 @@ export default function Search({ handleSearchClose }) {
           <Box>
             <Hits
               hitComponent={(Hit) => (
-                <HitComponent Hit={Hit} handleSearchClose={handleSearchClose} />
+                <HitComponent Hit={Hit} handleSearchClose={handleSearchClose} locale={locale} />
               )}
             />
           </Box>

@@ -6,30 +6,20 @@ export const DEMO_MODE = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
 export const HOMEPAGE_MENU = process.env.NEXT_PUBLIC_HOMEPAGE_MENU || "";
 export const GEOLOCATION = process.env.NEXT_PUBLIC_GEOLOCATION === "true";
 
-export const HOME_PAGE_SANITY_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
-    title,
-    "name": author->name,
-    "categories": categories[]->title,
-    "categoriesDes": categories[]->description,
-    "categoriesImg": categories[]->carouselImage,
-    "categoriesButton": categories[]->buttonOrLinkText,
-    "authorImage": author->image,
-    "findFramesTitle": findFrames[]->title,
-    "findFramesDes": findFrames[]->description,
-    "findFramesImg": findFrames[]->carouselImage,
-    "findFramesButton": findFrames[]->buttonOrLinkText,
-    topCategoriesHeading,
-    "topCategories": topCategories[]->title,
-    "topCategoriesImg": topCategories[]->carouselImage,
-    topBrandsHeading,
-    "topBrandsImg": topBrands[]->carouselImage,
-    "largeBanners":largeBanners[]->carouselImage,
-    "biggerBanners":biggerBanners[]->title,
-    "biggerBannersImg":biggerBanners[]->carouselImage,
-    "biggerBannersDes":biggerBanners[]->description,
-    "biggerBannersButton": biggerBanners[]->buttonOrLinkText,
-    body
-  }`;
+export const HOME_PAGE_SANITY_QUERY = groq`*[_type == "definedPage" && pageType == "home"][0]{
+  _id,
+  _type,
+  pageType,
+  seoDetails{
+    title
+  },
+  title,
+  translations
+}`;
+
+export const HEADER_PAGE_SANITY_QUERY = groq`*[_type == "header"]{
+  content,
+}`;
 
 export const PDP_PAGE_SANITY_QUERY = groq`*[_type == "productDetail" && slug.current == $slug][0]{
     "productCarouselImg":productCarousel[]->carouselImage,

@@ -9,10 +9,10 @@ import {
   RootCategoriesDocument,
 } from "@/saleor/api";
 import { serverApolloClient } from "@/lib/auth/useAuthenticatedApolloClient";
-import CheckoutForm from "@/lib/checkout/CheckoutForm";
+import CheckoutForm from "@/components/checkout/CheckoutForm";
 import { usePaths } from "@/lib/paths";
 import { useCheckout } from "@/lib/providers/CheckoutProvider";
-import CheckoutSidebar from "@/lib/checkout/sidebar/CheckoutSidebar";
+import CheckoutSidebar from "@/components/checkout/sidebar/CheckoutSidebar";
 import { useRegions } from "@/components/RegionsProvider";
 import { Box, Grid } from "@mui/material";
 import CheckoutLayout from "@/components/CheckoutLayout/Layout";
