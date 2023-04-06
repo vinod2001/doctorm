@@ -44,7 +44,7 @@ export function TopBrands({ data }) {
   //   }
   // }
 
-  const sliderItems: number = contents.length > 2 ? 2 : contents.length;
+  const sliderItems: number = contents.length > 4 ? 4 : contents.length;
   const itemsContent: Array<any> = [];
 
   for (let i = 0; i < contents.length; i += sliderItems) {
