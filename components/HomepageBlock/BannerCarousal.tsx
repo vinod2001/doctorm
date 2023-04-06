@@ -60,10 +60,7 @@ export function BannerCarousal({ data }) {
         >
           {contents.map((item, index) => (
             <Box key={item._key}>
-              <PortableText
-                value={item.image}
-                components={ptComponents}
-              />{" "}
+              <PortableText value={item.image} components={ptComponents} />{" "}
               <br />
               <Box
                 sx={{
@@ -92,9 +89,7 @@ export function BannerCarousal({ data }) {
                   <Box sx={{ border: "0px solid", textAlign: "center" }}>
                     {item.description}
                   </Box>
-                  <Box
-                    sx={{ border: "0px solid", textAlign: "center", mt: 3 }}
-                  >
+                  <Box sx={{ border: "0px solid", textAlign: "center", mt: 3 }}>
                     <Button
                       variant="contained"
                       sx={{
@@ -102,6 +97,13 @@ export function BannerCarousal({ data }) {
                         "&:hover": {
                           backgroundColor: "#f59407",
                         },
+                      }}
+                      style={{
+                        backgroundColor: "#ff9905",
+                        color: "#3A3A3A",
+                        textTransform: "capitalize",
+                        borderRadius: "5px",
+                        textDecoration: "none",
                       }}
                     >
                       {item.bannerButton.text}

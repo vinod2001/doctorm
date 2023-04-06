@@ -399,7 +399,7 @@ function CartDetails(props) {
                   href="/en-AE/checkout"
                   style={{
                     backgroundColor: "#ff9905",
-                    color: "#fff",
+                    color: "#3A3A3A",
                     textTransform: "capitalize",
                     padding: "8px",
                     borderRadius: "5px",
