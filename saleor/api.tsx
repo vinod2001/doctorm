@@ -2,12 +2,23 @@
 import "graphql/language/ast";
 import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
-import { FieldPolicy, FieldReadFunction, TypePolicies, TypePolicy } from "@apollo/client/cache";
+import {
+  FieldPolicy,
+  FieldReadFunction,
+  TypePolicies,
+  TypePolicy,
+} from "@apollo/client/cache";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -501,7 +512,9 @@ export type Allocation = Node & {
  *     PRIORITIZE_HIGH_STOCK - allocate stock in a warehouse with the most stock
  *
  */
-export type AllocationStrategyEnum = "PRIORITIZE_HIGH_STOCK" | "PRIORITIZE_SORTING_ORDER";
+export type AllocationStrategyEnum =
+  | "PRIORITIZE_HIGH_STOCK"
+  | "PRIORITIZE_SORTING_ORDER";
 
 /** Represents app data. */
 export type App = Node &
@@ -1083,7 +1096,13 @@ export type AppUpdated = Event & {
 };
 
 /** An enumeration. */
-export type AreaUnitsEnum = "SQ_CM" | "SQ_FT" | "SQ_INCH" | "SQ_KM" | "SQ_M" | "SQ_YD";
+export type AreaUnitsEnum =
+  | "SQ_CM"
+  | "SQ_FT"
+  | "SQ_INCH"
+  | "SQ_KM"
+  | "SQ_M"
+  | "SQ_YD";
 
 /**
  * Assigns storefront's navigation menus.
@@ -5545,7 +5564,11 @@ export type ExportError = {
 };
 
 /** An enumeration. */
-export type ExportErrorCode = "GRAPHQL_ERROR" | "INVALID" | "NOT_FOUND" | "REQUIRED";
+export type ExportErrorCode =
+  | "GRAPHQL_ERROR"
+  | "INVALID"
+  | "NOT_FOUND"
+  | "REQUIRED";
 
 /** History log of export file. */
 export type ExportEvent = Node & {
@@ -5619,7 +5642,11 @@ export type ExportFileFilterInput = {
   user?: InputMaybe<Scalars["String"]>;
 };
 
-export type ExportFileSortField = "CREATED_AT" | "LAST_MODIFIED_AT" | "STATUS" | "UPDATED_AT";
+export type ExportFileSortField =
+  | "CREATED_AT"
+  | "LAST_MODIFIED_AT"
+  | "STATUS"
+  | "UPDATED_AT";
 
 export type ExportFileSortingInput = {
   /** Specifies the direction in which to sort products. */
@@ -6764,7 +6791,10 @@ export type GiftCardSettingsError = {
 };
 
 /** An enumeration. */
-export type GiftCardSettingsErrorCode = "GRAPHQL_ERROR" | "INVALID" | "REQUIRED";
+export type GiftCardSettingsErrorCode =
+  | "GRAPHQL_ERROR"
+  | "INVALID"
+  | "REQUIRED";
 
 /** An enumeration. */
 export type GiftCardSettingsExpiryTypeEnum = "EXPIRY_PERIOD" | "NEVER_EXPIRE";
@@ -19877,7 +19907,9 @@ export type ShippingPriceExcludeProductsInput = {
 
 export type ShippingPriceInput = {
   /** Postal code rules to add. */
-  addPostalCodeRules?: InputMaybe<Array<ShippingPostalCodeRulesCreateInputRange>>;
+  addPostalCodeRules?: InputMaybe<
+    Array<ShippingPostalCodeRulesCreateInputRange>
+  >;
   /** Postal code rules to delete. */
   deletePostalCodeRules?: InputMaybe<Array<Scalars["ID"]>>;
   /** Shipping method description. */
@@ -21532,7 +21564,9 @@ export type TaxConfigurationUpdateInput = {
   /** The default strategy to use for tax calculation in the given channel. Taxes can be calculated either using user-defined flat rates or with a tax app. Empty value means that no method is selected and taxes are not calculated. */
   taxCalculationStrategy?: InputMaybe<TaxCalculationStrategy>;
   /** List of tax country configurations to create or update (identified by a country code). */
-  updateCountriesConfiguration?: InputMaybe<Array<TaxConfigurationPerCountryInput>>;
+  updateCountriesConfiguration?: InputMaybe<
+    Array<TaxConfigurationPerCountryInput>
+  >;
 };
 
 /**
@@ -21577,7 +21611,10 @@ export type TaxCountryConfigurationDeleteError = {
 };
 
 /** An enumeration. */
-export type TaxCountryConfigurationDeleteErrorCode = "GRAPHQL_ERROR" | "INVALID" | "NOT_FOUND";
+export type TaxCountryConfigurationDeleteErrorCode =
+  | "GRAPHQL_ERROR"
+  | "INVALID"
+  | "NOT_FOUND";
 
 /**
  * Update tax class rates for a specific country.
@@ -22265,7 +22302,11 @@ export type TranslationError = {
 };
 
 /** An enumeration. */
-export type TranslationErrorCode = "GRAPHQL_ERROR" | "INVALID" | "NOT_FOUND" | "REQUIRED";
+export type TranslationErrorCode =
+  | "GRAPHQL_ERROR"
+  | "INVALID"
+  | "NOT_FOUND"
+  | "REQUIRED";
 
 export type TranslationInput = {
   /**
@@ -22661,7 +22702,10 @@ export type Vat = {
   standardRate?: Maybe<Scalars["Float"]>;
 };
 
-export type VariantAttributeScope = "ALL" | "NOT_VARIANT_SELECTION" | "VARIANT_SELECTION";
+export type VariantAttributeScope =
+  | "ALL"
+  | "NOT_VARIANT_SELECTION"
+  | "VARIANT_SELECTION";
 
 /**
  * Assign an media to a product variant.
@@ -24802,7 +24846,10 @@ export type AttributeFilterChoiceFragment = {
   id: string;
   name?: string | null;
   slug?: string | null;
-  translation?: { __typename?: "AttributeValueTranslation"; name: string } | null;
+  translation?: {
+    __typename?: "AttributeValueTranslation";
+    name: string;
+  } | null;
 };
 
 export type AttributeFilterFragment = {
@@ -24812,7 +24859,11 @@ export type AttributeFilterFragment = {
   name?: string | null;
   slug?: string | null;
   withChoices: boolean;
-  translation?: { __typename?: "AttributeTranslation"; id: string; name: string } | null;
+  translation?: {
+    __typename?: "AttributeTranslation";
+    id: string;
+    name: string;
+  } | null;
   choices?: {
     __typename?: "AttributeValueCountableConnection";
     edges: Array<{
@@ -24823,7 +24874,10 @@ export type AttributeFilterFragment = {
         id: string;
         name?: string | null;
         slug?: string | null;
-        translation?: { __typename?: "AttributeValueTranslation"; name: string } | null;
+        translation?: {
+          __typename?: "AttributeValueTranslation";
+          name: string;
+        } | null;
       };
     }>;
   } | null;
@@ -24834,7 +24888,11 @@ export type CategoryBasicFragment = {
   id: string;
   name: string;
   slug: string;
-  translation?: { __typename?: "CategoryTranslation"; id: string; name?: string | null } | null;
+  translation?: {
+    __typename?: "CategoryTranslation";
+    id: string;
+    name?: string | null;
+  } | null;
 };
 
 export type CategoryDetailsFragment = {
@@ -24851,7 +24909,11 @@ export type CategoryDetailsFragment = {
     description?: string | null;
     name?: string | null;
   } | null;
-  backgroundImage?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+  backgroundImage?: {
+    __typename?: "Image";
+    url: string;
+    alt?: string | null;
+  } | null;
   ancestors?: {
     __typename?: "CategoryCountableConnection";
     edges: Array<{
@@ -24951,7 +25013,11 @@ export type CheckoutDetailsFragment = {
     __typename?: "PaymentGateway";
     id: string;
     name: string;
-    config: Array<{ __typename?: "GatewayConfigLine"; field: string; value?: string | null }>;
+    config: Array<{
+      __typename?: "GatewayConfigLine";
+      field: string;
+      value?: string | null;
+    }>;
   }>;
   lines: Array<{
     __typename?: "CheckoutLine";
@@ -24975,7 +25041,11 @@ export type CheckoutDetailsFragment = {
           id: string;
           name?: string | null;
         } | null;
-        thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+        thumbnail?: {
+          __typename?: "Image";
+          url: string;
+          alt?: string | null;
+        } | null;
       };
       pricing?: {
         __typename?: "VariantPricingInfo";
@@ -24984,7 +25054,11 @@ export type CheckoutDetailsFragment = {
           gross: { __typename?: "Money"; currency: string; amount: number };
         } | null;
       } | null;
-      translation?: { __typename?: "ProductVariantTranslation"; id: string; name: string } | null;
+      translation?: {
+        __typename?: "ProductVariantTranslation";
+        id: string;
+        name: string;
+      } | null;
     };
   }>;
   discount?: { __typename?: "Money"; currency: string; amount: number } | null;
@@ -25020,8 +25094,16 @@ export type CheckoutLineDetailsFragment = {
       id: string;
       name: string;
       slug: string;
-      translation?: { __typename?: "ProductTranslation"; id: string; name?: string | null } | null;
-      thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+      translation?: {
+        __typename?: "ProductTranslation";
+        id: string;
+        name?: string | null;
+      } | null;
+      thumbnail?: {
+        __typename?: "Image";
+        url: string;
+        alt?: string | null;
+      } | null;
     };
     pricing?: {
       __typename?: "VariantPricingInfo";
@@ -25030,7 +25112,11 @@ export type CheckoutLineDetailsFragment = {
         gross: { __typename?: "Money"; currency: string; amount: number };
       } | null;
     } | null;
-    translation?: { __typename?: "ProductVariantTranslation"; id: string; name: string } | null;
+    translation?: {
+      __typename?: "ProductVariantTranslation";
+      id: string;
+      name: string;
+    } | null;
   };
 };
 
@@ -25039,7 +25125,11 @@ export type CollectionBasicFragment = {
   id: string;
   name: string;
   slug: string;
-  translation?: { __typename?: "CollectionTranslation"; id: string; name?: string | null } | null;
+  translation?: {
+    __typename?: "CollectionTranslation";
+    id: string;
+    name?: string | null;
+  } | null;
 };
 
 export type CollectionDetailsFragment = {
@@ -25056,7 +25146,11 @@ export type CollectionDetailsFragment = {
     description?: string | null;
     name?: string | null;
   } | null;
-  backgroundImage?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+  backgroundImage?: {
+    __typename?: "Image";
+    url: string;
+    alt?: string | null;
+  } | null;
 };
 
 export type DeliveryMethodFragment = {
@@ -25084,7 +25178,11 @@ export type HomepageBlockFragment = {
   __typename?: "MenuItem";
   id: string;
   name: string;
-  translation?: { __typename?: "MenuItemTranslation"; id: string; name: string } | null;
+  translation?: {
+    __typename?: "MenuItemTranslation";
+    id: string;
+    name: string;
+  } | null;
   category?: { __typename?: "Category"; id: string; slug: string } | null;
   collection?: { __typename?: "Collection"; id: string; slug: string } | null;
   page?: {
@@ -25101,14 +25199,22 @@ export type HomepageBlockFragment = {
   } | null;
 };
 
-export type ImageFragment = { __typename?: "Image"; url: string; alt?: string | null };
+export type ImageFragment = {
+  __typename?: "Image";
+  url: string;
+  alt?: string | null;
+};
 
 export type MenuItemFragment = {
   __typename?: "MenuItem";
   id: string;
   name: string;
   url?: string | null;
-  translation?: { __typename?: "MenuItemTranslation"; id: string; name: string } | null;
+  translation?: {
+    __typename?: "MenuItemTranslation";
+    id: string;
+    name: string;
+  } | null;
   category?: { __typename?: "Category"; id: string; slug: string } | null;
   collection?: { __typename?: "Collection"; id: string; slug: string } | null;
   page?: { __typename?: "Page"; id: string; slug: string } | null;
@@ -25119,7 +25225,11 @@ export type MenuItemWithChildrenFragment = {
   id: string;
   name: string;
   url?: string | null;
-  translation?: { __typename?: "MenuItemTranslation"; id: string; name: string } | null;
+  translation?: {
+    __typename?: "MenuItemTranslation";
+    id: string;
+    name: string;
+  } | null;
   category?: { __typename?: "Category"; id: string; slug: string } | null;
   collection?: { __typename?: "Collection"; id: string; slug: string } | null;
   page?: { __typename?: "Page"; id: string; slug: string } | null;
@@ -25133,12 +25243,24 @@ export type MenuItemWithChildrenFragment = {
       id: string;
       name: string;
       url?: string | null;
-      translation?: { __typename?: "MenuItemTranslation"; id: string; name: string } | null;
+      translation?: {
+        __typename?: "MenuItemTranslation";
+        id: string;
+        name: string;
+      } | null;
       category?: { __typename?: "Category"; id: string; slug: string } | null;
-      collection?: { __typename?: "Collection"; id: string; slug: string } | null;
+      collection?: {
+        __typename?: "Collection";
+        id: string;
+        slug: string;
+      } | null;
       page?: { __typename?: "Page"; id: string; slug: string } | null;
     }> | null;
-    translation?: { __typename?: "MenuItemTranslation"; id: string; name: string } | null;
+    translation?: {
+      __typename?: "MenuItemTranslation";
+      id: string;
+      name: string;
+    } | null;
     category?: { __typename?: "Category"; id: string; slug: string } | null;
     collection?: { __typename?: "Collection"; id: string; slug: string } | null;
     page?: { __typename?: "Page"; id: string; slug: string } | null;
@@ -25167,20 +25289,32 @@ export type PageInfoFragment = {
   endCursor?: string | null;
 };
 
-export type PriceFragment = { __typename?: "Money"; currency: string; amount: number };
+export type PriceFragment = {
+  __typename?: "Money";
+  currency: string;
+  amount: number;
+};
 
 export type ProductCardFragment = {
   __typename?: "Product";
   id: string;
   slug: string;
   name: string;
-  translation?: { __typename?: "ProductTranslation"; id: string; name?: string | null } | null;
+  translation?: {
+    __typename?: "ProductTranslation";
+    id: string;
+    name?: string | null;
+  } | null;
   thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
   category?: {
     __typename?: "Category";
     id: string;
     name: string;
-    translation?: { __typename?: "CategoryTranslation"; id: string; name?: string | null } | null;
+    translation?: {
+      __typename?: "CategoryTranslation";
+      id: string;
+      name?: string | null;
+    } | null;
   } | null;
   media?: Array<{
     __typename?: "ProductMedia";
@@ -25218,7 +25352,11 @@ export type ProductDetailsFragment = {
       name?: string | null;
       type?: AttributeTypeEnum | null;
       unit?: MeasurementUnitsEnum | null;
-      translation?: { __typename?: "AttributeTranslation"; id: string; name: string } | null;
+      translation?: {
+        __typename?: "AttributeTranslation";
+        id: string;
+        name: string;
+      } | null;
     };
     values: Array<{
       __typename?: "AttributeValue";
@@ -25238,14 +25376,22 @@ export type ProductDetailsFragment = {
     name: string;
     id: string;
     slug: string;
-    translation?: { __typename?: "CategoryTranslation"; id: string; name?: string | null } | null;
+    translation?: {
+      __typename?: "CategoryTranslation";
+      id: string;
+      name?: string | null;
+    } | null;
   } | null;
   variants?: Array<{
     __typename?: "ProductVariant";
     id: string;
     name: string;
     quantityAvailable?: number | null;
-    translation?: { __typename?: "ProductVariantTranslation"; id: string; name: string } | null;
+    translation?: {
+      __typename?: "ProductVariantTranslation";
+      id: string;
+      name: string;
+    } | null;
     attributes: Array<{
       __typename?: "SelectedAttribute";
       attribute: {
@@ -25254,7 +25400,11 @@ export type ProductDetailsFragment = {
         name?: string | null;
         type?: AttributeTypeEnum | null;
         unit?: MeasurementUnitsEnum | null;
-        translation?: { __typename?: "AttributeTranslation"; id: string; name: string } | null;
+        translation?: {
+          __typename?: "AttributeTranslation";
+          id: string;
+          name: string;
+        } | null;
       };
       values: Array<{
         __typename?: "AttributeValue";
@@ -25314,7 +25464,11 @@ export type ProductVariantDetailsFragment = {
   id: string;
   name: string;
   quantityAvailable?: number | null;
-  translation?: { __typename?: "ProductVariantTranslation"; id: string; name: string } | null;
+  translation?: {
+    __typename?: "ProductVariantTranslation";
+    id: string;
+    name: string;
+  } | null;
   attributes: Array<{
     __typename?: "SelectedAttribute";
     attribute: {
@@ -25323,7 +25477,11 @@ export type ProductVariantDetailsFragment = {
       name?: string | null;
       type?: AttributeTypeEnum | null;
       unit?: MeasurementUnitsEnum | null;
-      translation?: { __typename?: "AttributeTranslation"; id: string; name: string } | null;
+      translation?: {
+        __typename?: "AttributeTranslation";
+        id: string;
+        name: string;
+      } | null;
     };
     values: Array<{
       __typename?: "AttributeValue";
@@ -25361,7 +25519,11 @@ export type SelectedAttributeDetailsFragment = {
     name?: string | null;
     type?: AttributeTypeEnum | null;
     unit?: MeasurementUnitsEnum | null;
-    translation?: { __typename?: "AttributeTranslation"; id: string; name: string } | null;
+    translation?: {
+      __typename?: "AttributeTranslation";
+      id: string;
+      name: string;
+    } | null;
   };
   values: Array<{
     __typename?: "AttributeValue";
@@ -25398,7 +25560,11 @@ export type AddressDeleteMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       }>;
     } | null;
   } | null;
@@ -25451,7 +25617,11 @@ export type CheckoutAddProductLineMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingAddress?: {
         __typename?: "Address";
@@ -25464,7 +25634,11 @@ export type CheckoutAddProductLineMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingMethod?: {
         __typename?: "ShippingMethod";
@@ -25496,7 +25670,11 @@ export type CheckoutAddProductLineMutation = {
         __typename?: "PaymentGateway";
         id: string;
         name: string;
-        config: Array<{ __typename?: "GatewayConfigLine"; field: string; value?: string | null }>;
+        config: Array<{
+          __typename?: "GatewayConfigLine";
+          field: string;
+          value?: string | null;
+        }>;
       }>;
       lines: Array<{
         __typename?: "CheckoutLine";
@@ -25520,7 +25698,11 @@ export type CheckoutAddProductLineMutation = {
               id: string;
               name?: string | null;
             } | null;
-            thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+            thumbnail?: {
+              __typename?: "Image";
+              url: string;
+              alt?: string | null;
+            } | null;
           };
           pricing?: {
             __typename?: "VariantPricingInfo";
@@ -25536,7 +25718,11 @@ export type CheckoutAddProductLineMutation = {
           } | null;
         };
       }>;
-      discount?: { __typename?: "Money"; currency: string; amount: number } | null;
+      discount?: {
+        __typename?: "Money";
+        currency: string;
+        amount: number;
+      } | null;
       subtotalPrice: {
         __typename?: "TaxedMoney";
         net: { __typename?: "Money"; currency: string; amount: number };
@@ -25587,7 +25773,11 @@ export type CheckoutAddPromoCodeMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingAddress?: {
         __typename?: "Address";
@@ -25600,7 +25790,11 @@ export type CheckoutAddPromoCodeMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingMethod?: {
         __typename?: "ShippingMethod";
@@ -25632,7 +25826,11 @@ export type CheckoutAddPromoCodeMutation = {
         __typename?: "PaymentGateway";
         id: string;
         name: string;
-        config: Array<{ __typename?: "GatewayConfigLine"; field: string; value?: string | null }>;
+        config: Array<{
+          __typename?: "GatewayConfigLine";
+          field: string;
+          value?: string | null;
+        }>;
       }>;
       lines: Array<{
         __typename?: "CheckoutLine";
@@ -25656,7 +25854,11 @@ export type CheckoutAddPromoCodeMutation = {
               id: string;
               name?: string | null;
             } | null;
-            thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+            thumbnail?: {
+              __typename?: "Image";
+              url: string;
+              alt?: string | null;
+            } | null;
           };
           pricing?: {
             __typename?: "VariantPricingInfo";
@@ -25672,7 +25874,11 @@ export type CheckoutAddPromoCodeMutation = {
           } | null;
         };
       }>;
-      discount?: { __typename?: "Money"; currency: string; amount: number } | null;
+      discount?: {
+        __typename?: "Money";
+        currency: string;
+        amount: number;
+      } | null;
       subtotalPrice: {
         __typename?: "TaxedMoney";
         net: { __typename?: "Money"; currency: string; amount: number };
@@ -25687,7 +25893,11 @@ export type CheckoutAddPromoCodeMutation = {
         gross: { __typename?: "Money"; currency: string; amount: number };
       };
     } | null;
-    errors: Array<{ __typename?: "CheckoutError"; message?: string | null; field?: string | null }>;
+    errors: Array<{
+      __typename?: "CheckoutError";
+      message?: string | null;
+      field?: string | null;
+    }>;
   } | null;
 };
 
@@ -25719,7 +25929,11 @@ export type CheckoutBillingAddressUpdateMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingAddress?: {
         __typename?: "Address";
@@ -25732,7 +25946,11 @@ export type CheckoutBillingAddressUpdateMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingMethod?: {
         __typename?: "ShippingMethod";
@@ -25764,7 +25982,11 @@ export type CheckoutBillingAddressUpdateMutation = {
         __typename?: "PaymentGateway";
         id: string;
         name: string;
-        config: Array<{ __typename?: "GatewayConfigLine"; field: string; value?: string | null }>;
+        config: Array<{
+          __typename?: "GatewayConfigLine";
+          field: string;
+          value?: string | null;
+        }>;
       }>;
       lines: Array<{
         __typename?: "CheckoutLine";
@@ -25788,7 +26010,11 @@ export type CheckoutBillingAddressUpdateMutation = {
               id: string;
               name?: string | null;
             } | null;
-            thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+            thumbnail?: {
+              __typename?: "Image";
+              url: string;
+              alt?: string | null;
+            } | null;
           };
           pricing?: {
             __typename?: "VariantPricingInfo";
@@ -25804,7 +26030,11 @@ export type CheckoutBillingAddressUpdateMutation = {
           } | null;
         };
       }>;
-      discount?: { __typename?: "Money"; currency: string; amount: number } | null;
+      discount?: {
+        __typename?: "Money";
+        currency: string;
+        amount: number;
+      } | null;
       subtotalPrice: {
         __typename?: "TaxedMoney";
         net: { __typename?: "Money"; currency: string; amount: number };
@@ -25855,7 +26085,11 @@ export type CheckoutCompleteMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingAddress?: {
         __typename?: "Address";
@@ -25868,7 +26102,11 @@ export type CheckoutCompleteMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
     } | null;
     errors: Array<{
@@ -25915,7 +26153,11 @@ export type CheckoutPaymentCreateMutation = {
       id: string;
       total?: { __typename?: "Money"; currency: string; amount: number } | null;
     } | null;
-    errors: Array<{ __typename?: "PaymentError"; field?: string | null; message?: string | null }>;
+    errors: Array<{
+      __typename?: "PaymentError";
+      field?: string | null;
+      message?: string | null;
+    }>;
   } | null;
 };
 
@@ -25947,7 +26189,11 @@ export type CheckoutEmailUpdateMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingAddress?: {
         __typename?: "Address";
@@ -25960,7 +26206,11 @@ export type CheckoutEmailUpdateMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingMethod?: {
         __typename?: "ShippingMethod";
@@ -25992,7 +26242,11 @@ export type CheckoutEmailUpdateMutation = {
         __typename?: "PaymentGateway";
         id: string;
         name: string;
-        config: Array<{ __typename?: "GatewayConfigLine"; field: string; value?: string | null }>;
+        config: Array<{
+          __typename?: "GatewayConfigLine";
+          field: string;
+          value?: string | null;
+        }>;
       }>;
       lines: Array<{
         __typename?: "CheckoutLine";
@@ -26016,7 +26270,11 @@ export type CheckoutEmailUpdateMutation = {
               id: string;
               name?: string | null;
             } | null;
-            thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+            thumbnail?: {
+              __typename?: "Image";
+              url: string;
+              alt?: string | null;
+            } | null;
           };
           pricing?: {
             __typename?: "VariantPricingInfo";
@@ -26032,7 +26290,11 @@ export type CheckoutEmailUpdateMutation = {
           } | null;
         };
       }>;
-      discount?: { __typename?: "Money"; currency: string; amount: number } | null;
+      discount?: {
+        __typename?: "Money";
+        currency: string;
+        amount: number;
+      } | null;
       subtotalPrice: {
         __typename?: "TaxedMoney";
         net: { __typename?: "Money"; currency: string; amount: number };
@@ -26047,7 +26309,11 @@ export type CheckoutEmailUpdateMutation = {
         gross: { __typename?: "Money"; currency: string; amount: number };
       };
     } | null;
-    errors: Array<{ __typename?: "CheckoutError"; field?: string | null; message?: string | null }>;
+    errors: Array<{
+      __typename?: "CheckoutError";
+      field?: string | null;
+      message?: string | null;
+    }>;
   } | null;
 };
 
@@ -26079,7 +26345,11 @@ export type CheckoutLineUpdateMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingAddress?: {
         __typename?: "Address";
@@ -26092,7 +26362,11 @@ export type CheckoutLineUpdateMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingMethod?: {
         __typename?: "ShippingMethod";
@@ -26124,7 +26398,11 @@ export type CheckoutLineUpdateMutation = {
         __typename?: "PaymentGateway";
         id: string;
         name: string;
-        config: Array<{ __typename?: "GatewayConfigLine"; field: string; value?: string | null }>;
+        config: Array<{
+          __typename?: "GatewayConfigLine";
+          field: string;
+          value?: string | null;
+        }>;
       }>;
       lines: Array<{
         __typename?: "CheckoutLine";
@@ -26148,7 +26426,11 @@ export type CheckoutLineUpdateMutation = {
               id: string;
               name?: string | null;
             } | null;
-            thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+            thumbnail?: {
+              __typename?: "Image";
+              url: string;
+              alt?: string | null;
+            } | null;
           };
           pricing?: {
             __typename?: "VariantPricingInfo";
@@ -26164,7 +26446,11 @@ export type CheckoutLineUpdateMutation = {
           } | null;
         };
       }>;
-      discount?: { __typename?: "Money"; currency: string; amount: number } | null;
+      discount?: {
+        __typename?: "Money";
+        currency: string;
+        amount: number;
+      } | null;
       subtotalPrice: {
         __typename?: "TaxedMoney";
         net: { __typename?: "Money"; currency: string; amount: number };
@@ -26216,7 +26502,11 @@ export type RemoveProductFromCheckoutMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingAddress?: {
         __typename?: "Address";
@@ -26229,7 +26519,11 @@ export type RemoveProductFromCheckoutMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingMethod?: {
         __typename?: "ShippingMethod";
@@ -26261,7 +26555,11 @@ export type RemoveProductFromCheckoutMutation = {
         __typename?: "PaymentGateway";
         id: string;
         name: string;
-        config: Array<{ __typename?: "GatewayConfigLine"; field: string; value?: string | null }>;
+        config: Array<{
+          __typename?: "GatewayConfigLine";
+          field: string;
+          value?: string | null;
+        }>;
       }>;
       lines: Array<{
         __typename?: "CheckoutLine";
@@ -26285,7 +26583,11 @@ export type RemoveProductFromCheckoutMutation = {
               id: string;
               name?: string | null;
             } | null;
-            thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+            thumbnail?: {
+              __typename?: "Image";
+              url: string;
+              alt?: string | null;
+            } | null;
           };
           pricing?: {
             __typename?: "VariantPricingInfo";
@@ -26301,7 +26603,11 @@ export type RemoveProductFromCheckoutMutation = {
           } | null;
         };
       }>;
-      discount?: { __typename?: "Money"; currency: string; amount: number } | null;
+      discount?: {
+        __typename?: "Money";
+        currency: string;
+        amount: number;
+      } | null;
       subtotalPrice: {
         __typename?: "TaxedMoney";
         net: { __typename?: "Money"; currency: string; amount: number };
@@ -26316,7 +26622,11 @@ export type RemoveProductFromCheckoutMutation = {
         gross: { __typename?: "Money"; currency: string; amount: number };
       };
     } | null;
-    errors: Array<{ __typename?: "CheckoutError"; field?: string | null; message?: string | null }>;
+    errors: Array<{
+      __typename?: "CheckoutError";
+      field?: string | null;
+      message?: string | null;
+    }>;
   } | null;
 };
 
@@ -26348,7 +26658,11 @@ export type CheckoutShippingAddressUpdateMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingAddress?: {
         __typename?: "Address";
@@ -26361,7 +26675,11 @@ export type CheckoutShippingAddressUpdateMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingMethod?: {
         __typename?: "ShippingMethod";
@@ -26393,7 +26711,11 @@ export type CheckoutShippingAddressUpdateMutation = {
         __typename?: "PaymentGateway";
         id: string;
         name: string;
-        config: Array<{ __typename?: "GatewayConfigLine"; field: string; value?: string | null }>;
+        config: Array<{
+          __typename?: "GatewayConfigLine";
+          field: string;
+          value?: string | null;
+        }>;
       }>;
       lines: Array<{
         __typename?: "CheckoutLine";
@@ -26417,7 +26739,11 @@ export type CheckoutShippingAddressUpdateMutation = {
               id: string;
               name?: string | null;
             } | null;
-            thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+            thumbnail?: {
+              __typename?: "Image";
+              url: string;
+              alt?: string | null;
+            } | null;
           };
           pricing?: {
             __typename?: "VariantPricingInfo";
@@ -26433,7 +26759,11 @@ export type CheckoutShippingAddressUpdateMutation = {
           } | null;
         };
       }>;
-      discount?: { __typename?: "Money"; currency: string; amount: number } | null;
+      discount?: {
+        __typename?: "Money";
+        currency: string;
+        amount: number;
+      } | null;
       subtotalPrice: {
         __typename?: "TaxedMoney";
         net: { __typename?: "Money"; currency: string; amount: number };
@@ -26485,7 +26815,11 @@ export type CheckoutShippingMethodUpdateMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingAddress?: {
         __typename?: "Address";
@@ -26498,7 +26832,11 @@ export type CheckoutShippingMethodUpdateMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       } | null;
       shippingMethod?: {
         __typename?: "ShippingMethod";
@@ -26530,7 +26868,11 @@ export type CheckoutShippingMethodUpdateMutation = {
         __typename?: "PaymentGateway";
         id: string;
         name: string;
-        config: Array<{ __typename?: "GatewayConfigLine"; field: string; value?: string | null }>;
+        config: Array<{
+          __typename?: "GatewayConfigLine";
+          field: string;
+          value?: string | null;
+        }>;
       }>;
       lines: Array<{
         __typename?: "CheckoutLine";
@@ -26554,7 +26896,11 @@ export type CheckoutShippingMethodUpdateMutation = {
               id: string;
               name?: string | null;
             } | null;
-            thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+            thumbnail?: {
+              __typename?: "Image";
+              url: string;
+              alt?: string | null;
+            } | null;
           };
           pricing?: {
             __typename?: "VariantPricingInfo";
@@ -26570,7 +26916,11 @@ export type CheckoutShippingMethodUpdateMutation = {
           } | null;
         };
       }>;
-      discount?: { __typename?: "Money"; currency: string; amount: number } | null;
+      discount?: {
+        __typename?: "Money";
+        currency: string;
+        amount: number;
+      } | null;
       subtotalPrice: {
         __typename?: "TaxedMoney";
         net: { __typename?: "Money"; currency: string; amount: number };
@@ -26616,10 +26966,18 @@ export type SetAddressDefaultMutation = {
         postalCode: string;
         isDefaultBillingAddress?: boolean | null;
         isDefaultShippingAddress?: boolean | null;
-        country: { __typename?: "CountryDisplay"; code: string; country: string };
+        country: {
+          __typename?: "CountryDisplay";
+          code: string;
+          country: string;
+        };
       }>;
     } | null;
-    errors: Array<{ __typename?: "AccountError"; code: AccountErrorCode; message?: string | null }>;
+    errors: Array<{
+      __typename?: "AccountError";
+      code: AccountErrorCode;
+      message?: string | null;
+    }>;
   } | null;
 };
 
@@ -26723,7 +27081,11 @@ export type CategoryBySlugQuery = {
       description?: string | null;
       name?: string | null;
     } | null;
-    backgroundImage?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+    backgroundImage?: {
+      __typename?: "Image";
+      url: string;
+      alt?: string | null;
+    } | null;
     ancestors?: {
       __typename?: "CategoryCountableConnection";
       edges: Array<{
@@ -26852,7 +27214,11 @@ export type CheckoutByTokenQuery = {
       __typename?: "PaymentGateway";
       id: string;
       name: string;
-      config: Array<{ __typename?: "GatewayConfigLine"; field: string; value?: string | null }>;
+      config: Array<{
+        __typename?: "GatewayConfigLine";
+        field: string;
+        value?: string | null;
+      }>;
     }>;
     lines: Array<{
       __typename?: "CheckoutLine";
@@ -26876,7 +27242,11 @@ export type CheckoutByTokenQuery = {
             id: string;
             name?: string | null;
           } | null;
-          thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+          thumbnail?: {
+            __typename?: "Image";
+            url: string;
+            alt?: string | null;
+          } | null;
         };
         pricing?: {
           __typename?: "VariantPricingInfo";
@@ -26885,10 +27255,18 @@ export type CheckoutByTokenQuery = {
             gross: { __typename?: "Money"; currency: string; amount: number };
           } | null;
         } | null;
-        translation?: { __typename?: "ProductVariantTranslation"; id: string; name: string } | null;
+        translation?: {
+          __typename?: "ProductVariantTranslation";
+          id: string;
+          name: string;
+        } | null;
       };
     }>;
-    discount?: { __typename?: "Money"; currency: string; amount: number } | null;
+    discount?: {
+      __typename?: "Money";
+      currency: string;
+      amount: number;
+    } | null;
     subtotalPrice: {
       __typename?: "TaxedMoney";
       net: { __typename?: "Money"; currency: string; amount: number };
@@ -26921,7 +27299,11 @@ export type CollectionBySlugQuery = {
     description?: string | null;
     name: string;
     slug: string;
-    backgroundImage?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+    backgroundImage?: {
+      __typename?: "Image";
+      url: string;
+      alt?: string | null;
+    } | null;
     translation?: {
       __typename?: "CollectionTranslation";
       id: string;
@@ -26966,7 +27348,10 @@ export type CurrentUserDetailsQuery = {
     firstName: string;
     lastName: string;
     avatar?: { __typename?: "Image"; url: string; alt?: string | null } | null;
-    orders?: { __typename?: "OrderCountableConnection"; totalCount?: number | null } | null;
+    orders?: {
+      __typename?: "OrderCountableConnection";
+      totalCount?: number | null;
+    } | null;
   } | null;
 };
 
@@ -26990,7 +27375,11 @@ export type FilteringAttributesQuery = {
         name?: string | null;
         slug?: string | null;
         withChoices: boolean;
-        translation?: { __typename?: "AttributeTranslation"; id: string; name: string } | null;
+        translation?: {
+          __typename?: "AttributeTranslation";
+          id: string;
+          name: string;
+        } | null;
         choices?: {
           __typename?: "AttributeValueCountableConnection";
           edges: Array<{
@@ -27001,7 +27390,10 @@ export type FilteringAttributesQuery = {
               id: string;
               name?: string | null;
               slug?: string | null;
-              translation?: { __typename?: "AttributeValueTranslation"; name: string } | null;
+              translation?: {
+                __typename?: "AttributeValueTranslation";
+                name: string;
+              } | null;
             };
           }>;
         } | null;
@@ -27030,14 +27422,30 @@ export type FooterMenuQuery = {
         id: string;
         name: string;
         url?: string | null;
-        translation?: { __typename?: "MenuItemTranslation"; id: string; name: string } | null;
+        translation?: {
+          __typename?: "MenuItemTranslation";
+          id: string;
+          name: string;
+        } | null;
         category?: { __typename?: "Category"; id: string; slug: string } | null;
-        collection?: { __typename?: "Collection"; id: string; slug: string } | null;
+        collection?: {
+          __typename?: "Collection";
+          id: string;
+          slug: string;
+        } | null;
         page?: { __typename?: "Page"; id: string; slug: string } | null;
       }> | null;
-      translation?: { __typename?: "MenuItemTranslation"; id: string; name: string } | null;
+      translation?: {
+        __typename?: "MenuItemTranslation";
+        id: string;
+        name: string;
+      } | null;
       category?: { __typename?: "Category"; id: string; slug: string } | null;
-      collection?: { __typename?: "Collection"; id: string; slug: string } | null;
+      collection?: {
+        __typename?: "Collection";
+        id: string;
+        slug: string;
+      } | null;
       page?: { __typename?: "Page"; id: string; slug: string } | null;
     }> | null;
   } | null;
@@ -27060,9 +27468,17 @@ export type HomepageBlocksQuery = {
       __typename?: "MenuItem";
       id: string;
       name: string;
-      translation?: { __typename?: "MenuItemTranslation"; id: string; name: string } | null;
+      translation?: {
+        __typename?: "MenuItemTranslation";
+        id: string;
+        name: string;
+      } | null;
       category?: { __typename?: "Category"; id: string; slug: string } | null;
-      collection?: { __typename?: "Collection"; id: string; slug: string } | null;
+      collection?: {
+        __typename?: "Collection";
+        id: string;
+        slug: string;
+      } | null;
       page?: {
         __typename?: "Page";
         id: string;
@@ -27094,9 +27510,17 @@ export type MainMenuQuery = {
       id: string;
       name: string;
       url?: string | null;
-      translation?: { __typename?: "MenuItemTranslation"; id: string; name: string } | null;
+      translation?: {
+        __typename?: "MenuItemTranslation";
+        id: string;
+        name: string;
+      } | null;
       category?: { __typename?: "Category"; id: string; slug: string } | null;
-      collection?: { __typename?: "Collection"; id: string; slug: string } | null;
+      collection?: {
+        __typename?: "Collection";
+        id: string;
+        slug: string;
+      } | null;
       page?: { __typename?: "Page"; id: string; slug: string } | null;
       children?: Array<{
         __typename?: "MenuItem";
@@ -27108,14 +27532,34 @@ export type MainMenuQuery = {
           id: string;
           name: string;
           url?: string | null;
-          translation?: { __typename?: "MenuItemTranslation"; id: string; name: string } | null;
-          category?: { __typename?: "Category"; id: string; slug: string } | null;
-          collection?: { __typename?: "Collection"; id: string; slug: string } | null;
+          translation?: {
+            __typename?: "MenuItemTranslation";
+            id: string;
+            name: string;
+          } | null;
+          category?: {
+            __typename?: "Category";
+            id: string;
+            slug: string;
+          } | null;
+          collection?: {
+            __typename?: "Collection";
+            id: string;
+            slug: string;
+          } | null;
           page?: { __typename?: "Page"; id: string; slug: string } | null;
         }> | null;
-        translation?: { __typename?: "MenuItemTranslation"; id: string; name: string } | null;
+        translation?: {
+          __typename?: "MenuItemTranslation";
+          id: string;
+          name: string;
+        } | null;
         category?: { __typename?: "Category"; id: string; slug: string } | null;
-        collection?: { __typename?: "Collection"; id: string; slug: string } | null;
+        collection?: {
+          __typename?: "Collection";
+          id: string;
+          slug: string;
+        } | null;
         page?: { __typename?: "Page"; id: string; slug: string } | null;
       }> | null;
     }> | null;
@@ -27148,7 +27592,11 @@ export type OrderDetailsQuery = {
       productName: string;
       variantName: string;
       quantity: number;
-      thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+      thumbnail?: {
+        __typename?: "Image";
+        url: string;
+        alt?: string | null;
+      } | null;
       totalPrice: {
         __typename?: "TaxedMoney";
         gross: { __typename?: "Money"; currency: string; amount: number };
@@ -27206,7 +27654,11 @@ export type OrderDetailsQuery = {
       productName: string;
       variantName: string;
       quantity: number;
-      thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+      thumbnail?: {
+        __typename?: "Image";
+        url: string;
+        alt?: string | null;
+      } | null;
       unitPrice: {
         __typename?: "TaxedMoney";
         gross: { __typename?: "Money"; currency: string; amount: number };
@@ -27275,7 +27727,11 @@ export type OrderDetailsByTokenQuery = {
       productName: string;
       variantName: string;
       quantity: number;
-      thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+      thumbnail?: {
+        __typename?: "Image";
+        url: string;
+        alt?: string | null;
+      } | null;
       unitPrice: {
         __typename?: "TaxedMoney";
         gross: { __typename?: "Money"; currency: string; amount: number };
@@ -27372,7 +27828,10 @@ export type PagePathsQuery = {
       startCursor?: string | null;
       endCursor?: string | null;
     };
-    edges: Array<{ __typename?: "PageCountableEdge"; node: { __typename?: "Page"; slug: string } }>;
+    edges: Array<{
+      __typename?: "PageCountableEdge";
+      node: { __typename?: "Page"; slug: string };
+    }>;
   } | null;
 };
 
@@ -27407,7 +27866,11 @@ export type ProductBySlugQuery = {
         name?: string | null;
         type?: AttributeTypeEnum | null;
         unit?: MeasurementUnitsEnum | null;
-        translation?: { __typename?: "AttributeTranslation"; id: string; name: string } | null;
+        translation?: {
+          __typename?: "AttributeTranslation";
+          id: string;
+          name: string;
+        } | null;
       };
       values: Array<{
         __typename?: "AttributeValue";
@@ -27427,14 +27890,22 @@ export type ProductBySlugQuery = {
       name: string;
       id: string;
       slug: string;
-      translation?: { __typename?: "CategoryTranslation"; id: string; name?: string | null } | null;
+      translation?: {
+        __typename?: "CategoryTranslation";
+        id: string;
+        name?: string | null;
+      } | null;
     } | null;
     variants?: Array<{
       __typename?: "ProductVariant";
       id: string;
       name: string;
       quantityAvailable?: number | null;
-      translation?: { __typename?: "ProductVariantTranslation"; id: string; name: string } | null;
+      translation?: {
+        __typename?: "ProductVariantTranslation";
+        id: string;
+        name: string;
+      } | null;
       attributes: Array<{
         __typename?: "SelectedAttribute";
         attribute: {
@@ -27443,7 +27914,11 @@ export type ProductBySlugQuery = {
           name?: string | null;
           type?: AttributeTypeEnum | null;
           unit?: MeasurementUnitsEnum | null;
-          translation?: { __typename?: "AttributeTranslation"; id: string; name: string } | null;
+          translation?: {
+            __typename?: "AttributeTranslation";
+            id: string;
+            name: string;
+          } | null;
         };
         values: Array<{
           __typename?: "AttributeValue";
@@ -27488,7 +27963,11 @@ export type ProductBySlugQuery = {
       alt: string;
       type: ProductMediaType;
     }> | null;
-    thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+    thumbnail?: {
+      __typename?: "Image";
+      url: string;
+      alt?: string | null;
+    } | null;
   } | null;
 };
 
@@ -27520,7 +27999,11 @@ export type ProductCollectionQuery = {
           id: string;
           name?: string | null;
         } | null;
-        thumbnail?: { __typename?: "Image"; url: string; alt?: string | null } | null;
+        thumbnail?: {
+          __typename?: "Image";
+          url: string;
+          alt?: string | null;
+        } | null;
         category?: {
           __typename?: "Category";
           id: string;
@@ -27540,7 +28023,10 @@ export type ProductCollectionQuery = {
         attributes: Array<{
           __typename?: "SelectedAttribute";
           attribute: { __typename?: "Attribute"; slug?: string | null };
-          values: Array<{ __typename?: "AttributeValue"; name?: string | null }>;
+          values: Array<{
+            __typename?: "AttributeValue";
+            name?: string | null;
+          }>;
         }>;
       };
     }>;
@@ -27626,7 +28112,9 @@ export type UserQuery = {
   } | null;
 };
 
-export type CurrentUserAddressesQueryVariables = Exact<{ [key: string]: never }>;
+export type CurrentUserAddressesQueryVariables = Exact<{
+  [key: string]: never;
+}>;
 
 export type CurrentUserAddressesQuery = {
   __typename?: "Query";
@@ -28068,6 +28556,7 @@ export const SelectedAttributeDetailsFragmentDoc = gql`
         richText
       }
       value
+      richText
     }
   }
 `;
@@ -28189,23 +28678,37 @@ export type AddressDeleteMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useAddressDeleteMutation(
-  baseOptions?: Apollo.MutationHookOptions<AddressDeleteMutation, AddressDeleteMutationVariables>
+  baseOptions?: Apollo.MutationHookOptions<
+    AddressDeleteMutation,
+    AddressDeleteMutationVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<AddressDeleteMutation, AddressDeleteMutationVariables>(
-    AddressDeleteDocument,
-    options
-  );
+  return Apollo.useMutation<
+    AddressDeleteMutation,
+    AddressDeleteMutationVariables
+  >(AddressDeleteDocument, options);
 }
-export type AddressDeleteMutationHookResult = ReturnType<typeof useAddressDeleteMutation>;
-export type AddressDeleteMutationResult = Apollo.MutationResult<AddressDeleteMutation>;
+export type AddressDeleteMutationHookResult = ReturnType<
+  typeof useAddressDeleteMutation
+>;
+export type AddressDeleteMutationResult =
+  Apollo.MutationResult<AddressDeleteMutation>;
 export type AddressDeleteMutationOptions = Apollo.BaseMutationOptions<
   AddressDeleteMutation,
   AddressDeleteMutationVariables
 >;
 export const AddressSetDefaultDocument = gql`
-  mutation AddressSetDefault($addressID: ID!, $userID: ID!, $addressType: AddressTypeEnum!) {
-    addressSetDefault(addressId: $addressID, type: $addressType, userId: $userID) {
+  mutation AddressSetDefault(
+    $addressID: ID!
+    $userID: ID!
+    $addressType: AddressTypeEnum!
+  ) {
+    addressSetDefault(
+      addressId: $addressID
+      type: $addressType
+      userId: $userID
+    ) {
       errors {
         field
         message
@@ -28245,13 +28748,16 @@ export function useAddressSetDefaultMutation(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<AddressSetDefaultMutation, AddressSetDefaultMutationVariables>(
-    AddressSetDefaultDocument,
-    options
-  );
+  return Apollo.useMutation<
+    AddressSetDefaultMutation,
+    AddressSetDefaultMutationVariables
+  >(AddressSetDefaultDocument, options);
 }
-export type AddressSetDefaultMutationHookResult = ReturnType<typeof useAddressSetDefaultMutation>;
-export type AddressSetDefaultMutationResult = Apollo.MutationResult<AddressSetDefaultMutation>;
+export type AddressSetDefaultMutationHookResult = ReturnType<
+  typeof useAddressSetDefaultMutation
+>;
+export type AddressSetDefaultMutationResult =
+  Apollo.MutationResult<AddressSetDefaultMutation>;
 export type AddressSetDefaultMutationOptions = Apollo.BaseMutationOptions<
   AddressSetDefaultMutation,
   AddressSetDefaultMutationVariables
@@ -28262,7 +28768,10 @@ export const CheckoutAddProductLineDocument = gql`
     $variantId: ID!
     $locale: LanguageCodeEnum!
   ) {
-    checkoutLinesAdd(token: $checkoutToken, lines: [{ quantity: 1, variantId: $variantId }]) {
+    checkoutLinesAdd(
+      token: $checkoutToken
+      lines: [{ quantity: 1, variantId: $variantId }]
+    ) {
       checkout {
         ...CheckoutDetailsFragment
       }
@@ -28320,7 +28829,11 @@ export type CheckoutAddProductLineMutationOptions = Apollo.BaseMutationOptions<
   CheckoutAddProductLineMutationVariables
 >;
 export const CheckoutAddPromoCodeDocument = gql`
-  mutation CheckoutAddPromoCode($token: UUID!, $promoCode: String!, $locale: LanguageCodeEnum!) {
+  mutation CheckoutAddPromoCode(
+    $token: UUID!
+    $promoCode: String!
+    $locale: LanguageCodeEnum!
+  ) {
     checkoutAddPromoCode(token: $token, promoCode: $promoCode) {
       checkout {
         ...CheckoutDetailsFragment
@@ -28364,10 +28877,10 @@ export function useCheckoutAddPromoCodeMutation(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CheckoutAddPromoCodeMutation, CheckoutAddPromoCodeMutationVariables>(
-    CheckoutAddPromoCodeDocument,
-    options
-  );
+  return Apollo.useMutation<
+    CheckoutAddPromoCodeMutation,
+    CheckoutAddPromoCodeMutationVariables
+  >(CheckoutAddPromoCodeDocument, options);
 }
 export type CheckoutAddPromoCodeMutationHookResult = ReturnType<
   typeof useCheckoutAddPromoCodeMutation
@@ -28438,10 +28951,11 @@ export type CheckoutBillingAddressUpdateMutationHookResult = ReturnType<
 >;
 export type CheckoutBillingAddressUpdateMutationResult =
   Apollo.MutationResult<CheckoutBillingAddressUpdateMutation>;
-export type CheckoutBillingAddressUpdateMutationOptions = Apollo.BaseMutationOptions<
-  CheckoutBillingAddressUpdateMutation,
-  CheckoutBillingAddressUpdateMutationVariables
->;
+export type CheckoutBillingAddressUpdateMutationOptions =
+  Apollo.BaseMutationOptions<
+    CheckoutBillingAddressUpdateMutation,
+    CheckoutBillingAddressUpdateMutationVariables
+  >;
 export const CheckoutCompleteDocument = gql`
   mutation checkoutComplete($checkoutToken: UUID!, $paymentData: JSONString) {
     checkoutComplete(token: $checkoutToken, paymentData: $paymentData) {
@@ -28500,19 +29014,26 @@ export function useCheckoutCompleteMutation(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CheckoutCompleteMutation, CheckoutCompleteMutationVariables>(
-    CheckoutCompleteDocument,
-    options
-  );
+  return Apollo.useMutation<
+    CheckoutCompleteMutation,
+    CheckoutCompleteMutationVariables
+  >(CheckoutCompleteDocument, options);
 }
-export type CheckoutCompleteMutationHookResult = ReturnType<typeof useCheckoutCompleteMutation>;
-export type CheckoutCompleteMutationResult = Apollo.MutationResult<CheckoutCompleteMutation>;
+export type CheckoutCompleteMutationHookResult = ReturnType<
+  typeof useCheckoutCompleteMutation
+>;
+export type CheckoutCompleteMutationResult =
+  Apollo.MutationResult<CheckoutCompleteMutation>;
 export type CheckoutCompleteMutationOptions = Apollo.BaseMutationOptions<
   CheckoutCompleteMutation,
   CheckoutCompleteMutationVariables
 >;
 export const CreateCheckoutDocument = gql`
-  mutation CreateCheckout($email: String, $lines: [CheckoutLineInput!]!, $channel: String!) {
+  mutation CreateCheckout(
+    $email: String
+    $lines: [CheckoutLineInput!]!
+    $channel: String!
+  ) {
     checkoutCreate(input: { channel: $channel, email: $email, lines: $lines }) {
       checkout {
         id
@@ -28551,22 +29072,31 @@ export type CreateCheckoutMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useCreateCheckoutMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateCheckoutMutation, CreateCheckoutMutationVariables>
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateCheckoutMutation,
+    CreateCheckoutMutationVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateCheckoutMutation, CreateCheckoutMutationVariables>(
-    CreateCheckoutDocument,
-    options
-  );
+  return Apollo.useMutation<
+    CreateCheckoutMutation,
+    CreateCheckoutMutationVariables
+  >(CreateCheckoutDocument, options);
 }
-export type CreateCheckoutMutationHookResult = ReturnType<typeof useCreateCheckoutMutation>;
-export type CreateCheckoutMutationResult = Apollo.MutationResult<CreateCheckoutMutation>;
+export type CreateCheckoutMutationHookResult = ReturnType<
+  typeof useCreateCheckoutMutation
+>;
+export type CreateCheckoutMutationResult =
+  Apollo.MutationResult<CreateCheckoutMutation>;
 export type CreateCheckoutMutationOptions = Apollo.BaseMutationOptions<
   CreateCheckoutMutation,
   CreateCheckoutMutationVariables
 >;
 export const CheckoutPaymentCreateDocument = gql`
-  mutation checkoutPaymentCreate($checkoutToken: UUID!, $paymentInput: PaymentInput!) {
+  mutation checkoutPaymentCreate(
+    $checkoutToken: UUID!
+    $paymentInput: PaymentInput!
+  ) {
     checkoutPaymentCreate(token: $checkoutToken, input: $paymentInput) {
       payment {
         id
@@ -28612,10 +29142,10 @@ export function useCheckoutPaymentCreateMutation(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CheckoutPaymentCreateMutation, CheckoutPaymentCreateMutationVariables>(
-    CheckoutPaymentCreateDocument,
-    options
-  );
+  return Apollo.useMutation<
+    CheckoutPaymentCreateMutation,
+    CheckoutPaymentCreateMutationVariables
+  >(CheckoutPaymentCreateDocument, options);
 }
 export type CheckoutPaymentCreateMutationHookResult = ReturnType<
   typeof useCheckoutPaymentCreateMutation
@@ -28627,7 +29157,11 @@ export type CheckoutPaymentCreateMutationOptions = Apollo.BaseMutationOptions<
   CheckoutPaymentCreateMutationVariables
 >;
 export const CheckoutEmailUpdateDocument = gql`
-  mutation CheckoutEmailUpdate($token: UUID!, $email: String!, $locale: LanguageCodeEnum!) {
+  mutation CheckoutEmailUpdate(
+    $token: UUID!
+    $email: String!
+    $locale: LanguageCodeEnum!
+  ) {
     checkoutEmailUpdate(email: $email, token: $token) {
       checkout {
         ...CheckoutDetailsFragment
@@ -28671,15 +29205,16 @@ export function useCheckoutEmailUpdateMutation(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CheckoutEmailUpdateMutation, CheckoutEmailUpdateMutationVariables>(
-    CheckoutEmailUpdateDocument,
-    options
-  );
+  return Apollo.useMutation<
+    CheckoutEmailUpdateMutation,
+    CheckoutEmailUpdateMutationVariables
+  >(CheckoutEmailUpdateDocument, options);
 }
 export type CheckoutEmailUpdateMutationHookResult = ReturnType<
   typeof useCheckoutEmailUpdateMutation
 >;
-export type CheckoutEmailUpdateMutationResult = Apollo.MutationResult<CheckoutEmailUpdateMutation>;
+export type CheckoutEmailUpdateMutationResult =
+  Apollo.MutationResult<CheckoutEmailUpdateMutation>;
 export type CheckoutEmailUpdateMutationOptions = Apollo.BaseMutationOptions<
   CheckoutEmailUpdateMutation,
   CheckoutEmailUpdateMutationVariables
@@ -28733,13 +29268,16 @@ export function useCheckoutLineUpdateMutation(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CheckoutLineUpdateMutation, CheckoutLineUpdateMutationVariables>(
-    CheckoutLineUpdateDocument,
-    options
-  );
+  return Apollo.useMutation<
+    CheckoutLineUpdateMutation,
+    CheckoutLineUpdateMutationVariables
+  >(CheckoutLineUpdateDocument, options);
 }
-export type CheckoutLineUpdateMutationHookResult = ReturnType<typeof useCheckoutLineUpdateMutation>;
-export type CheckoutLineUpdateMutationResult = Apollo.MutationResult<CheckoutLineUpdateMutation>;
+export type CheckoutLineUpdateMutationHookResult = ReturnType<
+  typeof useCheckoutLineUpdateMutation
+>;
+export type CheckoutLineUpdateMutationResult =
+  Apollo.MutationResult<CheckoutLineUpdateMutation>;
 export type CheckoutLineUpdateMutationOptions = Apollo.BaseMutationOptions<
   CheckoutLineUpdateMutation,
   CheckoutLineUpdateMutationVariables
@@ -28803,10 +29341,11 @@ export type RemoveProductFromCheckoutMutationHookResult = ReturnType<
 >;
 export type RemoveProductFromCheckoutMutationResult =
   Apollo.MutationResult<RemoveProductFromCheckoutMutation>;
-export type RemoveProductFromCheckoutMutationOptions = Apollo.BaseMutationOptions<
-  RemoveProductFromCheckoutMutation,
-  RemoveProductFromCheckoutMutationVariables
->;
+export type RemoveProductFromCheckoutMutationOptions =
+  Apollo.BaseMutationOptions<
+    RemoveProductFromCheckoutMutation,
+    RemoveProductFromCheckoutMutationVariables
+  >;
 export const CheckoutShippingAddressUpdateDocument = gql`
   mutation CheckoutShippingAddressUpdate(
     $token: UUID!
@@ -28867,17 +29406,21 @@ export type CheckoutShippingAddressUpdateMutationHookResult = ReturnType<
 >;
 export type CheckoutShippingAddressUpdateMutationResult =
   Apollo.MutationResult<CheckoutShippingAddressUpdateMutation>;
-export type CheckoutShippingAddressUpdateMutationOptions = Apollo.BaseMutationOptions<
-  CheckoutShippingAddressUpdateMutation,
-  CheckoutShippingAddressUpdateMutationVariables
->;
+export type CheckoutShippingAddressUpdateMutationOptions =
+  Apollo.BaseMutationOptions<
+    CheckoutShippingAddressUpdateMutation,
+    CheckoutShippingAddressUpdateMutationVariables
+  >;
 export const CheckoutShippingMethodUpdateDocument = gql`
   mutation CheckoutShippingMethodUpdate(
     $token: UUID!
     $shippingMethodId: ID!
     $locale: LanguageCodeEnum!
   ) {
-    checkoutShippingMethodUpdate(shippingMethodId: $shippingMethodId, token: $token) {
+    checkoutShippingMethodUpdate(
+      shippingMethodId: $shippingMethodId
+      token: $token
+    ) {
       checkout {
         ...CheckoutDetailsFragment
       }
@@ -28931,10 +29474,11 @@ export type CheckoutShippingMethodUpdateMutationHookResult = ReturnType<
 >;
 export type CheckoutShippingMethodUpdateMutationResult =
   Apollo.MutationResult<CheckoutShippingMethodUpdateMutation>;
-export type CheckoutShippingMethodUpdateMutationOptions = Apollo.BaseMutationOptions<
-  CheckoutShippingMethodUpdateMutation,
-  CheckoutShippingMethodUpdateMutationVariables
->;
+export type CheckoutShippingMethodUpdateMutationOptions =
+  Apollo.BaseMutationOptions<
+    CheckoutShippingMethodUpdateMutation,
+    CheckoutShippingMethodUpdateMutationVariables
+  >;
 export const SetAddressDefaultDocument = gql`
   mutation SetAddressDefault($id: ID!, $type: AddressTypeEnum!) {
     accountSetDefaultAddress(id: $id, type: $type) {
@@ -28981,13 +29525,16 @@ export function useSetAddressDefaultMutation(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<SetAddressDefaultMutation, SetAddressDefaultMutationVariables>(
-    SetAddressDefaultDocument,
-    options
-  );
+  return Apollo.useMutation<
+    SetAddressDefaultMutation,
+    SetAddressDefaultMutationVariables
+  >(SetAddressDefaultDocument, options);
 }
-export type SetAddressDefaultMutationHookResult = ReturnType<typeof useSetAddressDefaultMutation>;
-export type SetAddressDefaultMutationResult = Apollo.MutationResult<SetAddressDefaultMutation>;
+export type SetAddressDefaultMutationHookResult = ReturnType<
+  typeof useSetAddressDefaultMutation
+>;
+export type SetAddressDefaultMutationResult =
+  Apollo.MutationResult<SetAddressDefaultMutation>;
 export type SetAddressDefaultMutationOptions = Apollo.BaseMutationOptions<
   SetAddressDefaultMutation,
   SetAddressDefaultMutationVariables
@@ -29030,16 +29577,22 @@ export type PasswordChangeMutationFn = Apollo.MutationFunction<
  * });
  */
 export function usePasswordChangeMutation(
-  baseOptions?: Apollo.MutationHookOptions<PasswordChangeMutation, PasswordChangeMutationVariables>
+  baseOptions?: Apollo.MutationHookOptions<
+    PasswordChangeMutation,
+    PasswordChangeMutationVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<PasswordChangeMutation, PasswordChangeMutationVariables>(
-    PasswordChangeDocument,
-    options
-  );
+  return Apollo.useMutation<
+    PasswordChangeMutation,
+    PasswordChangeMutationVariables
+  >(PasswordChangeDocument, options);
 }
-export type PasswordChangeMutationHookResult = ReturnType<typeof usePasswordChangeMutation>;
-export type PasswordChangeMutationResult = Apollo.MutationResult<PasswordChangeMutation>;
+export type PasswordChangeMutationHookResult = ReturnType<
+  typeof usePasswordChangeMutation
+>;
+export type PasswordChangeMutationResult =
+  Apollo.MutationResult<PasswordChangeMutation>;
 export type PasswordChangeMutationOptions = Apollo.BaseMutationOptions<
   PasswordChangeMutation,
   PasswordChangeMutationVariables
@@ -29078,10 +29631,16 @@ export type RegisterMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useRegisterMutation(
-  baseOptions?: Apollo.MutationHookOptions<RegisterMutation, RegisterMutationVariables>
+  baseOptions?: Apollo.MutationHookOptions<
+    RegisterMutation,
+    RegisterMutationVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, options);
+  return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(
+    RegisterDocument,
+    options
+  );
 }
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
@@ -29090,7 +29649,11 @@ export type RegisterMutationOptions = Apollo.BaseMutationOptions<
   RegisterMutationVariables
 >;
 export const RequestEmailChangeDocument = gql`
-  mutation RequestEmailChange($newEmail: String!, $password: String!, $redirectUrl: String!) {
+  mutation RequestEmailChange(
+    $newEmail: String!
+    $password: String!
+    $redirectUrl: String!
+  ) {
     requestEmailChange(
       channel: "default-channel"
       newEmail: $newEmail
@@ -29139,19 +29702,25 @@ export function useRequestEmailChangeMutation(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<RequestEmailChangeMutation, RequestEmailChangeMutationVariables>(
-    RequestEmailChangeDocument,
-    options
-  );
+  return Apollo.useMutation<
+    RequestEmailChangeMutation,
+    RequestEmailChangeMutationVariables
+  >(RequestEmailChangeDocument, options);
 }
-export type RequestEmailChangeMutationHookResult = ReturnType<typeof useRequestEmailChangeMutation>;
-export type RequestEmailChangeMutationResult = Apollo.MutationResult<RequestEmailChangeMutation>;
+export type RequestEmailChangeMutationHookResult = ReturnType<
+  typeof useRequestEmailChangeMutation
+>;
+export type RequestEmailChangeMutationResult =
+  Apollo.MutationResult<RequestEmailChangeMutation>;
 export type RequestEmailChangeMutationOptions = Apollo.BaseMutationOptions<
   RequestEmailChangeMutation,
   RequestEmailChangeMutationVariables
 >;
 export const AvailableShippingMethodsDocument = gql`
-  query AvailableShippingMethods($channel: String!, $locale: LanguageCodeEnum!) {
+  query AvailableShippingMethods(
+    $channel: String!
+    $locale: LanguageCodeEnum!
+  ) {
     shop {
       availableShippingMethods(channel: $channel) {
         id
@@ -29193,10 +29762,10 @@ export function useAvailableShippingMethodsQuery(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<AvailableShippingMethodsQuery, AvailableShippingMethodsQueryVariables>(
-    AvailableShippingMethodsDocument,
-    options
-  );
+  return Apollo.useQuery<
+    AvailableShippingMethodsQuery,
+    AvailableShippingMethodsQueryVariables
+  >(AvailableShippingMethodsDocument, options);
 }
 export function useAvailableShippingMethodsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
@@ -29205,10 +29774,10 @@ export function useAvailableShippingMethodsLazyQuery(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<AvailableShippingMethodsQuery, AvailableShippingMethodsQueryVariables>(
-    AvailableShippingMethodsDocument,
-    options
-  );
+  return Apollo.useLazyQuery<
+    AvailableShippingMethodsQuery,
+    AvailableShippingMethodsQueryVariables
+  >(AvailableShippingMethodsDocument, options);
 }
 export type AvailableShippingMethodsQueryHookResult = ReturnType<
   typeof useAvailableShippingMethodsQuery
@@ -29247,7 +29816,10 @@ export const CategoryBySlugDocument = gql`
  * });
  */
 export function useCategoryBySlugQuery(
-  baseOptions: Apollo.QueryHookOptions<CategoryBySlugQuery, CategoryBySlugQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<
+    CategoryBySlugQuery,
+    CategoryBySlugQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<CategoryBySlugQuery, CategoryBySlugQueryVariables>(
@@ -29256,7 +29828,10 @@ export function useCategoryBySlugQuery(
   );
 }
 export function useCategoryBySlugLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<CategoryBySlugQuery, CategoryBySlugQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    CategoryBySlugQuery,
+    CategoryBySlugQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<CategoryBySlugQuery, CategoryBySlugQueryVariables>(
@@ -29264,8 +29839,12 @@ export function useCategoryBySlugLazyQuery(
     options
   );
 }
-export type CategoryBySlugQueryHookResult = ReturnType<typeof useCategoryBySlugQuery>;
-export type CategoryBySlugLazyQueryHookResult = ReturnType<typeof useCategoryBySlugLazyQuery>;
+export type CategoryBySlugQueryHookResult = ReturnType<
+  typeof useCategoryBySlugQuery
+>;
+export type CategoryBySlugLazyQueryHookResult = ReturnType<
+  typeof useCategoryBySlugLazyQuery
+>;
 export type CategoryBySlugQueryResult = Apollo.QueryResult<
   CategoryBySlugQuery,
   CategoryBySlugQueryVariables
@@ -29303,7 +29882,10 @@ export const CategoryPathsDocument = gql`
  * });
  */
 export function useCategoryPathsQuery(
-  baseOptions?: Apollo.QueryHookOptions<CategoryPathsQuery, CategoryPathsQueryVariables>
+  baseOptions?: Apollo.QueryHookOptions<
+    CategoryPathsQuery,
+    CategoryPathsQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<CategoryPathsQuery, CategoryPathsQueryVariables>(
@@ -29312,7 +29894,10 @@ export function useCategoryPathsQuery(
   );
 }
 export function useCategoryPathsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<CategoryPathsQuery, CategoryPathsQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    CategoryPathsQuery,
+    CategoryPathsQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<CategoryPathsQuery, CategoryPathsQueryVariables>(
@@ -29320,8 +29905,12 @@ export function useCategoryPathsLazyQuery(
     options
   );
 }
-export type CategoryPathsQueryHookResult = ReturnType<typeof useCategoryPathsQuery>;
-export type CategoryPathsLazyQueryHookResult = ReturnType<typeof useCategoryPathsLazyQuery>;
+export type CategoryPathsQueryHookResult = ReturnType<
+  typeof useCategoryPathsQuery
+>;
+export type CategoryPathsLazyQueryHookResult = ReturnType<
+  typeof useCategoryPathsLazyQuery
+>;
 export type CategoryPathsQueryResult = Apollo.QueryResult<
   CategoryPathsQuery,
   CategoryPathsQueryVariables
@@ -29353,7 +29942,10 @@ export const CheckoutByTokenDocument = gql`
  * });
  */
 export function useCheckoutByTokenQuery(
-  baseOptions: Apollo.QueryHookOptions<CheckoutByTokenQuery, CheckoutByTokenQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<
+    CheckoutByTokenQuery,
+    CheckoutByTokenQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<CheckoutByTokenQuery, CheckoutByTokenQueryVariables>(
@@ -29362,22 +29954,33 @@ export function useCheckoutByTokenQuery(
   );
 }
 export function useCheckoutByTokenLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<CheckoutByTokenQuery, CheckoutByTokenQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    CheckoutByTokenQuery,
+    CheckoutByTokenQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CheckoutByTokenQuery, CheckoutByTokenQueryVariables>(
-    CheckoutByTokenDocument,
-    options
-  );
+  return Apollo.useLazyQuery<
+    CheckoutByTokenQuery,
+    CheckoutByTokenQueryVariables
+  >(CheckoutByTokenDocument, options);
 }
-export type CheckoutByTokenQueryHookResult = ReturnType<typeof useCheckoutByTokenQuery>;
-export type CheckoutByTokenLazyQueryHookResult = ReturnType<typeof useCheckoutByTokenLazyQuery>;
+export type CheckoutByTokenQueryHookResult = ReturnType<
+  typeof useCheckoutByTokenQuery
+>;
+export type CheckoutByTokenLazyQueryHookResult = ReturnType<
+  typeof useCheckoutByTokenLazyQuery
+>;
 export type CheckoutByTokenQueryResult = Apollo.QueryResult<
   CheckoutByTokenQuery,
   CheckoutByTokenQueryVariables
 >;
 export const CollectionBySlugDocument = gql`
-  query CollectionBySlug($slug: String!, $channel: String!, $locale: LanguageCodeEnum!) {
+  query CollectionBySlug(
+    $slug: String!
+    $channel: String!
+    $locale: LanguageCodeEnum!
+  ) {
     collection(slug: $slug, channel: $channel) {
       id
       ...CollectionDetailsFragment
@@ -29409,7 +30012,10 @@ export const CollectionBySlugDocument = gql`
  * });
  */
 export function useCollectionBySlugQuery(
-  baseOptions: Apollo.QueryHookOptions<CollectionBySlugQuery, CollectionBySlugQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<
+    CollectionBySlugQuery,
+    CollectionBySlugQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<CollectionBySlugQuery, CollectionBySlugQueryVariables>(
@@ -29418,16 +30024,23 @@ export function useCollectionBySlugQuery(
   );
 }
 export function useCollectionBySlugLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<CollectionBySlugQuery, CollectionBySlugQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    CollectionBySlugQuery,
+    CollectionBySlugQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CollectionBySlugQuery, CollectionBySlugQueryVariables>(
-    CollectionBySlugDocument,
-    options
-  );
+  return Apollo.useLazyQuery<
+    CollectionBySlugQuery,
+    CollectionBySlugQueryVariables
+  >(CollectionBySlugDocument, options);
 }
-export type CollectionBySlugQueryHookResult = ReturnType<typeof useCollectionBySlugQuery>;
-export type CollectionBySlugLazyQueryHookResult = ReturnType<typeof useCollectionBySlugLazyQuery>;
+export type CollectionBySlugQueryHookResult = ReturnType<
+  typeof useCollectionBySlugQuery
+>;
+export type CollectionBySlugLazyQueryHookResult = ReturnType<
+  typeof useCollectionBySlugLazyQuery
+>;
 export type CollectionBySlugQueryResult = Apollo.QueryResult<
   CollectionBySlugQuery,
   CollectionBySlugQueryVariables
@@ -29466,7 +30079,10 @@ export const CollectionPathsDocument = gql`
  * });
  */
 export function useCollectionPathsQuery(
-  baseOptions: Apollo.QueryHookOptions<CollectionPathsQuery, CollectionPathsQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<
+    CollectionPathsQuery,
+    CollectionPathsQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<CollectionPathsQuery, CollectionPathsQueryVariables>(
@@ -29475,16 +30091,23 @@ export function useCollectionPathsQuery(
   );
 }
 export function useCollectionPathsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<CollectionPathsQuery, CollectionPathsQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    CollectionPathsQuery,
+    CollectionPathsQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CollectionPathsQuery, CollectionPathsQueryVariables>(
-    CollectionPathsDocument,
-    options
-  );
+  return Apollo.useLazyQuery<
+    CollectionPathsQuery,
+    CollectionPathsQueryVariables
+  >(CollectionPathsDocument, options);
 }
-export type CollectionPathsQueryHookResult = ReturnType<typeof useCollectionPathsQuery>;
-export type CollectionPathsLazyQueryHookResult = ReturnType<typeof useCollectionPathsLazyQuery>;
+export type CollectionPathsQueryHookResult = ReturnType<
+  typeof useCollectionPathsQuery
+>;
+export type CollectionPathsLazyQueryHookResult = ReturnType<
+  typeof useCollectionPathsLazyQuery
+>;
 export type CollectionPathsQueryResult = Apollo.QueryResult<
   CollectionPathsQuery,
   CollectionPathsQueryVariables
@@ -29525,13 +30148,16 @@ export const CurrentUserDetailsDocument = gql`
  * });
  */
 export function useCurrentUserDetailsQuery(
-  baseOptions?: Apollo.QueryHookOptions<CurrentUserDetailsQuery, CurrentUserDetailsQueryVariables>
+  baseOptions?: Apollo.QueryHookOptions<
+    CurrentUserDetailsQuery,
+    CurrentUserDetailsQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<CurrentUserDetailsQuery, CurrentUserDetailsQueryVariables>(
-    CurrentUserDetailsDocument,
-    options
-  );
+  return Apollo.useQuery<
+    CurrentUserDetailsQuery,
+    CurrentUserDetailsQueryVariables
+  >(CurrentUserDetailsDocument, options);
 }
 export function useCurrentUserDetailsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
@@ -29540,12 +30166,14 @@ export function useCurrentUserDetailsLazyQuery(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CurrentUserDetailsQuery, CurrentUserDetailsQueryVariables>(
-    CurrentUserDetailsDocument,
-    options
-  );
+  return Apollo.useLazyQuery<
+    CurrentUserDetailsQuery,
+    CurrentUserDetailsQueryVariables
+  >(CurrentUserDetailsDocument, options);
 }
-export type CurrentUserDetailsQueryHookResult = ReturnType<typeof useCurrentUserDetailsQuery>;
+export type CurrentUserDetailsQueryHookResult = ReturnType<
+  typeof useCurrentUserDetailsQuery
+>;
 export type CurrentUserDetailsLazyQueryHookResult = ReturnType<
   typeof useCurrentUserDetailsLazyQuery
 >;
@@ -29590,13 +30218,16 @@ export const FilteringAttributesQueryDocument = gql`
  * });
  */
 export function useFilteringAttributesQuery(
-  baseOptions: Apollo.QueryHookOptions<FilteringAttributesQuery, FilteringAttributesQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<
+    FilteringAttributesQuery,
+    FilteringAttributesQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<FilteringAttributesQuery, FilteringAttributesQueryVariables>(
-    FilteringAttributesQueryDocument,
-    options
-  );
+  return Apollo.useQuery<
+    FilteringAttributesQuery,
+    FilteringAttributesQueryVariables
+  >(FilteringAttributesQueryDocument, options);
 }
 export function useFilteringAttributesQueryLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
@@ -29605,12 +30236,14 @@ export function useFilteringAttributesQueryLazyQuery(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<FilteringAttributesQuery, FilteringAttributesQueryVariables>(
-    FilteringAttributesQueryDocument,
-    options
-  );
+  return Apollo.useLazyQuery<
+    FilteringAttributesQuery,
+    FilteringAttributesQueryVariables
+  >(FilteringAttributesQueryDocument, options);
 }
-export type FilteringAttributesQueryHookResult = ReturnType<typeof useFilteringAttributesQuery>;
+export type FilteringAttributesQueryHookResult = ReturnType<
+  typeof useFilteringAttributesQuery
+>;
 export type FilteringAttributesQueryLazyQueryHookResult = ReturnType<
   typeof useFilteringAttributesQueryLazyQuery
 >;
@@ -29651,13 +30284,22 @@ export const FooterMenuDocument = gql`
  * });
  */
 export function useFooterMenuQuery(
-  baseOptions: Apollo.QueryHookOptions<FooterMenuQuery, FooterMenuQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<
+    FooterMenuQuery,
+    FooterMenuQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<FooterMenuQuery, FooterMenuQueryVariables>(FooterMenuDocument, options);
+  return Apollo.useQuery<FooterMenuQuery, FooterMenuQueryVariables>(
+    FooterMenuDocument,
+    options
+  );
 }
 export function useFooterMenuLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<FooterMenuQuery, FooterMenuQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    FooterMenuQuery,
+    FooterMenuQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<FooterMenuQuery, FooterMenuQueryVariables>(
@@ -29666,10 +30308,19 @@ export function useFooterMenuLazyQuery(
   );
 }
 export type FooterMenuQueryHookResult = ReturnType<typeof useFooterMenuQuery>;
-export type FooterMenuLazyQueryHookResult = ReturnType<typeof useFooterMenuLazyQuery>;
-export type FooterMenuQueryResult = Apollo.QueryResult<FooterMenuQuery, FooterMenuQueryVariables>;
+export type FooterMenuLazyQueryHookResult = ReturnType<
+  typeof useFooterMenuLazyQuery
+>;
+export type FooterMenuQueryResult = Apollo.QueryResult<
+  FooterMenuQuery,
+  FooterMenuQueryVariables
+>;
 export const HomepageBlocksQueryDocument = gql`
-  query HomepageBlocksQuery($slug: String!, $channel: String!, $locale: LanguageCodeEnum!) {
+  query HomepageBlocksQuery(
+    $slug: String!
+    $channel: String!
+    $locale: LanguageCodeEnum!
+  ) {
     menu(channel: $channel, slug: $slug) {
       id
       name
@@ -29701,7 +30352,10 @@ export const HomepageBlocksQueryDocument = gql`
  * });
  */
 export function useHomepageBlocksQuery(
-  baseOptions: Apollo.QueryHookOptions<HomepageBlocksQuery, HomepageBlocksQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<
+    HomepageBlocksQuery,
+    HomepageBlocksQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<HomepageBlocksQuery, HomepageBlocksQueryVariables>(
@@ -29710,7 +30364,10 @@ export function useHomepageBlocksQuery(
   );
 }
 export function useHomepageBlocksQueryLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<HomepageBlocksQuery, HomepageBlocksQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    HomepageBlocksQuery,
+    HomepageBlocksQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<HomepageBlocksQuery, HomepageBlocksQueryVariables>(
@@ -29718,7 +30375,9 @@ export function useHomepageBlocksQueryLazyQuery(
     options
   );
 }
-export type HomepageBlocksQueryHookResult = ReturnType<typeof useHomepageBlocksQuery>;
+export type HomepageBlocksQueryHookResult = ReturnType<
+  typeof useHomepageBlocksQuery
+>;
 export type HomepageBlocksQueryLazyQueryHookResult = ReturnType<
   typeof useHomepageBlocksQueryLazyQuery
 >;
@@ -29759,17 +30418,31 @@ export function useMainMenuQuery(
   baseOptions: Apollo.QueryHookOptions<MainMenuQuery, MainMenuQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<MainMenuQuery, MainMenuQueryVariables>(MainMenuDocument, options);
+  return Apollo.useQuery<MainMenuQuery, MainMenuQueryVariables>(
+    MainMenuDocument,
+    options
+  );
 }
 export function useMainMenuLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<MainMenuQuery, MainMenuQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    MainMenuQuery,
+    MainMenuQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<MainMenuQuery, MainMenuQueryVariables>(MainMenuDocument, options);
+  return Apollo.useLazyQuery<MainMenuQuery, MainMenuQueryVariables>(
+    MainMenuDocument,
+    options
+  );
 }
 export type MainMenuQueryHookResult = ReturnType<typeof useMainMenuQuery>;
-export type MainMenuLazyQueryHookResult = ReturnType<typeof useMainMenuLazyQuery>;
-export type MainMenuQueryResult = Apollo.QueryResult<MainMenuQuery, MainMenuQueryVariables>;
+export type MainMenuLazyQueryHookResult = ReturnType<
+  typeof useMainMenuLazyQuery
+>;
+export type MainMenuQueryResult = Apollo.QueryResult<
+  MainMenuQuery,
+  MainMenuQueryVariables
+>;
 export const OrderDetailsQueryDocument = gql`
   query OrderDetailsQuery($token: UUID!) {
     orderByToken(token: $token) {
@@ -29880,7 +30553,10 @@ export const OrderDetailsQueryByIdDocument = gql`
  * });
  */
 export function useOrderDetailsQuery(
-  baseOptions: Apollo.QueryHookOptions<OrderDetailsQuery, OrderDetailsQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<
+    OrderDetailsQuery,
+    OrderDetailsQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<OrderDetailsQuery, OrderDetailsQueryVariables>(
@@ -29889,7 +30565,10 @@ export function useOrderDetailsQuery(
   );
 }
 export function useOrderDetailsQueryLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<OrderDetailsQuery, OrderDetailsQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    OrderDetailsQuery,
+    OrderDetailsQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<OrderDetailsQuery, OrderDetailsQueryVariables>(
@@ -29897,8 +30576,12 @@ export function useOrderDetailsQueryLazyQuery(
     options
   );
 }
-export type OrderDetailsQueryHookResult = ReturnType<typeof useOrderDetailsQuery>;
-export type OrderDetailsQueryLazyQueryHookResult = ReturnType<typeof useOrderDetailsQueryLazyQuery>;
+export type OrderDetailsQueryHookResult = ReturnType<
+  typeof useOrderDetailsQuery
+>;
+export type OrderDetailsQueryLazyQueryHookResult = ReturnType<
+  typeof useOrderDetailsQueryLazyQuery
+>;
 export type OrderDetailsQueryQueryResult = Apollo.QueryResult<
   OrderDetailsQuery,
   OrderDetailsQueryVariables
@@ -29976,13 +30659,16 @@ export const OrderDetailsByTokenDocument = gql`
  * });
  */
 export function useOrderDetailsByTokenQuery(
-  baseOptions: Apollo.QueryHookOptions<OrderDetailsByTokenQuery, OrderDetailsByTokenQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<
+    OrderDetailsByTokenQuery,
+    OrderDetailsByTokenQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<OrderDetailsByTokenQuery, OrderDetailsByTokenQueryVariables>(
-    OrderDetailsByTokenDocument,
-    options
-  );
+  return Apollo.useQuery<
+    OrderDetailsByTokenQuery,
+    OrderDetailsByTokenQueryVariables
+  >(OrderDetailsByTokenDocument, options);
 }
 export function useOrderDetailsByTokenLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
@@ -29991,12 +30677,14 @@ export function useOrderDetailsByTokenLazyQuery(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<OrderDetailsByTokenQuery, OrderDetailsByTokenQueryVariables>(
-    OrderDetailsByTokenDocument,
-    options
-  );
+  return Apollo.useLazyQuery<
+    OrderDetailsByTokenQuery,
+    OrderDetailsByTokenQueryVariables
+  >(OrderDetailsByTokenDocument, options);
 }
-export type OrderDetailsByTokenQueryHookResult = ReturnType<typeof useOrderDetailsByTokenQuery>;
+export type OrderDetailsByTokenQueryHookResult = ReturnType<
+  typeof useOrderDetailsByTokenQuery
+>;
 export type OrderDetailsByTokenLazyQueryHookResult = ReturnType<
   typeof useOrderDetailsByTokenLazyQuery
 >;
@@ -30048,17 +30736,26 @@ export function useOrdersQuery(
   baseOptions?: Apollo.QueryHookOptions<OrdersQuery, OrdersQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<OrdersQuery, OrdersQueryVariables>(OrdersDocument, options);
+  return Apollo.useQuery<OrdersQuery, OrdersQueryVariables>(
+    OrdersDocument,
+    options
+  );
 }
 export function useOrdersLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<OrdersQuery, OrdersQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<OrdersQuery, OrdersQueryVariables>(OrdersDocument, options);
+  return Apollo.useLazyQuery<OrdersQuery, OrdersQueryVariables>(
+    OrdersDocument,
+    options
+  );
 }
 export type OrdersQueryHookResult = ReturnType<typeof useOrdersQuery>;
 export type OrdersLazyQueryHookResult = ReturnType<typeof useOrdersLazyQuery>;
-export type OrdersQueryResult = Apollo.QueryResult<OrdersQuery, OrdersQueryVariables>;
+export type OrdersQueryResult = Apollo.QueryResult<
+  OrdersQuery,
+  OrdersQueryVariables
+>;
 export const PageDocument = gql`
   query Page($slug: String!, $locale: LanguageCodeEnum!) {
     page(slug: $slug) {
@@ -30095,7 +30792,9 @@ export const PageDocument = gql`
  *   },
  * });
  */
-export function usePageQuery(baseOptions: Apollo.QueryHookOptions<PageQuery, PageQueryVariables>) {
+export function usePageQuery(
+  baseOptions: Apollo.QueryHookOptions<PageQuery, PageQueryVariables>
+) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<PageQuery, PageQueryVariables>(PageDocument, options);
 }
@@ -30103,7 +30802,10 @@ export function usePageLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<PageQuery, PageQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<PageQuery, PageQueryVariables>(PageDocument, options);
+  return Apollo.useLazyQuery<PageQuery, PageQueryVariables>(
+    PageDocument,
+    options
+  );
 }
 export type PageQueryHookResult = ReturnType<typeof usePageQuery>;
 export type PageLazyQueryHookResult = ReturnType<typeof usePageLazyQuery>;
@@ -30144,19 +30846,37 @@ export function usePagePathsQuery(
   baseOptions?: Apollo.QueryHookOptions<PagePathsQuery, PagePathsQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<PagePathsQuery, PagePathsQueryVariables>(PagePathsDocument, options);
+  return Apollo.useQuery<PagePathsQuery, PagePathsQueryVariables>(
+    PagePathsDocument,
+    options
+  );
 }
 export function usePagePathsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<PagePathsQuery, PagePathsQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    PagePathsQuery,
+    PagePathsQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<PagePathsQuery, PagePathsQueryVariables>(PagePathsDocument, options);
+  return Apollo.useLazyQuery<PagePathsQuery, PagePathsQueryVariables>(
+    PagePathsDocument,
+    options
+  );
 }
 export type PagePathsQueryHookResult = ReturnType<typeof usePagePathsQuery>;
-export type PagePathsLazyQueryHookResult = ReturnType<typeof usePagePathsLazyQuery>;
-export type PagePathsQueryResult = Apollo.QueryResult<PagePathsQuery, PagePathsQueryVariables>;
+export type PagePathsLazyQueryHookResult = ReturnType<
+  typeof usePagePathsLazyQuery
+>;
+export type PagePathsQueryResult = Apollo.QueryResult<
+  PagePathsQuery,
+  PagePathsQueryVariables
+>;
 export const ProductBySlugDocument = gql`
-  query ProductBySlug($slug: String!, $channel: String!, $locale: LanguageCodeEnum!) {
+  query ProductBySlug(
+    $slug: String!
+    $channel: String!
+    $locale: LanguageCodeEnum!
+  ) {
     product(slug: $slug, channel: $channel) {
       ...ProductDetailsFragment
     }
@@ -30183,7 +30903,10 @@ export const ProductBySlugDocument = gql`
  * });
  */
 export function useProductBySlugQuery(
-  baseOptions: Apollo.QueryHookOptions<ProductBySlugQuery, ProductBySlugQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<
+    ProductBySlugQuery,
+    ProductBySlugQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<ProductBySlugQuery, ProductBySlugQueryVariables>(
@@ -30192,7 +30915,10 @@ export function useProductBySlugQuery(
   );
 }
 export function useProductBySlugLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<ProductBySlugQuery, ProductBySlugQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    ProductBySlugQuery,
+    ProductBySlugQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<ProductBySlugQuery, ProductBySlugQueryVariables>(
@@ -30200,8 +30926,12 @@ export function useProductBySlugLazyQuery(
     options
   );
 }
-export type ProductBySlugQueryHookResult = ReturnType<typeof useProductBySlugQuery>;
-export type ProductBySlugLazyQueryHookResult = ReturnType<typeof useProductBySlugLazyQuery>;
+export type ProductBySlugQueryHookResult = ReturnType<
+  typeof useProductBySlugQuery
+>;
+export type ProductBySlugLazyQueryHookResult = ReturnType<
+  typeof useProductBySlugLazyQuery
+>;
 export type ProductBySlugQueryResult = Apollo.QueryResult<
   ProductBySlugQuery,
   ProductBySlugQueryVariables
@@ -30265,25 +30995,35 @@ export const ProductCollectionDocument = gql`
  * });
  */
 export function useProductCollectionQuery(
-  baseOptions: Apollo.QueryHookOptions<ProductCollectionQuery, ProductCollectionQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<
+    ProductCollectionQuery,
+    ProductCollectionQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<ProductCollectionQuery, ProductCollectionQueryVariables>(
-    ProductCollectionDocument,
-    options
-  );
+  return Apollo.useQuery<
+    ProductCollectionQuery,
+    ProductCollectionQueryVariables
+  >(ProductCollectionDocument, options);
 }
 export function useProductCollectionLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<ProductCollectionQuery, ProductCollectionQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    ProductCollectionQuery,
+    ProductCollectionQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<ProductCollectionQuery, ProductCollectionQueryVariables>(
-    ProductCollectionDocument,
-    options
-  );
+  return Apollo.useLazyQuery<
+    ProductCollectionQuery,
+    ProductCollectionQueryVariables
+  >(ProductCollectionDocument, options);
 }
-export type ProductCollectionQueryHookResult = ReturnType<typeof useProductCollectionQuery>;
-export type ProductCollectionLazyQueryHookResult = ReturnType<typeof useProductCollectionLazyQuery>;
+export type ProductCollectionQueryHookResult = ReturnType<
+  typeof useProductCollectionQuery
+>;
+export type ProductCollectionLazyQueryHookResult = ReturnType<
+  typeof useProductCollectionLazyQuery
+>;
 export type ProductCollectionQueryResult = Apollo.QueryResult<
   ProductCollectionQuery,
   ProductCollectionQueryVariables
@@ -30322,7 +31062,10 @@ export const ProductPathsDocument = gql`
  * });
  */
 export function useProductPathsQuery(
-  baseOptions: Apollo.QueryHookOptions<ProductPathsQuery, ProductPathsQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<
+    ProductPathsQuery,
+    ProductPathsQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<ProductPathsQuery, ProductPathsQueryVariables>(
@@ -30331,7 +31074,10 @@ export function useProductPathsQuery(
   );
 }
 export function useProductPathsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<ProductPathsQuery, ProductPathsQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    ProductPathsQuery,
+    ProductPathsQueryVariables
+  >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<ProductPathsQuery, ProductPathsQueryVariables>(
@@ -30339,8 +31085,12 @@ export function useProductPathsLazyQuery(
     options
   );
 }
-export type ProductPathsQueryHookResult = ReturnType<typeof useProductPathsQuery>;
-export type ProductPathsLazyQueryHookResult = ReturnType<typeof useProductPathsLazyQuery>;
+export type ProductPathsQueryHookResult = ReturnType<
+  typeof useProductPathsQuery
+>;
+export type ProductPathsLazyQueryHookResult = ReturnType<
+  typeof useProductPathsLazyQuery
+>;
 export type ProductPathsQueryResult = Apollo.QueryResult<
   ProductPathsQuery,
   ProductPathsQueryVariables
@@ -30379,7 +31129,9 @@ export const UserDocument = gql`
  *   },
  * });
  */
-export function useUserQuery(baseOptions?: Apollo.QueryHookOptions<UserQuery, UserQueryVariables>) {
+export function useUserQuery(
+  baseOptions?: Apollo.QueryHookOptions<UserQuery, UserQueryVariables>
+) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<UserQuery, UserQueryVariables>(UserDocument, options);
 }
@@ -30387,7 +31139,10 @@ export function useUserLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<UserQuery, UserQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<UserQuery, UserQueryVariables>(UserDocument, options);
+  return Apollo.useLazyQuery<UserQuery, UserQueryVariables>(
+    UserDocument,
+    options
+  );
 }
 export type UserQueryHookResult = ReturnType<typeof useUserQuery>;
 export type UserLazyQueryHookResult = ReturnType<typeof useUserLazyQuery>;
@@ -30425,10 +31180,10 @@ export function useCurrentUserAddressesQuery(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<CurrentUserAddressesQuery, CurrentUserAddressesQueryVariables>(
-    CurrentUserAddressesDocument,
-    options
-  );
+  return Apollo.useQuery<
+    CurrentUserAddressesQuery,
+    CurrentUserAddressesQueryVariables
+  >(CurrentUserAddressesDocument, options);
 }
 export function useCurrentUserAddressesLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
@@ -30437,12 +31192,14 @@ export function useCurrentUserAddressesLazyQuery(
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CurrentUserAddressesQuery, CurrentUserAddressesQueryVariables>(
-    CurrentUserAddressesDocument,
-    options
-  );
+  return Apollo.useLazyQuery<
+    CurrentUserAddressesQuery,
+    CurrentUserAddressesQueryVariables
+  >(CurrentUserAddressesDocument, options);
 }
-export type CurrentUserAddressesQueryHookResult = ReturnType<typeof useCurrentUserAddressesQuery>;
+export type CurrentUserAddressesQueryHookResult = ReturnType<
+  typeof useCurrentUserAddressesQuery
+>;
 export type CurrentUserAddressesLazyQueryHookResult = ReturnType<
   typeof useCurrentUserAddressesLazyQuery
 >;
@@ -30736,7 +31493,12 @@ export type AddressValidationDataFieldPolicy = {
   requiredFields?: FieldPolicy<any> | FieldReadFunction<any>;
   upperFields?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type AllocationKeySpecifier = ("id" | "quantity" | "warehouse" | AllocationKeySpecifier)[];
+export type AllocationKeySpecifier = (
+  | "id"
+  | "quantity"
+  | "warehouse"
+  | AllocationKeySpecifier
+)[];
 export type AllocationFieldPolicy = {
   id?: FieldPolicy<any> | FieldReadFunction<any>;
   quantity?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -30797,7 +31559,12 @@ export type AppFieldPolicy = {
   version?: FieldPolicy<any> | FieldReadFunction<any>;
   webhooks?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type AppActivateKeySpecifier = ("app" | "appErrors" | "errors" | AppActivateKeySpecifier)[];
+export type AppActivateKeySpecifier = (
+  | "app"
+  | "appErrors"
+  | "errors"
+  | AppActivateKeySpecifier
+)[];
 export type AppActivateFieldPolicy = {
   app?: FieldPolicy<any> | FieldReadFunction<any>;
   appErrors?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -30814,7 +31581,11 @@ export type AppCountableConnectionFieldPolicy = {
   pageInfo?: FieldPolicy<any> | FieldReadFunction<any>;
   totalCount?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type AppCountableEdgeKeySpecifier = ("cursor" | "node" | AppCountableEdgeKeySpecifier)[];
+export type AppCountableEdgeKeySpecifier = (
+  | "cursor"
+  | "node"
+  | AppCountableEdgeKeySpecifier
+)[];
 export type AppCountableEdgeFieldPolicy = {
   cursor?: FieldPolicy<any> | FieldReadFunction<any>;
   node?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -30843,7 +31614,12 @@ export type AppDeactivateFieldPolicy = {
   appErrors?: FieldPolicy<any> | FieldReadFunction<any>;
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type AppDeleteKeySpecifier = ("app" | "appErrors" | "errors" | AppDeleteKeySpecifier)[];
+export type AppDeleteKeySpecifier = (
+  | "app"
+  | "appErrors"
+  | "errors"
+  | AppDeleteKeySpecifier
+)[];
 export type AppDeleteFieldPolicy = {
   app?: FieldPolicy<any> | FieldReadFunction<any>;
   appErrors?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -31041,7 +31817,12 @@ export type AppStatusChangedFieldPolicy = {
   recipient?: FieldPolicy<any> | FieldReadFunction<any>;
   version?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type AppTokenKeySpecifier = ("authToken" | "id" | "name" | AppTokenKeySpecifier)[];
+export type AppTokenKeySpecifier = (
+  | "authToken"
+  | "id"
+  | "name"
+  | AppTokenKeySpecifier
+)[];
 export type AppTokenFieldPolicy = {
   authToken?: FieldPolicy<any> | FieldReadFunction<any>;
   id?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -31082,7 +31863,12 @@ export type AppTokenVerifyFieldPolicy = {
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
   valid?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type AppUpdateKeySpecifier = ("app" | "appErrors" | "errors" | AppUpdateKeySpecifier)[];
+export type AppUpdateKeySpecifier = (
+  | "app"
+  | "appErrors"
+  | "errors"
+  | AppUpdateKeySpecifier
+)[];
 export type AppUpdateFieldPolicy = {
   app?: FieldPolicy<any> | FieldReadFunction<any>;
   appErrors?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -31811,7 +32597,9 @@ export type ChannelKeySpecifier = (
   | ChannelKeySpecifier
 )[];
 export type ChannelFieldPolicy = {
-  availableShippingMethodsPerCountry?: FieldPolicy<any> | FieldReadFunction<any>;
+  availableShippingMethodsPerCountry?:
+    | FieldPolicy<any>
+    | FieldReadFunction<any>;
   countries?: FieldPolicy<any> | FieldReadFunction<any>;
   currencyCode?: FieldPolicy<any> | FieldReadFunction<any>;
   defaultCountry?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -32387,7 +33175,11 @@ export type CheckoutUpdatedFieldPolicy = {
   recipient?: FieldPolicy<any> | FieldReadFunction<any>;
   version?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type ChoiceValueKeySpecifier = ("raw" | "verbose" | ChoiceValueKeySpecifier)[];
+export type ChoiceValueKeySpecifier = (
+  | "raw"
+  | "verbose"
+  | ChoiceValueKeySpecifier
+)[];
 export type ChoiceValueFieldPolicy = {
   raw?: FieldPolicy<any> | FieldReadFunction<any>;
   verbose?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -33053,7 +33845,12 @@ export type DiscountErrorFieldPolicy = {
   message?: FieldPolicy<any> | FieldReadFunction<any>;
   products?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type DomainKeySpecifier = ("host" | "sslEnabled" | "url" | DomainKeySpecifier)[];
+export type DomainKeySpecifier = (
+  | "host"
+  | "sslEnabled"
+  | "url"
+  | DomainKeySpecifier
+)[];
 export type DomainFieldPolicy = {
   host?: FieldPolicy<any> | FieldReadFunction<any>;
   sslEnabled?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -33272,7 +34069,12 @@ export type EventDeliveryRetryFieldPolicy = {
   delivery?: FieldPolicy<any> | FieldReadFunction<any>;
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type ExportErrorKeySpecifier = ("code" | "field" | "message" | ExportErrorKeySpecifier)[];
+export type ExportErrorKeySpecifier = (
+  | "code"
+  | "field"
+  | "message"
+  | ExportErrorKeySpecifier
+)[];
 export type ExportErrorFieldPolicy = {
   code?: FieldPolicy<any> | FieldReadFunction<any>;
   field?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -33338,7 +34140,11 @@ export type ExportFileCountableEdgeFieldPolicy = {
   cursor?: FieldPolicy<any> | FieldReadFunction<any>;
   node?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type ExportGiftCardsKeySpecifier = ("errors" | "exportFile" | ExportGiftCardsKeySpecifier)[];
+export type ExportGiftCardsKeySpecifier = (
+  | "errors"
+  | "exportFile"
+  | ExportGiftCardsKeySpecifier
+)[];
 export type ExportGiftCardsFieldPolicy = {
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
   exportFile?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -33649,7 +34455,11 @@ export type FulfillmentUpdateTrackingFieldPolicy = {
   order?: FieldPolicy<any> | FieldReadFunction<any>;
   orderErrors?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type GatewayConfigLineKeySpecifier = ("field" | "value" | GatewayConfigLineKeySpecifier)[];
+export type GatewayConfigLineKeySpecifier = (
+  | "field"
+  | "value"
+  | GatewayConfigLineKeySpecifier
+)[];
 export type GatewayConfigLineFieldPolicy = {
   field?: FieldPolicy<any> | FieldReadFunction<any>;
   value?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -33932,7 +34742,11 @@ export type GiftCardMetadataUpdatedFieldPolicy = {
   recipient?: FieldPolicy<any> | FieldReadFunction<any>;
   version?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type GiftCardResendKeySpecifier = ("errors" | "giftCard" | GiftCardResendKeySpecifier)[];
+export type GiftCardResendKeySpecifier = (
+  | "errors"
+  | "giftCard"
+  | GiftCardResendKeySpecifier
+)[];
 export type GiftCardResendFieldPolicy = {
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
   giftCard?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -33981,7 +34795,11 @@ export type GiftCardStatusChangedFieldPolicy = {
   recipient?: FieldPolicy<any> | FieldReadFunction<any>;
   version?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type GiftCardTagKeySpecifier = ("id" | "name" | GiftCardTagKeySpecifier)[];
+export type GiftCardTagKeySpecifier = (
+  | "id"
+  | "name"
+  | GiftCardTagKeySpecifier
+)[];
 export type GiftCardTagFieldPolicy = {
   id?: FieldPolicy<any> | FieldReadFunction<any>;
   name?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -34058,7 +34876,11 @@ export type GroupCountableConnectionFieldPolicy = {
   pageInfo?: FieldPolicy<any> | FieldReadFunction<any>;
   totalCount?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type GroupCountableEdgeKeySpecifier = ("cursor" | "node" | GroupCountableEdgeKeySpecifier)[];
+export type GroupCountableEdgeKeySpecifier = (
+  | "cursor"
+  | "node"
+  | GroupCountableEdgeKeySpecifier
+)[];
 export type GroupCountableEdgeFieldPolicy = {
   cursor?: FieldPolicy<any> | FieldReadFunction<any>;
   node?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -34142,7 +34964,12 @@ export type InvoiceDeletedFieldPolicy = {
   recipient?: FieldPolicy<any> | FieldReadFunction<any>;
   version?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type InvoiceErrorKeySpecifier = ("code" | "field" | "message" | InvoiceErrorKeySpecifier)[];
+export type InvoiceErrorKeySpecifier = (
+  | "code"
+  | "field"
+  | "message"
+  | InvoiceErrorKeySpecifier
+)[];
 export type InvoiceErrorFieldPolicy = {
   code?: FieldPolicy<any> | FieldReadFunction<any>;
   field?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -34241,12 +35068,20 @@ export type JobFieldPolicy = {
   status?: FieldPolicy<any> | FieldReadFunction<any>;
   updatedAt?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type LanguageDisplayKeySpecifier = ("code" | "language" | LanguageDisplayKeySpecifier)[];
+export type LanguageDisplayKeySpecifier = (
+  | "code"
+  | "language"
+  | LanguageDisplayKeySpecifier
+)[];
 export type LanguageDisplayFieldPolicy = {
   code?: FieldPolicy<any> | FieldReadFunction<any>;
   language?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type LimitInfoKeySpecifier = ("allowedUsage" | "currentUsage" | LimitInfoKeySpecifier)[];
+export type LimitInfoKeySpecifier = (
+  | "allowedUsage"
+  | "currentUsage"
+  | LimitInfoKeySpecifier
+)[];
 export type LimitInfoFieldPolicy = {
   allowedUsage?: FieldPolicy<any> | FieldReadFunction<any>;
   currentUsage?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -34353,12 +35188,21 @@ export type MenuCountableConnectionFieldPolicy = {
   pageInfo?: FieldPolicy<any> | FieldReadFunction<any>;
   totalCount?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type MenuCountableEdgeKeySpecifier = ("cursor" | "node" | MenuCountableEdgeKeySpecifier)[];
+export type MenuCountableEdgeKeySpecifier = (
+  | "cursor"
+  | "node"
+  | MenuCountableEdgeKeySpecifier
+)[];
 export type MenuCountableEdgeFieldPolicy = {
   cursor?: FieldPolicy<any> | FieldReadFunction<any>;
   node?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type MenuCreateKeySpecifier = ("errors" | "menu" | "menuErrors" | MenuCreateKeySpecifier)[];
+export type MenuCreateKeySpecifier = (
+  | "errors"
+  | "menu"
+  | "menuErrors"
+  | MenuCreateKeySpecifier
+)[];
 export type MenuCreateFieldPolicy = {
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
   menu?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -34379,7 +35223,12 @@ export type MenuCreatedFieldPolicy = {
   recipient?: FieldPolicy<any> | FieldReadFunction<any>;
   version?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type MenuDeleteKeySpecifier = ("errors" | "menu" | "menuErrors" | MenuDeleteKeySpecifier)[];
+export type MenuDeleteKeySpecifier = (
+  | "errors"
+  | "menu"
+  | "menuErrors"
+  | MenuDeleteKeySpecifier
+)[];
 export type MenuDeleteFieldPolicy = {
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
   menu?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -34400,7 +35249,12 @@ export type MenuDeletedFieldPolicy = {
   recipient?: FieldPolicy<any> | FieldReadFunction<any>;
   version?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type MenuErrorKeySpecifier = ("code" | "field" | "message" | MenuErrorKeySpecifier)[];
+export type MenuErrorKeySpecifier = (
+  | "code"
+  | "field"
+  | "message"
+  | MenuErrorKeySpecifier
+)[];
 export type MenuErrorFieldPolicy = {
   code?: FieldPolicy<any> | FieldReadFunction<any>;
   field?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -34600,7 +35454,12 @@ export type MenuItemUpdatedFieldPolicy = {
   recipient?: FieldPolicy<any> | FieldReadFunction<any>;
   version?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type MenuUpdateKeySpecifier = ("errors" | "menu" | "menuErrors" | MenuUpdateKeySpecifier)[];
+export type MenuUpdateKeySpecifier = (
+  | "errors"
+  | "menu"
+  | "menuErrors"
+  | MenuUpdateKeySpecifier
+)[];
 export type MenuUpdateFieldPolicy = {
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
   menu?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -34632,7 +35491,11 @@ export type MetadataErrorFieldPolicy = {
   field?: FieldPolicy<any> | FieldReadFunction<any>;
   message?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type MetadataItemKeySpecifier = ("key" | "value" | MetadataItemKeySpecifier)[];
+export type MetadataItemKeySpecifier = (
+  | "key"
+  | "value"
+  | MetadataItemKeySpecifier
+)[];
 export type MetadataItemFieldPolicy = {
   key?: FieldPolicy<any> | FieldReadFunction<any>;
   value?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -34642,7 +35505,11 @@ export type MoneyFieldPolicy = {
   amount?: FieldPolicy<any> | FieldReadFunction<any>;
   currency?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type MoneyRangeKeySpecifier = ("start" | "stop" | MoneyRangeKeySpecifier)[];
+export type MoneyRangeKeySpecifier = (
+  | "start"
+  | "stop"
+  | MoneyRangeKeySpecifier
+)[];
 export type MoneyRangeFieldPolicy = {
   start?: FieldPolicy<any> | FieldReadFunction<any>;
   stop?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -35144,12 +36011,16 @@ export type MutationFieldPolicy = {
   productVariantBulkCreate?: FieldPolicy<any> | FieldReadFunction<any>;
   productVariantBulkDelete?: FieldPolicy<any> | FieldReadFunction<any>;
   productVariantBulkUpdate?: FieldPolicy<any> | FieldReadFunction<any>;
-  productVariantChannelListingUpdate?: FieldPolicy<any> | FieldReadFunction<any>;
+  productVariantChannelListingUpdate?:
+    | FieldPolicy<any>
+    | FieldReadFunction<any>;
   productVariantCreate?: FieldPolicy<any> | FieldReadFunction<any>;
   productVariantDelete?: FieldPolicy<any> | FieldReadFunction<any>;
   productVariantPreorderDeactivate?: FieldPolicy<any> | FieldReadFunction<any>;
   productVariantReorder?: FieldPolicy<any> | FieldReadFunction<any>;
-  productVariantReorderAttributeValues?: FieldPolicy<any> | FieldReadFunction<any>;
+  productVariantReorderAttributeValues?:
+    | FieldPolicy<any>
+    | FieldReadFunction<any>;
   productVariantSetDefault?: FieldPolicy<any> | FieldReadFunction<any>;
   productVariantStocksCreate?: FieldPolicy<any> | FieldReadFunction<any>;
   productVariantStocksDelete?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -35167,12 +36038,16 @@ export type MutationFieldPolicy = {
   saleTranslate?: FieldPolicy<any> | FieldReadFunction<any>;
   saleUpdate?: FieldPolicy<any> | FieldReadFunction<any>;
   setPassword?: FieldPolicy<any> | FieldReadFunction<any>;
-  shippingMethodChannelListingUpdate?: FieldPolicy<any> | FieldReadFunction<any>;
+  shippingMethodChannelListingUpdate?:
+    | FieldPolicy<any>
+    | FieldReadFunction<any>;
   shippingPriceBulkDelete?: FieldPolicy<any> | FieldReadFunction<any>;
   shippingPriceCreate?: FieldPolicy<any> | FieldReadFunction<any>;
   shippingPriceDelete?: FieldPolicy<any> | FieldReadFunction<any>;
   shippingPriceExcludeProducts?: FieldPolicy<any> | FieldReadFunction<any>;
-  shippingPriceRemoveProductFromExclude?: FieldPolicy<any> | FieldReadFunction<any>;
+  shippingPriceRemoveProductFromExclude?:
+    | FieldPolicy<any>
+    | FieldReadFunction<any>;
   shippingPriceTranslate?: FieldPolicy<any> | FieldReadFunction<any>;
   shippingPriceUpdate?: FieldPolicy<any> | FieldReadFunction<any>;
   shippingZoneBulkDelete?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -35492,7 +36367,11 @@ export type OrderCountableConnectionFieldPolicy = {
   pageInfo?: FieldPolicy<any> | FieldReadFunction<any>;
   totalCount?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type OrderCountableEdgeKeySpecifier = ("cursor" | "node" | OrderCountableEdgeKeySpecifier)[];
+export type OrderCountableEdgeKeySpecifier = (
+  | "cursor"
+  | "node"
+  | OrderCountableEdgeKeySpecifier
+)[];
 export type OrderCountableEdgeFieldPolicy = {
   cursor?: FieldPolicy<any> | FieldReadFunction<any>;
   node?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -35956,7 +36835,9 @@ export type OrderSettingsKeySpecifier = (
 )[];
 export type OrderSettingsFieldPolicy = {
   automaticallyConfirmAllNewOrders?: FieldPolicy<any> | FieldReadFunction<any>;
-  automaticallyFulfillNonShippableGiftCard?: FieldPolicy<any> | FieldReadFunction<any>;
+  automaticallyFulfillNonShippableGiftCard?:
+    | FieldPolicy<any>
+    | FieldReadFunction<any>;
 };
 export type OrderSettingsErrorKeySpecifier = (
   | "code"
@@ -36017,7 +36898,12 @@ export type OrderUpdatedFieldPolicy = {
   recipient?: FieldPolicy<any> | FieldReadFunction<any>;
   version?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type OrderVoidKeySpecifier = ("errors" | "order" | "orderErrors" | OrderVoidKeySpecifier)[];
+export type OrderVoidKeySpecifier = (
+  | "errors"
+  | "order"
+  | "orderErrors"
+  | OrderVoidKeySpecifier
+)[];
 export type OrderVoidFieldPolicy = {
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
   order?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -36123,12 +37009,21 @@ export type PageCountableConnectionFieldPolicy = {
   pageInfo?: FieldPolicy<any> | FieldReadFunction<any>;
   totalCount?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type PageCountableEdgeKeySpecifier = ("cursor" | "node" | PageCountableEdgeKeySpecifier)[];
+export type PageCountableEdgeKeySpecifier = (
+  | "cursor"
+  | "node"
+  | PageCountableEdgeKeySpecifier
+)[];
 export type PageCountableEdgeFieldPolicy = {
   cursor?: FieldPolicy<any> | FieldReadFunction<any>;
   node?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type PageCreateKeySpecifier = ("errors" | "page" | "pageErrors" | PageCreateKeySpecifier)[];
+export type PageCreateKeySpecifier = (
+  | "errors"
+  | "page"
+  | "pageErrors"
+  | PageCreateKeySpecifier
+)[];
 export type PageCreateFieldPolicy = {
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
   page?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -36149,7 +37044,12 @@ export type PageCreatedFieldPolicy = {
   recipient?: FieldPolicy<any> | FieldReadFunction<any>;
   version?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type PageDeleteKeySpecifier = ("errors" | "page" | "pageErrors" | PageDeleteKeySpecifier)[];
+export type PageDeleteKeySpecifier = (
+  | "errors"
+  | "page"
+  | "pageErrors"
+  | PageDeleteKeySpecifier
+)[];
 export type PageDeleteFieldPolicy = {
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
   page?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -36411,7 +37311,12 @@ export type PageTypeUpdatedFieldPolicy = {
   recipient?: FieldPolicy<any> | FieldReadFunction<any>;
   version?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type PageUpdateKeySpecifier = ("errors" | "page" | "pageErrors" | PageUpdateKeySpecifier)[];
+export type PageUpdateKeySpecifier = (
+  | "errors"
+  | "page"
+  | "pageErrors"
+  | PageUpdateKeySpecifier
+)[];
 export type PageUpdateFieldPolicy = {
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
   page?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -36726,7 +37631,11 @@ export type PaymentVoidEventFieldPolicy = {
   recipient?: FieldPolicy<any> | FieldReadFunction<any>;
   version?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type PermissionKeySpecifier = ("code" | "name" | PermissionKeySpecifier)[];
+export type PermissionKeySpecifier = (
+  | "code"
+  | "name"
+  | PermissionKeySpecifier
+)[];
 export type PermissionFieldPolicy = {
   code?: FieldPolicy<any> | FieldReadFunction<any>;
   name?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -36870,7 +37779,12 @@ export type PluginCountableEdgeFieldPolicy = {
   cursor?: FieldPolicy<any> | FieldReadFunction<any>;
   node?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type PluginErrorKeySpecifier = ("code" | "field" | "message" | PluginErrorKeySpecifier)[];
+export type PluginErrorKeySpecifier = (
+  | "code"
+  | "field"
+  | "message"
+  | PluginErrorKeySpecifier
+)[];
 export type PluginErrorFieldPolicy = {
   code?: FieldPolicy<any> | FieldReadFunction<any>;
   field?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -38207,7 +39121,11 @@ export type QueryFieldPolicy = {
   webhookEvents?: FieldPolicy<any> | FieldReadFunction<any>;
   webhookSamplePayload?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type ReducedRateKeySpecifier = ("rate" | "rateType" | ReducedRateKeySpecifier)[];
+export type ReducedRateKeySpecifier = (
+  | "rate"
+  | "rateType"
+  | ReducedRateKeySpecifier
+)[];
 export type ReducedRateFieldPolicy = {
   rate?: FieldPolicy<any> | FieldReadFunction<any>;
   rateType?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -38349,7 +39267,11 @@ export type SaleCountableConnectionFieldPolicy = {
   pageInfo?: FieldPolicy<any> | FieldReadFunction<any>;
   totalCount?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type SaleCountableEdgeKeySpecifier = ("cursor" | "node" | SaleCountableEdgeKeySpecifier)[];
+export type SaleCountableEdgeKeySpecifier = (
+  | "cursor"
+  | "node"
+  | SaleCountableEdgeKeySpecifier
+)[];
 export type SaleCountableEdgeFieldPolicy = {
   cursor?: FieldPolicy<any> | FieldReadFunction<any>;
   node?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -39051,7 +39973,9 @@ export type ShopKeySpecifier = (
   | ShopKeySpecifier
 )[];
 export type ShopFieldPolicy = {
-  automaticFulfillmentDigitalProducts?: FieldPolicy<any> | FieldReadFunction<any>;
+  automaticFulfillmentDigitalProducts?:
+    | FieldPolicy<any>
+    | FieldReadFunction<any>;
   availableExternalAuthentications?: FieldPolicy<any> | FieldReadFunction<any>;
   availablePaymentGateways?: FieldPolicy<any> | FieldReadFunction<any>;
   availableShippingMethods?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -39080,7 +40004,9 @@ export type ShopFieldPolicy = {
   permissions?: FieldPolicy<any> | FieldReadFunction<any>;
   phonePrefixes?: FieldPolicy<any> | FieldReadFunction<any>;
   reserveStockDurationAnonymousUser?: FieldPolicy<any> | FieldReadFunction<any>;
-  reserveStockDurationAuthenticatedUser?: FieldPolicy<any> | FieldReadFunction<any>;
+  reserveStockDurationAuthenticatedUser?:
+    | FieldPolicy<any>
+    | FieldReadFunction<any>;
   schemaVersion?: FieldPolicy<any> | FieldReadFunction<any>;
   staffNotificationRecipients?: FieldPolicy<any> | FieldReadFunction<any>;
   trackInventoryByDefault?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -39109,7 +40035,12 @@ export type ShopDomainUpdateFieldPolicy = {
   shop?: FieldPolicy<any> | FieldReadFunction<any>;
   shopErrors?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type ShopErrorKeySpecifier = ("code" | "field" | "message" | ShopErrorKeySpecifier)[];
+export type ShopErrorKeySpecifier = (
+  | "code"
+  | "field"
+  | "message"
+  | ShopErrorKeySpecifier
+)[];
 export type ShopErrorFieldPolicy = {
   code?: FieldPolicy<any> | FieldReadFunction<any>;
   field?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -39343,18 +40274,30 @@ export type StockCountableConnectionFieldPolicy = {
   pageInfo?: FieldPolicy<any> | FieldReadFunction<any>;
   totalCount?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type StockCountableEdgeKeySpecifier = ("cursor" | "node" | StockCountableEdgeKeySpecifier)[];
+export type StockCountableEdgeKeySpecifier = (
+  | "cursor"
+  | "node"
+  | StockCountableEdgeKeySpecifier
+)[];
 export type StockCountableEdgeFieldPolicy = {
   cursor?: FieldPolicy<any> | FieldReadFunction<any>;
   node?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type StockErrorKeySpecifier = ("code" | "field" | "message" | StockErrorKeySpecifier)[];
+export type StockErrorKeySpecifier = (
+  | "code"
+  | "field"
+  | "message"
+  | StockErrorKeySpecifier
+)[];
 export type StockErrorFieldPolicy = {
   code?: FieldPolicy<any> | FieldReadFunction<any>;
   field?: FieldPolicy<any> | FieldReadFunction<any>;
   message?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type StockSettingsKeySpecifier = ("allocationStrategy" | StockSettingsKeySpecifier)[];
+export type StockSettingsKeySpecifier = (
+  | "allocationStrategy"
+  | StockSettingsKeySpecifier
+)[];
 export type StockSettingsFieldPolicy = {
   allocationStrategy?: FieldPolicy<any> | FieldReadFunction<any>;
 };
@@ -39416,7 +40359,11 @@ export type TaxClassCountryRateFieldPolicy = {
   rate?: FieldPolicy<any> | FieldReadFunction<any>;
   taxClass?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type TaxClassCreateKeySpecifier = ("errors" | "taxClass" | TaxClassCreateKeySpecifier)[];
+export type TaxClassCreateKeySpecifier = (
+  | "errors"
+  | "taxClass"
+  | TaxClassCreateKeySpecifier
+)[];
 export type TaxClassCreateFieldPolicy = {
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
   taxClass?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -39434,7 +40381,11 @@ export type TaxClassCreateErrorFieldPolicy = {
   field?: FieldPolicy<any> | FieldReadFunction<any>;
   message?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type TaxClassDeleteKeySpecifier = ("errors" | "taxClass" | TaxClassDeleteKeySpecifier)[];
+export type TaxClassDeleteKeySpecifier = (
+  | "errors"
+  | "taxClass"
+  | TaxClassDeleteKeySpecifier
+)[];
 export type TaxClassDeleteFieldPolicy = {
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
   taxClass?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -39450,7 +40401,11 @@ export type TaxClassDeleteErrorFieldPolicy = {
   field?: FieldPolicy<any> | FieldReadFunction<any>;
   message?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type TaxClassUpdateKeySpecifier = ("errors" | "taxClass" | TaxClassUpdateKeySpecifier)[];
+export type TaxClassUpdateKeySpecifier = (
+  | "errors"
+  | "taxClass"
+  | TaxClassUpdateKeySpecifier
+)[];
 export type TaxClassUpdateFieldPolicy = {
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
   taxClass?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -39625,7 +40580,11 @@ export type TaxExemptionManageErrorFieldPolicy = {
   field?: FieldPolicy<any> | FieldReadFunction<any>;
   message?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type TaxTypeKeySpecifier = ("description" | "taxCode" | TaxTypeKeySpecifier)[];
+export type TaxTypeKeySpecifier = (
+  | "description"
+  | "taxCode"
+  | TaxTypeKeySpecifier
+)[];
 export type TaxTypeFieldPolicy = {
   description?: FieldPolicy<any> | FieldReadFunction<any>;
   taxCode?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -39694,7 +40653,11 @@ export type TaxedMoneyFieldPolicy = {
   net?: FieldPolicy<any> | FieldReadFunction<any>;
   tax?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type TaxedMoneyRangeKeySpecifier = ("start" | "stop" | TaxedMoneyRangeKeySpecifier)[];
+export type TaxedMoneyRangeKeySpecifier = (
+  | "start"
+  | "stop"
+  | TaxedMoneyRangeKeySpecifier
+)[];
 export type TaxedMoneyRangeFieldPolicy = {
   start?: FieldPolicy<any> | FieldReadFunction<any>;
   stop?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -39720,7 +40683,11 @@ export type ThumbnailCreatedFieldPolicy = {
   url?: FieldPolicy<any> | FieldReadFunction<any>;
   version?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type TimePeriodKeySpecifier = ("amount" | "type" | TimePeriodKeySpecifier)[];
+export type TimePeriodKeySpecifier = (
+  | "amount"
+  | "type"
+  | TimePeriodKeySpecifier
+)[];
 export type TimePeriodFieldPolicy = {
   amount?: FieldPolicy<any> | FieldReadFunction<any>;
   type?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -39990,7 +40957,12 @@ export type UpdatePrivateMetadataFieldPolicy = {
   item?: FieldPolicy<any> | FieldReadFunction<any>;
   metadataErrors?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type UploadErrorKeySpecifier = ("code" | "field" | "message" | UploadErrorKeySpecifier)[];
+export type UploadErrorKeySpecifier = (
+  | "code"
+  | "field"
+  | "message"
+  | UploadErrorKeySpecifier
+)[];
 export type UploadErrorFieldPolicy = {
   code?: FieldPolicy<any> | FieldReadFunction<any>;
   field?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -40111,7 +41083,11 @@ export type UserCountableConnectionFieldPolicy = {
   pageInfo?: FieldPolicy<any> | FieldReadFunction<any>;
   totalCount?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type UserCountableEdgeKeySpecifier = ("cursor" | "node" | UserCountableEdgeKeySpecifier)[];
+export type UserCountableEdgeKeySpecifier = (
+  | "cursor"
+  | "node"
+  | UserCountableEdgeKeySpecifier
+)[];
 export type UserCountableEdgeFieldPolicy = {
   cursor?: FieldPolicy<any> | FieldReadFunction<any>;
   node?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -40127,7 +41103,12 @@ export type UserPermissionFieldPolicy = {
   name?: FieldPolicy<any> | FieldReadFunction<any>;
   sourcePermissionGroups?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type VATKeySpecifier = ("countryCode" | "reducedRates" | "standardRate" | VATKeySpecifier)[];
+export type VATKeySpecifier = (
+  | "countryCode"
+  | "reducedRates"
+  | "standardRate"
+  | VATKeySpecifier
+)[];
 export type VATFieldPolicy = {
   countryCode?: FieldPolicy<any> | FieldReadFunction<any>;
   reducedRates?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -40695,7 +41676,11 @@ export type WebhookDeleteFieldPolicy = {
   webhook?: FieldPolicy<any> | FieldReadFunction<any>;
   webhookErrors?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type WebhookDryRunKeySpecifier = ("errors" | "payload" | WebhookDryRunKeySpecifier)[];
+export type WebhookDryRunKeySpecifier = (
+  | "errors"
+  | "payload"
+  | WebhookDryRunKeySpecifier
+)[];
 export type WebhookDryRunFieldPolicy = {
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
   payload?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -40711,13 +41696,22 @@ export type WebhookDryRunErrorFieldPolicy = {
   field?: FieldPolicy<any> | FieldReadFunction<any>;
   message?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type WebhookErrorKeySpecifier = ("code" | "field" | "message" | WebhookErrorKeySpecifier)[];
+export type WebhookErrorKeySpecifier = (
+  | "code"
+  | "field"
+  | "message"
+  | WebhookErrorKeySpecifier
+)[];
 export type WebhookErrorFieldPolicy = {
   code?: FieldPolicy<any> | FieldReadFunction<any>;
   field?: FieldPolicy<any> | FieldReadFunction<any>;
   message?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type WebhookEventKeySpecifier = ("eventType" | "name" | WebhookEventKeySpecifier)[];
+export type WebhookEventKeySpecifier = (
+  | "eventType"
+  | "name"
+  | WebhookEventKeySpecifier
+)[];
 export type WebhookEventFieldPolicy = {
   eventType?: FieldPolicy<any> | FieldReadFunction<any>;
   name?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -40731,12 +41725,20 @@ export type WebhookEventAsyncFieldPolicy = {
   eventType?: FieldPolicy<any> | FieldReadFunction<any>;
   name?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type WebhookEventSyncKeySpecifier = ("eventType" | "name" | WebhookEventSyncKeySpecifier)[];
+export type WebhookEventSyncKeySpecifier = (
+  | "eventType"
+  | "name"
+  | WebhookEventSyncKeySpecifier
+)[];
 export type WebhookEventSyncFieldPolicy = {
   eventType?: FieldPolicy<any> | FieldReadFunction<any>;
   name?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type WebhookTriggerKeySpecifier = ("delivery" | "errors" | WebhookTriggerKeySpecifier)[];
+export type WebhookTriggerKeySpecifier = (
+  | "delivery"
+  | "errors"
+  | WebhookTriggerKeySpecifier
+)[];
 export type WebhookTriggerFieldPolicy = {
   delivery?: FieldPolicy<any> | FieldReadFunction<any>;
   errors?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -40795,11 +41797,17 @@ export type StrictTypedTypePolicies = {
     fields?: AccountAddressUpdateFieldPolicy;
   };
   AccountDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AccountDeleteKeySpecifier | (() => undefined | AccountDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | AccountDeleteKeySpecifier
+      | (() => undefined | AccountDeleteKeySpecifier);
     fields?: AccountDeleteFieldPolicy;
   };
   AccountError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AccountErrorKeySpecifier | (() => undefined | AccountErrorKeySpecifier);
+    keyFields?:
+      | false
+      | AccountErrorKeySpecifier
+      | (() => undefined | AccountErrorKeySpecifier);
     fields?: AccountErrorFieldPolicy;
   };
   AccountRegister?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -40824,27 +41832,45 @@ export type StrictTypedTypePolicies = {
     fields?: AccountSetDefaultAddressFieldPolicy;
   };
   AccountUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AccountUpdateKeySpecifier | (() => undefined | AccountUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | AccountUpdateKeySpecifier
+      | (() => undefined | AccountUpdateKeySpecifier);
     fields?: AccountUpdateFieldPolicy;
   };
   Address?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AddressKeySpecifier | (() => undefined | AddressKeySpecifier);
+    keyFields?:
+      | false
+      | AddressKeySpecifier
+      | (() => undefined | AddressKeySpecifier);
     fields?: AddressFieldPolicy;
   };
   AddressCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AddressCreateKeySpecifier | (() => undefined | AddressCreateKeySpecifier);
+    keyFields?:
+      | false
+      | AddressCreateKeySpecifier
+      | (() => undefined | AddressCreateKeySpecifier);
     fields?: AddressCreateFieldPolicy;
   };
   AddressCreated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AddressCreatedKeySpecifier | (() => undefined | AddressCreatedKeySpecifier);
+    keyFields?:
+      | false
+      | AddressCreatedKeySpecifier
+      | (() => undefined | AddressCreatedKeySpecifier);
     fields?: AddressCreatedFieldPolicy;
   };
   AddressDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AddressDeleteKeySpecifier | (() => undefined | AddressDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | AddressDeleteKeySpecifier
+      | (() => undefined | AddressDeleteKeySpecifier);
     fields?: AddressDeleteFieldPolicy;
   };
   AddressDeleted?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AddressDeletedKeySpecifier | (() => undefined | AddressDeletedKeySpecifier);
+    keyFields?:
+      | false
+      | AddressDeletedKeySpecifier
+      | (() => undefined | AddressDeletedKeySpecifier);
     fields?: AddressDeletedFieldPolicy;
   };
   AddressSetDefault?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -40855,11 +41881,17 @@ export type StrictTypedTypePolicies = {
     fields?: AddressSetDefaultFieldPolicy;
   };
   AddressUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AddressUpdateKeySpecifier | (() => undefined | AddressUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | AddressUpdateKeySpecifier
+      | (() => undefined | AddressUpdateKeySpecifier);
     fields?: AddressUpdateFieldPolicy;
   };
   AddressUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AddressUpdatedKeySpecifier | (() => undefined | AddressUpdatedKeySpecifier);
+    keyFields?:
+      | false
+      | AddressUpdatedKeySpecifier
+      | (() => undefined | AddressUpdatedKeySpecifier);
     fields?: AddressUpdatedFieldPolicy;
   };
   AddressValidationData?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -40870,7 +41902,10 @@ export type StrictTypedTypePolicies = {
     fields?: AddressValidationDataFieldPolicy;
   };
   Allocation?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AllocationKeySpecifier | (() => undefined | AllocationKeySpecifier);
+    keyFields?:
+      | false
+      | AllocationKeySpecifier
+      | (() => undefined | AllocationKeySpecifier);
     fields?: AllocationFieldPolicy;
   };
   App?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -40878,7 +41913,10 @@ export type StrictTypedTypePolicies = {
     fields?: AppFieldPolicy;
   };
   AppActivate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AppActivateKeySpecifier | (() => undefined | AppActivateKeySpecifier);
+    keyFields?:
+      | false
+      | AppActivateKeySpecifier
+      | (() => undefined | AppActivateKeySpecifier);
     fields?: AppActivateFieldPolicy;
   };
   AppCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -40896,15 +41934,24 @@ export type StrictTypedTypePolicies = {
     fields?: AppCountableEdgeFieldPolicy;
   };
   AppCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AppCreateKeySpecifier | (() => undefined | AppCreateKeySpecifier);
+    keyFields?:
+      | false
+      | AppCreateKeySpecifier
+      | (() => undefined | AppCreateKeySpecifier);
     fields?: AppCreateFieldPolicy;
   };
   AppDeactivate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AppDeactivateKeySpecifier | (() => undefined | AppDeactivateKeySpecifier);
+    keyFields?:
+      | false
+      | AppDeactivateKeySpecifier
+      | (() => undefined | AppDeactivateKeySpecifier);
     fields?: AppDeactivateFieldPolicy;
   };
   AppDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AppDeleteKeySpecifier | (() => undefined | AppDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | AppDeleteKeySpecifier
+      | (() => undefined | AppDeleteKeySpecifier);
     fields?: AppDeleteFieldPolicy;
   };
   AppDeleteFailedInstallation?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -40915,15 +41962,24 @@ export type StrictTypedTypePolicies = {
     fields?: AppDeleteFailedInstallationFieldPolicy;
   };
   AppDeleted?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AppDeletedKeySpecifier | (() => undefined | AppDeletedKeySpecifier);
+    keyFields?:
+      | false
+      | AppDeletedKeySpecifier
+      | (() => undefined | AppDeletedKeySpecifier);
     fields?: AppDeletedFieldPolicy;
   };
   AppError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AppErrorKeySpecifier | (() => undefined | AppErrorKeySpecifier);
+    keyFields?:
+      | false
+      | AppErrorKeySpecifier
+      | (() => undefined | AppErrorKeySpecifier);
     fields?: AppErrorFieldPolicy;
   };
   AppExtension?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AppExtensionKeySpecifier | (() => undefined | AppExtensionKeySpecifier);
+    keyFields?:
+      | false
+      | AppExtensionKeySpecifier
+      | (() => undefined | AppExtensionKeySpecifier);
     fields?: AppExtensionFieldPolicy;
   };
   AppExtensionCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -40948,7 +42004,10 @@ export type StrictTypedTypePolicies = {
     fields?: AppFetchManifestFieldPolicy;
   };
   AppInstall?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AppInstallKeySpecifier | (() => undefined | AppInstallKeySpecifier);
+    keyFields?:
+      | false
+      | AppInstallKeySpecifier
+      | (() => undefined | AppInstallKeySpecifier);
     fields?: AppInstallFieldPolicy;
   };
   AppInstallation?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -40959,7 +42018,10 @@ export type StrictTypedTypePolicies = {
     fields?: AppInstallationFieldPolicy;
   };
   AppInstalled?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AppInstalledKeySpecifier | (() => undefined | AppInstalledKeySpecifier);
+    keyFields?:
+      | false
+      | AppInstalledKeySpecifier
+      | (() => undefined | AppInstalledKeySpecifier);
     fields?: AppInstalledFieldPolicy;
   };
   AppManifestExtension?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -40991,27 +42053,45 @@ export type StrictTypedTypePolicies = {
     fields?: AppStatusChangedFieldPolicy;
   };
   AppToken?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AppTokenKeySpecifier | (() => undefined | AppTokenKeySpecifier);
+    keyFields?:
+      | false
+      | AppTokenKeySpecifier
+      | (() => undefined | AppTokenKeySpecifier);
     fields?: AppTokenFieldPolicy;
   };
   AppTokenCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AppTokenCreateKeySpecifier | (() => undefined | AppTokenCreateKeySpecifier);
+    keyFields?:
+      | false
+      | AppTokenCreateKeySpecifier
+      | (() => undefined | AppTokenCreateKeySpecifier);
     fields?: AppTokenCreateFieldPolicy;
   };
   AppTokenDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AppTokenDeleteKeySpecifier | (() => undefined | AppTokenDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | AppTokenDeleteKeySpecifier
+      | (() => undefined | AppTokenDeleteKeySpecifier);
     fields?: AppTokenDeleteFieldPolicy;
   };
   AppTokenVerify?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AppTokenVerifyKeySpecifier | (() => undefined | AppTokenVerifyKeySpecifier);
+    keyFields?:
+      | false
+      | AppTokenVerifyKeySpecifier
+      | (() => undefined | AppTokenVerifyKeySpecifier);
     fields?: AppTokenVerifyFieldPolicy;
   };
   AppUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AppUpdateKeySpecifier | (() => undefined | AppUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | AppUpdateKeySpecifier
+      | (() => undefined | AppUpdateKeySpecifier);
     fields?: AppUpdateFieldPolicy;
   };
   AppUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AppUpdatedKeySpecifier | (() => undefined | AppUpdatedKeySpecifier);
+    keyFields?:
+      | false
+      | AppUpdatedKeySpecifier
+      | (() => undefined | AppUpdatedKeySpecifier);
     fields?: AppUpdatedFieldPolicy;
   };
   AssignNavigation?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41029,7 +42109,10 @@ export type StrictTypedTypePolicies = {
     fields?: AssignedVariantAttributeFieldPolicy;
   };
   Attribute?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AttributeKeySpecifier | (() => undefined | AttributeKeySpecifier);
+    keyFields?:
+      | false
+      | AttributeKeySpecifier
+      | (() => undefined | AttributeKeySpecifier);
     fields?: AttributeFieldPolicy;
   };
   AttributeBulkDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41082,7 +42165,10 @@ export type StrictTypedTypePolicies = {
     fields?: AttributeDeletedFieldPolicy;
   };
   AttributeError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AttributeErrorKeySpecifier | (() => undefined | AttributeErrorKeySpecifier);
+    keyFields?:
+      | false
+      | AttributeErrorKeySpecifier
+      | (() => undefined | AttributeErrorKeySpecifier);
     fields?: AttributeErrorFieldPolicy;
   };
   AttributeReorderValues?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41128,7 +42214,10 @@ export type StrictTypedTypePolicies = {
     fields?: AttributeUpdatedFieldPolicy;
   };
   AttributeValue?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | AttributeValueKeySpecifier | (() => undefined | AttributeValueKeySpecifier);
+    keyFields?:
+      | false
+      | AttributeValueKeySpecifier
+      | (() => undefined | AttributeValueKeySpecifier);
     fields?: AttributeValueFieldPolicy;
   };
   AttributeValueBulkDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41138,7 +42227,10 @@ export type StrictTypedTypePolicies = {
       | (() => undefined | AttributeValueBulkDeleteKeySpecifier);
     fields?: AttributeValueBulkDeleteFieldPolicy;
   };
-  AttributeValueCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  AttributeValueCountableConnection?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | AttributeValueCountableConnectionKeySpecifier
@@ -41180,7 +42272,10 @@ export type StrictTypedTypePolicies = {
       | (() => undefined | AttributeValueDeletedKeySpecifier);
     fields?: AttributeValueDeletedFieldPolicy;
   };
-  AttributeValueTranslatableContent?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  AttributeValueTranslatableContent?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | AttributeValueTranslatableContentKeySpecifier
@@ -41223,15 +42318,24 @@ export type StrictTypedTypePolicies = {
     fields?: BulkProductErrorFieldPolicy;
   };
   BulkStockError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | BulkStockErrorKeySpecifier | (() => undefined | BulkStockErrorKeySpecifier);
+    keyFields?:
+      | false
+      | BulkStockErrorKeySpecifier
+      | (() => undefined | BulkStockErrorKeySpecifier);
     fields?: BulkStockErrorFieldPolicy;
   };
   CalculateTaxes?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CalculateTaxesKeySpecifier | (() => undefined | CalculateTaxesKeySpecifier);
+    keyFields?:
+      | false
+      | CalculateTaxesKeySpecifier
+      | (() => undefined | CalculateTaxesKeySpecifier);
     fields?: CalculateTaxesFieldPolicy;
   };
   Category?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CategoryKeySpecifier | (() => undefined | CategoryKeySpecifier);
+    keyFields?:
+      | false
+      | CategoryKeySpecifier
+      | (() => undefined | CategoryKeySpecifier);
     fields?: CategoryFieldPolicy;
   };
   CategoryBulkDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41256,7 +42360,10 @@ export type StrictTypedTypePolicies = {
     fields?: CategoryCountableEdgeFieldPolicy;
   };
   CategoryCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CategoryCreateKeySpecifier | (() => undefined | CategoryCreateKeySpecifier);
+    keyFields?:
+      | false
+      | CategoryCreateKeySpecifier
+      | (() => undefined | CategoryCreateKeySpecifier);
     fields?: CategoryCreateFieldPolicy;
   };
   CategoryCreated?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41267,7 +42374,10 @@ export type StrictTypedTypePolicies = {
     fields?: CategoryCreatedFieldPolicy;
   };
   CategoryDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CategoryDeleteKeySpecifier | (() => undefined | CategoryDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | CategoryDeleteKeySpecifier
+      | (() => undefined | CategoryDeleteKeySpecifier);
     fields?: CategoryDeleteFieldPolicy;
   };
   CategoryDeleted?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41299,7 +42409,10 @@ export type StrictTypedTypePolicies = {
     fields?: CategoryTranslationFieldPolicy;
   };
   CategoryUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CategoryUpdateKeySpecifier | (() => undefined | CategoryUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | CategoryUpdateKeySpecifier
+      | (() => undefined | CategoryUpdateKeySpecifier);
     fields?: CategoryUpdateFieldPolicy;
   };
   CategoryUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41310,7 +42423,10 @@ export type StrictTypedTypePolicies = {
     fields?: CategoryUpdatedFieldPolicy;
   };
   Channel?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ChannelKeySpecifier | (() => undefined | ChannelKeySpecifier);
+    keyFields?:
+      | false
+      | ChannelKeySpecifier
+      | (() => undefined | ChannelKeySpecifier);
     fields?: ChannelFieldPolicy;
   };
   ChannelActivate?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41321,11 +42437,17 @@ export type StrictTypedTypePolicies = {
     fields?: ChannelActivateFieldPolicy;
   };
   ChannelCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ChannelCreateKeySpecifier | (() => undefined | ChannelCreateKeySpecifier);
+    keyFields?:
+      | false
+      | ChannelCreateKeySpecifier
+      | (() => undefined | ChannelCreateKeySpecifier);
     fields?: ChannelCreateFieldPolicy;
   };
   ChannelCreated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ChannelCreatedKeySpecifier | (() => undefined | ChannelCreatedKeySpecifier);
+    keyFields?:
+      | false
+      | ChannelCreatedKeySpecifier
+      | (() => undefined | ChannelCreatedKeySpecifier);
     fields?: ChannelCreatedFieldPolicy;
   };
   ChannelDeactivate?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41336,15 +42458,24 @@ export type StrictTypedTypePolicies = {
     fields?: ChannelDeactivateFieldPolicy;
   };
   ChannelDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ChannelDeleteKeySpecifier | (() => undefined | ChannelDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | ChannelDeleteKeySpecifier
+      | (() => undefined | ChannelDeleteKeySpecifier);
     fields?: ChannelDeleteFieldPolicy;
   };
   ChannelDeleted?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ChannelDeletedKeySpecifier | (() => undefined | ChannelDeletedKeySpecifier);
+    keyFields?:
+      | false
+      | ChannelDeletedKeySpecifier
+      | (() => undefined | ChannelDeletedKeySpecifier);
     fields?: ChannelDeletedFieldPolicy;
   };
   ChannelError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ChannelErrorKeySpecifier | (() => undefined | ChannelErrorKeySpecifier);
+    keyFields?:
+      | false
+      | ChannelErrorKeySpecifier
+      | (() => undefined | ChannelErrorKeySpecifier);
     fields?: ChannelErrorFieldPolicy;
   };
   ChannelReorderWarehouses?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41362,15 +42493,24 @@ export type StrictTypedTypePolicies = {
     fields?: ChannelStatusChangedFieldPolicy;
   };
   ChannelUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ChannelUpdateKeySpecifier | (() => undefined | ChannelUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | ChannelUpdateKeySpecifier
+      | (() => undefined | ChannelUpdateKeySpecifier);
     fields?: ChannelUpdateFieldPolicy;
   };
   ChannelUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ChannelUpdatedKeySpecifier | (() => undefined | ChannelUpdatedKeySpecifier);
+    keyFields?:
+      | false
+      | ChannelUpdatedKeySpecifier
+      | (() => undefined | ChannelUpdatedKeySpecifier);
     fields?: ChannelUpdatedFieldPolicy;
   };
   Checkout?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CheckoutKeySpecifier | (() => undefined | CheckoutKeySpecifier);
+    keyFields?:
+      | false
+      | CheckoutKeySpecifier
+      | (() => undefined | CheckoutKeySpecifier);
     fields?: CheckoutFieldPolicy;
   };
   CheckoutAddPromoCode?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41409,7 +42549,10 @@ export type StrictTypedTypePolicies = {
     fields?: CheckoutCountableEdgeFieldPolicy;
   };
   CheckoutCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CheckoutCreateKeySpecifier | (() => undefined | CheckoutCreateKeySpecifier);
+    keyFields?:
+      | false
+      | CheckoutCreateKeySpecifier
+      | (() => undefined | CheckoutCreateKeySpecifier);
     fields?: CheckoutCreateFieldPolicy;
   };
   CheckoutCreated?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41448,7 +42591,10 @@ export type StrictTypedTypePolicies = {
     fields?: CheckoutEmailUpdateFieldPolicy;
   };
   CheckoutError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CheckoutErrorKeySpecifier | (() => undefined | CheckoutErrorKeySpecifier);
+    keyFields?:
+      | false
+      | CheckoutErrorKeySpecifier
+      | (() => undefined | CheckoutErrorKeySpecifier);
     fields?: CheckoutErrorFieldPolicy;
   };
   CheckoutFilterShippingMethods?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41466,7 +42612,10 @@ export type StrictTypedTypePolicies = {
     fields?: CheckoutLanguageCodeUpdateFieldPolicy;
   };
   CheckoutLine?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CheckoutLineKeySpecifier | (() => undefined | CheckoutLineKeySpecifier);
+    keyFields?:
+      | false
+      | CheckoutLineKeySpecifier
+      | (() => undefined | CheckoutLineKeySpecifier);
     fields?: CheckoutLineFieldPolicy;
   };
   CheckoutLineCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41554,11 +42703,17 @@ export type StrictTypedTypePolicies = {
     fields?: CheckoutUpdatedFieldPolicy;
   };
   ChoiceValue?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ChoiceValueKeySpecifier | (() => undefined | ChoiceValueKeySpecifier);
+    keyFields?:
+      | false
+      | ChoiceValueKeySpecifier
+      | (() => undefined | ChoiceValueKeySpecifier);
     fields?: ChoiceValueFieldPolicy;
   };
   Collection?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CollectionKeySpecifier | (() => undefined | CollectionKeySpecifier);
+    keyFields?:
+      | false
+      | CollectionKeySpecifier
+      | (() => undefined | CollectionKeySpecifier);
     fields?: CollectionFieldPolicy;
   };
   CollectionAddProducts?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41709,7 +42864,10 @@ export type StrictTypedTypePolicies = {
     fields?: ConfigurationItemFieldPolicy;
   };
   ConfirmAccount?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ConfirmAccountKeySpecifier | (() => undefined | ConfirmAccountKeySpecifier);
+    keyFields?:
+      | false
+      | ConfirmAccountKeySpecifier
+      | (() => undefined | ConfirmAccountKeySpecifier);
     fields?: ConfirmAccountFieldPolicy;
   };
   ConfirmEmailChange?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41720,15 +42878,24 @@ export type StrictTypedTypePolicies = {
     fields?: ConfirmEmailChangeFieldPolicy;
   };
   CountryDisplay?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CountryDisplayKeySpecifier | (() => undefined | CountryDisplayKeySpecifier);
+    keyFields?:
+      | false
+      | CountryDisplayKeySpecifier
+      | (() => undefined | CountryDisplayKeySpecifier);
     fields?: CountryDisplayFieldPolicy;
   };
   CreateToken?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CreateTokenKeySpecifier | (() => undefined | CreateTokenKeySpecifier);
+    keyFields?:
+      | false
+      | CreateTokenKeySpecifier
+      | (() => undefined | CreateTokenKeySpecifier);
     fields?: CreateTokenFieldPolicy;
   };
   CreditCard?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CreditCardKeySpecifier | (() => undefined | CreditCardKeySpecifier);
+    keyFields?:
+      | false
+      | CreditCardKeySpecifier
+      | (() => undefined | CreditCardKeySpecifier);
     fields?: CreditCardFieldPolicy;
   };
   CustomerBulkDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41739,7 +42906,10 @@ export type StrictTypedTypePolicies = {
     fields?: CustomerBulkDeleteFieldPolicy;
   };
   CustomerCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CustomerCreateKeySpecifier | (() => undefined | CustomerCreateKeySpecifier);
+    keyFields?:
+      | false
+      | CustomerCreateKeySpecifier
+      | (() => undefined | CustomerCreateKeySpecifier);
     fields?: CustomerCreateFieldPolicy;
   };
   CustomerCreated?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41750,11 +42920,17 @@ export type StrictTypedTypePolicies = {
     fields?: CustomerCreatedFieldPolicy;
   };
   CustomerDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CustomerDeleteKeySpecifier | (() => undefined | CustomerDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | CustomerDeleteKeySpecifier
+      | (() => undefined | CustomerDeleteKeySpecifier);
     fields?: CustomerDeleteFieldPolicy;
   };
   CustomerEvent?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CustomerEventKeySpecifier | (() => undefined | CustomerEventKeySpecifier);
+    keyFields?:
+      | false
+      | CustomerEventKeySpecifier
+      | (() => undefined | CustomerEventKeySpecifier);
     fields?: CustomerEventFieldPolicy;
   };
   CustomerMetadataUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41765,7 +42941,10 @@ export type StrictTypedTypePolicies = {
     fields?: CustomerMetadataUpdatedFieldPolicy;
   };
   CustomerUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | CustomerUpdateKeySpecifier | (() => undefined | CustomerUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | CustomerUpdateKeySpecifier
+      | (() => undefined | CustomerUpdateKeySpecifier);
     fields?: CustomerUpdateFieldPolicy;
   };
   CustomerUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41783,7 +42962,10 @@ export type StrictTypedTypePolicies = {
     fields?: DeactivateAllUserTokensFieldPolicy;
   };
   DeleteMetadata?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | DeleteMetadataKeySpecifier | (() => undefined | DeleteMetadataKeySpecifier);
+    keyFields?:
+      | false
+      | DeleteMetadataKeySpecifier
+      | (() => undefined | DeleteMetadataKeySpecifier);
     fields?: DeleteMetadataFieldPolicy;
   };
   DeletePrivateMetadata?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41794,10 +42976,16 @@ export type StrictTypedTypePolicies = {
     fields?: DeletePrivateMetadataFieldPolicy;
   };
   DigitalContent?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | DigitalContentKeySpecifier | (() => undefined | DigitalContentKeySpecifier);
+    keyFields?:
+      | false
+      | DigitalContentKeySpecifier
+      | (() => undefined | DigitalContentKeySpecifier);
     fields?: DigitalContentFieldPolicy;
   };
-  DigitalContentCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  DigitalContentCountableConnection?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | DigitalContentCountableConnectionKeySpecifier
@@ -41847,11 +43035,17 @@ export type StrictTypedTypePolicies = {
     fields?: DigitalContentUrlCreateFieldPolicy;
   };
   DiscountError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | DiscountErrorKeySpecifier | (() => undefined | DiscountErrorKeySpecifier);
+    keyFields?:
+      | false
+      | DiscountErrorKeySpecifier
+      | (() => undefined | DiscountErrorKeySpecifier);
     fields?: DiscountErrorFieldPolicy;
   };
   Domain?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | DomainKeySpecifier | (() => undefined | DomainKeySpecifier);
+    keyFields?:
+      | false
+      | DomainKeySpecifier
+      | (() => undefined | DomainKeySpecifier);
     fields?: DomainFieldPolicy;
   };
   DraftOrderBulkDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41918,11 +43112,17 @@ export type StrictTypedTypePolicies = {
     fields?: DraftOrderUpdatedFieldPolicy;
   };
   Event?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | EventKeySpecifier | (() => undefined | EventKeySpecifier);
+    keyFields?:
+      | false
+      | EventKeySpecifier
+      | (() => undefined | EventKeySpecifier);
     fields?: EventFieldPolicy;
   };
   EventDelivery?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | EventDeliveryKeySpecifier | (() => undefined | EventDeliveryKeySpecifier);
+    keyFields?:
+      | false
+      | EventDeliveryKeySpecifier
+      | (() => undefined | EventDeliveryKeySpecifier);
     fields?: EventDeliveryFieldPolicy;
   };
   EventDeliveryAttempt?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -41932,21 +43132,30 @@ export type StrictTypedTypePolicies = {
       | (() => undefined | EventDeliveryAttemptKeySpecifier);
     fields?: EventDeliveryAttemptFieldPolicy;
   };
-  EventDeliveryAttemptCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  EventDeliveryAttemptCountableConnection?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | EventDeliveryAttemptCountableConnectionKeySpecifier
       | (() => undefined | EventDeliveryAttemptCountableConnectionKeySpecifier);
     fields?: EventDeliveryAttemptCountableConnectionFieldPolicy;
   };
-  EventDeliveryAttemptCountableEdge?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  EventDeliveryAttemptCountableEdge?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | EventDeliveryAttemptCountableEdgeKeySpecifier
       | (() => undefined | EventDeliveryAttemptCountableEdgeKeySpecifier);
     fields?: EventDeliveryAttemptCountableEdgeFieldPolicy;
   };
-  EventDeliveryCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  EventDeliveryCountableConnection?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | EventDeliveryCountableConnectionKeySpecifier
@@ -41968,15 +43177,24 @@ export type StrictTypedTypePolicies = {
     fields?: EventDeliveryRetryFieldPolicy;
   };
   ExportError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ExportErrorKeySpecifier | (() => undefined | ExportErrorKeySpecifier);
+    keyFields?:
+      | false
+      | ExportErrorKeySpecifier
+      | (() => undefined | ExportErrorKeySpecifier);
     fields?: ExportErrorFieldPolicy;
   };
   ExportEvent?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ExportEventKeySpecifier | (() => undefined | ExportEventKeySpecifier);
+    keyFields?:
+      | false
+      | ExportEventKeySpecifier
+      | (() => undefined | ExportEventKeySpecifier);
     fields?: ExportEventFieldPolicy;
   };
   ExportFile?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ExportFileKeySpecifier | (() => undefined | ExportFileKeySpecifier);
+    keyFields?:
+      | false
+      | ExportFileKeySpecifier
+      | (() => undefined | ExportFileKeySpecifier);
     fields?: ExportFileFieldPolicy;
   };
   ExportFileCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42001,7 +43219,10 @@ export type StrictTypedTypePolicies = {
     fields?: ExportGiftCardsFieldPolicy;
   };
   ExportProducts?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ExportProductsKeySpecifier | (() => undefined | ExportProductsKeySpecifier);
+    keyFields?:
+      | false
+      | ExportProductsKeySpecifier
+      | (() => undefined | ExportProductsKeySpecifier);
     fields?: ExportProductsFieldPolicy;
   };
   ExternalAuthentication?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42019,7 +43240,10 @@ export type StrictTypedTypePolicies = {
     fields?: ExternalAuthenticationUrlFieldPolicy;
   };
   ExternalLogout?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ExternalLogoutKeySpecifier | (() => undefined | ExternalLogoutKeySpecifier);
+    keyFields?:
+      | false
+      | ExternalLogoutKeySpecifier
+      | (() => undefined | ExternalLogoutKeySpecifier);
     fields?: ExternalLogoutFieldPolicy;
   };
   ExternalNotificationError?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42051,7 +43275,10 @@ export type StrictTypedTypePolicies = {
     fields?: ExternalRefreshFieldPolicy;
   };
   ExternalVerify?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ExternalVerifyKeySpecifier | (() => undefined | ExternalVerifyKeySpecifier);
+    keyFields?:
+      | false
+      | ExternalVerifyKeySpecifier
+      | (() => undefined | ExternalVerifyKeySpecifier);
     fields?: ExternalVerifyFieldPolicy;
   };
   File?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42059,11 +43286,17 @@ export type StrictTypedTypePolicies = {
     fields?: FileFieldPolicy;
   };
   FileUpload?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | FileUploadKeySpecifier | (() => undefined | FileUploadKeySpecifier);
+    keyFields?:
+      | false
+      | FileUploadKeySpecifier
+      | (() => undefined | FileUploadKeySpecifier);
     fields?: FileUploadFieldPolicy;
   };
   Fulfillment?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | FulfillmentKeySpecifier | (() => undefined | FulfillmentKeySpecifier);
+    keyFields?:
+      | false
+      | FulfillmentKeySpecifier
+      | (() => undefined | FulfillmentKeySpecifier);
     fields?: FulfillmentFieldPolicy;
   };
   FulfillmentApprove?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42144,7 +43377,10 @@ export type StrictTypedTypePolicies = {
     fields?: GatewayConfigLineFieldPolicy;
   };
   GiftCard?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | GiftCardKeySpecifier | (() => undefined | GiftCardKeySpecifier);
+    keyFields?:
+      | false
+      | GiftCardKeySpecifier
+      | (() => undefined | GiftCardKeySpecifier);
     fields?: GiftCardFieldPolicy;
   };
   GiftCardActivate?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42204,7 +43440,10 @@ export type StrictTypedTypePolicies = {
     fields?: GiftCardCountableEdgeFieldPolicy;
   };
   GiftCardCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | GiftCardCreateKeySpecifier | (() => undefined | GiftCardCreateKeySpecifier);
+    keyFields?:
+      | false
+      | GiftCardCreateKeySpecifier
+      | (() => undefined | GiftCardCreateKeySpecifier);
     fields?: GiftCardCreateFieldPolicy;
   };
   GiftCardCreated?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42222,7 +43461,10 @@ export type StrictTypedTypePolicies = {
     fields?: GiftCardDeactivateFieldPolicy;
   };
   GiftCardDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | GiftCardDeleteKeySpecifier | (() => undefined | GiftCardDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | GiftCardDeleteKeySpecifier
+      | (() => undefined | GiftCardDeleteKeySpecifier);
     fields?: GiftCardDeleteFieldPolicy;
   };
   GiftCardDeleted?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42233,11 +43475,17 @@ export type StrictTypedTypePolicies = {
     fields?: GiftCardDeletedFieldPolicy;
   };
   GiftCardError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | GiftCardErrorKeySpecifier | (() => undefined | GiftCardErrorKeySpecifier);
+    keyFields?:
+      | false
+      | GiftCardErrorKeySpecifier
+      | (() => undefined | GiftCardErrorKeySpecifier);
     fields?: GiftCardErrorFieldPolicy;
   };
   GiftCardEvent?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | GiftCardEventKeySpecifier | (() => undefined | GiftCardEventKeySpecifier);
+    keyFields?:
+      | false
+      | GiftCardEventKeySpecifier
+      | (() => undefined | GiftCardEventKeySpecifier);
     fields?: GiftCardEventFieldPolicy;
   };
   GiftCardEventBalance?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42255,7 +43503,10 @@ export type StrictTypedTypePolicies = {
     fields?: GiftCardMetadataUpdatedFieldPolicy;
   };
   GiftCardResend?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | GiftCardResendKeySpecifier | (() => undefined | GiftCardResendKeySpecifier);
+    keyFields?:
+      | false
+      | GiftCardResendKeySpecifier
+      | (() => undefined | GiftCardResendKeySpecifier);
     fields?: GiftCardResendFieldPolicy;
   };
   GiftCardSettings?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42287,7 +43538,10 @@ export type StrictTypedTypePolicies = {
     fields?: GiftCardStatusChangedFieldPolicy;
   };
   GiftCardTag?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | GiftCardTagKeySpecifier | (() => undefined | GiftCardTagKeySpecifier);
+    keyFields?:
+      | false
+      | GiftCardTagKeySpecifier
+      | (() => undefined | GiftCardTagKeySpecifier);
     fields?: GiftCardTagFieldPolicy;
   };
   GiftCardTagCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42305,7 +43559,10 @@ export type StrictTypedTypePolicies = {
     fields?: GiftCardTagCountableEdgeFieldPolicy;
   };
   GiftCardUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | GiftCardUpdateKeySpecifier | (() => undefined | GiftCardUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | GiftCardUpdateKeySpecifier
+      | (() => undefined | GiftCardUpdateKeySpecifier);
     fields?: GiftCardUpdateFieldPolicy;
   };
   GiftCardUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42316,7 +43573,10 @@ export type StrictTypedTypePolicies = {
     fields?: GiftCardUpdatedFieldPolicy;
   };
   Group?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | GroupKeySpecifier | (() => undefined | GroupKeySpecifier);
+    keyFields?:
+      | false
+      | GroupKeySpecifier
+      | (() => undefined | GroupKeySpecifier);
     fields?: GroupFieldPolicy;
   };
   GroupCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42334,31 +43594,52 @@ export type StrictTypedTypePolicies = {
     fields?: GroupCountableEdgeFieldPolicy;
   };
   Image?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ImageKeySpecifier | (() => undefined | ImageKeySpecifier);
+    keyFields?:
+      | false
+      | ImageKeySpecifier
+      | (() => undefined | ImageKeySpecifier);
     fields?: ImageFieldPolicy;
   };
   Invoice?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | InvoiceKeySpecifier | (() => undefined | InvoiceKeySpecifier);
+    keyFields?:
+      | false
+      | InvoiceKeySpecifier
+      | (() => undefined | InvoiceKeySpecifier);
     fields?: InvoiceFieldPolicy;
   };
   InvoiceCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | InvoiceCreateKeySpecifier | (() => undefined | InvoiceCreateKeySpecifier);
+    keyFields?:
+      | false
+      | InvoiceCreateKeySpecifier
+      | (() => undefined | InvoiceCreateKeySpecifier);
     fields?: InvoiceCreateFieldPolicy;
   };
   InvoiceDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | InvoiceDeleteKeySpecifier | (() => undefined | InvoiceDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | InvoiceDeleteKeySpecifier
+      | (() => undefined | InvoiceDeleteKeySpecifier);
     fields?: InvoiceDeleteFieldPolicy;
   };
   InvoiceDeleted?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | InvoiceDeletedKeySpecifier | (() => undefined | InvoiceDeletedKeySpecifier);
+    keyFields?:
+      | false
+      | InvoiceDeletedKeySpecifier
+      | (() => undefined | InvoiceDeletedKeySpecifier);
     fields?: InvoiceDeletedFieldPolicy;
   };
   InvoiceError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | InvoiceErrorKeySpecifier | (() => undefined | InvoiceErrorKeySpecifier);
+    keyFields?:
+      | false
+      | InvoiceErrorKeySpecifier
+      | (() => undefined | InvoiceErrorKeySpecifier);
     fields?: InvoiceErrorFieldPolicy;
   };
   InvoiceRequest?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | InvoiceRequestKeySpecifier | (() => undefined | InvoiceRequestKeySpecifier);
+    keyFields?:
+      | false
+      | InvoiceRequestKeySpecifier
+      | (() => undefined | InvoiceRequestKeySpecifier);
     fields?: InvoiceRequestFieldPolicy;
   };
   InvoiceRequestDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42383,11 +43664,17 @@ export type StrictTypedTypePolicies = {
     fields?: InvoiceSendNotificationFieldPolicy;
   };
   InvoiceSent?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | InvoiceSentKeySpecifier | (() => undefined | InvoiceSentKeySpecifier);
+    keyFields?:
+      | false
+      | InvoiceSentKeySpecifier
+      | (() => undefined | InvoiceSentKeySpecifier);
     fields?: InvoiceSentFieldPolicy;
   };
   InvoiceUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | InvoiceUpdateKeySpecifier | (() => undefined | InvoiceUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | InvoiceUpdateKeySpecifier
+      | (() => undefined | InvoiceUpdateKeySpecifier);
     fields?: InvoiceUpdateFieldPolicy;
   };
   Job?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42402,19 +43689,31 @@ export type StrictTypedTypePolicies = {
     fields?: LanguageDisplayFieldPolicy;
   };
   LimitInfo?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | LimitInfoKeySpecifier | (() => undefined | LimitInfoKeySpecifier);
+    keyFields?:
+      | false
+      | LimitInfoKeySpecifier
+      | (() => undefined | LimitInfoKeySpecifier);
     fields?: LimitInfoFieldPolicy;
   };
   Limits?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | LimitsKeySpecifier | (() => undefined | LimitsKeySpecifier);
+    keyFields?:
+      | false
+      | LimitsKeySpecifier
+      | (() => undefined | LimitsKeySpecifier);
     fields?: LimitsFieldPolicy;
   };
   Manifest?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ManifestKeySpecifier | (() => undefined | ManifestKeySpecifier);
+    keyFields?:
+      | false
+      | ManifestKeySpecifier
+      | (() => undefined | ManifestKeySpecifier);
     fields?: ManifestFieldPolicy;
   };
   Margin?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MarginKeySpecifier | (() => undefined | MarginKeySpecifier);
+    keyFields?:
+      | false
+      | MarginKeySpecifier
+      | (() => undefined | MarginKeySpecifier);
     fields?: MarginFieldPolicy;
   };
   Menu?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42422,7 +43721,10 @@ export type StrictTypedTypePolicies = {
     fields?: MenuFieldPolicy;
   };
   MenuBulkDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MenuBulkDeleteKeySpecifier | (() => undefined | MenuBulkDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | MenuBulkDeleteKeySpecifier
+      | (() => undefined | MenuBulkDeleteKeySpecifier);
     fields?: MenuBulkDeleteFieldPolicy;
   };
   MenuCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42440,27 +43742,45 @@ export type StrictTypedTypePolicies = {
     fields?: MenuCountableEdgeFieldPolicy;
   };
   MenuCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MenuCreateKeySpecifier | (() => undefined | MenuCreateKeySpecifier);
+    keyFields?:
+      | false
+      | MenuCreateKeySpecifier
+      | (() => undefined | MenuCreateKeySpecifier);
     fields?: MenuCreateFieldPolicy;
   };
   MenuCreated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MenuCreatedKeySpecifier | (() => undefined | MenuCreatedKeySpecifier);
+    keyFields?:
+      | false
+      | MenuCreatedKeySpecifier
+      | (() => undefined | MenuCreatedKeySpecifier);
     fields?: MenuCreatedFieldPolicy;
   };
   MenuDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MenuDeleteKeySpecifier | (() => undefined | MenuDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | MenuDeleteKeySpecifier
+      | (() => undefined | MenuDeleteKeySpecifier);
     fields?: MenuDeleteFieldPolicy;
   };
   MenuDeleted?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MenuDeletedKeySpecifier | (() => undefined | MenuDeletedKeySpecifier);
+    keyFields?:
+      | false
+      | MenuDeletedKeySpecifier
+      | (() => undefined | MenuDeletedKeySpecifier);
     fields?: MenuDeletedFieldPolicy;
   };
   MenuError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MenuErrorKeySpecifier | (() => undefined | MenuErrorKeySpecifier);
+    keyFields?:
+      | false
+      | MenuErrorKeySpecifier
+      | (() => undefined | MenuErrorKeySpecifier);
     fields?: MenuErrorFieldPolicy;
   };
   MenuItem?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MenuItemKeySpecifier | (() => undefined | MenuItemKeySpecifier);
+    keyFields?:
+      | false
+      | MenuItemKeySpecifier
+      | (() => undefined | MenuItemKeySpecifier);
     fields?: MenuItemFieldPolicy;
   };
   MenuItemBulkDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42485,7 +43805,10 @@ export type StrictTypedTypePolicies = {
     fields?: MenuItemCountableEdgeFieldPolicy;
   };
   MenuItemCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MenuItemCreateKeySpecifier | (() => undefined | MenuItemCreateKeySpecifier);
+    keyFields?:
+      | false
+      | MenuItemCreateKeySpecifier
+      | (() => undefined | MenuItemCreateKeySpecifier);
     fields?: MenuItemCreateFieldPolicy;
   };
   MenuItemCreated?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42496,7 +43819,10 @@ export type StrictTypedTypePolicies = {
     fields?: MenuItemCreatedFieldPolicy;
   };
   MenuItemDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MenuItemDeleteKeySpecifier | (() => undefined | MenuItemDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | MenuItemDeleteKeySpecifier
+      | (() => undefined | MenuItemDeleteKeySpecifier);
     fields?: MenuItemDeleteFieldPolicy;
   };
   MenuItemDeleted?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42507,7 +43833,10 @@ export type StrictTypedTypePolicies = {
     fields?: MenuItemDeletedFieldPolicy;
   };
   MenuItemMove?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MenuItemMoveKeySpecifier | (() => undefined | MenuItemMoveKeySpecifier);
+    keyFields?:
+      | false
+      | MenuItemMoveKeySpecifier
+      | (() => undefined | MenuItemMoveKeySpecifier);
     fields?: MenuItemMoveFieldPolicy;
   };
   MenuItemTranslatableContent?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42532,7 +43861,10 @@ export type StrictTypedTypePolicies = {
     fields?: MenuItemTranslationFieldPolicy;
   };
   MenuItemUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MenuItemUpdateKeySpecifier | (() => undefined | MenuItemUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | MenuItemUpdateKeySpecifier
+      | (() => undefined | MenuItemUpdateKeySpecifier);
     fields?: MenuItemUpdateFieldPolicy;
   };
   MenuItemUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42543,31 +43875,52 @@ export type StrictTypedTypePolicies = {
     fields?: MenuItemUpdatedFieldPolicy;
   };
   MenuUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MenuUpdateKeySpecifier | (() => undefined | MenuUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | MenuUpdateKeySpecifier
+      | (() => undefined | MenuUpdateKeySpecifier);
     fields?: MenuUpdateFieldPolicy;
   };
   MenuUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MenuUpdatedKeySpecifier | (() => undefined | MenuUpdatedKeySpecifier);
+    keyFields?:
+      | false
+      | MenuUpdatedKeySpecifier
+      | (() => undefined | MenuUpdatedKeySpecifier);
     fields?: MenuUpdatedFieldPolicy;
   };
   MetadataError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MetadataErrorKeySpecifier | (() => undefined | MetadataErrorKeySpecifier);
+    keyFields?:
+      | false
+      | MetadataErrorKeySpecifier
+      | (() => undefined | MetadataErrorKeySpecifier);
     fields?: MetadataErrorFieldPolicy;
   };
   MetadataItem?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MetadataItemKeySpecifier | (() => undefined | MetadataItemKeySpecifier);
+    keyFields?:
+      | false
+      | MetadataItemKeySpecifier
+      | (() => undefined | MetadataItemKeySpecifier);
     fields?: MetadataItemFieldPolicy;
   };
   Money?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MoneyKeySpecifier | (() => undefined | MoneyKeySpecifier);
+    keyFields?:
+      | false
+      | MoneyKeySpecifier
+      | (() => undefined | MoneyKeySpecifier);
     fields?: MoneyFieldPolicy;
   };
   MoneyRange?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MoneyRangeKeySpecifier | (() => undefined | MoneyRangeKeySpecifier);
+    keyFields?:
+      | false
+      | MoneyRangeKeySpecifier
+      | (() => undefined | MoneyRangeKeySpecifier);
     fields?: MoneyRangeFieldPolicy;
   };
   Mutation?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | MutationKeySpecifier | (() => undefined | MutationKeySpecifier);
+    keyFields?:
+      | false
+      | MutationKeySpecifier
+      | (() => undefined | MutationKeySpecifier);
     fields?: MutationFieldPolicy;
   };
   Node?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42582,11 +43935,17 @@ export type StrictTypedTypePolicies = {
     fields?: ObjectWithMetadataFieldPolicy;
   };
   Order?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderKeySpecifier | (() => undefined | OrderKeySpecifier);
+    keyFields?:
+      | false
+      | OrderKeySpecifier
+      | (() => undefined | OrderKeySpecifier);
     fields?: OrderFieldPolicy;
   };
   OrderAddNote?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderAddNoteKeySpecifier | (() => undefined | OrderAddNoteKeySpecifier);
+    keyFields?:
+      | false
+      | OrderAddNoteKeySpecifier
+      | (() => undefined | OrderAddNoteKeySpecifier);
     fields?: OrderAddNoteFieldPolicy;
   };
   OrderBulkCancel?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42597,23 +43956,38 @@ export type StrictTypedTypePolicies = {
     fields?: OrderBulkCancelFieldPolicy;
   };
   OrderCancel?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderCancelKeySpecifier | (() => undefined | OrderCancelKeySpecifier);
+    keyFields?:
+      | false
+      | OrderCancelKeySpecifier
+      | (() => undefined | OrderCancelKeySpecifier);
     fields?: OrderCancelFieldPolicy;
   };
   OrderCancelled?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderCancelledKeySpecifier | (() => undefined | OrderCancelledKeySpecifier);
+    keyFields?:
+      | false
+      | OrderCancelledKeySpecifier
+      | (() => undefined | OrderCancelledKeySpecifier);
     fields?: OrderCancelledFieldPolicy;
   };
   OrderCapture?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderCaptureKeySpecifier | (() => undefined | OrderCaptureKeySpecifier);
+    keyFields?:
+      | false
+      | OrderCaptureKeySpecifier
+      | (() => undefined | OrderCaptureKeySpecifier);
     fields?: OrderCaptureFieldPolicy;
   };
   OrderConfirm?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderConfirmKeySpecifier | (() => undefined | OrderConfirmKeySpecifier);
+    keyFields?:
+      | false
+      | OrderConfirmKeySpecifier
+      | (() => undefined | OrderConfirmKeySpecifier);
     fields?: OrderConfirmFieldPolicy;
   };
   OrderConfirmed?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderConfirmedKeySpecifier | (() => undefined | OrderConfirmedKeySpecifier);
+    keyFields?:
+      | false
+      | OrderConfirmedKeySpecifier
+      | (() => undefined | OrderConfirmedKeySpecifier);
     fields?: OrderConfirmedFieldPolicy;
   };
   OrderCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42645,11 +44019,17 @@ export type StrictTypedTypePolicies = {
     fields?: OrderCreateFromCheckoutErrorFieldPolicy;
   };
   OrderCreated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderCreatedKeySpecifier | (() => undefined | OrderCreatedKeySpecifier);
+    keyFields?:
+      | false
+      | OrderCreatedKeySpecifier
+      | (() => undefined | OrderCreatedKeySpecifier);
     fields?: OrderCreatedFieldPolicy;
   };
   OrderDiscount?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderDiscountKeySpecifier | (() => undefined | OrderDiscountKeySpecifier);
+    keyFields?:
+      | false
+      | OrderDiscountKeySpecifier
+      | (() => undefined | OrderDiscountKeySpecifier);
     fields?: OrderDiscountFieldPolicy;
   };
   OrderDiscountAdd?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42674,11 +44054,17 @@ export type StrictTypedTypePolicies = {
     fields?: OrderDiscountUpdateFieldPolicy;
   };
   OrderError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderErrorKeySpecifier | (() => undefined | OrderErrorKeySpecifier);
+    keyFields?:
+      | false
+      | OrderErrorKeySpecifier
+      | (() => undefined | OrderErrorKeySpecifier);
     fields?: OrderErrorFieldPolicy;
   };
   OrderEvent?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderEventKeySpecifier | (() => undefined | OrderEventKeySpecifier);
+    keyFields?:
+      | false
+      | OrderEventKeySpecifier
+      | (() => undefined | OrderEventKeySpecifier);
     fields?: OrderEventFieldPolicy;
   };
   OrderEventCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42717,19 +44103,31 @@ export type StrictTypedTypePolicies = {
     fields?: OrderFilterShippingMethodsFieldPolicy;
   };
   OrderFulfill?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderFulfillKeySpecifier | (() => undefined | OrderFulfillKeySpecifier);
+    keyFields?:
+      | false
+      | OrderFulfillKeySpecifier
+      | (() => undefined | OrderFulfillKeySpecifier);
     fields?: OrderFulfillFieldPolicy;
   };
   OrderFulfilled?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderFulfilledKeySpecifier | (() => undefined | OrderFulfilledKeySpecifier);
+    keyFields?:
+      | false
+      | OrderFulfilledKeySpecifier
+      | (() => undefined | OrderFulfilledKeySpecifier);
     fields?: OrderFulfilledFieldPolicy;
   };
   OrderFullyPaid?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderFullyPaidKeySpecifier | (() => undefined | OrderFullyPaidKeySpecifier);
+    keyFields?:
+      | false
+      | OrderFullyPaidKeySpecifier
+      | (() => undefined | OrderFullyPaidKeySpecifier);
     fields?: OrderFullyPaidFieldPolicy;
   };
   OrderLine?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderLineKeySpecifier | (() => undefined | OrderLineKeySpecifier);
+    keyFields?:
+      | false
+      | OrderLineKeySpecifier
+      | (() => undefined | OrderLineKeySpecifier);
     fields?: OrderLineFieldPolicy;
   };
   OrderLineDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42782,11 +44180,17 @@ export type StrictTypedTypePolicies = {
     fields?: OrderMetadataUpdatedFieldPolicy;
   };
   OrderRefund?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderRefundKeySpecifier | (() => undefined | OrderRefundKeySpecifier);
+    keyFields?:
+      | false
+      | OrderRefundKeySpecifier
+      | (() => undefined | OrderRefundKeySpecifier);
     fields?: OrderRefundFieldPolicy;
   };
   OrderSettings?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderSettingsKeySpecifier | (() => undefined | OrderSettingsKeySpecifier);
+    keyFields?:
+      | false
+      | OrderSettingsKeySpecifier
+      | (() => undefined | OrderSettingsKeySpecifier);
     fields?: OrderSettingsFieldPolicy;
   };
   OrderSettingsError?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42804,7 +44208,10 @@ export type StrictTypedTypePolicies = {
     fields?: OrderSettingsUpdateFieldPolicy;
   };
   OrderUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderUpdateKeySpecifier | (() => undefined | OrderUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | OrderUpdateKeySpecifier
+      | (() => undefined | OrderUpdateKeySpecifier);
     fields?: OrderUpdateFieldPolicy;
   };
   OrderUpdateShipping?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42815,11 +44222,17 @@ export type StrictTypedTypePolicies = {
     fields?: OrderUpdateShippingFieldPolicy;
   };
   OrderUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderUpdatedKeySpecifier | (() => undefined | OrderUpdatedKeySpecifier);
+    keyFields?:
+      | false
+      | OrderUpdatedKeySpecifier
+      | (() => undefined | OrderUpdatedKeySpecifier);
     fields?: OrderUpdatedFieldPolicy;
   };
   OrderVoid?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | OrderVoidKeySpecifier | (() => undefined | OrderVoidKeySpecifier);
+    keyFields?:
+      | false
+      | OrderVoidKeySpecifier
+      | (() => undefined | OrderVoidKeySpecifier);
     fields?: OrderVoidFieldPolicy;
   };
   Page?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42841,7 +44254,10 @@ export type StrictTypedTypePolicies = {
     fields?: PageAttributeUnassignFieldPolicy;
   };
   PageBulkDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PageBulkDeleteKeySpecifier | (() => undefined | PageBulkDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | PageBulkDeleteKeySpecifier
+      | (() => undefined | PageBulkDeleteKeySpecifier);
     fields?: PageBulkDeleteFieldPolicy;
   };
   PageBulkPublish?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42866,27 +44282,45 @@ export type StrictTypedTypePolicies = {
     fields?: PageCountableEdgeFieldPolicy;
   };
   PageCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PageCreateKeySpecifier | (() => undefined | PageCreateKeySpecifier);
+    keyFields?:
+      | false
+      | PageCreateKeySpecifier
+      | (() => undefined | PageCreateKeySpecifier);
     fields?: PageCreateFieldPolicy;
   };
   PageCreated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PageCreatedKeySpecifier | (() => undefined | PageCreatedKeySpecifier);
+    keyFields?:
+      | false
+      | PageCreatedKeySpecifier
+      | (() => undefined | PageCreatedKeySpecifier);
     fields?: PageCreatedFieldPolicy;
   };
   PageDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PageDeleteKeySpecifier | (() => undefined | PageDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | PageDeleteKeySpecifier
+      | (() => undefined | PageDeleteKeySpecifier);
     fields?: PageDeleteFieldPolicy;
   };
   PageDeleted?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PageDeletedKeySpecifier | (() => undefined | PageDeletedKeySpecifier);
+    keyFields?:
+      | false
+      | PageDeletedKeySpecifier
+      | (() => undefined | PageDeletedKeySpecifier);
     fields?: PageDeletedFieldPolicy;
   };
   PageError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PageErrorKeySpecifier | (() => undefined | PageErrorKeySpecifier);
+    keyFields?:
+      | false
+      | PageErrorKeySpecifier
+      | (() => undefined | PageErrorKeySpecifier);
     fields?: PageErrorFieldPolicy;
   };
   PageInfo?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PageInfoKeySpecifier | (() => undefined | PageInfoKeySpecifier);
+    keyFields?:
+      | false
+      | PageInfoKeySpecifier
+      | (() => undefined | PageInfoKeySpecifier);
     fields?: PageInfoFieldPolicy;
   };
   PageReorderAttributeValues?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42904,7 +44338,10 @@ export type StrictTypedTypePolicies = {
     fields?: PageTranslatableContentFieldPolicy;
   };
   PageTranslate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PageTranslateKeySpecifier | (() => undefined | PageTranslateKeySpecifier);
+    keyFields?:
+      | false
+      | PageTranslateKeySpecifier
+      | (() => undefined | PageTranslateKeySpecifier);
     fields?: PageTranslateFieldPolicy;
   };
   PageTranslation?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42915,7 +44352,10 @@ export type StrictTypedTypePolicies = {
     fields?: PageTranslationFieldPolicy;
   };
   PageType?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PageTypeKeySpecifier | (() => undefined | PageTypeKeySpecifier);
+    keyFields?:
+      | false
+      | PageTypeKeySpecifier
+      | (() => undefined | PageTypeKeySpecifier);
     fields?: PageTypeFieldPolicy;
   };
   PageTypeBulkDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42940,7 +44380,10 @@ export type StrictTypedTypePolicies = {
     fields?: PageTypeCountableEdgeFieldPolicy;
   };
   PageTypeCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PageTypeCreateKeySpecifier | (() => undefined | PageTypeCreateKeySpecifier);
+    keyFields?:
+      | false
+      | PageTypeCreateKeySpecifier
+      | (() => undefined | PageTypeCreateKeySpecifier);
     fields?: PageTypeCreateFieldPolicy;
   };
   PageTypeCreated?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42951,7 +44394,10 @@ export type StrictTypedTypePolicies = {
     fields?: PageTypeCreatedFieldPolicy;
   };
   PageTypeDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PageTypeDeleteKeySpecifier | (() => undefined | PageTypeDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | PageTypeDeleteKeySpecifier
+      | (() => undefined | PageTypeDeleteKeySpecifier);
     fields?: PageTypeDeleteFieldPolicy;
   };
   PageTypeDeleted?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42969,7 +44415,10 @@ export type StrictTypedTypePolicies = {
     fields?: PageTypeReorderAttributesFieldPolicy;
   };
   PageTypeUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PageTypeUpdateKeySpecifier | (() => undefined | PageTypeUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | PageTypeUpdateKeySpecifier
+      | (() => undefined | PageTypeUpdateKeySpecifier);
     fields?: PageTypeUpdateFieldPolicy;
   };
   PageTypeUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -42980,19 +44429,31 @@ export type StrictTypedTypePolicies = {
     fields?: PageTypeUpdatedFieldPolicy;
   };
   PageUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PageUpdateKeySpecifier | (() => undefined | PageUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | PageUpdateKeySpecifier
+      | (() => undefined | PageUpdateKeySpecifier);
     fields?: PageUpdateFieldPolicy;
   };
   PageUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PageUpdatedKeySpecifier | (() => undefined | PageUpdatedKeySpecifier);
+    keyFields?:
+      | false
+      | PageUpdatedKeySpecifier
+      | (() => undefined | PageUpdatedKeySpecifier);
     fields?: PageUpdatedFieldPolicy;
   };
   PasswordChange?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PasswordChangeKeySpecifier | (() => undefined | PasswordChangeKeySpecifier);
+    keyFields?:
+      | false
+      | PasswordChangeKeySpecifier
+      | (() => undefined | PasswordChangeKeySpecifier);
     fields?: PasswordChangeFieldPolicy;
   };
   Payment?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PaymentKeySpecifier | (() => undefined | PaymentKeySpecifier);
+    keyFields?:
+      | false
+      | PaymentKeySpecifier
+      | (() => undefined | PaymentKeySpecifier);
     fields?: PaymentFieldPolicy;
   };
   PaymentAuthorize?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43003,7 +44464,10 @@ export type StrictTypedTypePolicies = {
     fields?: PaymentAuthorizeFieldPolicy;
   };
   PaymentCapture?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PaymentCaptureKeySpecifier | (() => undefined | PaymentCaptureKeySpecifier);
+    keyFields?:
+      | false
+      | PaymentCaptureKeySpecifier
+      | (() => undefined | PaymentCaptureKeySpecifier);
     fields?: PaymentCaptureFieldPolicy;
   };
   PaymentCaptureEvent?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43042,11 +44506,17 @@ export type StrictTypedTypePolicies = {
     fields?: PaymentCountableEdgeFieldPolicy;
   };
   PaymentError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PaymentErrorKeySpecifier | (() => undefined | PaymentErrorKeySpecifier);
+    keyFields?:
+      | false
+      | PaymentErrorKeySpecifier
+      | (() => undefined | PaymentErrorKeySpecifier);
     fields?: PaymentErrorFieldPolicy;
   };
   PaymentGateway?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PaymentGatewayKeySpecifier | (() => undefined | PaymentGatewayKeySpecifier);
+    keyFields?:
+      | false
+      | PaymentGatewayKeySpecifier
+      | (() => undefined | PaymentGatewayKeySpecifier);
     fields?: PaymentGatewayFieldPolicy;
   };
   PaymentInitialize?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43078,7 +44548,10 @@ export type StrictTypedTypePolicies = {
     fields?: PaymentProcessEventFieldPolicy;
   };
   PaymentRefund?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PaymentRefundKeySpecifier | (() => undefined | PaymentRefundKeySpecifier);
+    keyFields?:
+      | false
+      | PaymentRefundKeySpecifier
+      | (() => undefined | PaymentRefundKeySpecifier);
     fields?: PaymentRefundFieldPolicy;
   };
   PaymentRefundEvent?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43089,11 +44562,17 @@ export type StrictTypedTypePolicies = {
     fields?: PaymentRefundEventFieldPolicy;
   };
   PaymentSource?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PaymentSourceKeySpecifier | (() => undefined | PaymentSourceKeySpecifier);
+    keyFields?:
+      | false
+      | PaymentSourceKeySpecifier
+      | (() => undefined | PaymentSourceKeySpecifier);
     fields?: PaymentSourceFieldPolicy;
   };
   PaymentVoid?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PaymentVoidKeySpecifier | (() => undefined | PaymentVoidKeySpecifier);
+    keyFields?:
+      | false
+      | PaymentVoidKeySpecifier
+      | (() => undefined | PaymentVoidKeySpecifier);
     fields?: PaymentVoidFieldPolicy;
   };
   PaymentVoidEvent?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43104,7 +44583,10 @@ export type StrictTypedTypePolicies = {
     fields?: PaymentVoidEventFieldPolicy;
   };
   Permission?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PermissionKeySpecifier | (() => undefined | PermissionKeySpecifier);
+    keyFields?:
+      | false
+      | PermissionKeySpecifier
+      | (() => undefined | PermissionKeySpecifier);
     fields?: PermissionFieldPolicy;
   };
   PermissionGroupCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43157,7 +44639,10 @@ export type StrictTypedTypePolicies = {
     fields?: PermissionGroupUpdatedFieldPolicy;
   };
   Plugin?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PluginKeySpecifier | (() => undefined | PluginKeySpecifier);
+    keyFields?:
+      | false
+      | PluginKeySpecifier
+      | (() => undefined | PluginKeySpecifier);
     fields?: PluginFieldPolicy;
   };
   PluginConfiguration?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43182,15 +44667,24 @@ export type StrictTypedTypePolicies = {
     fields?: PluginCountableEdgeFieldPolicy;
   };
   PluginError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PluginErrorKeySpecifier | (() => undefined | PluginErrorKeySpecifier);
+    keyFields?:
+      | false
+      | PluginErrorKeySpecifier
+      | (() => undefined | PluginErrorKeySpecifier);
     fields?: PluginErrorFieldPolicy;
   };
   PluginUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PluginUpdateKeySpecifier | (() => undefined | PluginUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | PluginUpdateKeySpecifier
+      | (() => undefined | PluginUpdateKeySpecifier);
     fields?: PluginUpdateFieldPolicy;
   };
   PreorderData?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | PreorderDataKeySpecifier | (() => undefined | PreorderDataKeySpecifier);
+    keyFields?:
+      | false
+      | PreorderDataKeySpecifier
+      | (() => undefined | PreorderDataKeySpecifier);
     fields?: PreorderDataFieldPolicy;
   };
   PreorderThreshold?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43201,7 +44695,10 @@ export type StrictTypedTypePolicies = {
     fields?: PreorderThresholdFieldPolicy;
   };
   Product?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ProductKeySpecifier | (() => undefined | ProductKeySpecifier);
+    keyFields?:
+      | false
+      | ProductKeySpecifier
+      | (() => undefined | ProductKeySpecifier);
     fields?: ProductFieldPolicy;
   };
   ProductAttributeAssign?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43211,7 +44708,10 @@ export type StrictTypedTypePolicies = {
       | (() => undefined | ProductAttributeAssignKeySpecifier);
     fields?: ProductAttributeAssignFieldPolicy;
   };
-  ProductAttributeAssignmentUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  ProductAttributeAssignmentUpdate?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | ProductAttributeAssignmentUpdateKeySpecifier
@@ -43268,31 +44768,52 @@ export type StrictTypedTypePolicies = {
     fields?: ProductCountableEdgeFieldPolicy;
   };
   ProductCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ProductCreateKeySpecifier | (() => undefined | ProductCreateKeySpecifier);
+    keyFields?:
+      | false
+      | ProductCreateKeySpecifier
+      | (() => undefined | ProductCreateKeySpecifier);
     fields?: ProductCreateFieldPolicy;
   };
   ProductCreated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ProductCreatedKeySpecifier | (() => undefined | ProductCreatedKeySpecifier);
+    keyFields?:
+      | false
+      | ProductCreatedKeySpecifier
+      | (() => undefined | ProductCreatedKeySpecifier);
     fields?: ProductCreatedFieldPolicy;
   };
   ProductDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ProductDeleteKeySpecifier | (() => undefined | ProductDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | ProductDeleteKeySpecifier
+      | (() => undefined | ProductDeleteKeySpecifier);
     fields?: ProductDeleteFieldPolicy;
   };
   ProductDeleted?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ProductDeletedKeySpecifier | (() => undefined | ProductDeletedKeySpecifier);
+    keyFields?:
+      | false
+      | ProductDeletedKeySpecifier
+      | (() => undefined | ProductDeletedKeySpecifier);
     fields?: ProductDeletedFieldPolicy;
   };
   ProductError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ProductErrorKeySpecifier | (() => undefined | ProductErrorKeySpecifier);
+    keyFields?:
+      | false
+      | ProductErrorKeySpecifier
+      | (() => undefined | ProductErrorKeySpecifier);
     fields?: ProductErrorFieldPolicy;
   };
   ProductImage?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ProductImageKeySpecifier | (() => undefined | ProductImageKeySpecifier);
+    keyFields?:
+      | false
+      | ProductImageKeySpecifier
+      | (() => undefined | ProductImageKeySpecifier);
     fields?: ProductImageFieldPolicy;
   };
   ProductMedia?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ProductMediaKeySpecifier | (() => undefined | ProductMediaKeySpecifier);
+    keyFields?:
+      | false
+      | ProductMediaKeySpecifier
+      | (() => undefined | ProductMediaKeySpecifier);
     fields?: ProductMediaFieldPolicy;
   };
   ProductMediaBulkDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43394,7 +44915,10 @@ export type StrictTypedTypePolicies = {
     fields?: ProductTranslationFieldPolicy;
   };
   ProductType?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ProductTypeKeySpecifier | (() => undefined | ProductTypeKeySpecifier);
+    keyFields?:
+      | false
+      | ProductTypeKeySpecifier
+      | (() => undefined | ProductTypeKeySpecifier);
     fields?: ProductTypeFieldPolicy;
   };
   ProductTypeBulkDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43447,15 +44971,24 @@ export type StrictTypedTypePolicies = {
     fields?: ProductTypeUpdateFieldPolicy;
   };
   ProductUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ProductUpdateKeySpecifier | (() => undefined | ProductUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | ProductUpdateKeySpecifier
+      | (() => undefined | ProductUpdateKeySpecifier);
     fields?: ProductUpdateFieldPolicy;
   };
   ProductUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ProductUpdatedKeySpecifier | (() => undefined | ProductUpdatedKeySpecifier);
+    keyFields?:
+      | false
+      | ProductUpdatedKeySpecifier
+      | (() => undefined | ProductUpdatedKeySpecifier);
     fields?: ProductUpdatedFieldPolicy;
   };
   ProductVariant?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ProductVariantKeySpecifier | (() => undefined | ProductVariantKeySpecifier);
+    keyFields?:
+      | false
+      | ProductVariantKeySpecifier
+      | (() => undefined | ProductVariantKeySpecifier);
     fields?: ProductVariantFieldPolicy;
   };
   ProductVariantBackInStock?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43507,14 +45040,20 @@ export type StrictTypedTypePolicies = {
       | (() => undefined | ProductVariantChannelListingKeySpecifier);
     fields?: ProductVariantChannelListingFieldPolicy;
   };
-  ProductVariantChannelListingUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  ProductVariantChannelListingUpdate?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | ProductVariantChannelListingUpdateKeySpecifier
       | (() => undefined | ProductVariantChannelListingUpdateKeySpecifier);
     fields?: ProductVariantChannelListingUpdateFieldPolicy;
   };
-  ProductVariantCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  ProductVariantCountableConnection?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | ProductVariantCountableConnectionKeySpecifier
@@ -43570,7 +45109,10 @@ export type StrictTypedTypePolicies = {
       | (() => undefined | ProductVariantOutOfStockKeySpecifier);
     fields?: ProductVariantOutOfStockFieldPolicy;
   };
-  ProductVariantPreorderDeactivate?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  ProductVariantPreorderDeactivate?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | ProductVariantPreorderDeactivateKeySpecifier
@@ -43584,7 +45126,10 @@ export type StrictTypedTypePolicies = {
       | (() => undefined | ProductVariantReorderKeySpecifier);
     fields?: ProductVariantReorderFieldPolicy;
   };
-  ProductVariantReorderAttributeValues?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  ProductVariantReorderAttributeValues?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | ProductVariantReorderAttributeValuesKeySpecifier
@@ -43626,7 +45171,10 @@ export type StrictTypedTypePolicies = {
       | (() => undefined | ProductVariantStocksUpdateKeySpecifier);
     fields?: ProductVariantStocksUpdateFieldPolicy;
   };
-  ProductVariantTranslatableContent?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  ProductVariantTranslatableContent?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | ProductVariantTranslatableContentKeySpecifier
@@ -43662,15 +45210,24 @@ export type StrictTypedTypePolicies = {
     fields?: ProductVariantUpdatedFieldPolicy;
   };
   Query?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | QueryKeySpecifier | (() => undefined | QueryKeySpecifier);
+    keyFields?:
+      | false
+      | QueryKeySpecifier
+      | (() => undefined | QueryKeySpecifier);
     fields?: QueryFieldPolicy;
   };
   ReducedRate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ReducedRateKeySpecifier | (() => undefined | ReducedRateKeySpecifier);
+    keyFields?:
+      | false
+      | ReducedRateKeySpecifier
+      | (() => undefined | ReducedRateKeySpecifier);
     fields?: ReducedRateFieldPolicy;
   };
   RefreshToken?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | RefreshTokenKeySpecifier | (() => undefined | RefreshTokenKeySpecifier);
+    keyFields?:
+      | false
+      | RefreshTokenKeySpecifier
+      | (() => undefined | RefreshTokenKeySpecifier);
     fields?: RefreshTokenFieldPolicy;
   };
   RequestEmailChange?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43699,7 +45256,10 @@ export type StrictTypedTypePolicies = {
     fields?: SaleAddCataloguesFieldPolicy;
   };
   SaleBulkDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | SaleBulkDeleteKeySpecifier | (() => undefined | SaleBulkDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | SaleBulkDeleteKeySpecifier
+      | (() => undefined | SaleBulkDeleteKeySpecifier);
     fields?: SaleBulkDeleteFieldPolicy;
   };
   SaleChannelListing?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43731,19 +45291,31 @@ export type StrictTypedTypePolicies = {
     fields?: SaleCountableEdgeFieldPolicy;
   };
   SaleCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | SaleCreateKeySpecifier | (() => undefined | SaleCreateKeySpecifier);
+    keyFields?:
+      | false
+      | SaleCreateKeySpecifier
+      | (() => undefined | SaleCreateKeySpecifier);
     fields?: SaleCreateFieldPolicy;
   };
   SaleCreated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | SaleCreatedKeySpecifier | (() => undefined | SaleCreatedKeySpecifier);
+    keyFields?:
+      | false
+      | SaleCreatedKeySpecifier
+      | (() => undefined | SaleCreatedKeySpecifier);
     fields?: SaleCreatedFieldPolicy;
   };
   SaleDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | SaleDeleteKeySpecifier | (() => undefined | SaleDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | SaleDeleteKeySpecifier
+      | (() => undefined | SaleDeleteKeySpecifier);
     fields?: SaleDeleteFieldPolicy;
   };
   SaleDeleted?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | SaleDeletedKeySpecifier | (() => undefined | SaleDeletedKeySpecifier);
+    keyFields?:
+      | false
+      | SaleDeletedKeySpecifier
+      | (() => undefined | SaleDeletedKeySpecifier);
     fields?: SaleDeletedFieldPolicy;
   };
   SaleRemoveCatalogues?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43754,7 +45326,10 @@ export type StrictTypedTypePolicies = {
     fields?: SaleRemoveCataloguesFieldPolicy;
   };
   SaleToggle?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | SaleToggleKeySpecifier | (() => undefined | SaleToggleKeySpecifier);
+    keyFields?:
+      | false
+      | SaleToggleKeySpecifier
+      | (() => undefined | SaleToggleKeySpecifier);
     fields?: SaleToggleFieldPolicy;
   };
   SaleTranslatableContent?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43765,7 +45340,10 @@ export type StrictTypedTypePolicies = {
     fields?: SaleTranslatableContentFieldPolicy;
   };
   SaleTranslate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | SaleTranslateKeySpecifier | (() => undefined | SaleTranslateKeySpecifier);
+    keyFields?:
+      | false
+      | SaleTranslateKeySpecifier
+      | (() => undefined | SaleTranslateKeySpecifier);
     fields?: SaleTranslateFieldPolicy;
   };
   SaleTranslation?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43776,11 +45354,17 @@ export type StrictTypedTypePolicies = {
     fields?: SaleTranslationFieldPolicy;
   };
   SaleUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | SaleUpdateKeySpecifier | (() => undefined | SaleUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | SaleUpdateKeySpecifier
+      | (() => undefined | SaleUpdateKeySpecifier);
     fields?: SaleUpdateFieldPolicy;
   };
   SaleUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | SaleUpdatedKeySpecifier | (() => undefined | SaleUpdatedKeySpecifier);
+    keyFields?:
+      | false
+      | SaleUpdatedKeySpecifier
+      | (() => undefined | SaleUpdatedKeySpecifier);
     fields?: SaleUpdatedFieldPolicy;
   };
   SelectedAttribute?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43791,11 +45375,17 @@ export type StrictTypedTypePolicies = {
     fields?: SelectedAttributeFieldPolicy;
   };
   SetPassword?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | SetPasswordKeySpecifier | (() => undefined | SetPasswordKeySpecifier);
+    keyFields?:
+      | false
+      | SetPasswordKeySpecifier
+      | (() => undefined | SetPasswordKeySpecifier);
     fields?: SetPasswordFieldPolicy;
   };
   ShippingError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ShippingErrorKeySpecifier | (() => undefined | ShippingErrorKeySpecifier);
+    keyFields?:
+      | false
+      | ShippingErrorKeySpecifier
+      | (() => undefined | ShippingErrorKeySpecifier);
     fields?: ShippingErrorFieldPolicy;
   };
   ShippingListMethodsForCheckout?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43806,7 +45396,10 @@ export type StrictTypedTypePolicies = {
     fields?: ShippingListMethodsForCheckoutFieldPolicy;
   };
   ShippingMethod?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ShippingMethodKeySpecifier | (() => undefined | ShippingMethodKeySpecifier);
+    keyFields?:
+      | false
+      | ShippingMethodKeySpecifier
+      | (() => undefined | ShippingMethodKeySpecifier);
     fields?: ShippingMethodFieldPolicy;
   };
   ShippingMethodChannelListing?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -43816,7 +45409,10 @@ export type StrictTypedTypePolicies = {
       | (() => undefined | ShippingMethodChannelListingKeySpecifier);
     fields?: ShippingMethodChannelListingFieldPolicy;
   };
-  ShippingMethodChannelListingUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  ShippingMethodChannelListingUpdate?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | ShippingMethodChannelListingUpdateKeySpecifier
@@ -43830,7 +45426,10 @@ export type StrictTypedTypePolicies = {
       | (() => undefined | ShippingMethodPostalCodeRuleKeySpecifier);
     fields?: ShippingMethodPostalCodeRuleFieldPolicy;
   };
-  ShippingMethodTranslatableContent?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  ShippingMethodTranslatableContent?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | ShippingMethodTranslatableContentKeySpecifier
@@ -43900,7 +45499,10 @@ export type StrictTypedTypePolicies = {
       | (() => undefined | ShippingPriceExcludeProductsKeySpecifier);
     fields?: ShippingPriceExcludeProductsFieldPolicy;
   };
-  ShippingPriceRemoveProductFromExclude?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  ShippingPriceRemoveProductFromExclude?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | ShippingPriceRemoveProductFromExcludeKeySpecifier
@@ -43929,7 +45531,10 @@ export type StrictTypedTypePolicies = {
     fields?: ShippingPriceUpdatedFieldPolicy;
   };
   ShippingZone?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ShippingZoneKeySpecifier | (() => undefined | ShippingZoneKeySpecifier);
+    keyFields?:
+      | false
+      | ShippingZoneKeySpecifier
+      | (() => undefined | ShippingZoneKeySpecifier);
     fields?: ShippingZoneFieldPolicy;
   };
   ShippingZoneBulkDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44021,7 +45626,10 @@ export type StrictTypedTypePolicies = {
     fields?: ShopDomainUpdateFieldPolicy;
   };
   ShopError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | ShopErrorKeySpecifier | (() => undefined | ShopErrorKeySpecifier);
+    keyFields?:
+      | false
+      | ShopErrorKeySpecifier
+      | (() => undefined | ShopErrorKeySpecifier);
     fields?: ShopErrorFieldPolicy;
   };
   ShopFetchTaxRates?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44060,23 +45668,38 @@ export type StrictTypedTypePolicies = {
     fields?: StaffBulkDeleteFieldPolicy;
   };
   StaffCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | StaffCreateKeySpecifier | (() => undefined | StaffCreateKeySpecifier);
+    keyFields?:
+      | false
+      | StaffCreateKeySpecifier
+      | (() => undefined | StaffCreateKeySpecifier);
     fields?: StaffCreateFieldPolicy;
   };
   StaffCreated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | StaffCreatedKeySpecifier | (() => undefined | StaffCreatedKeySpecifier);
+    keyFields?:
+      | false
+      | StaffCreatedKeySpecifier
+      | (() => undefined | StaffCreatedKeySpecifier);
     fields?: StaffCreatedFieldPolicy;
   };
   StaffDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | StaffDeleteKeySpecifier | (() => undefined | StaffDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | StaffDeleteKeySpecifier
+      | (() => undefined | StaffDeleteKeySpecifier);
     fields?: StaffDeleteFieldPolicy;
   };
   StaffDeleted?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | StaffDeletedKeySpecifier | (() => undefined | StaffDeletedKeySpecifier);
+    keyFields?:
+      | false
+      | StaffDeletedKeySpecifier
+      | (() => undefined | StaffDeletedKeySpecifier);
     fields?: StaffDeletedFieldPolicy;
   };
   StaffError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | StaffErrorKeySpecifier | (() => undefined | StaffErrorKeySpecifier);
+    keyFields?:
+      | false
+      | StaffErrorKeySpecifier
+      | (() => undefined | StaffErrorKeySpecifier);
     fields?: StaffErrorFieldPolicy;
   };
   StaffNotificationRecipient?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44086,21 +45709,30 @@ export type StrictTypedTypePolicies = {
       | (() => undefined | StaffNotificationRecipientKeySpecifier);
     fields?: StaffNotificationRecipientFieldPolicy;
   };
-  StaffNotificationRecipientCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  StaffNotificationRecipientCreate?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | StaffNotificationRecipientCreateKeySpecifier
       | (() => undefined | StaffNotificationRecipientCreateKeySpecifier);
     fields?: StaffNotificationRecipientCreateFieldPolicy;
   };
-  StaffNotificationRecipientDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  StaffNotificationRecipientDelete?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | StaffNotificationRecipientDeleteKeySpecifier
       | (() => undefined | StaffNotificationRecipientDeleteKeySpecifier);
     fields?: StaffNotificationRecipientDeleteFieldPolicy;
   };
-  StaffNotificationRecipientUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  StaffNotificationRecipientUpdate?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | StaffNotificationRecipientUpdateKeySpecifier
@@ -44108,15 +45740,24 @@ export type StrictTypedTypePolicies = {
     fields?: StaffNotificationRecipientUpdateFieldPolicy;
   };
   StaffUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | StaffUpdateKeySpecifier | (() => undefined | StaffUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | StaffUpdateKeySpecifier
+      | (() => undefined | StaffUpdateKeySpecifier);
     fields?: StaffUpdateFieldPolicy;
   };
   StaffUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | StaffUpdatedKeySpecifier | (() => undefined | StaffUpdatedKeySpecifier);
+    keyFields?:
+      | false
+      | StaffUpdatedKeySpecifier
+      | (() => undefined | StaffUpdatedKeySpecifier);
     fields?: StaffUpdatedFieldPolicy;
   };
   Stock?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | StockKeySpecifier | (() => undefined | StockKeySpecifier);
+    keyFields?:
+      | false
+      | StockKeySpecifier
+      | (() => undefined | StockKeySpecifier);
     fields?: StockFieldPolicy;
   };
   StockCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44134,19 +45775,31 @@ export type StrictTypedTypePolicies = {
     fields?: StockCountableEdgeFieldPolicy;
   };
   StockError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | StockErrorKeySpecifier | (() => undefined | StockErrorKeySpecifier);
+    keyFields?:
+      | false
+      | StockErrorKeySpecifier
+      | (() => undefined | StockErrorKeySpecifier);
     fields?: StockErrorFieldPolicy;
   };
   StockSettings?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | StockSettingsKeySpecifier | (() => undefined | StockSettingsKeySpecifier);
+    keyFields?:
+      | false
+      | StockSettingsKeySpecifier
+      | (() => undefined | StockSettingsKeySpecifier);
     fields?: StockSettingsFieldPolicy;
   };
   Subscription?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | SubscriptionKeySpecifier | (() => undefined | SubscriptionKeySpecifier);
+    keyFields?:
+      | false
+      | SubscriptionKeySpecifier
+      | (() => undefined | SubscriptionKeySpecifier);
     fields?: SubscriptionFieldPolicy;
   };
   TaxClass?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | TaxClassKeySpecifier | (() => undefined | TaxClassKeySpecifier);
+    keyFields?:
+      | false
+      | TaxClassKeySpecifier
+      | (() => undefined | TaxClassKeySpecifier);
     fields?: TaxClassFieldPolicy;
   };
   TaxClassCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44171,7 +45824,10 @@ export type StrictTypedTypePolicies = {
     fields?: TaxClassCountryRateFieldPolicy;
   };
   TaxClassCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | TaxClassCreateKeySpecifier | (() => undefined | TaxClassCreateKeySpecifier);
+    keyFields?:
+      | false
+      | TaxClassCreateKeySpecifier
+      | (() => undefined | TaxClassCreateKeySpecifier);
     fields?: TaxClassCreateFieldPolicy;
   };
   TaxClassCreateError?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44182,7 +45838,10 @@ export type StrictTypedTypePolicies = {
     fields?: TaxClassCreateErrorFieldPolicy;
   };
   TaxClassDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | TaxClassDeleteKeySpecifier | (() => undefined | TaxClassDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | TaxClassDeleteKeySpecifier
+      | (() => undefined | TaxClassDeleteKeySpecifier);
     fields?: TaxClassDeleteFieldPolicy;
   };
   TaxClassDeleteError?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44193,7 +45852,10 @@ export type StrictTypedTypePolicies = {
     fields?: TaxClassDeleteErrorFieldPolicy;
   };
   TaxClassUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | TaxClassUpdateKeySpecifier | (() => undefined | TaxClassUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | TaxClassUpdateKeySpecifier
+      | (() => undefined | TaxClassUpdateKeySpecifier);
     fields?: TaxClassUpdateFieldPolicy;
   };
   TaxClassUpdateError?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44210,7 +45872,10 @@ export type StrictTypedTypePolicies = {
       | (() => undefined | TaxConfigurationKeySpecifier);
     fields?: TaxConfigurationFieldPolicy;
   };
-  TaxConfigurationCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  TaxConfigurationCountableConnection?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | TaxConfigurationCountableConnectionKeySpecifier
@@ -44259,7 +45924,10 @@ export type StrictTypedTypePolicies = {
       | (() => undefined | TaxCountryConfigurationDeleteKeySpecifier);
     fields?: TaxCountryConfigurationDeleteFieldPolicy;
   };
-  TaxCountryConfigurationDeleteError?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  TaxCountryConfigurationDeleteError?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | TaxCountryConfigurationDeleteErrorKeySpecifier
@@ -44273,7 +45941,10 @@ export type StrictTypedTypePolicies = {
       | (() => undefined | TaxCountryConfigurationUpdateKeySpecifier);
     fields?: TaxCountryConfigurationUpdateFieldPolicy;
   };
-  TaxCountryConfigurationUpdateError?: Omit<TypePolicy, "fields" | "keyFields"> & {
+  TaxCountryConfigurationUpdateError?: Omit<
+    TypePolicy,
+    "fields" | "keyFields"
+  > & {
     keyFields?:
       | false
       | TaxCountryConfigurationUpdateErrorKeySpecifier
@@ -44295,11 +45966,17 @@ export type StrictTypedTypePolicies = {
     fields?: TaxExemptionManageErrorFieldPolicy;
   };
   TaxType?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | TaxTypeKeySpecifier | (() => undefined | TaxTypeKeySpecifier);
+    keyFields?:
+      | false
+      | TaxTypeKeySpecifier
+      | (() => undefined | TaxTypeKeySpecifier);
     fields?: TaxTypeFieldPolicy;
   };
   TaxableObject?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | TaxableObjectKeySpecifier | (() => undefined | TaxableObjectKeySpecifier);
+    keyFields?:
+      | false
+      | TaxableObjectKeySpecifier
+      | (() => undefined | TaxableObjectKeySpecifier);
     fields?: TaxableObjectFieldPolicy;
   };
   TaxableObjectDiscount?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44317,7 +45994,10 @@ export type StrictTypedTypePolicies = {
     fields?: TaxableObjectLineFieldPolicy;
   };
   TaxedMoney?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | TaxedMoneyKeySpecifier | (() => undefined | TaxedMoneyKeySpecifier);
+    keyFields?:
+      | false
+      | TaxedMoneyKeySpecifier
+      | (() => undefined | TaxedMoneyKeySpecifier);
     fields?: TaxedMoneyFieldPolicy;
   };
   TaxedMoneyRange?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44335,11 +46015,17 @@ export type StrictTypedTypePolicies = {
     fields?: ThumbnailCreatedFieldPolicy;
   };
   TimePeriod?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | TimePeriodKeySpecifier | (() => undefined | TimePeriodKeySpecifier);
+    keyFields?:
+      | false
+      | TimePeriodKeySpecifier
+      | (() => undefined | TimePeriodKeySpecifier);
     fields?: TimePeriodFieldPolicy;
   };
   Transaction?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | TransactionKeySpecifier | (() => undefined | TransactionKeySpecifier);
+    keyFields?:
+      | false
+      | TransactionKeySpecifier
+      | (() => undefined | TransactionKeySpecifier);
     fields?: TransactionFieldPolicy;
   };
   TransactionAction?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44455,7 +46141,10 @@ export type StrictTypedTypePolicies = {
     fields?: TranslationUpdatedFieldPolicy;
   };
   UpdateMetadata?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | UpdateMetadataKeySpecifier | (() => undefined | UpdateMetadataKeySpecifier);
+    keyFields?:
+      | false
+      | UpdateMetadataKeySpecifier
+      | (() => undefined | UpdateMetadataKeySpecifier);
     fields?: UpdateMetadataFieldPolicy;
   };
   UpdatePrivateMetadata?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44466,7 +46155,10 @@ export type StrictTypedTypePolicies = {
     fields?: UpdatePrivateMetadataFieldPolicy;
   };
   UploadError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | UploadErrorKeySpecifier | (() => undefined | UploadErrorKeySpecifier);
+    keyFields?:
+      | false
+      | UploadErrorKeySpecifier
+      | (() => undefined | UploadErrorKeySpecifier);
     fields?: UploadErrorFieldPolicy;
   };
   User?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44509,7 +46201,10 @@ export type StrictTypedTypePolicies = {
     fields?: UserCountableEdgeFieldPolicy;
   };
   UserPermission?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | UserPermissionKeySpecifier | (() => undefined | UserPermissionKeySpecifier);
+    keyFields?:
+      | false
+      | UserPermissionKeySpecifier
+      | (() => undefined | UserPermissionKeySpecifier);
     fields?: UserPermissionFieldPolicy;
   };
   VAT?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44538,11 +46233,17 @@ export type StrictTypedTypePolicies = {
     fields?: VariantPricingInfoFieldPolicy;
   };
   VerifyToken?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | VerifyTokenKeySpecifier | (() => undefined | VerifyTokenKeySpecifier);
+    keyFields?:
+      | false
+      | VerifyTokenKeySpecifier
+      | (() => undefined | VerifyTokenKeySpecifier);
     fields?: VerifyTokenFieldPolicy;
   };
   Voucher?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | VoucherKeySpecifier | (() => undefined | VoucherKeySpecifier);
+    keyFields?:
+      | false
+      | VoucherKeySpecifier
+      | (() => undefined | VoucherKeySpecifier);
     fields?: VoucherFieldPolicy;
   };
   VoucherAddCatalogues?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44588,19 +46289,31 @@ export type StrictTypedTypePolicies = {
     fields?: VoucherCountableEdgeFieldPolicy;
   };
   VoucherCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | VoucherCreateKeySpecifier | (() => undefined | VoucherCreateKeySpecifier);
+    keyFields?:
+      | false
+      | VoucherCreateKeySpecifier
+      | (() => undefined | VoucherCreateKeySpecifier);
     fields?: VoucherCreateFieldPolicy;
   };
   VoucherCreated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | VoucherCreatedKeySpecifier | (() => undefined | VoucherCreatedKeySpecifier);
+    keyFields?:
+      | false
+      | VoucherCreatedKeySpecifier
+      | (() => undefined | VoucherCreatedKeySpecifier);
     fields?: VoucherCreatedFieldPolicy;
   };
   VoucherDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | VoucherDeleteKeySpecifier | (() => undefined | VoucherDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | VoucherDeleteKeySpecifier
+      | (() => undefined | VoucherDeleteKeySpecifier);
     fields?: VoucherDeleteFieldPolicy;
   };
   VoucherDeleted?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | VoucherDeletedKeySpecifier | (() => undefined | VoucherDeletedKeySpecifier);
+    keyFields?:
+      | false
+      | VoucherDeletedKeySpecifier
+      | (() => undefined | VoucherDeletedKeySpecifier);
     fields?: VoucherDeletedFieldPolicy;
   };
   VoucherMetadataUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44639,15 +46352,24 @@ export type StrictTypedTypePolicies = {
     fields?: VoucherTranslationFieldPolicy;
   };
   VoucherUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | VoucherUpdateKeySpecifier | (() => undefined | VoucherUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | VoucherUpdateKeySpecifier
+      | (() => undefined | VoucherUpdateKeySpecifier);
     fields?: VoucherUpdateFieldPolicy;
   };
   VoucherUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | VoucherUpdatedKeySpecifier | (() => undefined | VoucherUpdatedKeySpecifier);
+    keyFields?:
+      | false
+      | VoucherUpdatedKeySpecifier
+      | (() => undefined | VoucherUpdatedKeySpecifier);
     fields?: VoucherUpdatedFieldPolicy;
   };
   Warehouse?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | WarehouseKeySpecifier | (() => undefined | WarehouseKeySpecifier);
+    keyFields?:
+      | false
+      | WarehouseKeySpecifier
+      | (() => undefined | WarehouseKeySpecifier);
     fields?: WarehouseFieldPolicy;
   };
   WarehouseCountableConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44693,7 +46415,10 @@ export type StrictTypedTypePolicies = {
     fields?: WarehouseDeletedFieldPolicy;
   };
   WarehouseError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | WarehouseErrorKeySpecifier | (() => undefined | WarehouseErrorKeySpecifier);
+    keyFields?:
+      | false
+      | WarehouseErrorKeySpecifier
+      | (() => undefined | WarehouseErrorKeySpecifier);
     fields?: WarehouseErrorFieldPolicy;
   };
   WarehouseMetadataUpdated?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44732,19 +46457,31 @@ export type StrictTypedTypePolicies = {
     fields?: WarehouseUpdatedFieldPolicy;
   };
   Webhook?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | WebhookKeySpecifier | (() => undefined | WebhookKeySpecifier);
+    keyFields?:
+      | false
+      | WebhookKeySpecifier
+      | (() => undefined | WebhookKeySpecifier);
     fields?: WebhookFieldPolicy;
   };
   WebhookCreate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | WebhookCreateKeySpecifier | (() => undefined | WebhookCreateKeySpecifier);
+    keyFields?:
+      | false
+      | WebhookCreateKeySpecifier
+      | (() => undefined | WebhookCreateKeySpecifier);
     fields?: WebhookCreateFieldPolicy;
   };
   WebhookDelete?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | WebhookDeleteKeySpecifier | (() => undefined | WebhookDeleteKeySpecifier);
+    keyFields?:
+      | false
+      | WebhookDeleteKeySpecifier
+      | (() => undefined | WebhookDeleteKeySpecifier);
     fields?: WebhookDeleteFieldPolicy;
   };
   WebhookDryRun?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | WebhookDryRunKeySpecifier | (() => undefined | WebhookDryRunKeySpecifier);
+    keyFields?:
+      | false
+      | WebhookDryRunKeySpecifier
+      | (() => undefined | WebhookDryRunKeySpecifier);
     fields?: WebhookDryRunFieldPolicy;
   };
   WebhookDryRunError?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44755,11 +46492,17 @@ export type StrictTypedTypePolicies = {
     fields?: WebhookDryRunErrorFieldPolicy;
   };
   WebhookError?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | WebhookErrorKeySpecifier | (() => undefined | WebhookErrorKeySpecifier);
+    keyFields?:
+      | false
+      | WebhookErrorKeySpecifier
+      | (() => undefined | WebhookErrorKeySpecifier);
     fields?: WebhookErrorFieldPolicy;
   };
   WebhookEvent?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | WebhookEventKeySpecifier | (() => undefined | WebhookEventKeySpecifier);
+    keyFields?:
+      | false
+      | WebhookEventKeySpecifier
+      | (() => undefined | WebhookEventKeySpecifier);
     fields?: WebhookEventFieldPolicy;
   };
   WebhookEventAsync?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44777,7 +46520,10 @@ export type StrictTypedTypePolicies = {
     fields?: WebhookEventSyncFieldPolicy;
   };
   WebhookTrigger?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | WebhookTriggerKeySpecifier | (() => undefined | WebhookTriggerKeySpecifier);
+    keyFields?:
+      | false
+      | WebhookTriggerKeySpecifier
+      | (() => undefined | WebhookTriggerKeySpecifier);
     fields?: WebhookTriggerFieldPolicy;
   };
   WebhookTriggerError?: Omit<TypePolicy, "fields" | "keyFields"> & {
@@ -44788,15 +46534,24 @@ export type StrictTypedTypePolicies = {
     fields?: WebhookTriggerErrorFieldPolicy;
   };
   WebhookUpdate?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | WebhookUpdateKeySpecifier | (() => undefined | WebhookUpdateKeySpecifier);
+    keyFields?:
+      | false
+      | WebhookUpdateKeySpecifier
+      | (() => undefined | WebhookUpdateKeySpecifier);
     fields?: WebhookUpdateFieldPolicy;
   };
   Weight?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | WeightKeySpecifier | (() => undefined | WeightKeySpecifier);
+    keyFields?:
+      | false
+      | WeightKeySpecifier
+      | (() => undefined | WeightKeySpecifier);
     fields?: WeightFieldPolicy;
   };
   _Service?: Omit<TypePolicy, "fields" | "keyFields"> & {
-    keyFields?: false | _ServiceKeySpecifier | (() => undefined | _ServiceKeySpecifier);
+    keyFields?:
+      | false
+      | _ServiceKeySpecifier
+      | (() => undefined | _ServiceKeySpecifier);
     fields?: _ServiceFieldPolicy;
   };
 };

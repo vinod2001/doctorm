@@ -344,7 +344,7 @@ function ProductDetails({ pdpLayout, product }) {
   return (
     <Grid>
       <Grid item xs={12} className={roboto.className}>
-        <BreadcrumbsDetails />
+        <BreadcrumbsDetails brand={productAttributesMap.get("Brand")} />
         <Grid container xs={12} sx={{ mt: 10 }}>
           <Grid xs={7} sx={{ border: "0px solid" }}>
             <Box>
@@ -696,6 +696,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
   const marketingContent = await client.fetch(HEADER_PAGE_SANITY_QUERY);
+  console.log(product);
   return {
     props: {
       rootCategories: rootCategories,

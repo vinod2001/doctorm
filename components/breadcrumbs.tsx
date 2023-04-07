@@ -16,8 +16,9 @@ const linkDetails = {
   color: "#343434",
 };
 
-function BreadcrumbsDetails() {
-  const bredcrumbsItems = ["home", "Sunglasses", "Women", "Ray-Ban"];
+function BreadcrumbsDetails({ brand }) {
+  const bredcrumbsItems = ["home", "Sunglasses", "Men"];
+  bredcrumbsItems.push(brand);
   return (
     <Box sx={{ ml: 6, mt: 2 }}>
       <Breadcrumbs

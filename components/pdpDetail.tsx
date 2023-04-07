@@ -93,38 +93,12 @@ function PdpDetail({ pdpDetails, productFeature }) {
               <Box sx={pdpDetailsContent}>
                 <table width="100%">
                   <tbody>
-                    <tr>
-                      <td>Material</td>
-                      <td>{pdpDetails.Material}</td>
-                    </tr>
-                    <tr>
-                      <td>Shape</td>
-                      <td>{pdpDetails.Shape}</td>
-                    </tr>
-                    <tr>
-                      <td>Size</td>
-                      <td>58/135/14 mm</td>
-                    </tr>
-                    <tr>
-                      <td>Color</td>
-                      <td>Gunmetal</td>
-                    </tr>
-                    <tr>
-                      <td>Model</td>
-                      <td>{pdpDetails.Model}</td>
-                    </tr>
-                    <tr>
-                      <td>Color Code</td>
-                      <td>{pdpDetails["Color Code"]}</td>
-                    </tr>
-                    <tr>
-                      <td>Product</td>
-                      <td>{pdpDetails.Product}</td>
-                    </tr>
-                    <tr>
-                      <td>Brand</td>
-                      <td>{pdpDetails.Brand}</td>
-                    </tr>
+                    {pdpDetails.map((details, index) => (
+                      <tr key={index}>
+                        <td>{details[0]}</td>
+                        <td>{details[1]}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </Box>
@@ -136,15 +110,9 @@ function PdpDetail({ pdpDetails, productFeature }) {
               <Box sx={sectionTitle}>Features</Box>
               <Box sx={[pdpDetailsContent, pdpDetailsFeatureContent]}>
                 <ul>
-                  <li>
-                    Full rim in narrow width, crafted from lightweight acetate
-                    in suave black
-                  </li>
-                  <li>Green lenses with full UV protection</li>
-                  <li>Sturdy, tapering temples with embossed logo</li>
-                  <li>
-                    Shop this authentic piece in a classic RayBan branded case
-                  </li>
+                  {productFeature.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                  ))}
                 </ul>
               </Box>
             </Box>
