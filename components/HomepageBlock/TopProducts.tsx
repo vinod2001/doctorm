@@ -81,7 +81,7 @@ export function TopProducts({ data, locale }) {
                   <Box sx={{display:'flex',justifyContent: "right",alignItems:'right'}}>
                       <FavoriteBorderOutlinedIcon/>
                     </Box>
-                    <Link href={"/" + locale + "/products/" + item.productId} passHref sx={{textDecoration:'none'}}>
+                    <Link href={"/" + locale + "/products/" + item.slug} passHref sx={{textDecoration:'none'}}>
                       <Box
                         sx={{
                           borderRadius: "100%",
