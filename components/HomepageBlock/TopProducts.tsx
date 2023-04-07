@@ -63,7 +63,6 @@ export function TopProducts({ data, locale }) {
               }}
             >
               {contents.map((item, index) => {
-                console.log('item'+JSON.stringify(item));
                 return (<Box
                   key={item._key}
                   sx={{
@@ -74,7 +73,7 @@ export function TopProducts({ data, locale }) {
                     ml:index>0?2:0,
                     borderRadius:'5px',
                     p:2,
-                    width:'180px',
+                    width:'23%',
                     height:'280px'
                   }}
                 >
