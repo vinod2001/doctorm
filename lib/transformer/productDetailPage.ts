@@ -63,7 +63,7 @@ export function getProductFeatures(attributes) {
   attributes.forEach((attribute) => {
     if (attribute.values[0]) {
       if (attribute.attribute.name === "Features") {
-        if (attribute?.values[0]?.richText) {
+        if (attribute?.values && attribute?.values[0] && attribute?.values[0]?.richText) {
           let data = JSON.parse(attribute?.values[0]?.richText);
           productFeatures = data.blocks[0].data?.items;
         }
