@@ -73,7 +73,9 @@ export function TopProducts({ data, locale }) {
                     alignItems: "center",
                     ml:index>0?2:0,
                     borderRadius:'5px',
-                    p:2
+                    p:2,
+                    width:'180px',
+                    height:'280px'
                   }}
                 >
                   <Box sx={{ border: "0px solid red" }}>
@@ -86,9 +88,10 @@ export function TopProducts({ data, locale }) {
                           borderRadius: "100%",
                           border: "0px solid #999",
                           overflow: "hidden",
-                          width: "100%",
                           margin: "auto",
                           pb:2
+                          width:'150px',
+                          height:'120px'
                         }}
                       >
                         <img
