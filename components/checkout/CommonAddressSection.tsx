@@ -135,6 +135,13 @@ export function CommonAddressSection({
                   sx={{ mt: 2 }}
                   variant="contained"
                   onClick={() => setEditing(true)}
+                  style={{
+                    backgroundColor: "#ff9905",
+                    color: "#3A3A3A",
+                    textTransform: "capitalize",
+                    borderRadius: "5px",
+                    textDecoration: "none",
+                  }}
                 >
                   {t.formatMessage(messages.changeButton)}
                 </Button>

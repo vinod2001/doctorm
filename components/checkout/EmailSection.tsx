@@ -108,7 +108,17 @@ export function EmailSection({ checkout, locale }: EmailSectionProps) {
           {!modifyEmail ? (
             <Box className="flex justify-between items-center">
               <p className="text-base">{checkout?.email}</p>
-              <Button variant="contained" onClick={() => setModifyEmail(true)}>
+              <Button
+                variant="contained"
+                onClick={() => setModifyEmail(true)}
+                style={{
+                  backgroundColor: "#ff9905",
+                  color: "#3A3A3A",
+                  textTransform: "capitalize",
+                  borderRadius: "5px",
+                  textDecoration: "none",
+                }}
+              >
                 {t.formatMessage(messages.changeButton)}
               </Button>
             </Box>
@@ -136,6 +146,13 @@ export function EmailSection({ checkout, locale }: EmailSectionProps) {
                     variant="contained"
                     type="submit"
                     className="btn-checkout-section"
+                    style={{
+                      backgroundColor: "#ff9905",
+                      color: "#3A3A3A",
+                      textTransform: "capitalize",
+                      borderRadius: "5px",
+                      textDecoration: "none",
+                    }}
                   >
                     {t.formatMessage(messages.saveButton)}
                   </Button>

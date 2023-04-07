@@ -28,16 +28,18 @@ export function getProductDetails(attributes) {
   pdpNameMapping.set("Frame Material", "Material");
   pdpNameMapping.set("Product Code", "Product");
 
-  let pdpDisplayAttributes = new Set([
-    "Material",
-    "Shape",
-    "Color Code",
-    "Model",
-    "Product",
-    "Brand",
+  let ignorePdpAttributes = new Set([
+    "Bridge Width",
+    "Features",
+    "Frame Width",
+    "Lens Width",
+    "Temple Width",
+    "Fit",
   ]);
+
   let productAttributes = {};
   let pdpDetails = {};
+
   attributes.forEach((attribute) => {
     if (attribute.values[0]) {
       if (attribute.attribute.name && attribute.values[0].name) {
@@ -47,22 +49,24 @@ export function getProductDetails(attributes) {
         } else {
           fieldName = attribute.attribute.name;
         }
-        productAttributes[fieldName] = attribute.values[0].name;
+        if (!ignorePdpAttributes.has(attribute.attribute.name)) {
+          productAttributes[fieldName] = attribute.values[0].name;
+        }
       }
     }
   });
-  pdpDisplayAttributes.forEach((pdpDisplayAttribute) => {
-    pdpDetails[pdpDisplayAttribute] = productAttributes[pdpDisplayAttribute];
-  });
-  return pdpDetails;
+  return Object.entries(productAttributes);
 }
 
 export function getProductFeatures(attributes) {
-  let productFeatures = "";
+  let productFeatures = [];
   attributes.forEach((attribute) => {
     if (attribute.values[0]) {
       if (attribute.attribute.name === "Features") {
-        productFeatures = attribute.values[0].name;
+        if (attribute?.values && attribute?.values[0] && attribute?.values[0]?.richText) {
+          let data = JSON.parse(attribute?.values[0]?.richText);
+          productFeatures = data.blocks[0].data?.items;
+        }
       }
     }
   });

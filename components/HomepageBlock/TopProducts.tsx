@@ -72,7 +72,9 @@ export function TopProducts({ data, locale }) {
                     alignItems: "center",
                     ml:index>0?2:0,
                     borderRadius:'5px',
-                    p:2
+                    p:2,
+                    width:'23%',
+                    height:'280px'
                   }}
                 >
                   <Box sx={{ border: "0px solid red" }}>
@@ -85,9 +87,10 @@ export function TopProducts({ data, locale }) {
                           borderRadius: "100%",
                           border: "0px solid #999",
                           overflow: "hidden",
-                          width: "100%",
                           margin: "auto",
-                          pb:2
+                          pb:2,
+                          width:'150px',
+                          height:'120px'
                         }}
                       >
                         <img
@@ -101,17 +104,16 @@ export function TopProducts({ data, locale }) {
                         sx={{
                           border: "0px solid",
                           width: "80%",
-                          display: "flex",
-                          justifyContent: "center",
                           margin: "auto",
                           fontWeight: "bold",
                           color: "#343434",
-                          fontSize:'22px'
+                          fontSize:'24px'
                         }}
                       >
                         {item.productName}
-                        <br/>
-                        AED {item.price}
+                        <Box sx={{mt:3}}>
+                          AED <Box component="span" sx={{ml:1}}>{item.price}</Box>
+                        </Box>
                       </Box>
                     </Link>
                   </Box>

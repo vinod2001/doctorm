@@ -113,6 +113,13 @@ export function ShippingMethodSection({
                     variant="contained"
                     sx={{ mt: 1 }}
                     onClick={() => setEditing(true)}
+                    style={{
+                      backgroundColor: "#ff9905",
+                      color: "#3A3A3A",
+                      textTransform: "capitalize",
+                      borderRadius: "5px",
+                      textDecoration: "none",
+                    }}
                   >
                     {t.formatMessage(messages.changeButton)}
                   </Button>
