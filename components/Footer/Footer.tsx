@@ -52,7 +52,7 @@ const footerLists = [
   },
   {
     heading: "About Doctor M",
-    items: ["Our Story", "Our Story", "Terms and Conditions", "Privacy Policy"],
+    items: ["Our Story", "Find Us", "Terms and Conditions", "Privacy Policy"],
   },
   {
     heading: "Customer Service",
