@@ -89,7 +89,7 @@ export function TopProducts({ data, locale }) {
                           border: "0px solid #999",
                           overflow: "hidden",
                           margin: "auto",
-                          pb:2
+                          pb:2,
                           width:'150px',
                           height:'120px'
                         }}
